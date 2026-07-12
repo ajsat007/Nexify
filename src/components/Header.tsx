@@ -11,10 +11,22 @@ const navigation = [
   { name: 'Portfolio', href: '/portfolio' },
   { name: 'Pricing', href: '/pricing' },
   { name: 'About', href: '/about' },
-  { name: 'Resources', href: '#', hasDropdown: true,
+  {
+    name: 'Resources', href: '#', hasDropdown: true,
+    children: [
+      { name: 'Blog', href: '/blog' },
+      { name: 'Case Studies', href: '/case-studies' },
+      { name: 'Documentation', href: '/docs' },
+      { name: 'FAQ', href: '/faq' },
+      { name: 'Careers', href: '/careers' },
+      { name: 'Industries', href: '/industries' },
+      { name: 'Testimonials', href: '/testimonials' },
+    ]
+  },
+  {
+    name: 'More', href: '#', hasDropdown: true,
     children: [
       { name: 'Marketing', href: '/marketing' },
-      { name: 'Documentation', href: '/docs' },
       { name: 'Finance', href: '/finance' },
       { name: 'HR', href: '/hr' },
       { name: 'Tech Stack', href: '/techstack' },
@@ -24,6 +36,9 @@ const navigation = [
       { name: 'SOPs', href: '/sops' },
       { name: 'Branding', href: '/branding' },
       { name: 'Growth Roadmap', href: '/growth' },
+      { name: 'Admin Panel', href: '/admin' },
+      { name: 'Client Portal', href: '/portal' },
+      { name: 'Sales System', href: '/sales' },
     ]
   },
   { name: 'Contact', href: '/contact' },
@@ -32,7 +47,7 @@ const navigation = [
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -55,17 +70,25 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-6">
-            {navigation.map((item) => (
+          <nav className="hidden lg:flex items-center gap-5" onMouseLeave={() => setActiveDropdown(null)}>
+            {navigation.map((item) =>
               item.hasDropdown ? (
-                <div key={item.name} className="relative" onMouseEnter={() => setDropdownOpen(true)} onMouseLeave={() => setDropdownOpen(false)}>
+                <div
+                  key={item.name}
+                  className="relative"
+                  onMouseEnter={() => setActiveDropdown(item.name)}
+                >
                   <button className="nav-link text-sm font-medium py-2 flex items-center gap-1">
-                    {item.name} <ChevronDown size={14} className={`transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
+                    {item.name} <ChevronDown size={14} className={`transition-transform ${activeDropdown === item.name ? 'rotate-180' : ''}`} />
                   </button>
-                  {dropdownOpen && (
+                  {activeDropdown === item.name && (
                     <div className="absolute top-full left-0 mt-2 w-56 bg-neutral-800/95 backdrop-blur-xl rounded-2xl border border-neutral-700 shadow-2xl py-2 animate-slide-down">
                       {item.children?.map((child) => (
-                        <Link key={child.name} href={child.href} className="block px-5 py-2.5 text-sm text-neutral-300 hover:text-white hover:bg-neutral-700/50 transition-all">
+                        <Link
+                          key={child.name}
+                          href={child.href}
+                          className="block px-5 py-2.5 text-sm text-neutral-300 hover:text-white hover:bg-neutral-700/50 transition-all"
+                        >
                           {child.name}
                         </Link>
                       ))}
@@ -77,7 +100,7 @@ export default function Header() {
                   {item.name}
                 </Link>
               )
-            ))}
+            )}
             <Link href="/contact" className="btn-primary text-sm">Get Started</Link>
           </nav>
 
@@ -88,10 +111,10 @@ export default function Header() {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`lg:hidden transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'}`}>
+      <div className={`lg:hidden transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'}`}>
         <div className="section-container pb-6">
           <nav className="flex flex-col gap-1 bg-neutral-800/50 rounded-2xl p-4 backdrop-blur-xl">
-            {navigation.map((item) => (
+            {navigation.map((item) =>
               item.hasDropdown ? (
                 <div key={item.name}>
                   <div className="text-neutral-300 px-4 py-2 text-sm font-semibold uppercase tracking-wider">{item.name}</div>
@@ -106,8 +129,10 @@ export default function Header() {
                   {item.name}
                 </Link>
               )
-            ))}
-            <Link href="/contact" className="btn-primary text-sm mt-2 text-center" onClick={() => setIsOpen(false)}>Get Started</Link>
+            )}
+            <Link href="/contact" className="btn-primary text-sm mt-2 text-center" onClick={() => setIsOpen(false)}>
+              Get Started
+            </Link>
           </nav>
         </div>
       </div>
