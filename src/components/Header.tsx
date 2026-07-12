@@ -65,10 +65,8 @@ export default function Header() {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-neutral-900/95 backdrop-blur-xl shadow-lg shadow-black/10' : 'bg-transparent'}`}>
       <div className="section-container">
         <div className="flex items-center justify-between h-20">
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
-              <span className="text-white font-heading font-bold text-lg">N</span>
-            </div>
+          <Link href="/" className="flex items-center gap-2 group">
+            <img src="/icon.svg" alt="Nexify" className="w-9 h-9" />
             <div className="hidden sm:block">
               <h1 className="text-white font-heading font-bold text-xl leading-none">Nexify</h1>
               <p className="text-neutral-400 text-xs font-medium tracking-wider uppercase">Technologies</p>
