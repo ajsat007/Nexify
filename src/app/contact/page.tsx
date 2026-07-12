@@ -173,21 +173,21 @@ export default function ContactPage() {
                       <Mail className="w-5 h-5 text-primary-500 mt-0.5 shrink-0" />
                       <div>
                         <div className="text-sm font-medium text-neutral-900">Email</div>
-                        <a href="mailto:hello@nexify.tech" className="text-sm text-neutral-500 hover:text-primary-500">hello@nexify.tech</a>
+                        <a href="mailto:ajinkyasatkar5@gmail.com" className="text-sm text-neutral-500 hover:text-primary-500">ajinkyasatkar5@gmail.com</a>
                       </div>
                     </li>
                     <li className="flex items-start gap-3">
                       <Phone className="w-5 h-5 text-primary-500 mt-0.5 shrink-0" />
                       <div>
                         <div className="text-sm font-medium text-neutral-900">Phone</div>
-                        <a href="tel:+911800123456" className="text-sm text-neutral-500 hover:text-primary-500">1800-123-4567</a>
+                        <a href="tel:+919373955349" className="text-sm text-neutral-500 hover:text-primary-500">+91 9373955349</a>
                       </div>
                     </li>
                     <li className="flex items-start gap-3">
                       <MapPin className="w-5 h-5 text-primary-500 mt-0.5 shrink-0" />
                       <div>
                         <div className="text-sm font-medium text-neutral-900">Location</div>
-                        <div className="text-sm text-neutral-500">Bangalore, India · Remote-First</div>
+                        <div className="text-sm text-neutral-500">Pune, Maharashtra, India · Remote-First</div>
                       </div>
                     </li>
                     <li className="flex items-start gap-3">

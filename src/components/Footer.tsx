@@ -151,20 +151,20 @@ export default function Footer() {
             <h4 className="text-white font-semibold text-sm mb-4">Contact</h4>
             <ul className="space-y-3">
               <li>
-                <a href="mailto:hello@nexify.tech" className="flex items-center gap-2 text-neutral-400 hover:text-primary-400 text-sm transition-colors">
+                <a href="mailto:ajinkyasatkar5@gmail.com" className="flex items-center gap-2 text-neutral-400 hover:text-primary-400 text-sm transition-colors">
                   <Mail size={14} />
-                  hello@nexify.tech
+                  ajinkyasatkar5@gmail.com
                 </a>
               </li>
               <li>
-                <a href="tel:+911800123456" className="flex items-center gap-2 text-neutral-400 hover:text-primary-400 text-sm transition-colors">
+                <a href="tel:+919373955349" className="flex items-center gap-2 text-neutral-400 hover:text-primary-400 text-sm transition-colors">
                   <Phone size={14} />
-                  1800-123-4567
+                  +91 9373955349
                 </a>
               </li>
               <li className="flex items-start gap-2 text-neutral-400 text-sm">
                 <MapPin size={14} className="mt-0.5 shrink-0" />
-                Bangalore, India · Remote-First
+                Pune, Maharashtra, India · Remote-First
               </li>
             </ul>
           </div>
