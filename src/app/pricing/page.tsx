@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { ArrowRight, Check, HelpCircle, Zap, Building, Rocket, Crown } from 'lucide-react'
+import { ArrowRight, Check, HelpCircle, Zap, Calculator } from 'lucide-react'
+import PricingCalculator from '@/components/PricingCalculator'
 
 const servicePricing = [
   {
@@ -119,6 +120,20 @@ export default function PricingPage() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Interactive Pricing Calculator */}
+      <section className="section-padding bg-neutral-50">
+        <div className="section-container">
+          <div className="text-center max-w-3xl mx-auto mb-12 reveal">
+            <div className="chip bg-accent-50 text-accent-600 border border-accent-200 mb-4">Interactive Tool</div>
+            <h2 className="text-3xl font-heading font-bold mb-4">AI <span className="gradient-text">Cost Calculator</span></h2>
+            <p className="text-neutral-500">Select your requirements and get an instant estimate — powered by AI pricing models.</p>
+          </div>
+          <div className="max-w-2xl mx-auto reveal">
+            <PricingCalculator />
+          </div>
         </div>
       </section>
 

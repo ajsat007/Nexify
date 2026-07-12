@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { siteConfig } from '@/lib/data'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import AgentBar from '@/components/AgentBar'
 import { AIAgentWidget } from '@/components/AIAgent'
 import './globals.css'
 
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className="scroll-smooth">
       <body className="min-h-screen flex flex-col">
         <Header />
+        <AgentBar />
         <main className="flex-1">{children}</main>
         <Footer />
         <AIAgentWidget />
