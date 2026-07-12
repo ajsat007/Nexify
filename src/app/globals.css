@@ -36,11 +36,21 @@
   }
 
   .glass-card {
-    @apply bg-white/80 backdrop-blur-xl border border-white/20 shadow-xl;
+    @apply bg-white/80 backdrop-blur-xl border border-white/20 shadow-xl
+           dark:bg-neutral-800/80 dark:border-neutral-700/30;
   }
 
   .hover-card {
     @apply transition-all duration-300 hover:shadow-2xl hover:-translate-y-1;
+  }
+
+  .card-surface {
+    @apply bg-white border border-neutral-200 rounded-2xl
+           dark:bg-neutral-800/50 dark:border-neutral-700;
+  }
+
+  .divider {
+    @apply border-neutral-200 dark:border-neutral-700;
   }
 
   .section-container {
@@ -63,6 +73,8 @@
     @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium
            border-2 border-primary-500 text-primary-500
            hover:bg-primary-500 hover:text-white
+           dark:border-primary-400 dark:text-primary-400
+           dark:hover:bg-primary-500 dark:hover:text-white
            transition-all duration-300;
   }
 
@@ -70,6 +82,7 @@
     @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium
            bg-white text-primary-900 hover:bg-neutral-100
            shadow-lg shadow-black/10
+           dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700
            transition-all duration-300;
   }
 

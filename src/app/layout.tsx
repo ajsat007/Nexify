@@ -34,11 +34,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="scroll-smooth">
       <body className="min-h-screen flex flex-col">
-        <Header />
-        <AgentBar />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <AIAgentWidget />
+        <ThemeProvider>
+          <Header />
+          <AgentBar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <AIAgentWidget />
+        </ThemeProvider>
       </body>
     </html>
   )

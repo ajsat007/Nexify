@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Menu, X, ChevronDown } from 'lucide-react'
+import { Menu, X, ChevronDown, Moon, Sun } from 'lucide-react'
 import SiteSearch from '@/components/SiteSearch'
+import { useTheme } from '@/components/ThemeProvider'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -48,7 +49,11 @@ const navigation = [
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const { theme, toggle } = useTheme()
+
+  useEffect(() => { setMounted(true) }, [])
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
@@ -102,7 +107,15 @@ export default function Header() {
                 </Link>
               )
             )}
-            <Link href="/contact" className="btn-primary text-sm">Get Started</Link>
+            <div className="flex items-center gap-2">
+              <SiteSearch />
+              {mounted && (
+                <button onClick={toggle} className="w-9 h-9 rounded-xl flex items-center justify-center hover:bg-neutral-700/50 transition-all" title="Toggle theme">
+                  {theme === 'dark' ? <Sun size={16} className="text-amber-400" /> : <Moon size={16} className="text-neutral-300" />}
+                </button>
+              )}
+              <Link href="/contact" className="btn-primary text-sm">Get Started</Link>
+            </div>
           </nav>
 
           <button className="lg:hidden text-white p-2" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
