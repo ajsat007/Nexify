@@ -1,0 +1,116 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { Menu, X, ChevronDown } from 'lucide-react'
+
+const navigation = [
+  { name: 'Home', href: '/' },
+  { name: 'Services', href: '/services' },
+  { name: 'Products', href: '/products' },
+  { name: 'Portfolio', href: '/portfolio' },
+  { name: 'Pricing', href: '/pricing' },
+  { name: 'About', href: '/about' },
+  { name: 'Resources', href: '#', hasDropdown: true,
+    children: [
+      { name: 'Marketing', href: '/marketing' },
+      { name: 'Documentation', href: '/docs' },
+      { name: 'Finance', href: '/finance' },
+      { name: 'HR', href: '/hr' },
+      { name: 'Tech Stack', href: '/techstack' },
+      { name: 'AI Automation', href: '/ai-automation' },
+      { name: 'Business Automation', href: '/business-automation' },
+      { name: 'Dashboards', href: '/dashboards' },
+      { name: 'SOPs', href: '/sops' },
+      { name: 'Branding', href: '/branding' },
+      { name: 'Growth Roadmap', href: '/growth' },
+    ]
+  },
+  { name: 'Contact', href: '/contact' },
+]
+
+export default function Header() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [dropdownOpen, setDropdownOpen] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  return (
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-neutral-900/95 backdrop-blur-xl shadow-lg shadow-black/10' : 'bg-transparent'}`}>
+      <div className="section-container">
+        <div className="flex items-center justify-between h-20">
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
+              <span className="text-white font-heading font-bold text-lg">N</span>
+            </div>
+            <div className="hidden sm:block">
+              <h1 className="text-white font-heading font-bold text-xl leading-none">Nexify</h1>
+              <p className="text-neutral-400 text-xs font-medium tracking-wider uppercase">Technologies</p>
+            </div>
+          </Link>
+
+          {/* Desktop Nav */}
+          <nav className="hidden lg:flex items-center gap-6">
+            {navigation.map((item) => (
+              item.hasDropdown ? (
+                <div key={item.name} className="relative" onMouseEnter={() => setDropdownOpen(true)} onMouseLeave={() => setDropdownOpen(false)}>
+                  <button className="nav-link text-sm font-medium py-2 flex items-center gap-1">
+                    {item.name} <ChevronDown size={14} className={`transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  {dropdownOpen && (
+                    <div className="absolute top-full left-0 mt-2 w-56 bg-neutral-800/95 backdrop-blur-xl rounded-2xl border border-neutral-700 shadow-2xl py-2 animate-slide-down">
+                      {item.children?.map((child) => (
+                        <Link key={child.name} href={child.href} className="block px-5 py-2.5 text-sm text-neutral-300 hover:text-white hover:bg-neutral-700/50 transition-all">
+                          {child.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link key={item.name} href={item.href} className="nav-link text-sm font-medium py-2">
+                  {item.name}
+                </Link>
+              )
+            ))}
+            <Link href="/contact" className="btn-primary text-sm">Get Started</Link>
+          </nav>
+
+          <button className="lg:hidden text-white p-2" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      <div className={`lg:hidden transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'}`}>
+        <div className="section-container pb-6">
+          <nav className="flex flex-col gap-1 bg-neutral-800/50 rounded-2xl p-4 backdrop-blur-xl">
+            {navigation.map((item) => (
+              item.hasDropdown ? (
+                <div key={item.name}>
+                  <div className="text-neutral-300 px-4 py-2 text-sm font-semibold uppercase tracking-wider">{item.name}</div>
+                  {item.children?.map((child) => (
+                    <Link key={child.name} href={child.href} className="text-neutral-400 hover:text-white px-4 py-2 rounded-lg hover:bg-neutral-700/50 transition-all text-sm block" onClick={() => setIsOpen(false)}>
+                      {child.name}
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <Link key={item.name} href={item.href} className="text-neutral-300 hover:text-white px-4 py-2.5 rounded-lg hover:bg-neutral-700/50 transition-all text-sm font-medium" onClick={() => setIsOpen(false)}>
+                  {item.name}
+                </Link>
+              )
+            ))}
+            <Link href="/contact" className="btn-primary text-sm mt-2 text-center" onClick={() => setIsOpen(false)}>Get Started</Link>
+          </nav>
+        </div>
+      </div>
+    </header>
+  )
+}
