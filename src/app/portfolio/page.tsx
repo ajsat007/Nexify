@@ -64,7 +64,7 @@ export default function PortfolioPage() {
             ].map((s, i) => (
               <div key={i} className="text-center">
                 <div className="text-3xl font-heading font-bold gradient-text">{s.value}</div>
-                <div className="text-sm text-neutral-600 mt-1">{s.label}</div>
+                <div className="text-sm text-neutral-800 mt-1">{s.label}</div>
               </div>
             ))}
           </div>
@@ -72,7 +72,7 @@ export default function PortfolioPage() {
           {/* Filters */}
           <div className="flex flex-wrap gap-2 mb-12 reveal">
             {['All', 'Fintech', 'Healthcare', 'E-commerce', 'Edtech', 'Logistics', 'Manufacturing', 'Real Estate', 'Retail', 'Enterprise'].map((f, i) => (
-              <button key={i} className={`chip ${i === 0 ? 'bg-primary-500 text-white' : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'} transition-all`}>{f}</button>
+              <button key={i} className={`chip ${i === 0 ? 'bg-primary-500 text-white' : 'bg-neutral-100 text-neutral-800 hover:bg-neutral-200'} transition-all`}>{f}</button>
             ))}
           </div>
 
@@ -86,20 +86,20 @@ export default function PortfolioPage() {
                 <h3 className="text-xl font-heading font-bold mb-3 group-hover:text-primary-600 transition-colors">{project.title}</h3>
                 <div className="space-y-2 mb-4">
                   <div>
-                    <span className="text-xs font-semibold text-neutral-600 uppercase tracking-wider">Problem</span>
-                    <p className="text-sm text-neutral-600 mt-0.5">{project.problem}</p>
+                    <span className="text-xs font-semibold text-neutral-800 uppercase tracking-wider">Problem</span>
+                    <p className="text-sm text-neutral-800 mt-0.5">{project.problem}</p>
                   </div>
                   <div>
-                    <span className="text-xs font-semibold text-neutral-600 uppercase tracking-wider">Solution</span>
-                    <p className="text-sm text-neutral-600 mt-0.5">{project.solution}</p>
+                    <span className="text-xs font-semibold text-neutral-800 uppercase tracking-wider">Solution</span>
+                    <p className="text-sm text-neutral-800 mt-0.5">{project.solution}</p>
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.map((t, j) => (
-                    <span key={j} className="chip bg-neutral-100 text-neutral-600 text-xs">{t}</span>
+                    <span key={j} className="chip bg-neutral-100 text-neutral-800 text-xs">{t}</span>
                   ))}
                 </div>
-                <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-600 border-t border-neutral-100 pt-4">
+                <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-800 border-t border-neutral-100 pt-4">
                   <span className="flex items-center gap-1"><Clock size={14} />{project.timeline}</span>
                   <span className="flex items-center gap-1">{project.budget}</span>
                   <span className="flex items-center gap-1 text-success"><TrendingUp size={14} />{project.result}</span>

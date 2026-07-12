@@ -64,7 +64,7 @@ export default function MarketingPage() {
         <div className="section-container">
           <div className="text-center mb-16 reveal">
             <h2 className="text-3xl font-heading font-bold mb-4">Multi-Channel <span className="gradient-text">Strategy</span></h2>
-            <p className="text-neutral-600">8 channels managed by specialized AI marketing agents · Zero ad spend</p>
+            <p className="text-neutral-800">8 channels managed by specialized AI marketing agents · Zero ad spend</p>
           </div>
           <div className="grid md:grid-cols-2 gap-6 reveal">
             {strategies.map((s, i) => {
@@ -75,7 +75,7 @@ export default function MarketingPage() {
                     <div className="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center shrink-0"><Icon className="w-6 h-6 text-primary-500" /></div>
                     <div className="flex-1">
                       <h3 className="font-semibold text-lg mb-1">{s.title}</h3>
-                      <p className="text-neutral-600 text-sm mb-3">{s.desc}</p>
+                      <p className="text-neutral-800 text-sm mb-3">{s.desc}</p>
                       <div className="flex flex-wrap gap-2">
                         {s.kpis.map((k, j) => <span key={j} className="chip bg-primary-50 text-primary-600 text-xs">{k}</span>)}
                       </div>
@@ -93,19 +93,19 @@ export default function MarketingPage() {
         <div className="section-container">
           <div className="text-center mb-12 reveal">
             <h2 className="text-3xl font-heading font-bold mb-4">Content <span className="gradient-text">Calendar</span></h2>
-            <p className="text-neutral-600">AI-generated content pipeline · 8 weeks planned</p>
+            <p className="text-neutral-800">AI-generated content pipeline · 8 weeks planned</p>
           </div>
           <div className="bg-white rounded-2xl border border-neutral-200 overflow-hidden reveal">
             <table className="w-full">
               <thead><tr className="border-b border-neutral-100 bg-neutral-50">
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Week</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Topic</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Channel</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Type</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Week</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Topic</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Channel</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Type</th>
               </tr></thead>
               <tbody className="divide-y divide-neutral-100">
                 {contentCalendar.map((c, i) => (
-                  <tr key={i} className="hover:bg-neutral-50"><td className="p-4 text-sm text-neutral-600">{c.week}</td><td className="p-4 text-sm font-medium text-neutral-900">{c.topic}</td><td className="p-4 text-sm text-neutral-600">{c.channel}</td><td className="p-4"><span className="chip bg-accent-50 text-accent-600 text-xs">{c.type}</span></td></tr>
+                  <tr key={i} className="hover:bg-neutral-50"><td className="p-4 text-sm text-neutral-800">{c.week}</td><td className="p-4 text-sm font-medium text-neutral-900">{c.topic}</td><td className="p-4 text-sm text-neutral-800">{c.channel}</td><td className="p-4"><span className="chip bg-accent-50 text-accent-600 text-xs">{c.type}</span></td></tr>
                 ))}
               </tbody>
             </table>
@@ -118,14 +118,14 @@ export default function MarketingPage() {
         <div className="section-container">
           <div className="text-center mb-12 reveal">
             <h2 className="text-3xl font-heading font-bold mb-4">Ad <span className="gradient-text">Campaigns</span></h2>
-            <p className="text-neutral-600">Zero-cost ad strategy · AI-optimized targeting</p>
+            <p className="text-neutral-800">Zero-cost ad strategy · AI-optimized targeting</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6 reveal">
             {adCampaigns.map((a, i) => (
               <div key={i} className="bg-neutral-50 rounded-2xl p-6 border border-neutral-200">
                 <div className="text-lg font-heading font-bold mb-1">{a.platform}</div>
                 <div className="text-sm text-success font-semibold mb-4">{a.budget}</div>
-                <div className="space-y-2 text-sm text-neutral-600">
+                <div className="space-y-2 text-sm text-neutral-800">
                   <div><span className="font-medium text-neutral-700">Target:</span> {a.targeting}</div>
                   <div><span className="font-medium text-neutral-700">Audience:</span> {a.audience}</div>
                   <div><span className="font-medium text-neutral-700">Keywords:</span> {a.keywords}</div>
@@ -164,7 +164,7 @@ export default function MarketingPage() {
         <div className="section-container">
           <div className="text-center mb-12 reveal">
             <h2 className="text-3xl font-heading font-bold mb-4">LinkedIn <span className="gradient-text">Strategy</span></h2>
-            <p className="text-neutral-600">Daily AI-generated content · Automated engagement</p>
+            <p className="text-neutral-800">Daily AI-generated content · Automated engagement</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6 reveal">
             {[

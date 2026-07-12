@@ -67,7 +67,7 @@ export default function FAQPage() {
           <div className="max-w-3xl mx-auto">
             {/* Search */}
             <div className="relative mb-8 reveal">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-600" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-800" />
               <input
                 type="text"
                 placeholder="Search questions..."
@@ -83,7 +83,7 @@ export default function FAQPage() {
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`chip transition-all ${activeCategory === cat ? 'bg-primary-500 text-white' : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'}`}
+                  className={`chip transition-all ${activeCategory === cat ? 'bg-primary-500 text-white' : 'bg-neutral-100 text-neutral-800 hover:bg-neutral-200'}`}
                 >
                   {cat}
                 </button>
@@ -93,7 +93,7 @@ export default function FAQPage() {
             {/* FAQ List */}
             <div className="space-y-3 reveal">
               {filtered.length === 0 ? (
-                <div className="text-center py-12 text-neutral-600">
+                <div className="text-center py-12 text-neutral-800">
                   <p>No questions found for "{search}"</p>
                 </div>
               ) : (
@@ -107,10 +107,10 @@ export default function FAQPage() {
                         <span className="chip bg-primary-50 text-primary-600 text-xs hidden sm:inline-flex">{faq.category}</span>
                         <span className="font-medium text-neutral-900">{faq.q}</span>
                       </div>
-                      <ChevronRight size={20} className={`text-neutral-600 shrink-0 transition-transform duration-300 ${activeFaq === i ? 'rotate-90' : ''}`} />
+                      <ChevronRight size={20} className={`text-neutral-800 shrink-0 transition-transform duration-300 ${activeFaq === i ? 'rotate-90' : ''}`} />
                     </button>
                     <div className={`transition-all duration-300 overflow-hidden ${activeFaq === i ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-                      <p className="px-5 pb-5 text-neutral-600 text-sm leading-relaxed">{faq.a}</p>
+                      <p className="px-5 pb-5 text-neutral-800 text-sm leading-relaxed">{faq.a}</p>
                     </div>
                   </div>
                 ))

@@ -57,20 +57,20 @@ export default function Footer() {
               </div>
               <div>
                 <h3 className="text-white font-heading font-bold text-lg leading-none">Nexify</h3>
-                <p className="text-neutral-600 text-xs font-medium tracking-wider uppercase">Technologies</p>
+                <p className="text-neutral-800 text-xs font-medium tracking-wider uppercase">Technologies</p>
               </div>
             </Link>
-            <p className="text-neutral-600 text-sm leading-relaxed mb-6">
+            <p className="text-neutral-800 text-sm leading-relaxed mb-6">
               AI-powered software development company. We build next-gen digital products using intelligent AI agents — faster, better, and at half the cost.
             </p>
             <div className="flex gap-3">
-              <a href="#" className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center text-neutral-600 hover:bg-primary-500 hover:text-white transition-all">
+              <a href="#" className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center text-neutral-800 hover:bg-primary-500 hover:text-white transition-all">
                 <Linkedin size={18} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center text-neutral-600 hover:bg-primary-500 hover:text-white transition-all">
+              <a href="#" className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center text-neutral-800 hover:bg-primary-500 hover:text-white transition-all">
                 <Twitter size={18} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center text-neutral-600 hover:bg-primary-500 hover:text-white transition-all">
+              <a href="#" className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center text-neutral-800 hover:bg-primary-500 hover:text-white transition-all">
                 <Github size={18} />
               </a>
             </div>
@@ -82,7 +82,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-neutral-600 hover:text-primary-400 text-sm transition-colors">
+                  <Link href={link.href} className="text-neutral-800 hover:text-primary-400 text-sm transition-colors">
                     {link.name}
                   </Link>
                 </li>
@@ -96,7 +96,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {footerLinks.products.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-neutral-600 hover:text-primary-400 text-sm transition-colors">
+                  <Link href={link.href} className="text-neutral-800 hover:text-primary-400 text-sm transition-colors">
                     {link.name}
                   </Link>
                 </li>
@@ -110,7 +110,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-neutral-600 hover:text-primary-400 text-sm transition-colors">
+                  <Link href={link.href} className="text-neutral-800 hover:text-primary-400 text-sm transition-colors">
                     {link.name}
                   </Link>
                 </li>
@@ -124,7 +124,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {footerLinks.resources.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-neutral-600 hover:text-primary-400 text-sm transition-colors">
+                  <Link href={link.href} className="text-neutral-800 hover:text-primary-400 text-sm transition-colors">
                     {link.name}
                   </Link>
                 </li>
@@ -138,7 +138,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {footerLinks.portals.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-neutral-600 hover:text-primary-400 text-sm transition-colors">
+                  <Link href={link.href} className="text-neutral-800 hover:text-primary-400 text-sm transition-colors">
                     {link.name}
                   </Link>
                 </li>
@@ -151,18 +151,18 @@ export default function Footer() {
             <h4 className="text-white font-semibold text-sm mb-4">Contact</h4>
             <ul className="space-y-3">
               <li>
-                <a href="mailto:ajinkyasatkar5@gmail.com" className="flex items-center gap-2 text-neutral-600 hover:text-primary-400 text-sm transition-colors">
+                <a href="mailto:ajinkyasatkar5@gmail.com" className="flex items-center gap-2 text-neutral-800 hover:text-primary-400 text-sm transition-colors">
                   <Mail size={14} />
                   ajinkyasatkar5@gmail.com
                 </a>
               </li>
               <li>
-                <a href="tel:+919373955349" className="flex items-center gap-2 text-neutral-600 hover:text-primary-400 text-sm transition-colors">
+                <a href="tel:+919373955349" className="flex items-center gap-2 text-neutral-800 hover:text-primary-400 text-sm transition-colors">
                   <Phone size={14} />
                   +91 9373955349
                 </a>
               </li>
-              <li className="flex items-start gap-2 text-neutral-600 text-sm">
+              <li className="flex items-start gap-2 text-neutral-800 text-sm">
                 <MapPin size={14} className="mt-0.5 shrink-0" />
                 Pune, Maharashtra, India · Remote-First
               </li>
@@ -172,13 +172,13 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="mt-12 pt-8 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-neutral-600 text-xs">
+          <p className="text-neutral-800 text-xs">
             © {new Date().getFullYear()} Nexify Technologies. All rights reserved. Powered by AI Agents.
           </p>
           <div className="flex items-center gap-4">
-            <Link href="#" className="text-neutral-600 hover:text-neutral-300 text-xs transition-colors">Privacy</Link>
-            <Link href="#" className="text-neutral-600 hover:text-neutral-300 text-xs transition-colors">Terms</Link>
-            <Link href="#" className="text-neutral-600 hover:text-neutral-300 text-xs transition-colors">Cookies</Link>
+            <Link href="#" className="text-neutral-800 hover:text-neutral-300 text-xs transition-colors">Privacy</Link>
+            <Link href="#" className="text-neutral-800 hover:text-neutral-300 text-xs transition-colors">Terms</Link>
+            <Link href="#" className="text-neutral-800 hover:text-neutral-300 text-xs transition-colors">Cookies</Link>
           </div>
         </div>
       </div>

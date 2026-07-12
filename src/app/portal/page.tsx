@@ -72,7 +72,7 @@ const statusColors: Record<string, string> = {
   open: 'bg-error/10 text-error border-error/20',
   'in-progress': 'bg-info/10 text-info border-info/20',
   resolved: 'bg-success/10 text-success border-success/20',
-  low: 'bg-neutral-100 text-neutral-600 border-neutral-200',
+  low: 'bg-neutral-100 text-neutral-800 border-neutral-200',
   medium: 'bg-warning/10 text-warning border-warning/20',
   high: 'bg-error/10 text-error border-error/20',
   bug: 'bg-error/10 text-error border-error/20',
@@ -82,7 +82,7 @@ const statusColors: Record<string, string> = {
 
 function StatusBadge({ status }: { status: string }) {
   return (
-    <span className={`chip text-xs capitalize border ${statusColors[status] || 'bg-neutral-100 text-neutral-600'}`}>
+    <span className={`chip text-xs capitalize border ${statusColors[status] || 'bg-neutral-100 text-neutral-800'}`}>
       {status}
     </span>
   )
@@ -93,12 +93,12 @@ function StatCard({ icon: Icon, label, value, trend, variant = 'default' }: { ic
     <div className="bg-white rounded-xl p-5 border border-neutral-200 hover:shadow-lg transition-all">
       <div className="flex items-center justify-between mb-3">
         <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${variant === 'primary' ? 'bg-primary-50' : variant === 'success' ? 'bg-success/10' : variant === 'warning' ? 'bg-warning/10' : 'bg-neutral-100'}`}>
-          <Icon className={`w-5 h-5 ${variant === 'primary' ? 'text-primary-500' : variant === 'success' ? 'text-success' : variant === 'warning' ? 'text-warning' : 'text-neutral-600'}`} />
+          <Icon className={`w-5 h-5 ${variant === 'primary' ? 'text-primary-500' : variant === 'success' ? 'text-success' : variant === 'warning' ? 'text-warning' : 'text-neutral-800'}`} />
         </div>
         {trend && <span className="text-xs text-success font-medium">{trend}</span>}
       </div>
       <div className="text-2xl font-heading font-bold text-neutral-900">{value}</div>
-      <div className="text-sm text-neutral-600">{label}</div>
+      <div className="text-sm text-neutral-800">{label}</div>
     </div>
   )
 }
@@ -184,9 +184,9 @@ function DashboardPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-heading font-bold">Dashboard</h1>
-          <p className="text-neutral-600 text-sm">Welcome back! Here's your project overview.</p>
+          <p className="text-neutral-800 text-sm">Welcome back! Here's your project overview.</p>
         </div>
-        <div className="text-sm text-neutral-600">Last updated: AI agent sync 2 min ago</div>
+        <div className="text-sm text-neutral-800">Last updated: AI agent sync 2 min ago</div>
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -216,7 +216,7 @@ function DashboardPage() {
                   </div>
                   <div className="flex items-center gap-4 mt-2">
                     <ProgressBar value={p.progress} />
-                    <span className="text-xs text-neutral-600 shrink-0">{p.progress}%</span>
+                    <span className="text-xs text-neutral-800 shrink-0">{p.progress}%</span>
                   </div>
                 </div>
               </div>
@@ -234,14 +234,14 @@ function DashboardPage() {
             {tickets.map(t => (
               <div key={t.id} className="flex items-start gap-3 p-3 rounded-xl hover:bg-neutral-50 transition-all">
                 <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${t.priority === 'high' ? 'bg-error/10' : 'bg-neutral-100'}`}>
-                  {t.status === 'resolved' ? <CheckCircle2 className="w-4 h-4 text-success" /> : <AlertCircle className={`w-4 h-4 ${t.priority === 'high' ? 'text-error' : 'text-neutral-600'}`} />}
+                  {t.status === 'resolved' ? <CheckCircle2 className="w-4 h-4 text-success" /> : <AlertCircle className={`w-4 h-4 ${t.priority === 'high' ? 'text-error' : 'text-neutral-800'}`} />}
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-medium text-neutral-900 truncate">{t.subject}</span>
                     <StatusBadge status={t.status} />
                   </div>
-                  <div className="text-xs text-neutral-600 mt-1 flex items-center gap-2">
+                  <div className="text-xs text-neutral-800 mt-1 flex items-center gap-2">
                     <span>{t.id}</span>
                     <span>·</span>
                     <span>{t.lastUpdate}</span>
@@ -264,12 +264,12 @@ function DashboardPage() {
             return (
               <div key={p.id} className="p-4 rounded-xl bg-neutral-50 border border-neutral-100">
                 <div className="text-sm font-medium text-neutral-900 mb-2">{p.name}</div>
-                <div className="flex items-center justify-between text-xs text-neutral-600 mb-1">
+                <div className="flex items-center justify-between text-xs text-neutral-800 mb-1">
                   <span>Spent: ₹{(spent/100000).toFixed(1)}L</span>
                   <span>Budget: ₹{(budget/100000).toFixed(1)}L</span>
                 </div>
                 <ProgressBar value={pct} />
-                <div className="text-xs text-neutral-600 mt-1 text-right">{pct}% utilized</div>
+                <div className="text-xs text-neutral-800 mt-1 text-right">{pct}% utilized</div>
               </div>
             )
           })}
@@ -291,7 +291,7 @@ function ProjectsPage() {
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-heading font-bold">Projects</h1>
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-600" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-800" />
           <input className="pl-9 pr-4 py-2 rounded-xl border border-neutral-200 text-sm w-64 focus:outline-none focus:ring-2 focus:ring-primary-500/30" placeholder="Search projects..." />
         </div>
       </div>
@@ -304,10 +304,10 @@ function ProjectsPage() {
                 <div className="flex items-center gap-3 mb-2">
                   <h2 className="text-lg font-heading font-bold">{p.name}</h2>
                   <StatusBadge status={p.status} />
-                  <span className="text-xs text-neutral-600">{p.id}</span>
+                  <span className="text-xs text-neutral-800">{p.id}</span>
                 </div>
-                <p className="text-sm text-neutral-600 mb-4">{p.description}</p>
-                <div className="flex flex-wrap items-center gap-4 text-xs text-neutral-600">
+                <p className="text-sm text-neutral-800 mb-4">{p.description}</p>
+                <div className="flex flex-wrap items-center gap-4 text-xs text-neutral-800">
                   <span className="flex items-center gap-1"><Calendar size={12} /> {p.startDate} → {p.endDate}</span>
                   <span className="flex items-center gap-1"><DollarSign size={12} /> {p.budget}</span>
                   <span className="flex items-center gap-1"><Users size={12} /> {p.team.join(', ')}</span>
@@ -316,7 +316,7 @@ function ProjectsPage() {
               <div className="text-right shrink-0">
                 <div className="text-sm font-semibold text-neutral-900">{p.progress}%</div>
                 <ProgressBar value={p.progress} />
-                <div className="text-xs text-neutral-600 mt-1">{p.tasks.done}/{p.tasks.total} tasks</div>
+                <div className="text-xs text-neutral-800 mt-1">{p.tasks.done}/{p.tasks.total} tasks</div>
               </div>
             </div>
             <div className="mt-4 flex items-center gap-4 text-xs">
@@ -352,7 +352,7 @@ function InvoicesPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-heading font-bold">Invoices</h1>
-          <p className="text-neutral-600 text-sm">Track payments and manage billing</p>
+          <p className="text-neutral-800 text-sm">Track payments and manage billing</p>
         </div>
         <button className="btn-primary text-sm"><Plus size={16} /> Request Payment Plan</button>
       </div>
@@ -362,23 +362,23 @@ function InvoicesPage() {
           <table className="w-full">
             <thead>
               <tr className="border-b border-neutral-100 bg-neutral-50">
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase tracking-wider">Invoice</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase tracking-wider">Project</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase tracking-wider">Amount</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase tracking-wider">Date</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase tracking-wider">Due</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase tracking-wider">Status</th>
-                <th className="text-right p-4 text-xs font-semibold text-neutral-600 uppercase tracking-wider">Action</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase tracking-wider">Invoice</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase tracking-wider">Project</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase tracking-wider">Amount</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase tracking-wider">Date</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase tracking-wider">Due</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase tracking-wider">Status</th>
+                <th className="text-right p-4 text-xs font-semibold text-neutral-800 uppercase tracking-wider">Action</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-neutral-100">
               {invoices.map(inv => (
                 <tr key={inv.id} className="hover:bg-neutral-50 transition-all">
                   <td className="p-4 text-sm font-medium text-neutral-900">{inv.id}</td>
-                  <td className="p-4 text-sm text-neutral-600">{inv.project}</td>
+                  <td className="p-4 text-sm text-neutral-800">{inv.project}</td>
                   <td className="p-4 text-sm font-semibold text-neutral-900">₹{inv.amount.toLocaleString('en-IN')}</td>
-                  <td className="p-4 text-sm text-neutral-600">{inv.date}</td>
-                  <td className="p-4 text-sm text-neutral-600">{inv.dueDate}</td>
+                  <td className="p-4 text-sm text-neutral-800">{inv.date}</td>
+                  <td className="p-4 text-sm text-neutral-800">{inv.dueDate}</td>
                   <td className="p-4"><StatusBadge status={inv.status} /></td>
                   <td className="p-4 text-right">
                     <button className="text-primary-500 hover:text-primary-600 text-sm flex items-center gap-1 ml-auto"><Download size={14} /> PDF</button>
@@ -437,7 +437,7 @@ function TicketsPage() {
                 <h1 className="text-xl font-heading font-bold">{ticket.subject}</h1>
                 <StatusBadge status={ticket.status} />
               </div>
-              <div className="flex items-center gap-3 text-xs text-neutral-600">
+              <div className="flex items-center gap-3 text-xs text-neutral-800">
                 <span>{ticket.id}</span><span>·</span><StatusBadge status={ticket.priority} /><span>·</span><StatusBadge status={ticket.category} /><span>·</span><span>{ticket.date}</span>
               </div>
             </div>
@@ -450,7 +450,7 @@ function TicketsPage() {
                 </div>
                 <div className={`max-w-[80%] p-3 rounded-xl text-sm ${msg.from === 'client' ? 'bg-neutral-100 text-neutral-700' : 'bg-accent-50 text-accent-700'}`}>
                   <p>{msg.text}</p>
-                  <div className="text-xs text-neutral-600 mt-1">{msg.time}</div>
+                  <div className="text-xs text-neutral-800 mt-1">{msg.time}</div>
                 </div>
               </div>
             ))}
@@ -471,7 +471,7 @@ function TicketsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-heading font-bold">Support Tickets</h1>
-          <p className="text-neutral-600 text-sm">AI agents respond within minutes, 24/7</p>
+          <p className="text-neutral-800 text-sm">AI agents respond within minutes, 24/7</p>
         </div>
         <button onClick={() => setShowNewTicket(true)} className="btn-primary text-sm"><Plus size={16} /> New Ticket</button>
       </div>
@@ -519,14 +519,14 @@ function TicketsPage() {
                   <span className="font-medium text-neutral-900 truncate">{t.subject}</span>
                   <StatusBadge status={t.status} />
                 </div>
-                <p className="text-sm text-neutral-600 truncate">{t.description}</p>
+                <p className="text-sm text-neutral-800 truncate">{t.description}</p>
               </div>
               <div className="text-right shrink-0">
                 <div className="flex items-center gap-2 justify-end mb-1">
                   <StatusBadge status={t.priority} />
                   <StatusBadge status={t.category} />
                 </div>
-                <div className="text-xs text-neutral-600">{t.lastUpdate}</div>
+                <div className="text-xs text-neutral-800">{t.lastUpdate}</div>
               </div>
             </div>
           </button>
@@ -548,7 +548,7 @@ function FilesPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-heading font-bold">Files & Documents</h1>
-          <p className="text-neutral-600 text-sm">All project files in one place</p>
+          <p className="text-neutral-800 text-sm">All project files in one place</p>
         </div>
         <button className="btn-primary text-sm"><Upload size={16} /> Upload File</button>
       </div>
@@ -562,10 +562,10 @@ function FilesPage() {
               </div>
               <div className="min-w-0 flex-1">
                 <div className="font-medium text-sm text-neutral-900 truncate group-hover:text-primary-600 transition-colors">{f.name}</div>
-                <div className="text-xs text-neutral-600 mt-1">{f.size}</div>
-                <div className="text-xs text-neutral-600">{f.project}</div>
+                <div className="text-xs text-neutral-800 mt-1">{f.size}</div>
+                <div className="text-xs text-neutral-800">{f.project}</div>
                 <div className="flex items-center justify-between mt-3 pt-3 border-t border-neutral-100">
-                  <span className="text-xs text-neutral-600">by {f.uploadedBy}</span>
+                  <span className="text-xs text-neutral-800">by {f.uploadedBy}</span>
                   <button className="text-primary-500 hover:text-primary-600"><Download size={14} /></button>
                 </div>
               </div>
@@ -601,15 +601,15 @@ function NotificationsPage() {
           <div key={n.id} className={`bg-white rounded-xl border p-4 transition-all hover:shadow-md ${n.read ? 'border-neutral-200' : 'border-primary-500/30 bg-primary-50/30'}`}>
             <div className="flex items-start gap-3">
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${n.type === 'milestone' ? 'bg-success/10' : n.type === 'ticket' ? 'bg-info/10' : n.type === 'invoice' ? 'bg-warning/10' : 'bg-neutral-100'}`}>
-                {n.type === 'milestone' ? <Star className="w-5 h-5 text-success" /> : n.type === 'ticket' ? <Ticket className="w-5 h-5 text-info" /> : n.type === 'invoice' ? <FileText className="w-5 h-5 text-warning" /> : <Bell className="w-5 h-5 text-neutral-600" />}
+                {n.type === 'milestone' ? <Star className="w-5 h-5 text-success" /> : n.type === 'ticket' ? <Ticket className="w-5 h-5 text-info" /> : n.type === 'invoice' ? <FileText className="w-5 h-5 text-warning" /> : <Bell className="w-5 h-5 text-neutral-800" />}
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
                   <span className="font-medium text-sm text-neutral-900">{n.title}</span>
                   {!n.read && <span className="w-2 h-2 rounded-full bg-primary-500" />}
                 </div>
-                <p className="text-sm text-neutral-600 mt-0.5">{n.message}</p>
-                <span className="text-xs text-neutral-600 mt-1 block">{n.date}</span>
+                <p className="text-sm text-neutral-800 mt-0.5">{n.message}</p>
+                <span className="text-xs text-neutral-800 mt-1 block">{n.date}</span>
               </div>
             </div>
           </div>
@@ -637,7 +637,7 @@ function ReportsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-heading font-bold">Reports</h1>
-          <p className="text-neutral-600 text-sm">AI-generated project insights</p>
+          <p className="text-neutral-800 text-sm">AI-generated project insights</p>
         </div>
         <button className="btn-primary text-sm"><Download size={16} /> Export Report</button>
       </div>
@@ -656,7 +656,7 @@ function ReportsPage() {
             <div key={p.id}>
               <div className="flex items-center justify-between text-sm mb-1.5">
                 <span className="text-neutral-900 font-medium">{p.name}</span>
-                <span className="text-neutral-600">{p.progress}%</span>
+                <span className="text-neutral-800">{p.progress}%</span>
               </div>
               <ProgressBar value={p.progress} />
             </div>
@@ -675,7 +675,7 @@ function ReportsPage() {
               const isOnTrack = p.progress >= 30 && daysLeft > 0
               return (
                 <div key={p.id} className="flex items-center justify-between text-sm">
-                  <span className="text-neutral-600">{p.name}</span>
+                  <span className="text-neutral-800">{p.name}</span>
                   <span className={`flex items-center gap-1 text-xs ${isOnTrack ? 'text-success' : 'text-warning'}`}>
                     {isOnTrack ? <CheckCircle2 size={12} /> : <AlertCircle size={12} />}
                     {daysLeft > 0 ? `${daysLeft} days left` : 'Overdue'}
@@ -687,7 +687,7 @@ function ReportsPage() {
         </div>
         <div className="bg-white rounded-xl border border-neutral-200 p-5">
           <h2 className="font-semibold mb-3">AI Agent Insights</h2>
-          <ul className="space-y-3 text-sm text-neutral-600">
+          <ul className="space-y-3 text-sm text-neutral-800">
             <li className="flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-success mt-1.5 shrink-0" /> Trading Dashboard pacing 12% ahead of schedule</li>
             <li className="flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-warning mt-1.5 shrink-0" /> Portal Redesign sprint velocity stable</li>
             <li className="flex items-start gap-2"><div className="w-1.5 h-1.5 rounded-full bg-success mt-1.5 shrink-0" /> Payment Gateway integration ahead of timeline</li>
@@ -708,8 +708,8 @@ function ProfilePage() {
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white font-heading font-bold text-xl">RM</div>
           <div>
             <h2 className="text-xl font-heading font-bold">Rajesh Mehta</h2>
-            <p className="text-neutral-600">FinTech Labs</p>
-            <p className="text-neutral-600 text-sm">rajesh@fintechlabs.com</p>
+            <p className="text-neutral-800">FinTech Labs</p>
+            <p className="text-neutral-800 text-sm">rajesh@fintechlabs.com</p>
           </div>
         </div>
         <div className="grid sm:grid-cols-2 gap-4">
@@ -739,9 +739,9 @@ function ProfilePage() {
       <div className="bg-white rounded-xl border border-neutral-200 p-6">
         <h2 className="font-semibold mb-3">Client Details</h2>
         <div className="grid sm:grid-cols-3 gap-4 text-sm">
-          <div className="p-4 bg-neutral-50 rounded-xl"><span className="text-neutral-600 block">Client ID</span><span className="font-medium text-neutral-900">CLT-001</span></div>
-          <div className="p-4 bg-neutral-50 rounded-xl"><span className="text-neutral-600 block">Account Type</span><span className="font-medium text-neutral-900">Enterprise</span></div>
-          <div className="p-4 bg-neutral-50 rounded-xl"><span className="text-neutral-600 block">Since</span><span className="font-medium text-neutral-900">April 2026</span></div>
+          <div className="p-4 bg-neutral-50 rounded-xl"><span className="text-neutral-800 block">Client ID</span><span className="font-medium text-neutral-900">CLT-001</span></div>
+          <div className="p-4 bg-neutral-50 rounded-xl"><span className="text-neutral-800 block">Account Type</span><span className="font-medium text-neutral-900">Enterprise</span></div>
+          <div className="p-4 bg-neutral-50 rounded-xl"><span className="text-neutral-800 block">Since</span><span className="font-medium text-neutral-900">April 2026</span></div>
         </div>
       </div>
     </div>
@@ -808,7 +808,7 @@ export default function PortalPage() {
             </div>
             <div>
               <h2 className="text-white font-heading font-bold text-sm leading-none bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent">Nexify</h2>
-              <p className="text-neutral-600 text-xs">Client Portal</p>
+              <p className="text-neutral-800 text-xs">Client Portal</p>
             </div>
           </div>
         </div>
@@ -820,7 +820,7 @@ export default function PortalPage() {
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
                 activeTab === tab.id
                   ? 'bg-primary-50 text-primary-600 border border-primary-200'
-                  : 'text-neutral-600 hover:bg-neutral-50 hover:text-neutral-700'
+                  : 'text-neutral-800 hover:bg-neutral-50 hover:text-neutral-700'
               }`}
             >
               <tab.icon size={18} />
@@ -836,9 +836,9 @@ export default function PortalPage() {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white text-xs font-bold">RM</div>
             <div className="flex-1 min-w-0">
               <div className="text-sm font-medium text-neutral-900 truncate">Rajesh Mehta</div>
-              <div className="text-xs text-neutral-600">Client</div>
+              <div className="text-xs text-neutral-800">Client</div>
             </div>
-            <button onClick={() => setAuthenticated(false)} className="text-neutral-600 hover:text-error transition-colors"><LogOut size={16} /></button>
+            <button onClick={() => setAuthenticated(false)} className="text-neutral-800 hover:text-error transition-colors"><LogOut size={16} /></button>
           </div>
         </div>
       </aside>
@@ -850,11 +850,11 @@ export default function PortalPage() {
       <main className="flex-1 min-w-0">
         <div className="sticky top-0 bg-white/80 backdrop-blur-xl border-b border-neutral-200 z-20">
           <div className="flex items-center justify-between px-4 sm:px-6 py-4">
-            <button className="lg:hidden text-neutral-600" onClick={() => setSidebarOpen(true)}><Menu size={20} /></button>
+            <button className="lg:hidden text-neutral-800" onClick={() => setSidebarOpen(true)}><Menu size={20} /></button>
             <div className="flex items-center gap-3 ml-auto">
-              <Link href="/" className="text-xs text-neutral-600 hover:text-primary-500 flex items-center gap-1"><Home size={12} /> Main Site</Link>
+              <Link href="/" className="text-xs text-neutral-800 hover:text-primary-500 flex items-center gap-1"><Home size={12} /> Main Site</Link>
               <button onClick={() => setActiveTab('notifications')} className="relative p-2 rounded-xl hover:bg-neutral-100 transition-all">
-                <Bell size={18} className="text-neutral-600" />
+                <Bell size={18} className="text-neutral-800" />
                 {unreadNotifications > 0 && <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-primary-500" />}
               </button>
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white text-xs font-bold cursor-pointer">RM</div>

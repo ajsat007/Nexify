@@ -197,7 +197,7 @@ export default function ContentPage() {
             ].map((s, i) => (
               <div key={i} className="text-center p-6 bg-neutral-50 dark:bg-neutral-800/50 rounded-2xl border border-neutral-200 dark:border-neutral-700">
                 <div className={`text-3xl font-heading font-bold bg-gradient-to-r ${s.c} bg-clip-text text-transparent`}>{s.value}</div>
-                <div className="text-sm text-neutral-600 mt-1">{s.label}</div>
+                <div className="text-sm text-neutral-800 mt-1">{s.label}</div>
               </div>
             ))}
           </div>
@@ -206,7 +206,7 @@ export default function ContentPage() {
           <div className="card-surface p-8 mb-12 reveal">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 rounded-2xl gradient-bg flex items-center justify-center"><Sparkles className="w-6 h-6 text-white" /></div>
-              <div><h2 className="text-2xl font-heading font-bold">AI Content Generator</h2><p className="text-sm text-neutral-600">Generates LinkedIn/Twitter posts optimized for engagement</p></div>
+              <div><h2 className="text-2xl font-heading font-bold">AI Content Generator</h2><p className="text-sm text-neutral-800">Generates LinkedIn/Twitter posts optimized for engagement</p></div>
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
@@ -243,7 +243,7 @@ export default function ContentPage() {
                 <div className={`p-6 rounded-xl border ${selectedPlatform === 'LinkedIn' ? 'bg-blue-50 dark:bg-blue-500/5 border-blue-200 dark:border-blue-500/20' : 'bg-neutral-50 dark:bg-neutral-800/50 border-neutral-200 dark:border-neutral-700'}`}>
                   <div className="flex items-center gap-2 mb-4">
                     {selectedPlatform === 'LinkedIn' ? <Linkedin className="w-5 h-5 text-blue-600" /> : <Twitter className="w-5 h-5 text-sky-500" />}
-                    <span className="text-xs font-medium text-neutral-600 uppercase">{selectedPlatform} · {selectedType.replace('-', ' ')}</span>
+                    <span className="text-xs font-medium text-neutral-800 uppercase">{selectedPlatform} · {selectedType.replace('-', ' ')}</span>
                   </div>
                   <p className="text-neutral-700 dark:text-neutral-200 whitespace-pre-line leading-relaxed">{generatedPost}</p>
                 </div>
@@ -253,14 +253,14 @@ export default function ContentPage() {
                     {scheduling ? <Loader size={14} className="animate-spin" /> : <Clock size={14} />}
                     Schedule for {scheduleTime}
                   </button>
-                  <button onClick={copyPost} className="px-4 py-2 rounded-xl border border-neutral-200 dark:border-neutral-700 text-sm text-neutral-600 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-all">
+                  <button onClick={copyPost} className="px-4 py-2 rounded-xl border border-neutral-200 dark:border-neutral-700 text-sm text-neutral-800 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-all">
                     {copied ? <><Check size={14} /> Copied</> : <><Copy size={14} /> Copy</>}
                   </button>
                 </div>
               </div>
             )}
 
-            <div className="mt-4 text-xs text-neutral-600 flex items-center gap-2">
+            <div className="mt-4 text-xs text-neutral-800 flex items-center gap-2">
               <Zap size={12} className="text-primary-500" /> AI generates content optimized for your niche. Customize before posting.
             </div>
           </div>
@@ -269,7 +269,7 @@ export default function ContentPage() {
           {analytics.topPost && (
             <div className="bg-gradient-to-r from-amber-500/5 to-orange-500/5 rounded-2xl border border-amber-500/20 p-6 mb-12 reveal">
               <div className="flex items-center gap-2 mb-2"><Star className="w-4 h-4 text-amber-500" fill="currentColor" /><span className="text-sm font-semibold">Top Performing Post</span></div>
-              <p className="text-sm text-neutral-600">{analytics.topPost}</p>
+              <p className="text-sm text-neutral-800">{analytics.topPost}</p>
             </div>
           )}
 
@@ -277,7 +277,7 @@ export default function ContentPage() {
           <div className="space-y-4 reveal">
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-heading font-bold">Content Feed</h2>
-              <span className="text-xs text-neutral-600">{posts.length} posts generated</span>
+              <span className="text-xs text-neutral-800">{posts.length} posts generated</span>
             </div>
             {posts.map((post, i) => (
               <div key={post.id} className="card-surface p-5 hover:shadow-lg transition-all">
@@ -287,7 +287,7 @@ export default function ContentPage() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm text-neutral-700 dark:text-neutral-200 whitespace-pre-line line-clamp-3">{post.content}</p>
-                    <div className="flex flex-wrap items-center gap-3 mt-3 text-xs text-neutral-600">
+                    <div className="flex flex-wrap items-center gap-3 mt-3 text-xs text-neutral-800">
                       <span>{post.date} · {post.time}</span>
                       {post.autoPosted && <span className="chip bg-success/10 text-success text-[10px]">Auto-posted</span>}
                       <span className="flex items-center gap-1"><Heart size={12} /> {post.engagement.likes}</span>
@@ -303,7 +303,7 @@ export default function ContentPage() {
           {/* CTA */}
           <div className="mt-12 bg-gradient-to-r from-primary-500/5 to-accent-500/5 rounded-2xl border border-primary-500/20 p-8 text-center reveal">
             <h2 className="text-2xl font-heading font-bold mb-2">Your AI Content Calendar is Running</h2>
-            <p className="text-neutral-600 mb-6 max-w-md mx-auto">AI generates posts, schedules them, and tracks engagement. Build your audience without lifting a finger.</p>
+            <p className="text-neutral-800 mb-6 max-w-md mx-auto">AI generates posts, schedules them, and tracks engagement. Build your audience without lifting a finger.</p>
             <div className="flex justify-center gap-4">
               <button onClick={autoGenerateSequence} className="btn-primary"><Zap size={16} /> Auto-Generate Week</button>
               <Link href="/freelancer" className="btn-secondary">Freelancer Hub <ArrowRight size={16} /></Link>

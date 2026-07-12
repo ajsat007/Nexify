@@ -40,11 +40,11 @@ export default function CaseStudiesPage() {
                 <div className="chip bg-primary-50 text-primary-600 text-xs mb-4">{c.industry}</div>
                 <h2 className="text-xl font-heading font-bold mb-4 group-hover:text-primary-600 transition-colors">{c.title}</h2>
                 <div className="space-y-3 mb-4">
-                  <div><span className="text-xs font-semibold text-neutral-600 uppercase tracking-wider">Problem</span><p className="text-sm text-neutral-600 mt-0.5">{c.problem}</p></div>
-                  <div><span className="text-xs font-semibold text-neutral-600 uppercase tracking-wider">Solution</span><p className="text-sm text-neutral-600 mt-0.5">{c.solution}</p></div>
+                  <div><span className="text-xs font-semibold text-neutral-800 uppercase tracking-wider">Problem</span><p className="text-sm text-neutral-800 mt-0.5">{c.problem}</p></div>
+                  <div><span className="text-xs font-semibold text-neutral-800 uppercase tracking-wider">Solution</span><p className="text-sm text-neutral-800 mt-0.5">{c.solution}</p></div>
                 </div>
-                <div className="flex flex-wrap gap-2 mb-4">{c.tech.map((t, j) => <span key={j} className="chip bg-neutral-100 text-neutral-600 text-xs">{t}</span>)}</div>
-                <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-600 border-t border-neutral-100 pt-4">
+                <div className="flex flex-wrap gap-2 mb-4">{c.tech.map((t, j) => <span key={j} className="chip bg-neutral-100 text-neutral-800 text-xs">{t}</span>)}</div>
+                <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-800 border-t border-neutral-100 pt-4">
                   <span className="flex items-center gap-1"><Clock size={14} />{c.timeline}</span>
                   <span className="flex items-center gap-1"><DollarSign size={14} />{c.budget}</span>
                   <span className="flex items-center gap-1 text-success"><TrendingUp size={14} />{c.result}</span>

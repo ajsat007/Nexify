@@ -42,8 +42,8 @@ export default function TechStackPage() {
                       <span className="font-semibold text-neutral-900">{t.category}</span>
                       <span className="chip bg-accent-50 text-accent-600 text-[10px]">Free Tier</span>
                     </div>
-                    <p className="text-sm text-neutral-600 mb-2">{t.tech}</p>
-                    <p className="text-xs text-neutral-600">{t.purpose}</p>
+                    <p className="text-sm text-neutral-800 mb-2">{t.tech}</p>
+                    <p className="text-xs text-neutral-800">{t.purpose}</p>
                   </div>
                 </div>
               </div>
@@ -52,9 +52,9 @@ export default function TechStackPage() {
 
           <div className="mt-12 bg-gradient-to-r from-primary-500/5 to-accent-500/5 rounded-2xl border border-primary-500/20 p-8 text-center">
             <h2 className="text-2xl font-heading font-bold mb-2">Zero Licensing Cost</h2>
-            <p className="text-neutral-600 mb-4">Every technology in our stack has a generous free tier or is open-source. Total monthly infra cost: <strong className="text-primary-600">~₹1,04,000</strong>.</p>
+            <p className="text-neutral-800 mb-4">Every technology in our stack has a generous free tier or is open-source. Total monthly infra cost: <strong className="text-primary-600">~₹1,04,000</strong>.</p>
             <div className="flex flex-wrap justify-center gap-3">
-              {techLayers.map((t, i) => <span key={i} className="chip bg-white text-neutral-600 text-xs border border-neutral-200">{t.category}</span>)}
+              {techLayers.map((t, i) => <span key={i} className="chip bg-white text-neutral-800 text-xs border border-neutral-200">{t.category}</span>)}
             </div>
           </div>
         </div>

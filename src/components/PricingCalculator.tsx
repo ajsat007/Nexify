@@ -96,7 +96,7 @@ export default function PricingCalculator() {
                 className={`flex items-center gap-2 px-4 py-3 rounded-xl border text-sm font-medium transition-all ${
                   service === s.id
                     ? 'border-primary-500 bg-primary-50 text-primary-600'
-                    : 'border-neutral-200 text-neutral-600 hover:border-neutral-300'
+                    : 'border-neutral-200 text-neutral-800 hover:border-neutral-300'
                 }`}>
                 <span>{s.icon}</span> {s.name}
               </button>
@@ -131,7 +131,7 @@ export default function PricingCalculator() {
                 className={`chip text-xs transition-all ${
                   selectedFeatures.includes(f.id)
                     ? 'bg-primary-500 text-white'
-                    : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                    : 'bg-neutral-100 text-neutral-800 hover:bg-neutral-200'
                 }`}>
                 {selectedFeatures.includes(f.id) && <Check size={10} />}
                 {f.label} (+₹{(f.cost / 1000).toFixed(0)}K)

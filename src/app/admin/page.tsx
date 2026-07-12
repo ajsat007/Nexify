@@ -145,7 +145,7 @@ const DB = {
 const statusColors: Record<string, string> = {
   active: 'bg-success/10 text-success border-success/20',
   idle: 'bg-warning/10 text-warning border-warning/20',
-  inactive: 'bg-neutral-100 text-neutral-600 border-neutral-200',
+  inactive: 'bg-neutral-100 text-neutral-800 border-neutral-200',
   planning: 'bg-info/10 text-info border-info/20',
   completed: 'bg-neutral-900 text-white border-neutral-900',
   paid: 'bg-success/10 text-success border-success/20',
@@ -153,7 +153,7 @@ const statusColors: Record<string, string> = {
   pending: 'bg-warning/10 text-warning border-warning/20',
   high: 'bg-error/10 text-error border-error/20',
   medium: 'bg-warning/10 text-warning border-warning/20',
-  low: 'bg-neutral-100 text-neutral-600 border-neutral-200',
+  low: 'bg-neutral-100 text-neutral-800 border-neutral-200',
   new: 'bg-info/10 text-info border-info/20',
   qualified: 'bg-accent-50 text-accent-600 border-accent-200',
   proposal: 'bg-warning/10 text-warning border-warning/20',
@@ -164,7 +164,7 @@ const statusColors: Record<string, string> = {
 }
 
 function Badge({ status }: { status: string }) {
-  return <span className={`chip text-xs capitalize border ${statusColors[status] || 'bg-neutral-100 text-neutral-600'}`}>{status.replace('_', ' ')}</span>
+  return <span className={`chip text-xs capitalize border ${statusColors[status] || 'bg-neutral-100 text-neutral-800'}`}>{status.replace('_', ' ')}</span>
 }
 
 function ProgressBar({ value, size = 'md' }: { value: number; size?: string }) {
@@ -182,13 +182,13 @@ function StatCard({ icon: Icon, label, value, trend, sub, variant = 'default' }:
     <div className="bg-white rounded-xl p-5 border border-neutral-200 hover:shadow-md transition-all">
       <div className="flex items-center justify-between mb-3">
         <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${variant === 'primary' ? 'bg-primary-50' : variant === 'success' ? 'bg-success/10' : variant === 'warning' ? 'bg-warning/10' : variant === 'accent' ? 'bg-accent-50' : 'bg-neutral-100'}`}>
-          <Icon className={`w-5 h-5 ${variant === 'primary' ? 'text-primary-500' : variant === 'success' ? 'text-success' : variant === 'warning' ? 'text-warning' : variant === 'accent' ? 'text-accent-500' : 'text-neutral-600'}`} />
+          <Icon className={`w-5 h-5 ${variant === 'primary' ? 'text-primary-500' : variant === 'success' ? 'text-success' : variant === 'warning' ? 'text-warning' : variant === 'accent' ? 'text-accent-500' : 'text-neutral-800'}`} />
         </div>
         {trend && <span className={`text-xs font-medium ${trend.startsWith('+') ? 'text-success' : 'text-error'}`}>{trend}</span>}
       </div>
       <div className="text-2xl font-heading font-bold text-neutral-900">{value}</div>
-      <div className="text-sm text-neutral-600">{label}</div>
-      {sub && <div className="text-xs text-neutral-600 mt-0.5">{sub}</div>}
+      <div className="text-sm text-neutral-800">{label}</div>
+      {sub && <div className="text-xs text-neutral-800 mt-0.5">{sub}</div>}
     </div>
   )
 }
@@ -205,7 +205,7 @@ function AdminLogin({ onLogin }: { onLogin: () => void }) {
             <Shield className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-heading font-bold text-white">Nexify Admin</h1>
-          <p className="text-neutral-600 mt-2">AI Company Management Console</p>
+          <p className="text-neutral-800 mt-2">AI Company Management Console</p>
         </div>
         <div className="bg-neutral-800 rounded-2xl p-8 border border-neutral-700">
           <h2 className="text-xl font-semibold text-white mb-6">System Access</h2>
@@ -222,7 +222,7 @@ function AdminLogin({ onLogin }: { onLogin: () => void }) {
               {loading ? 'Authenticating...' : 'Access Admin Panel'}
             </button>
           </div>
-          <p className="text-center text-neutral-600 text-xs mt-4">Demo: click to enter</p>
+          <p className="text-center text-neutral-800 text-xs mt-4">Demo: click to enter</p>
         </div>
       </div>
     </div>
@@ -252,9 +252,9 @@ function AdminDashboard() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-heading font-bold">Admin Dashboard</h1>
-          <p className="text-neutral-600 text-sm">AI company operational overview — all metrics AI-generated.</p>
+          <p className="text-neutral-800 text-sm">AI company operational overview — all metrics AI-generated.</p>
         </div>
-        <div className="flex items-center gap-2 text-xs text-neutral-600 bg-neutral-100 rounded-xl px-3 py-1.5">
+        <div className="flex items-center gap-2 text-xs text-neutral-800 bg-neutral-100 rounded-xl px-3 py-1.5">
           <RefreshCw size={12} /> Live · Auto-sync every 60s
         </div>
       </div>
@@ -283,13 +283,13 @@ function AdminDashboard() {
                   <div className="flex items-center gap-2">
                     <span className="font-medium text-sm text-neutral-900">{a.name}</span>
                     <Badge status={a.status} />
-                    <span className="text-xs text-neutral-600">{a.model}</span>
+                    <span className="text-xs text-neutral-800">{a.model}</span>
                   </div>
-                  <div className="text-xs text-neutral-600">{a.specialization} · {a.tasksCompleted} tasks</div>
+                  <div className="text-xs text-neutral-800">{a.specialization} · {a.tasksCompleted} tasks</div>
                 </div>
                 <div className="text-right text-xs">
                   <div className="text-success font-medium">{a.efficiency}%</div>
-                  <div className="text-neutral-600">efficiency</div>
+                  <div className="text-neutral-800">efficiency</div>
                 </div>
               </div>
             ))}
@@ -308,7 +308,7 @@ function AdminDashboard() {
                 <div className="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center text-primary-500 text-xs font-bold shrink-0">{l.company.slice(0, 2)}</div>
                 <div className="min-w-0 flex-1">
                   <div className="text-sm font-medium text-neutral-900 truncate">{l.company}</div>
-                  <div className="text-xs text-neutral-600">{l.service} · {l.value}</div>
+                  <div className="text-xs text-neutral-800">{l.service} · {l.value}</div>
                   <Badge status={l.status} />
                 </div>
               </div>
@@ -330,9 +330,9 @@ function AdminDashboard() {
                 <span className="text-sm font-medium text-neutral-900 truncate">{p.name}</span>
                 <Badge status={p.priority} />
               </div>
-              <div className="text-xs text-neutral-600 mb-2">{p.client} · {p.value}</div>
+              <div className="text-xs text-neutral-800 mb-2">{p.client} · {p.value}</div>
               <ProgressBar value={p.progress} />
-              <div className="text-xs text-neutral-600 mt-1">{p.progress}% complete</div>
+              <div className="text-xs text-neutral-800 mt-1">{p.progress}% complete</div>
             </div>
           ))}
         </div>
@@ -344,19 +344,19 @@ function AdminDashboard() {
         <div className="grid sm:grid-cols-4 gap-6">
           <div className="text-center p-4">
             <div className="text-3xl font-heading font-bold gradient-text">{avgEfficiency}%</div>
-            <div className="text-xs text-neutral-600 mt-1">Avg Efficiency</div>
+            <div className="text-xs text-neutral-800 mt-1">Avg Efficiency</div>
           </div>
           <div className="text-center p-4">
             <div className="text-3xl font-heading font-bold gradient-text">99.95%</div>
-            <div className="text-xs text-neutral-600 mt-1">Avg Uptime</div>
+            <div className="text-xs text-neutral-800 mt-1">Avg Uptime</div>
           </div>
           <div className="text-center p-4">
             <div className="text-3xl font-heading font-bold gradient-text">6,264</div>
-            <div className="text-xs text-neutral-600 mt-1">Tasks Completed (June)</div>
+            <div className="text-xs text-neutral-800 mt-1">Tasks Completed (June)</div>
           </div>
           <div className="text-center p-4">
             <div className="text-3xl font-heading font-bold gradient-text">₹0</div>
-            <div className="text-xs text-neutral-600 mt-1">Labor Cost (AI)</div>
+            <div className="text-xs text-neutral-800 mt-1">Labor Cost (AI)</div>
           </div>
         </div>
       </div>
@@ -383,18 +383,18 @@ function AgentsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-heading font-bold">AI Agent Management</h1>
-          <p className="text-neutral-600 text-sm">12 agents deployed · 0 labor cost · 99.95% avg uptime</p>
+          <p className="text-neutral-800 text-sm">12 agents deployed · 0 labor cost · 99.95% avg uptime</p>
         </div>
         <button className="btn-primary text-sm"><Plus size={16} /> Deploy Agent</button>
       </div>
 
       <div className="flex flex-wrap gap-3 items-center">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-600" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-800" />
           <input className="pl-9 pr-4 py-2.5 rounded-xl border border-neutral-200 text-sm w-full focus:outline-none focus:ring-2 focus:ring-primary-500/30" placeholder="Search agents..." value={search} onChange={e => setSearch(e.target.value)} />
         </div>
         {['all', 'active', 'idle'].map(f => (
-          <button key={f} onClick={() => setFilter(f)} className={`chip text-xs capitalize ${filter === f ? 'bg-primary-500 text-white' : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'}`}>{f}</button>
+          <button key={f} onClick={() => setFilter(f)} className={`chip text-xs capitalize ${filter === f ? 'bg-primary-500 text-white' : 'bg-neutral-100 text-neutral-800 hover:bg-neutral-200'}`}>{f}</button>
         ))}
       </div>
 
@@ -411,17 +411,17 @@ function AgentsPage() {
                     <span className="font-semibold text-neutral-900">{a.name}</span>
                     <Badge status={a.status} />
                   </div>
-                  <div className="text-xs text-neutral-600">{a.type} · {a.model}</div>
+                  <div className="text-xs text-neutral-800">{a.type} · {a.model}</div>
                 </div>
               </div>
-              <button className="text-neutral-600 hover:text-neutral-600"><MoreHorizontal size={16} /></button>
+              <button className="text-neutral-800 hover:text-neutral-800"><MoreHorizontal size={16} /></button>
             </div>
             <div className="grid grid-cols-3 gap-4 text-center text-sm mb-4">
-              <div><div className="font-semibold text-neutral-900">{a.projects}</div><div className="text-xs text-neutral-600">Projects</div></div>
-              <div><div className="font-semibold text-neutral-900">{a.tasksCompleted}</div><div className="text-xs text-neutral-600">Tasks</div></div>
-              <div><div className="font-semibold text-neutral-900">{a.efficiency}%</div><div className="text-xs text-neutral-600">Efficiency</div></div>
+              <div><div className="font-semibold text-neutral-900">{a.projects}</div><div className="text-xs text-neutral-800">Projects</div></div>
+              <div><div className="font-semibold text-neutral-900">{a.tasksCompleted}</div><div className="text-xs text-neutral-800">Tasks</div></div>
+              <div><div className="font-semibold text-neutral-900">{a.efficiency}%</div><div className="text-xs text-neutral-800">Efficiency</div></div>
             </div>
-            <div className="flex items-center justify-between text-xs text-neutral-600 pt-3 border-t border-neutral-100">
+            <div className="flex items-center justify-between text-xs text-neutral-800 pt-3 border-t border-neutral-100">
               <span className="flex items-center gap-1"><Code2 size={12} /> {a.specialization}</span>
               <span className="flex items-center gap-1">{a.status === 'active' ? <Wifi size={12} className="text-success" /> : <WifiOff size={12} className="text-warning" />} {a.lastActive}</span>
             </div>
@@ -447,7 +447,7 @@ function AdminProjectsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-heading font-bold">Project Management</h1>
-          <p className="text-neutral-600 text-sm">8 active projects · ₹49.5L total value</p>
+          <p className="text-neutral-800 text-sm">8 active projects · ₹49.5L total value</p>
         </div>
         <button className="btn-primary text-sm"><Plus size={16} /> New Project</button>
       </div>
@@ -457,14 +457,14 @@ function AdminProjectsPage() {
           <table className="w-full">
             <thead>
               <tr className="border-b border-neutral-100 bg-neutral-50">
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Project</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Client</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Value</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Progress</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Agents</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Deadline</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Status</th>
-                <th className="text-right p-4 text-xs font-semibold text-neutral-600 uppercase">Action</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Project</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Client</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Value</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Progress</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Agents</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Deadline</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Status</th>
+                <th className="text-right p-4 text-xs font-semibold text-neutral-800 uppercase">Action</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-neutral-100">
@@ -473,12 +473,12 @@ function AdminProjectsPage() {
                 return (
                   <tr key={p.id} className="hover:bg-neutral-50 transition-all">
                     <td className="p-4 text-sm font-medium text-neutral-900">{p.name}</td>
-                    <td className="p-4 text-sm text-neutral-600">{p.client}</td>
+                    <td className="p-4 text-sm text-neutral-800">{p.client}</td>
                     <td className="p-4 text-sm font-semibold">{p.value}</td>
                     <td className="p-4">
                       <div className="flex items-center gap-2">
                         <div className="w-20"><ProgressBar value={p.progress} size="sm" /></div>
-                        <span className="text-xs text-neutral-600">{p.progress}%</span>
+                        <span className="text-xs text-neutral-800">{p.progress}%</span>
                       </div>
                     </td>
                     <td className="p-4">
@@ -486,10 +486,10 @@ function AdminProjectsPage() {
                         {assigned.slice(0, 3).map(a => (
                           <div key={a.id} className="w-7 h-7 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 border-2 border-white flex items-center justify-center text-[8px] text-white font-bold">{a.name.split('-')[1]?.slice(0, 2)}</div>
                         ))}
-                        {assigned.length > 3 && <div className="w-7 h-7 rounded-full bg-neutral-100 border-2 border-white flex items-center justify-center text-[8px] text-neutral-600 font-bold">+{assigned.length - 3}</div>}
+                        {assigned.length > 3 && <div className="w-7 h-7 rounded-full bg-neutral-100 border-2 border-white flex items-center justify-center text-[8px] text-neutral-800 font-bold">+{assigned.length - 3}</div>}
                       </div>
                     </td>
-                    <td className="p-4 text-sm text-neutral-600">{p.deadline}</td>
+                    <td className="p-4 text-sm text-neutral-800">{p.deadline}</td>
                     <td className="p-4"><Badge status={p.status} /></td>
                     <td className="p-4 text-right">
                       <button className="text-primary-500 hover:text-primary-600 text-sm">Manage</button>
@@ -526,7 +526,7 @@ function LeadsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-heading font-bold">CRM & Lead Management</h1>
-          <p className="text-neutral-600 text-sm">8 leads in pipeline · AI-powered lead scoring</p>
+          <p className="text-neutral-800 text-sm">8 leads in pipeline · AI-powered lead scoring</p>
         </div>
         <button className="btn-primary text-sm"><UserPlus size={16} /> Add Lead</button>
       </div>
@@ -535,18 +535,18 @@ function LeadsPage() {
         {Object.entries(funnel).map(([k, v]) => (
           <div key={k} className="text-center p-4 bg-white rounded-xl border border-neutral-200">
             <div className="text-2xl font-heading font-bold gradient-text">{v}</div>
-            <div className="text-xs text-neutral-600 capitalize">{k}</div>
+            <div className="text-xs text-neutral-800 capitalize">{k}</div>
           </div>
         ))}
       </div>
 
       <div className="flex flex-wrap gap-3 items-center">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-600" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-800" />
           <input className="pl-9 pr-4 py-2.5 rounded-xl border border-neutral-200 text-sm w-full focus:outline-none focus:ring-2 focus:ring-primary-500/30" placeholder="Search leads..." value={search} onChange={e => setSearch(e.target.value)} />
         </div>
         {['all', 'new', 'qualified', 'proposal', 'closed'].map(f => (
-          <button key={f} onClick={() => setFilter(f)} className={`chip text-xs capitalize ${filter === f ? 'bg-primary-500 text-white' : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'}`}>{f}</button>
+          <button key={f} onClick={() => setFilter(f)} className={`chip text-xs capitalize ${filter === f ? 'bg-primary-500 text-white' : 'bg-neutral-100 text-neutral-800 hover:bg-neutral-200'}`}>{f}</button>
         ))}
       </div>
 
@@ -561,8 +561,8 @@ function LeadsPage() {
                     <span className="font-semibold text-neutral-900">{l.company}</span>
                     <Badge status={l.status} />
                   </div>
-                  <div className="text-sm text-neutral-600">{l.contact} · {l.email}</div>
-                  <div className="text-xs text-neutral-600 mt-1">{l.service} · {l.value} · Source: {l.source}</div>
+                  <div className="text-sm text-neutral-800">{l.contact} · {l.email}</div>
+                  <div className="text-xs text-neutral-800 mt-1">{l.service} · {l.value} · Source: {l.source}</div>
                 </div>
               </div>
               <div className="flex items-center gap-2 shrink-0">
@@ -592,7 +592,7 @@ function FinancePage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-heading font-bold">Finance & Accounting</h1>
-          <p className="text-neutral-600 text-sm">Zero labor cost · 100% margin on services</p>
+          <p className="text-neutral-800 text-sm">Zero labor cost · 100% margin on services</p>
         </div>
         <button className="btn-primary text-sm"><DownloadCloud size={16} /> Export Report</button>
       </div>
@@ -611,7 +611,7 @@ function FinancePage() {
           <div className="flex-1 h-6 rounded-xl bg-warning/20 relative overflow-hidden"><div className="absolute bottom-0 w-full bg-warning rounded-t-xl" style={{ height: '24%' }} /><div className="absolute bottom-2 left-2 text-xs text-warning font-bold">Costs</div></div>
         </div>
         <div className="text-3xl font-heading font-bold gradient-text text-center">Profit Margin: 99.91%</div>
-        <p className="text-center text-xs text-neutral-600 mt-2">Traditional agency margin: 15-25% · Nexify AI advantage: zero labor, zero overhead</p>
+        <p className="text-center text-xs text-neutral-800 mt-2">Traditional agency margin: 15-25% · Nexify AI advantage: zero labor, zero overhead</p>
       </div>
 
       <div className="bg-white rounded-xl border border-neutral-200 overflow-hidden">
@@ -620,21 +620,21 @@ function FinancePage() {
           <table className="w-full">
             <thead>
               <tr className="border-b border-neutral-100 bg-neutral-50">
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Description</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Category</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Amount</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Date</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Type</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Status</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Description</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Category</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Amount</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Date</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Type</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Status</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-neutral-100">
               {transactions.map(t => (
                 <tr key={t.id} className="hover:bg-neutral-50 transition-all">
                   <td className="p-4 text-sm text-neutral-900">{t.description}</td>
-                  <td className="p-4 text-sm text-neutral-600">{t.category}</td>
+                  <td className="p-4 text-sm text-neutral-800">{t.category}</td>
                   <td className={`p-4 text-sm font-semibold ${t.type === 'income' ? 'text-success' : 'text-error'}`}>{t.type === 'income' ? '+' : '-'}₹{t.amount.toLocaleString('en-IN')}</td>
-                  <td className="p-4 text-sm text-neutral-600">{t.date}</td>
+                  <td className="p-4 text-sm text-neutral-800">{t.date}</td>
                   <td className="p-4"><Badge status={t.type} /></td>
                   <td className="p-4"><Badge status={t.status} /></td>
                 </tr>
@@ -662,7 +662,7 @@ function AttendancePage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-heading font-bold">Attendance & Uptime</h1>
-          <p className="text-neutral-600 text-sm">AI agents work 24/7/365 · No leaves · No holidays</p>
+          <p className="text-neutral-800 text-sm">AI agents work 24/7/365 · No leaves · No holidays</p>
         </div>
       </div>
 
@@ -677,12 +677,12 @@ function AttendancePage() {
           <table className="w-full">
             <thead>
               <tr className="border-b border-neutral-100 bg-neutral-50">
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Agent</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Date</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Status</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Active Hours</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Tasks Done</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-600 uppercase">Efficiency</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Agent</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Date</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Status</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Active Hours</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Tasks Done</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Efficiency</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-neutral-100">
@@ -691,7 +691,7 @@ function AttendancePage() {
                 return (
                   <tr key={a.id} className="hover:bg-neutral-50">
                     <td className="p-4 text-sm font-medium text-neutral-900 flex items-center gap-2">{agent?.name || a.agentId}</td>
-                    <td className="p-4 text-sm text-neutral-600">{a.date}</td>
+                    <td className="p-4 text-sm text-neutral-800">{a.date}</td>
                     <td className="p-4"><Badge status={a.status} /></td>
                     <td className="p-4 text-sm text-neutral-900">{a.hoursActive}/24h</td>
                     <td className="p-4 text-sm text-neutral-900">{a.tasksDone}</td>
@@ -718,7 +718,7 @@ function AssetsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-heading font-bold">Assets & Inventory</h1>
-          <p className="text-neutral-600 text-sm">All digital assets managed · Zero physical inventory</p>
+          <p className="text-neutral-800 text-sm">All digital assets managed · Zero physical inventory</p>
         </div>
       </div>
 
@@ -728,16 +728,16 @@ function AssetsPage() {
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-3">
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${a.type === 'LLM Model' ? 'bg-accent-50' : a.type === 'Cloud' ? 'bg-primary-50' : a.type === 'Infra' ? 'bg-success/10' : 'bg-neutral-100'}`}>
-                  {a.type === 'LLM Model' ? <Brain className="w-5 h-5 text-accent-500" /> : a.type === 'Cloud' ? <Server className="w-5 h-5 text-primary-500" /> : a.type === 'Infra' ? <Database className="w-5 h-5 text-success" /> : <Monitor className="w-5 h-5 text-neutral-600" />}
+                  {a.type === 'LLM Model' ? <Brain className="w-5 h-5 text-accent-500" /> : a.type === 'Cloud' ? <Server className="w-5 h-5 text-primary-500" /> : a.type === 'Infra' ? <Database className="w-5 h-5 text-success" /> : <Monitor className="w-5 h-5 text-neutral-800" />}
                 </div>
                 <div>
                   <div className="font-semibold text-sm text-neutral-900">{a.name}</div>
-                  <div className="text-xs text-neutral-600">{a.type} · Assigned: {a.assignedTo}</div>
+                  <div className="text-xs text-neutral-800">{a.type} · Assigned: {a.assignedTo}</div>
                 </div>
               </div>
               <Badge status={a.status} />
             </div>
-            <div className="mt-3 text-xs text-neutral-600">Expiry: {a.expiry}</div>
+            <div className="mt-3 text-xs text-neutral-800">Expiry: {a.expiry}</div>
           </div>
         ))}
       </div>
@@ -753,7 +753,7 @@ function AssetsPage() {
                 <Badge status={i.status} />
               </div>
               <ProgressBar value={Math.round(i.used / i.total * 100)} />
-              <div className="text-xs text-neutral-600 mt-1">{i.used.toLocaleString()} / {i.total.toLocaleString()} {i.unit} used</div>
+              <div className="text-xs text-neutral-800 mt-1">{i.used.toLocaleString()} / {i.total.toLocaleString()} {i.unit} used</div>
             </div>
           ))}
         </div>
@@ -779,7 +779,7 @@ function AnalyticsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-heading font-bold">Analytics & Reports</h1>
-          <p className="text-neutral-600 text-sm">AI-generated insights · 100% data accuracy</p>
+          <p className="text-neutral-800 text-sm">AI-generated insights · 100% data accuracy</p>
         </div>
         <button className="btn-primary text-sm"><DownloadCloud size={16} /> Export All</button>
       </div>
@@ -797,11 +797,11 @@ function AnalyticsPage() {
         <div className="space-y-3">
           {perf.map(p => (
             <div key={p.month} className="flex items-center gap-4">
-              <span className="text-xs text-neutral-600 w-8">{p.month}</span>
+              <span className="text-xs text-neutral-800 w-8">{p.month}</span>
               <div className="flex-1 bg-neutral-100 rounded-full h-6 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full transition-all" style={{ width: `${(p.tasks / maxTasks) * 100}%` }} />
               </div>
-              <span className="text-xs text-neutral-600 w-16 text-right">{p.tasks}</span>
+              <span className="text-xs text-neutral-800 w-16 text-right">{p.tasks}</span>
               <span className="text-xs text-success w-12 text-right">{p.bugs} bugs</span>
             </div>
           ))}
@@ -814,14 +814,14 @@ function AnalyticsPage() {
         <div className="space-y-2">
           {agents.sort((a, b) => b.efficiency - a.efficiency).map((a, i) => (
             <div key={a.id} className="flex items-center gap-4 p-3 rounded-xl hover:bg-neutral-50">
-              <span className={`w-6 h-6 rounded-lg flex items-center justify-center text-xs font-bold ${i === 0 ? 'bg-warning/20 text-warning' : 'bg-neutral-100 text-neutral-600'}`}>{i + 1}</span>
+              <span className={`w-6 h-6 rounded-lg flex items-center justify-center text-xs font-bold ${i === 0 ? 'bg-warning/20 text-warning' : 'bg-neutral-100 text-neutral-800'}`}>{i + 1}</span>
               <div className="flex-1 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-medium text-neutral-900">{a.name}</span>
-                  <span className="text-xs text-neutral-600">{a.type}</span>
+                  <span className="text-xs text-neutral-800">{a.type}</span>
                 </div>
                 <div className="flex items-center gap-4 text-xs">
-                  <span className="text-neutral-600">{a.tasksCompleted} tasks</span>
+                  <span className="text-neutral-800">{a.tasksCompleted} tasks</span>
                   <span className={`font-semibold ${a.efficiency >= 97 ? 'text-success' : a.efficiency >= 94 ? 'text-primary-500' : 'text-warning'}`}>{a.efficiency}%</span>
                 </div>
               </div>
@@ -834,15 +834,15 @@ function AnalyticsPage() {
       <div className="grid sm:grid-cols-3 gap-4">
         <div className="bg-white rounded-xl border border-neutral-200 p-5 text-center">
           <div className="text-2xl font-heading font-bold gradient-text">99.99%</div>
-          <div className="text-xs text-neutral-600 mt-1">System Uptime (30 days)</div>
+          <div className="text-xs text-neutral-800 mt-1">System Uptime (30 days)</div>
         </div>
         <div className="bg-white rounded-xl border border-neutral-200 p-5 text-center">
           <div className="text-2xl font-heading font-bold gradient-text">0</div>
-          <div className="text-xs text-neutral-600 mt-1">Human Errors (30 days)</div>
+          <div className="text-xs text-neutral-800 mt-1">Human Errors (30 days)</div>
         </div>
         <div className="bg-white rounded-xl border border-neutral-200 p-5 text-center">
           <div className="text-2xl font-heading font-bold gradient-text">₹0</div>
-          <div className="text-xs text-neutral-600 mt-1">Labor Cost (All time)</div>
+          <div className="text-xs text-neutral-800 mt-1">Labor Cost (All time)</div>
         </div>
       </div>
     </div>
@@ -860,7 +860,7 @@ function RolesPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-heading font-bold">Role & Permission Management</h1>
-          <p className="text-neutral-600 text-sm">6 roles defined · RBAC enforced</p>
+          <p className="text-neutral-800 text-sm">6 roles defined · RBAC enforced</p>
         </div>
         <button className="btn-primary text-sm"><Plus size={16} /> Create Role</button>
       </div>
@@ -875,13 +875,13 @@ function RolesPage() {
                 </div>
                 <div>
                   <div className="font-semibold text-neutral-900">{r.name}</div>
-                  <div className="text-xs text-neutral-600">{r.agents} agent{r.agents > 1 ? 's' : ''}</div>
+                  <div className="text-xs text-neutral-800">{r.agents} agent{r.agents > 1 ? 's' : ''}</div>
                 </div>
               </div>
             </div>
             <div className="flex flex-wrap gap-1.5 mt-2">
               {r.permissions.map((p: string) => (
-                <span key={p} className="chip bg-neutral-100 text-neutral-600 text-[10px]">{p.replace('_', ' ')}</span>
+                <span key={p} className="chip bg-neutral-100 text-neutral-800 text-[10px]">{p.replace('_', ' ')}</span>
               ))}
             </div>
           </div>
@@ -944,14 +944,14 @@ export default function AdminPage() {
             </div>
             <div>
               <h2 className="text-white font-heading font-bold text-sm">Nexify Admin</h2>
-              <p className="text-neutral-600 text-xs">Management Console</p>
+              <p className="text-neutral-800 text-xs">Management Console</p>
             </div>
           </div>
         </div>
         <nav className="p-4 space-y-1">
           {tabs.map(tab => (
             <button key={tab.id} onClick={() => { setActiveTab(tab.id); setSidebarOpen(false) }}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === tab.id ? 'bg-primary-500/10 text-primary-400 border border-primary-500/20' : 'text-neutral-600 hover:bg-neutral-800 hover:text-neutral-200'}`}>
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === tab.id ? 'bg-primary-500/10 text-primary-400 border border-primary-500/20' : 'text-neutral-800 hover:bg-neutral-800 hover:text-neutral-200'}`}>
               <tab.icon size={18} />
               <span>{tab.label}</span>
             </button>
@@ -962,9 +962,9 @@ export default function AdminPage() {
             <div className="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center text-white text-xs font-bold">NO</div>
             <div className="flex-1 min-w-0">
               <div className="text-sm font-medium text-white truncate">Nexify Orchestrator</div>
-              <div className="text-xs text-neutral-600">Super Admin</div>
+              <div className="text-xs text-neutral-800">Super Admin</div>
             </div>
-            <button onClick={() => setAuthenticated(false)} className="text-neutral-600 hover:text-error transition-all"><LogOut size={16} /></button>
+            <button onClick={() => setAuthenticated(false)} className="text-neutral-800 hover:text-error transition-all"><LogOut size={16} /></button>
           </div>
         </div>
       </aside>
@@ -974,10 +974,10 @@ export default function AdminPage() {
       <main className="flex-1 min-w-0">
         <div className="sticky top-0 bg-white/80 backdrop-blur-xl border-b border-neutral-200 z-20">
           <div className="flex items-center justify-between px-4 sm:px-6 py-4">
-            <button className="lg:hidden text-neutral-600" onClick={() => setSidebarOpen(true)}><Menu size={20} /></button>
+            <button className="lg:hidden text-neutral-800" onClick={() => setSidebarOpen(true)}><Menu size={20} /></button>
             <div className="flex items-center gap-3 ml-auto">
-              <Link href="/" className="text-xs text-neutral-600 hover:text-primary-500 flex items-center gap-1"><Home size={12} /> Main Site</Link>
-              <Link href="/portal" className="text-xs text-neutral-600 hover:text-primary-500 flex items-center gap-1"><ExternalLink size={12} /> Client Portal</Link>
+              <Link href="/" className="text-xs text-neutral-800 hover:text-primary-500 flex items-center gap-1"><Home size={12} /> Main Site</Link>
+              <Link href="/portal" className="text-xs text-neutral-800 hover:text-primary-500 flex items-center gap-1"><ExternalLink size={12} /> Client Portal</Link>
               <div className="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center text-white text-xs font-bold cursor-pointer">NO</div>
             </div>
           </div>

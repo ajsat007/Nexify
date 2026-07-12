@@ -141,8 +141,8 @@ export default function PayPage() {
       <section className="py-12 bg-white dark:bg-neutral-950">
         <div className="section-container">
           <div className="flex gap-2 mb-8 reveal">
-            <button onClick={() => setTab('pay')} className={'px-6 py-3 rounded-xl text-sm font-medium transition-all ' + (tab === 'pay' ? 'bg-primary-500 text-white shadow-lg' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-600')}>Pay Now</button>
-            <button onClick={() => setTab('invoices')} className={'px-6 py-3 rounded-xl text-sm font-medium transition-all ' + (tab === 'invoices' ? 'bg-primary-500 text-white shadow-lg' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-600')}>Invoices</button>
+            <button onClick={() => setTab('pay')} className={'px-6 py-3 rounded-xl text-sm font-medium transition-all ' + (tab === 'pay' ? 'bg-primary-500 text-white shadow-lg' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-800')}>Pay Now</button>
+            <button onClick={() => setTab('invoices')} className={'px-6 py-3 rounded-xl text-sm font-medium transition-all ' + (tab === 'invoices' ? 'bg-primary-500 text-white shadow-lg' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-800')}>Invoices</button>
           </div>
 
           {tab === 'pay' && (
@@ -153,16 +153,16 @@ export default function PayPage() {
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-4">
                     {amounts.map(a => (
                       <button key={a} onClick={() => { setAmount(a); setCustom('') }}
-                        className={'p-4 rounded-xl border-2 text-center transition-all ' + (amount === a && !custom ? 'border-primary-500 bg-primary-50 dark:bg-primary-500/10 text-primary-600' : 'border-neutral-200 dark:border-neutral-700 text-neutral-600 dark:text-neutral-300 hover:border-neutral-300')}>
+                        className={'p-4 rounded-xl border-2 text-center transition-all ' + (amount === a && !custom ? 'border-primary-500 bg-primary-50 dark:bg-primary-500/10 text-primary-600' : 'border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-neutral-300 hover:border-neutral-300')}>
                         <div className="text-lg font-heading font-bold">₹{a.toLocaleString('en-IN')}</div>
-                        <div className="text-xs text-neutral-600">{a >= 75000 ? 'Enterprise' : a >= 45000 ? 'Standard' : 'Starter'}</div>
+                        <div className="text-xs text-neutral-800">{a >= 75000 ? 'Enterprise' : a >= 45000 ? 'Standard' : 'Starter'}</div>
                       </button>
                     ))}
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-neutral-600 dark:text-neutral-300 mb-1">Custom Amount</label>
+                    <label className="block text-sm font-medium text-neutral-800 dark:text-neutral-300 mb-1">Custom Amount</label>
                     <div className="relative">
-                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-600 font-medium">₹</span>
+                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-800 font-medium">₹</span>
                       <input type="number" className="input-field pl-8" placeholder="Enter any amount" value={custom} onChange={e => { setCustom(e.target.value); setAmount(0) }} />
                     </div>
                   </div>
@@ -191,7 +191,7 @@ export default function PayPage() {
                         {m.popular && <span className="absolute -top-2 -right-2 px-2 py-0.5 bg-primary-500 text-white text-[10px] rounded-full font-medium">Popular</span>}
                         <m.icon className="w-5 h-5 text-primary-500 mb-1" />
                         <div className="text-sm font-medium">{m.name}</div>
-                        <div className="text-[10px] text-neutral-600">{m.desc}</div>
+                        <div className="text-[10px] text-neutral-800">{m.desc}</div>
                       </div>
                     ))}
                   </div>
@@ -201,7 +201,7 @@ export default function PayPage() {
                   {loading ? <><Loader size={20} className="animate-spin" /> Opening Razorpay...</> : <><Lock size={18} /> Pay ₹{total.toLocaleString('en-IN')}</>}
                 </button>
 
-                <div className="flex items-center justify-center gap-4 text-xs text-neutral-600">
+                <div className="flex items-center justify-center gap-4 text-xs text-neutral-800">
                   <span className="flex items-center gap-1"><Shield size={12} /> Razorpay Live</span>
                   <span className="flex items-center gap-1"><Lock size={12} /> 256-bit SSL</span>
                   <span className="flex items-center gap-1"><Zap size={12} /> Instant</span>
@@ -212,15 +212,15 @@ export default function PayPage() {
                 <div className="card-surface p-6 sticky top-28 space-y-6">
                   <h2 className="font-semibold">Payment Summary</h2>
                   <div className="space-y-3 text-sm">
-                    <div className="flex justify-between"><span className="text-neutral-600">Service Fee</span><span className="font-medium">₹{fa.toLocaleString('en-IN')}</span></div>
-                    <div className="flex justify-between"><span className="text-neutral-600">GST (18%)</span><span className="font-medium">₹{Math.round(fa * 0.18).toLocaleString('en-IN')}</span></div>
+                    <div className="flex justify-between"><span className="text-neutral-800">Service Fee</span><span className="font-medium">₹{fa.toLocaleString('en-IN')}</span></div>
+                    <div className="flex justify-between"><span className="text-neutral-800">GST (18%)</span><span className="font-medium">₹{Math.round(fa * 0.18).toLocaleString('en-IN')}</span></div>
                     <div className="border-t border-neutral-200 dark:border-neutral-700 pt-3 flex justify-between">
                       <span className="font-bold">Total</span>
                       <span className="text-2xl font-heading font-bold gradient-text">₹{total.toLocaleString('en-IN')}</span>
                     </div>
                   </div>
 
-                  <div className="bg-neutral-50 dark:bg-neutral-800/50 rounded-xl p-4 space-y-2 text-xs text-neutral-600">
+                  <div className="bg-neutral-50 dark:bg-neutral-800/50 rounded-xl p-4 space-y-2 text-xs text-neutral-800">
                     {[
                       '🔒 Secured by Razorpay',
                       '📧 Instant email receipt',
@@ -233,9 +233,9 @@ export default function PayPage() {
                   </div>
 
                   <div className="text-center pt-4 border-t border-neutral-200 dark:border-neutral-700">
-                    <p className="text-xs text-neutral-600 mb-2">Paid to</p>
+                    <p className="text-xs text-neutral-800 mb-2">Paid to</p>
                     <div className="font-semibold text-sm">Ajinkya Satkar</div>
-                    <p className="text-xs text-neutral-600">Pune, Maharashtra, India</p>
+                    <p className="text-xs text-neutral-800">Pune, Maharashtra, India</p>
                   </div>
                 </div>
               </div>
@@ -253,14 +253,14 @@ export default function PayPage() {
                 ].map((s, i) => (
                   <div key={i} className="card-surface p-5 text-center">
                     <div className={'text-2xl font-heading font-bold ' + s.c}>{s.v}</div>
-                    <div className="text-xs text-neutral-600 mt-1">{s.l}</div>
+                    <div className="text-xs text-neutral-800 mt-1">{s.l}</div>
                   </div>
                 ))}
               </div>
 
               <div className="space-y-3">
                 {invoices.length === 0 && (
-                  <div className="card-surface p-12 text-center text-neutral-600">No invoices yet. Make your first payment!</div>
+                  <div className="card-surface p-12 text-center text-neutral-800">No invoices yet. Make your first payment!</div>
                 )}
                 {invoices.map((inv: any) => (
                   <div key={inv.id} className="card-surface p-5 hover:shadow-lg transition-all">
@@ -270,12 +270,12 @@ export default function PayPage() {
                           <span className="font-semibold text-sm">{inv.project}</span>
                           <span className={'chip text-[10px] border-0 ' + st(inv.status)}>{inv.status}</span>
                         </div>
-                        <div className="text-xs text-neutral-600 mt-0.5">{inv.client} · {inv.date}</div>
-                        {inv.paymentId && <div className="text-[10px] text-neutral-600 mt-0.5">Payment ID: {inv.paymentId}</div>}
+                        <div className="text-xs text-neutral-800 mt-0.5">{inv.client} · {inv.date}</div>
+                        {inv.paymentId && <div className="text-[10px] text-neutral-800 mt-0.5">Payment ID: {inv.paymentId}</div>}
                       </div>
                       <div className="text-right">
                         <div className="text-lg font-heading font-bold">₹{inv.amount.toLocaleString('en-IN')}</div>
-                        {inv.method && <div className="text-[10px] text-neutral-600">{inv.method}</div>}
+                        {inv.method && <div className="text-[10px] text-neutral-800">{inv.method}</div>}
                       </div>
                     </div>
                   </div>
@@ -284,7 +284,7 @@ export default function PayPage() {
 
               <div className="bg-gradient-to-r from-success/5 to-primary-500/5 rounded-2xl border border-success/20 p-6 text-center">
                 <h3 className="font-semibold mb-2">✅ Razorpay Live — Ready to Accept Payments</h3>
-                <p className="text-sm text-neutral-600 mb-4">Money settles directly to your bank account via Razorpay.</p>
+                <p className="text-sm text-neutral-800 mb-4">Money settles directly to your bank account via Razorpay.</p>
                 <Link href="/pay" onClick={() => setTab('pay')} className="btn-primary text-sm">Make a Payment <ArrowRight size={16} /></Link>
               </div>
             </div>

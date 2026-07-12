@@ -109,7 +109,7 @@ export default function ProductsPage() {
                 <Link key={p.id} href={`#${p.id}`} className="bg-neutral-50 rounded-xl p-4 border border-neutral-200 hover:border-primary-500/30 hover:bg-white transition-all text-center group">
                   <Icon className="w-6 h-6 text-primary-500 mx-auto mb-2" />
                   <div className="font-semibold text-sm text-neutral-900 group-hover:text-primary-600 transition-colors">{p.name}</div>
-                  <div className="text-xs text-neutral-600 mt-1">{p.price}</div>
+                  <div className="text-xs text-neutral-800 mt-1">{p.price}</div>
                 </Link>
               )
             })}
@@ -130,15 +130,15 @@ export default function ProductsPage() {
                         </div>
                         <div>
                           <h2 className="text-3xl font-heading font-bold">{product.name}</h2>
-                          <p className="text-neutral-600 italic">{product.tagline}</p>
+                          <p className="text-neutral-800 italic">{product.tagline}</p>
                         </div>
                       </div>
-                      <p className="text-neutral-600 mb-8 leading-relaxed text-lg">{product.description}</p>
+                      <p className="text-neutral-800 mb-8 leading-relaxed text-lg">{product.description}</p>
 
                       <h3 className="font-semibold mb-4">Key Features</h3>
                       <ul className="grid sm:grid-cols-2 gap-3 mb-8">
                         {product.features.map((f, i) => (
-                          <li key={i} className="flex items-start gap-2 text-sm text-neutral-600">
+                          <li key={i} className="flex items-start gap-2 text-sm text-neutral-800">
                             <Check size={16} className="text-success mt-0.5 shrink-0" />
                             {f}
                           </li>
@@ -147,15 +147,15 @@ export default function ProductsPage() {
 
                       <div className="flex flex-wrap gap-6">
                         <div>
-                          <h4 className="text-xs uppercase tracking-wider text-neutral-600 font-semibold mb-2">Tech Stack</h4>
+                          <h4 className="text-xs uppercase tracking-wider text-neutral-800 font-semibold mb-2">Tech Stack</h4>
                           <div className="flex flex-wrap gap-2">
                             {product.tech.map((t, i) => (
-                              <span key={i} className="chip bg-neutral-100 text-neutral-600 text-xs">{t}</span>
+                              <span key={i} className="chip bg-neutral-100 text-neutral-800 text-xs">{t}</span>
                             ))}
                           </div>
                         </div>
                         <div>
-                          <h4 className="text-xs uppercase tracking-wider text-neutral-600 font-semibold mb-2">User Roles</h4>
+                          <h4 className="text-xs uppercase tracking-wider text-neutral-800 font-semibold mb-2">User Roles</h4>
                           <div className="flex flex-wrap gap-2">
                             {product.roles.map((r, i) => (
                               <span key={i} className="chip bg-primary-50 text-primary-600 text-xs">{r}</span>
@@ -168,7 +168,7 @@ export default function ProductsPage() {
                     {/* Right - Sidebar */}
                     <div className="lg:col-span-2">
                       <div className="bg-neutral-50 rounded-2xl p-6 border border-neutral-200 sticky top-28">
-                        <div className="text-sm text-neutral-600 mb-1">Starting from</div>
+                        <div className="text-sm text-neutral-800 mb-1">Starting from</div>
                         <div className="text-3xl font-heading font-bold gradient-text mb-6">{product.price}</div>
 
                         <Link href="/contact" className="btn-primary w-full mb-4">
@@ -179,7 +179,7 @@ export default function ProductsPage() {
                         <h4 className="font-semibold text-sm mb-3">App Screens</h4>
                         <ul className="space-y-2">
                           {product.screens.map((s, i) => (
-                            <li key={i} className="flex items-center gap-2 text-sm text-neutral-600">
+                            <li key={i} className="flex items-center gap-2 text-sm text-neutral-800">
                               <div className="w-1.5 h-1.5 rounded-full bg-primary-500" />
                               {s}
                             </li>

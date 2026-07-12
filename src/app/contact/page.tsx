@@ -74,10 +74,10 @@ export default function ContactPage() {
                     <Check className="w-8 h-8 text-success" />
                   </div>
                   <h2 className="text-2xl font-heading font-bold mb-3">Proposal Being Generated! 🚀</h2>
-                  <p className="text-neutral-600 mb-6 max-w-md mx-auto">
+                  <p className="text-neutral-800 mb-6 max-w-md mx-auto">
                     Our AI agents are analyzing your requirements. You'll receive a detailed proposal with timeline, pricing, and technical approach within 24 hours.
                   </p>
-                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-100 rounded-lg text-sm text-neutral-600">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-100 rounded-lg text-sm text-neutral-800">
                     <Clock size={16} />
                     Expect response by tomorrow
                   </div>
@@ -85,7 +85,7 @@ export default function ContactPage() {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <h2 className="text-2xl font-heading font-bold mb-2">Tell Us About Your Project</h2>
-                  <p className="text-neutral-600 mb-6">Every field helps our AI generate a more accurate proposal.</p>
+                  <p className="text-neutral-800 mb-6">Every field helps our AI generate a more accurate proposal.</p>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-neutral-700 mb-1.5">Name *</label>
@@ -154,28 +154,28 @@ export default function ContactPage() {
                       <Mail className="w-5 h-5 text-primary-500 mt-0.5 shrink-0" />
                       <div>
                         <div className="text-sm font-medium text-neutral-900">Email</div>
-                        <a href="mailto:ajinkyasatkar5@gmail.com" className="text-sm text-neutral-600 hover:text-primary-500">ajinkyasatkar5@gmail.com</a>
+                        <a href="mailto:ajinkyasatkar5@gmail.com" className="text-sm text-neutral-800 hover:text-primary-500">ajinkyasatkar5@gmail.com</a>
                       </div>
                     </li>
                     <li className="flex items-start gap-3">
                       <Phone className="w-5 h-5 text-primary-500 mt-0.5 shrink-0" />
                       <div>
                         <div className="text-sm font-medium text-neutral-900">Phone</div>
-                        <a href="tel:+919373955349" className="text-sm text-neutral-600 hover:text-primary-500">+91 9373955349</a>
+                        <a href="tel:+919373955349" className="text-sm text-neutral-800 hover:text-primary-500">+91 9373955349</a>
                       </div>
                     </li>
                     <li className="flex items-start gap-3">
                       <MapPin className="w-5 h-5 text-primary-500 mt-0.5 shrink-0" />
                       <div>
                         <div className="text-sm font-medium text-neutral-900">Location</div>
-                        <div className="text-sm text-neutral-600">Pune, Maharashtra, India · Remote-First</div>
+                        <div className="text-sm text-neutral-800">Pune, Maharashtra, India · Remote-First</div>
                       </div>
                     </li>
                     <li className="flex items-start gap-3">
                       <MessageSquare className="w-5 h-5 text-primary-500 mt-0.5 shrink-0" />
                       <div>
                         <div className="text-sm font-medium text-neutral-900">Response Time</div>
-                        <div className="text-sm text-neutral-600">AI responds in under 2 minutes</div>
+                        <div className="text-sm text-neutral-800">AI responds in under 2 minutes</div>
                       </div>
                     </li>
                   </ul>
@@ -193,7 +193,7 @@ export default function ContactPage() {
                     ].map((step, i) => (
                       <li key={i} className="flex items-start gap-3">
                         <span className="w-6 h-6 rounded-full bg-primary-500 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">{i + 1}</span>
-                        <span className="text-sm text-neutral-600">{step}</span>
+                        <span className="text-sm text-neutral-800">{step}</span>
                       </li>
                     ))}
                   </ol>

@@ -35,12 +35,12 @@ export default function BusinessAutomationPage() {
               <div key={i} className="bg-neutral-50 rounded-2xl p-6 border border-neutral-200 hover:shadow-lg hover:border-primary-500/20 transition-all">
                 <div className="flex items-start justify-between mb-3">
                   <h3 className="font-semibold text-neutral-900">{a.name}</h3>
-                  <div className="flex items-center gap-1 text-xs text-neutral-600"><RefreshCw size={12} /> {a.time}</div>
+                  <div className="flex items-center gap-1 text-xs text-neutral-800"><RefreshCw size={12} /> {a.time}</div>
                 </div>
-                <div className="text-xs text-neutral-600 mb-2">Trigger: {a.trigger}</div>
+                <div className="text-xs text-neutral-800 mb-2">Trigger: {a.trigger}</div>
                 <ol className="space-y-1.5">
                   {a.steps.map((step, j) => (
-                    <li key={j} className="flex items-start gap-2 text-sm text-neutral-600">
+                    <li key={j} className="flex items-start gap-2 text-sm text-neutral-800">
                       <Check size={14} className="text-success mt-0.5 shrink-0" />
                       {step}
                     </li>

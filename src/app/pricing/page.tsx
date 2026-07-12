@@ -93,7 +93,7 @@ export default function PricingPage() {
         <div className="section-container">
           <div className="text-center max-w-3xl mx-auto mb-12 reveal">
             <h2 className="text-3xl font-heading font-bold mb-4">SaaS <span className="gradient-text">Pricing</span></h2>
-            <p className="text-neutral-600">Start free, upgrade when you grow. 20% off with annual billing.</p>
+            <p className="text-neutral-800">Start free, upgrade when you grow. 20% off with annual billing.</p>
           </div>
 
           {productPricing.map((product) => (
@@ -108,7 +108,7 @@ export default function PricingPage() {
                     {yearly && <p className="text-xs text-success mb-4">Save 20% annually</p>}
                     <ul className="space-y-3 my-6">
                       {tier.features.map((f, j) => (
-                        <li key={j} className="flex items-start gap-2 text-sm text-neutral-600"><Check size={16} className="text-success shrink-0 mt-0.5" />{f}</li>
+                        <li key={j} className="flex items-start gap-2 text-sm text-neutral-800"><Check size={16} className="text-success shrink-0 mt-0.5" />{f}</li>
                       ))}
                     </ul>
                     <Link href="/contact" className={`w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium text-center transition-all ${tier.popular ? 'btn-primary' : 'btn-secondary'}`}>
@@ -129,7 +129,7 @@ export default function PricingPage() {
           <div className="text-center max-w-3xl mx-auto mb-12 reveal">
             <div className="chip bg-accent-50 text-accent-600 border border-accent-200 mb-4">Interactive Tool</div>
             <h2 className="text-3xl font-heading font-bold mb-4">AI <span className="gradient-text">Cost Calculator</span></h2>
-            <p className="text-neutral-600">Select your requirements and get an instant estimate — powered by AI pricing models.</p>
+            <p className="text-neutral-800">Select your requirements and get an instant estimate — powered by AI pricing models.</p>
           </div>
           <div className="max-w-2xl mx-auto reveal">
             <PricingCalculator />
@@ -142,7 +142,7 @@ export default function PricingPage() {
         <div className="section-container">
           <div className="text-center max-w-3xl mx-auto mb-12 reveal">
             <h2 className="text-3xl font-heading font-bold mb-4">Service <span className="gradient-text">Packages</span></h2>
-            <p className="text-neutral-600">Fixed-price packages for common needs. Custom projects priced individually.</p>
+            <p className="text-neutral-800">Fixed-price packages for common needs. Custom projects priced individually.</p>
           </div>
 
           {servicePricing.map((service) => (
@@ -156,7 +156,7 @@ export default function PricingPage() {
                     <div className="text-3xl font-heading font-bold mb-4">{tier.price}</div>
                     <ul className="space-y-3 my-6">
                       {tier.features.map((f, j) => (
-                        <li key={j} className="flex items-start gap-2 text-sm text-neutral-600"><Check size={16} className="text-success shrink-0 mt-0.5" />{f}</li>
+                        <li key={j} className="flex items-start gap-2 text-sm text-neutral-800"><Check size={16} className="text-success shrink-0 mt-0.5" />{f}</li>
                       ))}
                     </ul>
                     <Link href="/contact" className={`w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium text-center transition-all ${tier.popular ? 'btn-primary' : 'btn-secondary'}`}>

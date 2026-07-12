@@ -99,7 +99,7 @@ export default function DashboardsPage() {
                 className={`flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-medium transition-all ${
                   active.id === d.id
                     ? `bg-gradient-to-r ${d.color} text-white shadow-lg`
-                    : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-300'
+                    : 'bg-neutral-100 text-neutral-800 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-300'
                 }`}>
                 <d.icon size={16} />{d.role.replace(' Dashboard', '')}
               </button>
@@ -114,7 +114,7 @@ export default function DashboardsPage() {
                   <div className={`w-10 h-10 rounded-xl bg-gradient-to-r ${active.color} flex items-center justify-center`}><active.icon className="w-5 h-5 text-white" /></div>
                   <h2 className="text-2xl font-heading font-bold">{active.role}</h2>
                 </div>
-                <p className="text-neutral-600 text-sm ml-[52px]">{active.summary}</p>
+                <p className="text-neutral-800 text-sm ml-[52px]">{active.summary}</p>
               </div>
             </div>
 
@@ -148,7 +148,7 @@ export default function DashboardsPage() {
                     {active.donutData.map((d, i) => (
                       <div key={i} className="flex items-center gap-3">
                         <div className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: d.color }} />
-                        <span className="text-sm text-neutral-600 dark:text-neutral-300 flex-1">{d.label}</span>
+                        <span className="text-sm text-neutral-800 dark:text-neutral-300 flex-1">{d.label}</span>
                         <span className="text-sm font-semibold">{d.value}%</span>
                         <div className="w-32 sm:w-48 bg-neutral-100 dark:bg-neutral-700 rounded-full h-2">
                           <div className="h-2 rounded-full transition-all duration-1000" style={{ width: `${d.value}%`, backgroundColor: d.color }} />
@@ -160,7 +160,7 @@ export default function DashboardsPage() {
               </div>
             )}
 
-            <div className="flex items-center gap-2 text-xs text-neutral-600"><RefreshCw size={12} /> Auto-updates every 30s · AI-generated data</div>
+            <div className="flex items-center gap-2 text-xs text-neutral-800"><RefreshCw size={12} /> Auto-updates every 30s · AI-generated data</div>
           </div>
 
           {/* Other dashboards */}
@@ -173,7 +173,7 @@ export default function DashboardsPage() {
                   <div key={i} className="card-surface p-5 hover:shadow-xl transition-all group">
                     <div className={`w-10 h-10 rounded-xl bg-gradient-to-r ${d.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}><Icon className="w-5 h-5 text-white" /></div>
                     <h3 className="font-semibold mb-2">{d.role}</h3>
-                    <p className="text-xs text-neutral-600">{d.kpis}</p>
+                    <p className="text-xs text-neutral-800">{d.kpis}</p>
                   </div>
                 )
               })}
@@ -183,7 +183,7 @@ export default function DashboardsPage() {
           {/* CTA */}
           <div className="mt-12 bg-gradient-to-r from-primary-500/5 to-accent-500/5 rounded-2xl border border-primary-500/20 p-8 text-center reveal">
             <h2 className="text-2xl font-heading font-bold mb-2">Live in Every Portal</h2>
-            <p className="text-neutral-600 mb-6">These dashboards are built into the Admin Panel and Client Portal with real-time updates.</p>
+            <p className="text-neutral-800 mb-6">These dashboards are built into the Admin Panel and Client Portal with real-time updates.</p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/admin" className="btn-primary">Admin Panel <ArrowRight size={16} /></Link>
               <Link href="/portal" className="btn-secondary">Client Portal <ArrowRight size={16} /></Link>
