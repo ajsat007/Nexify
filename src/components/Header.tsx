@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Menu, X, ChevronDown } from 'lucide-react'
+import SiteSearch from '@/components/SiteSearch'
 
 const navigation = [
   { name: 'Home', href: '/' },

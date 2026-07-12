@@ -3,6 +3,7 @@ import { siteConfig } from '@/lib/data'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import AgentBar from '@/components/AgentBar'
+import { ThemeProvider } from '@/components/ThemeProvider'
 import { AIAgentWidget } from '@/components/AIAgent'
 import './globals.css'
 
