@@ -37,12 +37,12 @@ export default function SOPsPage() {
                     <div className="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center"><Icon className="w-5 h-5 text-primary-500" /></div>
                     <div>
                       <h3 className="font-semibold text-neutral-900">{sop.dept}</h3>
-                      <span className="text-xs text-neutral-400">Owned by: {sop.owner}</span>
+                      <span className="text-xs text-neutral-600">Owned by: {sop.owner}</span>
                     </div>
                   </div>
                   <ol className="space-y-2">
                     {sop.steps.map((step, j) => (
-                      <li key={j} className="flex items-start gap-2 text-sm text-neutral-500">
+                      <li key={j} className="flex items-start gap-2 text-sm text-neutral-600">
                         <span className="w-5 h-5 rounded-full bg-primary-500 text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">{j + 1}</span>
                         {step}
                       </li>

@@ -44,8 +44,8 @@ export default function FinancePage() {
               <div key={i} className="text-center p-6 bg-neutral-50 rounded-2xl border border-neutral-200">
                 <s.icon className="w-8 h-8 text-primary-500 mx-auto mb-3" />
                 <div className="text-2xl font-heading font-bold gradient-text">{s.value}</div>
-                <div className="text-sm text-neutral-500 mt-1">{s.label}</div>
-                <div className="text-xs text-neutral-400 mt-0.5">{s.sub}</div>
+                <div className="text-sm text-neutral-600 mt-1">{s.label}</div>
+                <div className="text-xs text-neutral-600 mt-0.5">{s.sub}</div>
               </div>
             ))}
           </div>
@@ -85,9 +85,9 @@ export default function FinancePage() {
                       <span className="text-success font-semibold">{p.margin} margin</span>
                     </div>
                     <div className="grid grid-cols-3 gap-2 text-center text-sm">
-                      <div><div className="font-medium text-neutral-900">{p.revenue}</div><div className="text-xs text-neutral-400">Revenue</div></div>
-                      <div><div className="font-medium text-neutral-900">{p.expenses}</div><div className="text-xs text-neutral-400">Costs</div></div>
-                      <div><div className="font-medium text-success">{p.profit}</div><div className="text-xs text-neutral-400">Profit</div></div>
+                      <div><div className="font-medium text-neutral-900">{p.revenue}</div><div className="text-xs text-neutral-600">Revenue</div></div>
+                      <div><div className="font-medium text-neutral-900">{p.expenses}</div><div className="text-xs text-neutral-600">Costs</div></div>
+                      <div><div className="font-medium text-success">{p.profit}</div><div className="text-xs text-neutral-600">Profit</div></div>
                     </div>
                   </div>
                 ))}
@@ -108,7 +108,7 @@ export default function FinancePage() {
                 </ul>
               </div>
               <div className="bg-white/80 rounded-xl p-6 border border-neutral-200">
-                <h3 className="font-semibold text-lg text-neutral-400 mb-4">Traditional Agency (10 people)</h3>
+                <h3 className="font-semibold text-lg text-neutral-600 mb-4">Traditional Agency (10 people)</h3>
                 <ul className="space-y-3">
                   {['₹5-8L/mo salary cost', '₹50K+/mo office & overhead', '15-25% profit margin', 'Limited by team size', '8-10 hrs/day operation', 'HR, payroll, benefits admin'].map((item, i) => (
                     <li key={i} className="flex items-center gap-2 text-sm"><span className="w-2 h-2 rounded-full bg-error shrink-0" />{item}</li>

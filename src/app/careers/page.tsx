@@ -50,7 +50,7 @@ export default function CareersPage() {
         <div className="section-container">
           <div className="text-center max-w-3xl mx-auto mb-16 reveal">
             <h2 className="text-3xl font-heading font-bold mb-4">Why <span className="gradient-text">Join Us</span></h2>
-            <p className="text-neutral-500">We're building the future of software development. Literally.</p>
+            <p className="text-neutral-600">We're building the future of software development. Literally.</p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20 reveal">
@@ -65,7 +65,7 @@ export default function CareersPage() {
                 <div key={i} className="text-center p-6 bg-neutral-50 rounded-2xl border border-neutral-200">
                   <Icon className="w-8 h-8 text-primary-500 mx-auto mb-3" />
                   <h3 className="font-semibold mb-1">{b.title}</h3>
-                  <p className="text-sm text-neutral-500">{b.desc}</p>
+                  <p className="text-sm text-neutral-600">{b.desc}</p>
                 </div>
               )
             })}
@@ -73,7 +73,7 @@ export default function CareersPage() {
 
           <div className="text-center max-w-3xl mx-auto mb-16 reveal">
             <h2 className="text-3xl font-heading font-bold mb-4">Open <span className="gradient-text">Positions</span></h2>
-            <p className="text-neutral-500">We're looking for humans who want to build the future of AI-powered software development.</p>
+            <p className="text-neutral-600">We're looking for humans who want to build the future of AI-powered software development.</p>
           </div>
 
           <div className="space-y-4 max-w-3xl mx-auto reveal">
@@ -88,11 +88,11 @@ export default function CareersPage() {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div>
                     <h3 className="font-semibold text-neutral-900 group-hover:text-primary-600 transition-colors">{job.title}</h3>
-                    <div className="flex items-center gap-3 mt-1 text-sm text-neutral-400">
+                    <div className="flex items-center gap-3 mt-1 text-sm text-neutral-600">
                       <span className="chip bg-primary-50 text-primary-600 text-xs">{job.type}</span>
                       <span>{job.location}</span>
                     </div>
-                    <p className="text-sm text-neutral-500 mt-2">{job.desc}</p>
+                    <p className="text-sm text-neutral-600 mt-2">{job.desc}</p>
                   </div>
                   <Link href="/contact" className="btn-primary text-sm shrink-0 whitespace-nowrap">
                     Apply Now <ArrowRight size={16} />

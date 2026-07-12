@@ -35,8 +35,8 @@ export default function BrandingPage() {
                 <div key={i} className="bg-neutral-50 rounded-2xl p-6 border border-neutral-200 hover:shadow-xl hover:border-primary-500/20 transition-all group">
                   <div className="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><Icon className="w-6 h-6 text-primary-500" /></div>
                   <h3 className="font-semibold text-neutral-900 mb-1">{a.name}</h3>
-                  <p className="text-xs text-neutral-400 mb-1">{a.formats}</p>
-                  <p className="text-xs text-neutral-500 mb-4">{a.desc}</p>
+                  <p className="text-xs text-neutral-600 mb-1">{a.formats}</p>
+                  <p className="text-xs text-neutral-600 mb-4">{a.desc}</p>
                   <button className="text-primary-500 hover:text-primary-600 text-sm flex items-center gap-1"><Download size={14} /> Download</button>
                 </div>
               )
@@ -57,7 +57,7 @@ export default function BrandingPage() {
                 <div key={i} className="text-center">
                   <div className="w-full aspect-square rounded-2xl mb-2" style={{ backgroundColor: c.hex }} />
                   <div className="text-white text-sm font-medium">{c.name}</div>
-                  <div className="text-neutral-400 text-xs">{c.hex}</div>
+                  <div className="text-neutral-600 text-xs">{c.hex}</div>
                 </div>
               ))}
             </div>

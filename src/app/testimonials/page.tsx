@@ -30,7 +30,7 @@ export default function TestimonialsPage() {
         <div className="section-container">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 reveal">
             {stats.map((s, i) => (
-              <div key={i} className="text-center"><div className="text-3xl font-heading font-bold gradient-text">{s.value}</div><div className="text-sm text-neutral-500 mt-1">{s.label}</div></div>
+              <div key={i} className="text-center"><div className="text-3xl font-heading font-bold gradient-text">{s.value}</div><div className="text-sm text-neutral-600 mt-1">{s.label}</div></div>
             ))}
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 reveal">
@@ -41,7 +41,7 @@ export default function TestimonialsPage() {
                 <p className="text-neutral-600 text-sm leading-relaxed mb-6">&ldquo;{t.content}&rdquo;</p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white text-sm font-bold">{t.name.split(' ').map(n => n[0]).join('')}</div>
-                  <div><div className="font-semibold text-sm text-neutral-900">{t.name}</div><div className="text-xs text-neutral-400">{t.role}</div></div>
+                  <div><div className="font-semibold text-sm text-neutral-900">{t.name}</div><div className="text-xs text-neutral-600">{t.role}</div></div>
                 </div>
               </div>
             ))}

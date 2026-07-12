@@ -152,7 +152,7 @@ export function AIAgentWidget() {
               <input className="flex-1 px-3 py-2 rounded-xl border border-neutral-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/30" placeholder="Ask about Nexify..." value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && send()} />
               <button onClick={send} disabled={loading || !input.trim()} className="w-9 h-9 rounded-xl bg-primary-500 text-white flex items-center justify-center hover:bg-primary-600 disabled:opacity-50 transition-all"><Send size={14} /></button>
             </div>
-            <p className="text-[10px] text-neutral-400 mt-1.5 flex items-center gap-1"><Zap size={10} /> Nexify AI — answers about Nexify only</p>
+            <p className="text-[10px] text-neutral-600 mt-1.5 flex items-center gap-1"><Zap size={10} /> Nexify AI — answers about Nexify only</p>
           </div>
         </div>
       )}

@@ -29,10 +29,10 @@ function ServiceCard({ service, index }: { service: any; index: number }) {
         <Icon className="w-6 h-6 text-primary-500" />
       </div>
       <h3 className="text-lg font-semibold mb-2 group-hover:text-primary-600 transition-colors">{service.title}</h3>
-      <p className="text-neutral-500 text-sm mb-4 line-clamp-2">{service.description}</p>
+      <p className="text-neutral-600 text-sm mb-4 line-clamp-2">{service.description}</p>
       <div className="flex items-center justify-between">
         <span className="text-primary-600 font-semibold text-sm">{service.price}</span>
-        <span className="text-xs text-neutral-400">{service.timeline}</span>
+        <span className="text-xs text-neutral-600">{service.timeline}</span>
       </div>
     </Link>
   )
@@ -124,7 +124,7 @@ export default function HomePage() {
                 Agents. Delivered in Days.
               </h1>
 
-              <p className="text-lg sm:text-xl text-neutral-400 leading-relaxed max-w-xl">
+              <p className="text-lg sm:text-xl text-neutral-600 leading-relaxed max-w-xl">
                 Nexify is an AI-native software company. Our workforce of 50+ AI agents builds custom software,
                 mobile apps, AI solutions, and SaaS products — 10x faster, at half the cost of traditional agencies.
               </p>
@@ -146,7 +146,7 @@ export default function HomePage() {
                       {['R','P','A','S'][i-1]}
                     </div>
                   ))}
-                  <div className="w-8 h-8 rounded-full bg-neutral-800 border-2 border-neutral-900 flex items-center justify-center text-neutral-400 text-xs font-medium">
+                  <div className="w-8 h-8 rounded-full bg-neutral-800 border-2 border-neutral-900 flex items-center justify-center text-neutral-600 text-xs font-medium">
                     +50
                   </div>
                 </div>
@@ -154,7 +154,7 @@ export default function HomePage() {
                   <div className="flex items-center gap-1 text-warning">
                     {[1,2,3,4,5].map(i => <Star key={i} size={14} fill="currentColor" />)}
                   </div>
-                  <span className="text-neutral-400">Trusted by 200+ clients</span>
+                  <span className="text-neutral-600">Trusted by 200+ clients</span>
                 </div>
               </div>
             </div>
@@ -168,7 +168,7 @@ export default function HomePage() {
                       <Cpu size={40} className="text-white" />
                     </div>
                     <h3 className="text-white text-2xl font-heading font-bold mb-2">50+ AI Agents</h3>
-                    <p className="text-neutral-400 mb-6">Working 24/7 on your projects</p>
+                    <p className="text-neutral-600 mb-6">Working 24/7 on your projects</p>
                     <div className="grid grid-cols-2 gap-4 w-full">
                       {[
                         { label: 'Uptime', value: '99.9%' },
@@ -178,7 +178,7 @@ export default function HomePage() {
                       ].map(stat => (
                         <div key={stat.label} className="bg-neutral-800 rounded-xl p-3">
                           <div className="text-white font-heading font-bold text-lg">{stat.value}</div>
-                          <div className="text-neutral-500 text-xs">{stat.label}</div>
+                          <div className="text-neutral-600 text-xs">{stat.label}</div>
                         </div>
                       ))}
                     </div>
@@ -205,7 +205,7 @@ export default function HomePage() {
               {teamStats.map((stat, i) => (
                 <div key={stat.label} className="text-center">
                   <AnimatedCounter value={stat.value} />
-                  <div className="text-neutral-400 text-sm mt-1">{stat.label}</div>
+                  <div className="text-neutral-600 text-sm mt-1">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -222,7 +222,7 @@ export default function HomePage() {
               Everything You Need to{' '}
               <span className="gradient-text">Build & Scale</span>
             </h2>
-            <p className="text-neutral-500 text-lg">
+            <p className="text-neutral-600 text-lg">
               20+ AI-powered services delivered by intelligent agents — from strategy to deployment, we handle it all.
             </p>
           </div>
@@ -251,7 +251,7 @@ export default function HomePage() {
               Purpose-Built{' '}
               <span className="gradient-text">SaaS Solutions</span>
             </h2>
-            <p className="text-neutral-500 text-lg">
+            <p className="text-neutral-600 text-lg">
               Products we built, use ourselves, and now offer to the world.
             </p>
           </div>
@@ -269,11 +269,11 @@ export default function HomePage() {
                     <Icon className="w-7 h-7 text-white" />
                   </div>
                   <h3 className="text-xl font-heading font-bold mb-2">{product.name}</h3>
-                  <p className="text-neutral-400 text-sm mb-4 italic">{product.tagline}</p>
-                  <p className="text-neutral-500 text-sm mb-6 line-clamp-2">{product.description}</p>
+                  <p className="text-neutral-600 text-sm mb-4 italic">{product.tagline}</p>
+                  <p className="text-neutral-600 text-sm mb-6 line-clamp-2">{product.description}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-primary-600 font-semibold">{product.price}</span>
-                    <span className="text-sm text-neutral-400 group-hover:text-primary-500 transition-colors flex items-center gap-1">
+                    <span className="text-sm text-neutral-600 group-hover:text-primary-500 transition-colors flex items-center gap-1">
                       Learn more <ArrowUpRight size={14} />
                     </span>
                   </div>
@@ -301,7 +301,7 @@ export default function HomePage() {
                 AI-Native.{' '}
                 <span className="gradient-text">Built Different.</span>
               </h2>
-              <p className="text-neutral-500 text-lg mb-8">
+              <p className="text-neutral-600 text-lg mb-8">
                 We don't have a team — we have a workforce of AI agents that never sleep, never take breaks,
                 and never compromise on quality. This isn't automation. This is a new way to build software.
               </p>
@@ -321,7 +321,7 @@ export default function HomePage() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-neutral-900 mb-1">{item.title}</h4>
-                        <p className="text-neutral-500 text-sm">{item.desc}</p>
+                        <p className="text-neutral-600 text-sm">{item.desc}</p>
                       </div>
                     </div>
                   )
@@ -342,7 +342,7 @@ export default function HomePage() {
                     <div key={i} className="bg-white rounded-xl p-4 border border-neutral-100 shadow-sm">
                       <div className={`w-full h-2 rounded-full bg-gradient-to-r ${item.color} mb-3`} />
                       <div className="font-heading font-bold text-2xl text-neutral-900">{item.pct}</div>
-                      <div className="text-neutral-500 text-xs mt-1">{item.label}</div>
+                      <div className="text-neutral-600 text-xs mt-1">{item.label}</div>
                     </div>
                   ))}
                 </div>
@@ -387,7 +387,7 @@ export default function HomePage() {
                 Trusted by{' '}
                 <span className="gradient-text">200+ Clients</span>
               </h2>
-              <p className="text-neutral-500 text-lg mb-8">Hear from our clients — real results, real satisfaction.</p>
+              <p className="text-neutral-600 text-lg mb-8">Hear from our clients — real results, real satisfaction.</p>
               <div className="grid sm:grid-cols-2 gap-6">
                 {testimonials.slice(0, 4).map((t, i) => (
                   <div key={i} className="bg-neutral-50 rounded-2xl p-6 border border-neutral-200 hover:border-primary-500/20 transition-all duration-300">
@@ -401,7 +401,7 @@ export default function HomePage() {
                       </div>
                       <div>
                         <div className="font-semibold text-sm text-neutral-900">{t.name}</div>
-                        <div className="text-xs text-neutral-400">{t.role}</div>
+                        <div className="text-xs text-neutral-600">{t.role}</div>
                       </div>
                     </div>
                   </div>
@@ -440,7 +440,7 @@ export default function HomePage() {
                     <span className="font-medium text-neutral-900 pr-4">{faq.q}</span>
                     <ChevronRight
                       size={20}
-                      className={`text-neutral-400 shrink-0 transition-transform duration-300 ${
+                      className={`text-neutral-600 shrink-0 transition-transform duration-300 ${
                         activeFaq === i ? 'rotate-90' : ''
                       }`}
                     />
@@ -450,7 +450,7 @@ export default function HomePage() {
                       activeFaq === i ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                     }`}
                   >
-                    <p className="px-5 pb-5 text-neutral-500 text-sm leading-relaxed">{faq.a}</p>
+                    <p className="px-5 pb-5 text-neutral-600 text-sm leading-relaxed">{faq.a}</p>
                   </div>
                 </div>
               ))}
@@ -466,7 +466,7 @@ export default function HomePage() {
             Let's Build Something{' '}
             <span className="gradient-text">Amazing</span>
           </h2>
-          <p className="text-neutral-500 text-lg mb-8 max-w-xl mx-auto">
+          <p className="text-neutral-600 text-lg mb-8 max-w-xl mx-auto">
             Ready to experience the future of software development? Your project starts here.
           </p>
           <Link href="/contact" className="btn-primary text-lg px-8 py-4">

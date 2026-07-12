@@ -160,7 +160,7 @@ export default function ServicesPage() {
                 <div key={i} className="text-center p-6 bg-neutral-50 rounded-2xl border border-neutral-100">
                   <Icon className="w-8 h-8 text-primary-500 mx-auto mb-3" />
                   <div className="text-2xl font-heading font-bold text-neutral-900">{stat.value}</div>
-                  <div className="text-sm text-neutral-500">{stat.label}</div>
+                  <div className="text-sm text-neutral-600">{stat.label}</div>
                 </div>
               )
             })}
@@ -168,7 +168,7 @@ export default function ServicesPage() {
 
           <div className="text-center max-w-3xl mx-auto mb-16 reveal">
             <h2 className="text-3xl font-heading font-bold mb-4">All <span className="gradient-text">Services</span></h2>
-            <p className="text-neutral-500">Every service delivered by specialized AI agents with human-level oversight.</p>
+            <p className="text-neutral-600">Every service delivered by specialized AI agents with human-level oversight.</p>
           </div>
 
           {/* Service Details */}
@@ -183,9 +183,9 @@ export default function ServicesPage() {
                         <Icon className="w-8 h-8 text-primary-500" />
                       </div>
                       <h2 className="text-2xl sm:text-3xl font-heading font-bold mb-4">{service.title}</h2>
-                      <p className="text-neutral-500 mb-6 leading-relaxed">{service.description}</p>
+                      <p className="text-neutral-600 mb-6 leading-relaxed">{service.description}</p>
 
-                      <h4 className="font-semibold mb-3 text-sm uppercase tracking-wider text-neutral-400">Deliverables</h4>
+                      <h4 className="font-semibold mb-3 text-sm uppercase tracking-wider text-neutral-600">Deliverables</h4>
                       <ul className="space-y-2 mb-6">
                         {service.deliverables.map((d, i) => (
                           <li key={i} className="flex items-start gap-2 text-sm text-neutral-600">
@@ -195,7 +195,7 @@ export default function ServicesPage() {
                         ))}
                       </ul>
 
-                      <h4 className="font-semibold mb-3 text-sm uppercase tracking-wider text-neutral-400">Technologies</h4>
+                      <h4 className="font-semibold mb-3 text-sm uppercase tracking-wider text-neutral-600">Technologies</h4>
                       <div className="flex flex-wrap gap-2 mb-6">
                         {service.technologies.map((t, i) => (
                           <span key={i} className="chip bg-neutral-100 text-neutral-600 text-xs">{t}</span>
@@ -210,7 +210,7 @@ export default function ServicesPage() {
                           <div key={i} className="bg-neutral-50 rounded-xl p-6 border border-neutral-200 hover:border-primary-500/30 transition-all duration-300">
                             <div className="flex items-center justify-between mb-2">
                               <h4 className="font-semibold text-neutral-900">{pkg.name}</h4>
-                              <div className="flex items-center gap-2 text-sm text-neutral-400">
+                              <div className="flex items-center gap-2 text-sm text-neutral-600">
                                 <Clock size={14} />
                                 {pkg.timeline}
                               </div>
@@ -218,7 +218,7 @@ export default function ServicesPage() {
                             <div className="text-xl font-heading font-bold gradient-text mb-3">{pkg.price}</div>
                             <ul className="space-y-1.5">
                               {pkg.features.map((f, j) => (
-                                <li key={j} className="flex items-center gap-2 text-sm text-neutral-500">
+                                <li key={j} className="flex items-center gap-2 text-sm text-neutral-600">
                                   <Check size={14} className="text-success shrink-0" />
                                   {f}
                                 </li>

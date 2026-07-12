@@ -64,7 +64,7 @@ export default function PortfolioPage() {
             ].map((s, i) => (
               <div key={i} className="text-center">
                 <div className="text-3xl font-heading font-bold gradient-text">{s.value}</div>
-                <div className="text-sm text-neutral-500 mt-1">{s.label}</div>
+                <div className="text-sm text-neutral-600 mt-1">{s.label}</div>
               </div>
             ))}
           </div>
@@ -86,12 +86,12 @@ export default function PortfolioPage() {
                 <h3 className="text-xl font-heading font-bold mb-3 group-hover:text-primary-600 transition-colors">{project.title}</h3>
                 <div className="space-y-2 mb-4">
                   <div>
-                    <span className="text-xs font-semibold text-neutral-400 uppercase tracking-wider">Problem</span>
-                    <p className="text-sm text-neutral-500 mt-0.5">{project.problem}</p>
+                    <span className="text-xs font-semibold text-neutral-600 uppercase tracking-wider">Problem</span>
+                    <p className="text-sm text-neutral-600 mt-0.5">{project.problem}</p>
                   </div>
                   <div>
-                    <span className="text-xs font-semibold text-neutral-400 uppercase tracking-wider">Solution</span>
-                    <p className="text-sm text-neutral-500 mt-0.5">{project.solution}</p>
+                    <span className="text-xs font-semibold text-neutral-600 uppercase tracking-wider">Solution</span>
+                    <p className="text-sm text-neutral-600 mt-0.5">{project.solution}</p>
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-2 mb-4">
@@ -99,7 +99,7 @@ export default function PortfolioPage() {
                     <span key={j} className="chip bg-neutral-100 text-neutral-600 text-xs">{t}</span>
                   ))}
                 </div>
-                <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-400 border-t border-neutral-100 pt-4">
+                <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-600 border-t border-neutral-100 pt-4">
                   <span className="flex items-center gap-1"><Clock size={14} />{project.timeline}</span>
                   <span className="flex items-center gap-1">{project.budget}</span>
                   <span className="flex items-center gap-1 text-success"><TrendingUp size={14} />{project.result}</span>

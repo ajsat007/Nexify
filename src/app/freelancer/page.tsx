@@ -88,12 +88,12 @@ function StatCard({ icon: Icon, label, value, trend, variant = 'default' }: { ic
     <div className="bg-white dark:bg-neutral-800/50 rounded-xl p-5 border border-neutral-200 dark:border-neutral-700 hover:shadow-lg transition-all">
       <div className="flex items-center justify-between mb-3">
         <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${variant === 'primary' ? 'bg-primary-50 dark:bg-primary-500/10' : variant === 'success' ? 'bg-success/10' : variant === 'warning' ? 'bg-warning/10' : 'bg-neutral-100 dark:bg-neutral-700'}`}>
-          <Icon className={`w-5 h-5 ${variant === 'primary' ? 'text-primary-500' : variant === 'success' ? 'text-success' : variant === 'warning' ? 'text-warning' : 'text-neutral-500 dark:text-neutral-300'}`} />
+          <Icon className={`w-5 h-5 ${variant === 'primary' ? 'text-primary-500' : variant === 'success' ? 'text-success' : variant === 'warning' ? 'text-warning' : 'text-neutral-600 dark:text-neutral-300'}`} />
         </div>
         {trend && <span className={`text-xs font-medium ${trend.startsWith('+') ? 'text-success' : 'text-error'}`}>{trend}</span>}
       </div>
       <div className="text-2xl font-heading font-bold text-neutral-900 dark:text-white">{value}</div>
-      <div className="text-sm text-neutral-400">{label}</div>
+      <div className="text-sm text-neutral-600">{label}</div>
     </div>
   )
 }
@@ -101,10 +101,10 @@ function StatCard({ icon: Icon, label, value, trend, variant = 'default' }: { ic
 function Badge({ status }: { status: string }) {
   const colors: Record<string, string> = {
     new: 'bg-info/10 text-info', won: 'bg-success/10 text-success', lost: 'bg-error/10 text-error',
-    proposal: 'bg-warning/10 text-warning', sent: 'bg-primary-50 text-primary-600', draft: 'bg-neutral-100 text-neutral-500',
+    proposal: 'bg-warning/10 text-warning', sent: 'bg-primary-50 text-primary-600', draft: 'bg-neutral-100 text-neutral-600',
     accepted: 'bg-success/10 text-success', 'in-progress': 'bg-info/10 text-info', pending: 'bg-warning/10 text-warning',
   }
-  return <span className={`chip text-xs capitalize border-0 ${colors[status] || 'bg-neutral-100 text-neutral-500'}`}>{status}</span>
+  return <span className={`chip text-xs capitalize border-0 ${colors[status] || 'bg-neutral-100 text-neutral-600'}`}>{status}</span>
 }
 
 function ProgressBar({ value }: { value: number }) {
@@ -152,7 +152,7 @@ function AiLeadFinder() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <div><h1 className="text-2xl font-heading font-bold">AI Lead Finder</h1><p className="text-neutral-400 text-sm">AI scans LinkedIn, Upwork, and freelance platforms for you</p></div>
+        <div><h1 className="text-2xl font-heading font-bold">AI Lead Finder</h1><p className="text-neutral-600 text-sm">AI scans LinkedIn, Upwork, and freelance platforms for you</p></div>
         <button onClick={() => setShowScanner(!showScanner)} className="btn-primary text-sm"><Search size={16} /> {showScanner ? 'Close Scanner' : 'Scan for Leads'}</button>
       </div>
 
@@ -160,7 +160,7 @@ function AiLeadFinder() {
         <div className="card-surface p-6 space-y-4">
           <div className="flex items-center gap-3 mb-2">
             <div className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center"><Search className="w-5 h-5 text-white" /></div>
-            <div><h2 className="font-semibold">AI Lead Scanner</h2><p className="text-xs text-neutral-400">Scans LinkedIn, Upwork, freelancer platforms for matching opportunities</p></div>
+            <div><h2 className="font-semibold">AI Lead Scanner</h2><p className="text-xs text-neutral-600">Scans LinkedIn, Upwork, freelancer platforms for matching opportunities</p></div>
           </div>
           <div className="flex gap-3">
             <button onClick={scanForLeads} disabled={scanning} className="btn-primary text-sm">
@@ -168,7 +168,7 @@ function AiLeadFinder() {
             </button>
           </div>
           {scanning && (
-            <div className="flex items-center gap-3 text-sm text-neutral-500 p-4 bg-neutral-50 dark:bg-neutral-800/50 rounded-xl">
+            <div className="flex items-center gap-3 text-sm text-neutral-600 p-4 bg-neutral-50 dark:bg-neutral-800/50 rounded-xl">
               <Loader size={16} className="animate-spin text-primary-500" />
               AI scanning LinkedIn jobs, Upwork projects, and website inquiries...
             </div>
@@ -179,8 +179,8 @@ function AiLeadFinder() {
               {foundLeads.map((lead, i) => (
                 <div key={i} className="flex items-center justify-between p-4 bg-gradient-to-r from-primary-500/5 to-accent-500/5 rounded-xl border border-primary-500/20">
                   <div>
-                    <div className="font-medium text-sm">{lead.name} — <span className="text-neutral-500">{lead.company}</span></div>
-                    <div className="text-xs text-neutral-400">{lead.need} · Source: {lead.source}</div>
+                    <div className="font-medium text-sm">{lead.name} — <span className="text-neutral-600">{lead.company}</span></div>
+                    <div className="text-xs text-neutral-600">{lead.need} · Source: {lead.source}</div>
                   </div>
                   <button onClick={() => acceptLead(lead)} className="btn-primary text-xs px-4 py-2"><UserPlus size={12} /> Accept</button>
                 </div>
@@ -197,14 +197,14 @@ function AiLeadFinder() {
               <div className="flex items-center gap-4 flex-1">
                 <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary-500/10 to-accent-500/10 flex items-center justify-center text-primary-500 font-bold">{l.company.slice(0, 2)}</div>
                 <div>
-                  <div className="flex items-center gap-2"><span className="font-semibold text-sm">{l.name}</span><Badge status={l.status} /><span className="text-xs text-neutral-400">{l.from}</span></div>
-                  <div className="text-xs text-neutral-400">{l.company} · {l.need}</div>
-                  <div className="text-xs text-neutral-400">{l.email} · {l.budget}</div>
+                  <div className="flex items-center gap-2"><span className="font-semibold text-sm">{l.name}</span><Badge status={l.status} /><span className="text-xs text-neutral-600">{l.from}</span></div>
+                  <div className="text-xs text-neutral-600">{l.company} · {l.need}</div>
+                  <div className="text-xs text-neutral-600">{l.email} · {l.budget}</div>
                 </div>
               </div>
               <div className="text-right shrink-0">
-                <div className="text-xs text-neutral-400">AI Score</div>
-                <div className={`text-lg font-heading font-bold ${l.aiScore >= 80 ? 'text-success' : l.aiScore >= 70 ? 'text-warning' : 'text-neutral-400'}`}>{l.aiScore}%</div>
+                <div className="text-xs text-neutral-600">AI Score</div>
+                <div className={`text-lg font-heading font-bold ${l.aiScore >= 80 ? 'text-success' : l.aiScore >= 70 ? 'text-warning' : 'text-neutral-600'}`}>{l.aiScore}%</div>
               </div>
             </div>
           </div>
@@ -270,12 +270,12 @@ function AiProposalGenerator() {
 
   return (
     <div className="space-y-6">
-      <div><h1 className="text-2xl font-heading font-bold">AI Proposal Generator</h1><p className="text-neutral-400 text-sm">AI generates personalized proposals in seconds</p></div>
+      <div><h1 className="text-2xl font-heading font-bold">AI Proposal Generator</h1><p className="text-neutral-600 text-sm">AI generates personalized proposals in seconds</p></div>
 
       <div className="card-surface p-6 space-y-4">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center"><Wand2 className="w-5 h-5 text-white" /></div>
-          <div><h2 className="font-semibold">Generate Proposal</h2><p className="text-xs text-neutral-400">Select a lead and AI creates a custom proposal instantly</p></div>
+          <div><h2 className="font-semibold">Generate Proposal</h2><p className="text-xs text-neutral-600">Select a lead and AI creates a custom proposal instantly</p></div>
         </div>
 
         <select className="input-field" value={selectedLead} onChange={e => setSelectedLead(e.target.value)}>
@@ -307,9 +307,9 @@ function AiProposalGenerator() {
             <div className="flex items-center justify-between">
               <div>
                 <div className="flex items-center gap-2"><span className="font-semibold text-sm">{p.project}</span><Badge status={p.status} /></div>
-                <div className="text-xs text-neutral-400">{p.client} · {p.company} · {p.aiGenerated && 'AI-generated'}</div>
+                <div className="text-xs text-neutral-600">{p.client} · {p.company} · {p.aiGenerated && 'AI-generated'}</div>
               </div>
-              <div className="text-right"><div className="font-heading font-bold">₹{p.amount.toLocaleString('en-IN')}</div><div className="text-xs text-neutral-400">Delivery: {p.deliveryDate}</div></div>
+              <div className="text-right"><div className="font-heading font-bold">₹{p.amount.toLocaleString('en-IN')}</div><div className="text-xs text-neutral-600">Delivery: {p.deliveryDate}</div></div>
             </div>
           </div>
         ))}
@@ -332,7 +332,7 @@ function AiCodingAgent() {
     setOutput('')
     setTimeout(() => {
       const outputs = [
-        `// Auto-generated component: ${prompt.split(' ').slice(0, 3).join(' ')}\n\nexport default function Component() {\n  return (\n    <div className="p-6 bg-white rounded-2xl shadow-lg">\n      <h2 className="text-2xl font-bold mb-4">Feature</h2>\n      <p className="text-neutral-500">AI-generated component based on your requirements.</p>\n    </div>\n  )\n}`,
+        `// Auto-generated component: ${prompt.split(' ').slice(0, 3).join(' ')}\n\nexport default function Component() {\n  return (\n    <div className="p-6 bg-white rounded-2xl shadow-lg">\n      <h2 className="text-2xl font-bold mb-4">Feature</h2>\n      <p className="text-neutral-600">AI-generated component based on your requirements.</p>\n    </div>\n  )\n}`,
         `✅ Task completed! AI agent has:\n1. Created the requested component/structure\n2. Added TypeScript types and interfaces\n3. Written unit tests (92% coverage)\n4. Formatted and linted all files\n\nReady for review in your project repository.`,
       ]
       setOutput(outputs[Math.floor(Math.random() * outputs.length)])
@@ -342,12 +342,12 @@ function AiCodingAgent() {
 
   return (
     <div className="space-y-6">
-      <div><h1 className="text-2xl font-heading font-bold">AI Coding Agent</h1><p className="text-neutral-400 text-sm">Describe what you need — AI agents build it</p></div>
+      <div><h1 className="text-2xl font-heading font-bold">AI Coding Agent</h1><p className="text-neutral-600 text-sm">Describe what you need — AI agents build it</p></div>
 
       <div className="card-surface p-6 space-y-4">
         <div className="flex items-center gap-3 mb-2">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center"><Bot className="w-5 h-5 text-white" /></div>
-          <div><h2 className="font-semibold">AI Code Generator</h2><p className="text-xs text-neutral-400">Describe your requirement in plain English</p></div>
+          <div><h2 className="font-semibold">AI Code Generator</h2><p className="text-xs text-neutral-600">Describe your requirement in plain English</p></div>
         </div>
         <textarea className="input-field resize-none" rows={3} placeholder="e.g. Create a contact form component with validation and email sending..." value={prompt} onChange={e => setPrompt(e.target.value)} />
         <button onClick={generateCode} disabled={!prompt.trim() || generating} className="btn-primary text-sm">
@@ -367,7 +367,7 @@ function AiCodingAgent() {
               <span className="text-sm font-semibold">₹{p.amount.toLocaleString('en-IN')}</span>
             </div>
             <ProgressBar value={p.progress} />
-            <div className="flex items-center justify-between text-xs text-neutral-400 mt-2">
+            <div className="flex items-center justify-between text-xs text-neutral-600 mt-2">
               <span>{p.tasks.done}/{p.tasks.total} tasks</span><span>{p.deadline}</span>
             </div>
           </div>
@@ -397,7 +397,7 @@ function FreelancerDashboard() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <div><h1 className="text-2xl font-heading font-bold">AI Freelancer Dashboard</h1><p className="text-neutral-400 text-sm">Everything runs on AI — you just collect the money</p></div>
+        <div><h1 className="text-2xl font-heading font-bold">AI Freelancer Dashboard</h1><p className="text-neutral-600 text-sm">Everything runs on AI — you just collect the money</p></div>
         <Link href="/contact" className="btn-primary text-sm" target="_blank">Share Your Link <ExternalLink size={14} /></Link>
       </div>
 
@@ -418,7 +418,7 @@ function FreelancerDashboard() {
                 <div className="w-8 h-8 rounded-lg bg-primary-50 dark:bg-primary-500/10 flex items-center justify-center text-primary-500 text-xs font-bold">{l.company.slice(0, 2)}</div>
                 <div className="flex-1">
                   <div className="text-sm font-medium">{l.name}</div>
-                  <div className="text-xs text-neutral-400">{l.need} · {l.budget}</div>
+                  <div className="text-xs text-neutral-600">{l.need} · {l.budget}</div>
                 </div>
                 <Badge status={l.status} />
               </div>
@@ -436,7 +436,7 @@ function FreelancerDashboard() {
             ].map((a, i) => (
               <div key={i} className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-success mt-2 animate-pulse" />
-                <div className="flex-1"><span className="text-neutral-500">{a.action}</span><div className="text-xs text-neutral-400">{a.time} · {a.agent}</div></div>
+                <div className="flex-1"><span className="text-neutral-600">{a.action}</span><div className="text-xs text-neutral-600">{a.time} · {a.agent}</div></div>
               </div>
             ))}
           </div>
@@ -451,7 +451,7 @@ function FreelancerDashboard() {
             <div key={p.id}>
               <div className="flex items-center justify-between text-sm mb-1">
                 <span className="font-medium">{p.name} — {p.client}</span>
-                <span className="text-neutral-400">{p.progress}% · ₹{p.amount.toLocaleString('en-IN')}</span>
+                <span className="text-neutral-600">{p.progress}% · ₹{p.amount.toLocaleString('en-IN')}</span>
               </div>
               <ProgressBar value={p.progress} />
             </div>
@@ -469,7 +469,7 @@ function FreelancerDashboard() {
             { label: 'Email', value: 'you@email.com' },
             { label: 'Rate', value: '₹30,000+ / project' },
           ].map((f, i) => (
-            <div key={i} className="p-3 bg-neutral-50 dark:bg-neutral-800/50 rounded-xl"><div className="text-xs text-neutral-400">{f.label}</div><div className="text-sm font-medium">{f.value}</div></div>
+            <div key={i} className="p-3 bg-neutral-50 dark:bg-neutral-800/50 rounded-xl"><div className="text-xs text-neutral-600">{f.label}</div><div className="text-sm font-medium">{f.value}</div></div>
           ))}
         </div>
         <div className="flex flex-wrap gap-2 mt-4">
@@ -481,7 +481,7 @@ function FreelancerDashboard() {
 
       <div className="bg-gradient-to-r from-success/10 to-primary-500/10 rounded-2xl border border-success/20 p-6 text-center">
         <h2 className="text-lg font-heading font-bold mb-2">🤖 AI is Working for You Right Now</h2>
-        <p className="text-sm text-neutral-500">LeadFinder AI is scanning platforms · Proposal AI is drafting · Code Agent is building · All while you sleep.</p>
+        <p className="text-sm text-neutral-600">LeadFinder AI is scanning platforms · Proposal AI is drafting · Code Agent is building · All while you sleep.</p>
       </div>
     </div>
   )
@@ -507,13 +507,13 @@ export default function FreelancerPage() {
         <div className="p-6 border-b border-neutral-200 dark:border-neutral-800">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center"><Briefcase className="w-5 h-5 text-white" /></div>
-            <div><h2 className="font-heading font-bold text-sm">Freelancer Hub</h2><p className="text-neutral-400 text-xs">AI-Powered</p></div>
+            <div><h2 className="font-heading font-bold text-sm">Freelancer Hub</h2><p className="text-neutral-600 text-xs">AI-Powered</p></div>
           </div>
         </div>
         <nav className="p-4 space-y-1">
           {tabs.map(tab => (
             <button key={tab.id} onClick={() => { setActiveTab(tab.id); setSidebarOpen(false) }}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === tab.id ? 'bg-primary-50 dark:bg-primary-500/10 text-primary-600 dark:text-primary-400 border border-primary-200 dark:border-primary-500/20' : 'text-neutral-500 hover:bg-neutral-50 dark:hover:bg-neutral-800 dark:text-neutral-400'}`}>
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === tab.id ? 'bg-primary-50 dark:bg-primary-500/10 text-primary-600 dark:text-primary-400 border border-primary-200 dark:border-primary-500/20' : 'text-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-800 dark:text-neutral-600'}`}>
               <tab.icon size={18} /><span>{tab.label}</span>
             </button>
           ))}
@@ -521,7 +521,7 @@ export default function FreelancerPage() {
         <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-neutral-200 dark:border-neutral-800">
           <div className="flex items-center gap-3 px-4 py-3">
             <div className="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center text-white text-xs font-bold">Y</div>
-            <div><div className="text-sm font-medium text-neutral-900 dark:text-white">You</div><div className="text-xs text-neutral-400">Freelancer</div></div>
+            <div><div className="text-sm font-medium text-neutral-900 dark:text-white">You</div><div className="text-xs text-neutral-600">Freelancer</div></div>
           </div>
         </div>
       </aside>
@@ -529,9 +529,9 @@ export default function FreelancerPage() {
       <main className="flex-1 min-w-0">
         <div className="sticky top-0 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border-b border-neutral-200 dark:border-neutral-800 z-20">
           <div className="flex items-center justify-between px-4 sm:px-6 py-4">
-            <button className="lg:hidden text-neutral-500" onClick={() => setSidebarOpen(true)}><Menu size={20} /></button>
+            <button className="lg:hidden text-neutral-600" onClick={() => setSidebarOpen(true)}><Menu size={20} /></button>
             <div className="flex items-center gap-3 ml-auto">
-              <Link href="/" className="flex items-center gap-1 text-xs text-neutral-400 hover:text-primary-500"><Globe size={12} /> Site</Link>
+              <Link href="/" className="flex items-center gap-1 text-xs text-neutral-600 hover:text-primary-500"><Globe size={12} /> Site</Link>
               <div className="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center text-white text-xs font-bold">Y</div>
             </div>
           </div>

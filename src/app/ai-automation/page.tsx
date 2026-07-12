@@ -54,7 +54,7 @@ export default function AIAutomationPage() {
             ].map((s, i) => (
               <div key={i} className="text-center p-6 bg-neutral-50 rounded-2xl border border-neutral-100 hover:shadow-lg transition-all">
                 <div className={`text-3xl font-heading font-bold bg-gradient-to-r ${s.c} bg-clip-text text-transparent`}>{s.value}</div>
-                <div className="text-sm text-neutral-500 mt-1">{s.label}</div>
+                <div className="text-sm text-neutral-600 mt-1">{s.label}</div>
               </div>
             ))}
           </div>
@@ -69,11 +69,11 @@ export default function AIAutomationPage() {
                   <span className="flex items-center gap-1.5 text-xs font-medium text-success"><span className="w-2 h-2 rounded-full bg-success animate-pulse" /> active</span>
                 </div>
                 <h3 className="text-lg font-heading font-bold mb-1">{agent.name}</h3>
-                <p className="text-sm text-neutral-500 mb-3 line-clamp-2">{agent.desc}</p>
+                <p className="text-sm text-neutral-600 mb-3 line-clamp-2">{agent.desc}</p>
                 <div className="flex flex-wrap gap-1.5">
-                  {agent.skills.map((s, i) => <span key={i} className="chip bg-neutral-100 text-neutral-500 text-[10px]">{s}</span>)}
+                  {agent.skills.map((s, i) => <span key={i} className="chip bg-neutral-100 text-neutral-600 text-[10px]">{s}</span>)}
                 </div>
-                <div className="mt-3 text-xs text-neutral-400">Model: {agent.model}</div>
+                <div className="mt-3 text-xs text-neutral-600">Model: {agent.model}</div>
               </button>
             ))}
           </div>
@@ -90,11 +90,11 @@ export default function AIAutomationPage() {
                     <h2 className="text-2xl font-heading font-bold">{activeAgent.name}</h2>
                     <span className="flex items-center gap-1.5 text-xs text-success bg-success/10 px-3 py-1 rounded-full"><span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />Running</span>
                   </div>
-                  <p className="text-neutral-500 mb-4">{activeAgent.desc}</p>
+                  <p className="text-neutral-600 mb-4">{activeAgent.desc}</p>
                   <div className="flex flex-wrap gap-4 text-sm">
-                    <div><span className="text-neutral-400 text-xs block">Model</span><span className="font-medium">{activeAgent.model}</span></div>
-                    <div><span className="text-neutral-400 text-xs block">Response Time</span><span className="font-medium text-success">{'<'} 30s</span></div>
-                    <div><span className="text-neutral-400 text-xs block">Tasks Today</span><span className="font-medium">{Math.floor(Math.random() * 100 + 50)}</span></div>
+                    <div><span className="text-neutral-600 text-xs block">Model</span><span className="font-medium">{activeAgent.model}</span></div>
+                    <div><span className="text-neutral-600 text-xs block">Response Time</span><span className="font-medium text-success">{'<'} 30s</span></div>
+                    <div><span className="text-neutral-600 text-xs block">Tasks Today</span><span className="font-medium">{Math.floor(Math.random() * 100 + 50)}</span></div>
                   </div>
                   <div className="flex flex-wrap gap-2 mt-4">
                     {activeAgent.skills.map((s, i) => <span key={i} className="chip bg-primary-50 text-primary-600 text-xs">{s}</span>)}
@@ -117,7 +117,7 @@ export default function AIAutomationPage() {
                 <div key={i} className="text-center">
                   <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${item.c} flex items-center justify-center mx-auto mb-4 text-white font-bold text-lg`}>{item.step}</div>
                   <h3 className="font-semibold mb-1">{item.title}</h3>
-                  <p className="text-sm text-neutral-500">{item.desc}</p>
+                  <p className="text-sm text-neutral-600">{item.desc}</p>
                 </div>
               ))}
             </div>

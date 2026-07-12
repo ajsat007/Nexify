@@ -55,7 +55,7 @@ export default function HRPage() {
                 {handbook.map((h, i) => (
                   <div key={i} className="bg-white rounded-xl p-4 border border-neutral-200">
                     <div className="font-medium text-sm text-neutral-900 mb-1">{h.section}</div>
-                    <p className="text-xs text-neutral-500">{h.policy}</p>
+                    <p className="text-xs text-neutral-600">{h.policy}</p>
                   </div>
                 ))}
               </div>
@@ -75,7 +75,7 @@ export default function HRPage() {
                 <div key={i} className="bg-white rounded-xl p-5 border border-neutral-200 text-center">
                   <div className="text-xs font-semibold text-primary-500 mb-1">{p.phase}</div>
                   <div className="font-heading font-bold text-lg text-neutral-900">{p.focus}</div>
-                  <div className="text-xs text-neutral-400 mt-1">{p.desc}</div>
+                  <div className="text-xs text-neutral-600 mt-1">{p.desc}</div>
                 </div>
               ))}
             </div>

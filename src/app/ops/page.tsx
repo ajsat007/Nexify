@@ -41,7 +41,7 @@ export default function OpsPage() {
                   <h2 className="text-xl font-heading font-bold">{o.area}</h2>
                   <span className="chip bg-primary-50 text-primary-600 text-xs">{o.owner}</span>
                 </div>
-                <div className="flex flex-wrap items-center gap-2 text-sm text-neutral-500">
+                <div className="flex flex-wrap items-center gap-2 text-sm text-neutral-600">
                   {o.process.split('→').map((step, j) => (
                     <span key={j} className="flex items-center gap-1">
                       <CheckCircle2 size={14} className="text-success shrink-0" />

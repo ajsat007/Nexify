@@ -47,7 +47,7 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-16 items-center reveal">
             <div>
               <h2 className="text-3xl font-heading font-bold mb-6">The <span className="gradient-text">Story</span></h2>
-              <div className="space-y-4 text-neutral-500 leading-relaxed">
+              <div className="space-y-4 text-neutral-600 leading-relaxed">
                 <p><strong className="text-neutral-900">The problem:</strong> Most software agencies treat clients like order-takers. Requirements → quote → build → deliver → ghost. No strategic partnership. No velocity. No transparency.</p>
                 <p><strong className="text-neutral-900">The insight:</strong> What if an agency ran like a product company? What if it had its own SaaS products, its own AI agents, its own internal tools? What if it ate its own dog food before serving it to clients?</p>
                 <p><strong className="text-neutral-900">The result:</strong> Nexify doesn't just build software. We run on the same systems we build for clients. Our internal AI agents, dashboards, and automation pipelines are the same ones we deploy for clients. Every process is battle-tested internally first.</p>
@@ -63,7 +63,7 @@ export default function AboutPage() {
         <div className="section-container">
           <div className="text-center max-w-3xl mx-auto mb-16 reveal">
             <h2 className="text-3xl font-heading font-bold mb-4">Our <span className="gradient-text">Values</span></h2>
-            <p className="text-neutral-500">The principles that guide every AI agent and every decision we make.</p>
+            <p className="text-neutral-600">The principles that guide every AI agent and every decision we make.</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
             {[
@@ -82,7 +82,7 @@ export default function AboutPage() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-neutral-900 mb-1">{v.title}</h4>
-                    <p className="text-neutral-500 text-sm">{v.desc}</p>
+                    <p className="text-neutral-600 text-sm">{v.desc}</p>
                   </div>
                 </div>
               )

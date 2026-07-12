@@ -43,8 +43,8 @@ export default function IndustriesPage() {
                 <div key={i} className="bg-white rounded-2xl border border-neutral-200 p-6 hover:shadow-xl hover:border-primary-500/20 transition-all group">
                   <Icon className="w-10 h-10 text-primary-500 mb-4 group-hover:scale-110 transition-transform" />
                   <h3 className="text-lg font-heading font-bold mb-2 group-hover:text-primary-600 transition-colors">{ind.name}</h3>
-                  <p className="text-sm text-neutral-500 mb-4">{ind.description}</p>
-                  <div className="flex items-center gap-4 text-xs text-neutral-400 border-t border-neutral-100 pt-4">
+                  <p className="text-sm text-neutral-600 mb-4">{ind.description}</p>
+                  <div className="flex items-center gap-4 text-xs text-neutral-600 border-t border-neutral-100 pt-4">
                     <span>{ind.clients} clients</span>
                     <span>{ind.projects} projects</span>
                   </div>
