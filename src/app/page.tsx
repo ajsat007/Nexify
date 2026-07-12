@@ -147,7 +147,7 @@ export default function HomePage() {
                       {['R','P','A','S'][i-1]}
                     </div>
                   ))}
-                  <div className="w-8 h-8 rounded-full bg-neutral-800 border-2 border-neutral-900 flex items-center justify-center text-neutral-600 text-xs font-medium">
+                  <div className="w-8 h-8 rounded-full bg-neutral-800 border-2 border-neutral-900 flex items-center justify-center text-neutral-400 text-xs font-medium">
                     +50
                   </div>
                 </div>
@@ -155,7 +155,7 @@ export default function HomePage() {
                   <div className="flex items-center gap-1 text-warning">
                     {[1,2,3,4,5].map(i => <Star key={i} size={14} fill="currentColor" />)}
                   </div>
-                  <span className="text-neutral-600">Trusted by 200+ clients</span>
+                  <span className="text-neutral-400">Trusted by 200+ clients</span>
                 </div>
               </div>
             </div>
@@ -169,7 +169,7 @@ export default function HomePage() {
                       <Cpu size={40} className="text-white" />
                     </div>
                     <h3 className="text-white text-2xl font-heading font-bold mb-2">50+ AI Agents</h3>
-                    <p className="text-neutral-600 mb-6">Working 24/7 on your projects</p>
+                    <p className="text-neutral-400 mb-6">Working 24/7 on your projects</p>
                     <div className="grid grid-cols-2 gap-4 w-full">
                       {[
                         { label: 'Uptime', value: '99.9%' },
@@ -206,7 +206,7 @@ export default function HomePage() {
               {teamStats.map((stat, i) => (
                 <div key={stat.label} className="text-center">
                   <AnimatedCounter value={stat.value} />
-                  <div className="text-neutral-600 text-sm mt-1">{stat.label}</div>
+                  <div className="text-neutral-400 text-sm mt-1">{stat.label}</div>
                 </div>
               ))}
             </div>
