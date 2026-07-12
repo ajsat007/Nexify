@@ -8,6 +8,7 @@ export default function ContactPage() {
   const [formState, setFormState] = useState({ name: '', email: '', company: '', service: '', budget: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -21,11 +22,47 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    // Simulate AI processing
-    setTimeout(() => {
+    setError('')
+
+    try {
+      // Store in localStorage (available in admin panel)
+      const leads = JSON.parse(localStorage.getItem('nexify_leads') || '[]')
+      leads.unshift({
+        id: `LD-${String(leads.length + 1).padStart(3, '0')}`,
+        ...formState,
+        source: 'Website',
+        status: 'new',
+        date: new Date().toISOString().split('T')[0],
+        value: formState.budget || 'not-set',
+      })
+      localStorage.setItem('nexify_leads', JSON.stringify(leads))
+
+      // Attempt to send via Formspree (free tier)
+      try {
+        await fetch('https://formspree.io/f/xjkyqryz', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: formState.name,
+            email: formState.email,
+            company: formState.company,
+            service: formState.service,
+            budget: formState.budget,
+            message: formState.message,
+            _subject: `New Lead from ${formState.name} - ${formState.company}`,
+          }),
+        })
+      } catch {
+        // Formspree not configured — data still saved locally
+        console.log('Lead saved locally. Configure Formspree for email delivery.')
+      }
+
       setLoading(false)
       setSubmitted(true)
-    }, 1500)
+    } catch {
+      setError('Something went wrong. Please try again.')
+      setLoading(false)
+    }
   }
 
   return (
