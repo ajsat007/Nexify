@@ -97,13 +97,13 @@ export default function HomePage() {
 
   return (
     <>
-      {/* ===== HERO ===== */}
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-neutral-900">
-        {/* Background Effects */}
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/20 rounded-full blur-3xl animate-blob" />
-          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-accent-500/20 rounded-full blur-3xl animate-blob animation-delay-2000" />
-          <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-primary-400/10 rounded-full blur-3xl animate-blob animation-delay-4000" />
+      {/* ===== 3D HERO ===== */}
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-neutral-900 scene-3d-tilt">
+        {/* 3D Background Effects */}
+        <div className="absolute inset-0" style={{ transformStyle: 'preserve-3d' }}>
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/20 rounded-full blur-3xl animate-blob depth-20" />
+          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-accent-500/20 rounded-full blur-3xl animate-blob animation-delay-2000 depth-30" />
+          <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-primary-400/10 rounded-full blur-3xl animate-blob animation-delay-4000 depth-10" />
         </div>
 
         {/* Grid Overlay */}
@@ -112,19 +112,19 @@ export default function HomePage() {
         <div className="section-container relative z-10 pt-32 pb-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left */}
-            <div className="space-y-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-300 text-sm font-medium">
+            <div className="space-y-8 depth-20" style={{ transformStyle: 'preserve-3d' }}>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-300 text-sm font-medium depth-10">
                 <Cpu size={14} className="text-primary-400" />
                 AI-Powered Software Development
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-white leading-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-white leading-tight text-3d-light depth-30">
                 Software Built by{' '}
                 <span className="gradient-text">Intelligent AI</span>{' '}
                 Agents. Delivered in Days.
               </h1>
 
-              <p className="text-lg sm:text-xl text-neutral-600 leading-relaxed max-w-xl">
+              <p className="text-lg sm:text-xl text-neutral-300 leading-relaxed max-w-xl depth-20">
                 Nexify is an AI-native software company. Our workforce of 50+ AI agents builds custom software,
                 mobile apps, AI solutions, and SaaS products — 10x faster, at half the cost of traditional agencies.
               </p>
