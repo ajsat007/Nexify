@@ -42,16 +42,24 @@
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-700 via-accent-700 to-primary-900;
-    text-shadow: 0 2px 16px rgba(59,130,246,0.3);
+    background: linear-gradient(135deg, #0F172A 0%, #1D4ED8 40%, #6D28D9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .dark .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-300 via-accent-400 to-primary-400;
+    background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #C4B5FD 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .gradient-text-light {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-500 via-accent-500 to-primary-600;
+    background: linear-gradient(135deg, #1E40AF 0%, #7C3AED 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   /* === 3D BACKGROUND === */

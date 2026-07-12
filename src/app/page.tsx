@@ -11,6 +11,7 @@ import {
 } from 'lucide-react'
 import { services, products, testimonials, faqs, teamStats, industries } from '@/lib/data'
 import ActivityFeed from '@/components/ActivityFeed'
+import Tilt3D from '@/components/Tilt3D'
 
 const iconMap: Record<string, any> = {
   Code2, Globe, Smartphone, Brain, BarChart3, Palette, Cloud, MessageCircle,
