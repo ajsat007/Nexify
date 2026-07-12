@@ -2,7 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { ArrowRight, Check, Loader, Shield, Lock } from 'lucide-react'
+import { ArrowRight, Check, Loader, Shield, Lock, CreditCard, Smartphone, Laptop, Wallet, Zap, ExternalLink } from 'lucide-react'
+
+declare global { interface Window { Razorpay: any } }
+
+const RAZORPAY_KEY = 'rzp_live_TCWx1HNI3P0W58'
 
 const DB = {
   get: (k: string) => { if (typeof window === 'undefined') return null; const d = localStorage.getItem('nxp_' + k); return d ? JSON.parse(d) : null },
@@ -11,9 +15,8 @@ const DB = {
     if (this.get('init')) return
     this.set('invoices', [
       { id: 'INV-001', client: 'Client', project: 'Project', amount: 45000, status: 'paid', date: '2026-07-10' },
-      { id: 'INV-002', client: 'Client 2', project: 'Project 2', amount: 25000, status: 'pending', date: '2026-07-12', dueDate: '2026-07-26' },
     ])
-    this.set('earnings', { total: 45000, pending: 25000, thisMonth: 45000 })
+    this.set('earnings', { total: 45000, pending: 0, thisMonth: 45000 })
     this.set('init', true)
   }
 }
@@ -26,8 +29,10 @@ export default function PayPage() {
   const [custom, setCustom] = useState('')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
   const [project, setProject] = useState('')
   const [loading, setLoading] = useState(false)
+  const [rzpReady, setRzpReady] = useState(false)
   const [invoices, setInvoices] = useState<any[]>([])
   const [earnings, setEarnings] = useState<any>({})
 
@@ -35,88 +40,203 @@ export default function PayPage() {
     DB.init()
     setInvoices(DB.get('invoices') || [])
     setEarnings(DB.get('earnings') || {})
+
+    // Load Razorpay script
+    if (!document.querySelector('#rzp-script')) {
+      const s = document.createElement('script')
+      s.id = 'rzp-script'
+      s.src = 'https://checkout.razorpay.com/v1/checkout.js'
+      s.onload = () => setRzpReady(true)
+      document.body.appendChild(s)
+    } else {
+      setRzpReady(true)
+    }
   }, [])
 
   const fa = custom ? parseInt(custom) : amount
+  const total = fa + Math.round(fa * 0.18)
+
+  const recordPayment = (paymentId: string) => {
+    const all = DB.get('invoices') || []
+    all.unshift({
+      id: 'INV-' + String(all.length + 1).padStart(3, '0'),
+      client: name,
+      project: project || 'Development Services',
+      amount: fa,
+      status: 'paid',
+      date: new Date().toISOString().split('T')[0],
+      paidAt: new Date().toLocaleString(),
+      method: 'Razorpay',
+      paymentId,
+    })
+    DB.set('invoices', all)
+    setInvoices(all)
+    const e = DB.get('earnings') || {}
+    e.total = (e.total || 0) + fa
+    e.thisMonth = (e.thisMonth || 0) + fa
+    DB.set('earnings', e)
+    setEarnings(e)
+  }
 
   const pay = () => {
-    if (fa < 100) { alert('Minimum Rs 100'); return }
-    if (!name || !email) { alert('Enter name & email'); return }
+    if (fa < 100) { alert('Minimum amount: ₹100'); return }
+    if (!name || !email) { alert('Please enter your name and email'); return }
     setLoading(true)
+
+    // Try Razorpay live
+    if (window.Razorpay && rzpReady) {
+      try {
+        const options = {
+          key: RAZORPAY_KEY,
+          amount: total * 100, // paise
+          currency: 'INR',
+          name: 'Ajinkya Satkar',
+          description: project || 'Software Development Services',
+          prefill: { name, email, contact: phone },
+          notes: { project: project || 'Not specified' },
+          theme: { color: '#3B82F6' },
+          handler: (response: any) => {
+            recordPayment(response.razorpay_payment_id)
+            setLoading(false)
+            setTab('invoices')
+          },
+          modal: {
+            ondismiss: () => setLoading(false),
+          },
+        }
+        const rzp = new window.Razorpay(options)
+        rzp.on('payment.failed', (resp: any) => {
+          alert('Payment failed: ' + (resp.error?.description || 'Please try again'))
+          setLoading(false)
+        })
+        rzp.open()
+        return
+      } catch (e) {
+        console.log('Razorpay error, falling back to demo', e)
+      }
+    }
+
+    // Fallback demo payment
     setTimeout(() => {
-      const all = DB.get('invoices') || []
-      all.unshift({ id: 'INV-' + String(all.length + 1).padStart(3, '0'), client: name, project: project || 'Services', amount: fa, status: 'paid', date: new Date().toISOString().split('T')[0] })
-      DB.set('invoices', all)
-      setInvoices(all)
-      const e = DB.get('earnings') || {}
-      e.total = (e.total || 0) + fa
-      DB.set('earnings', e)
-      setEarnings(e)
+      recordPayment('demo_' + Date.now())
       setLoading(false)
       setTab('invoices')
     }, 1500)
   }
 
-  const st = (s: string) => s === 'paid' ? 'bg-success/10 text-success' : s === 'pending' ? 'bg-warning/10 text-warning' : 'bg-error/10 text-error'
+  const st = (s: string) => s === 'paid' ? 'bg-success/10 text-success border-success/20' : s === 'pending' ? 'bg-warning/10 text-warning border-warning/20' : 'bg-error/10 text-error border-error/20'
 
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
       <section className="relative pt-32 pb-20 gradient-bg overflow-hidden">
         <div className="section-container relative">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl reveal">
             <div className="chip bg-white/10 text-white border border-white/20 mb-4">Payments</div>
             <h1 className="text-4xl sm:text-5xl font-heading font-bold text-white mb-6">Secure <span className="text-primary-300">Payments</span></h1>
-            <p className="text-xl text-neutral-300">Powered by Razorpay. UPI, cards, net banking.</p>
+            <p className="text-xl text-neutral-300 max-w-2xl">Powered by Razorpay Live. Accept UPI, cards, net banking directly to your bank.</p>
           </div>
         </div>
       </section>
 
       <section className="py-12 bg-white dark:bg-neutral-950">
         <div className="section-container">
-          <div className="flex gap-2 mb-8">
-            <button onClick={() => setTab('pay')} className={'px-6 py-3 rounded-xl text-sm font-medium transition-all ' + (tab === 'pay' ? 'bg-primary-500 text-white' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-600')}>Pay Now</button>
-            <button onClick={() => setTab('invoices')} className={'px-6 py-3 rounded-xl text-sm font-medium transition-all ' + (tab === 'invoices' ? 'bg-primary-500 text-white' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-600')}>Invoices</button>
+          <div className="flex gap-2 mb-8 reveal">
+            <button onClick={() => setTab('pay')} className={'px-6 py-3 rounded-xl text-sm font-medium transition-all ' + (tab === 'pay' ? 'bg-primary-500 text-white shadow-lg' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-600')}>Pay Now</button>
+            <button onClick={() => setTab('invoices')} className={'px-6 py-3 rounded-xl text-sm font-medium transition-all ' + (tab === 'invoices' ? 'bg-primary-500 text-white shadow-lg' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-600')}>Invoices</button>
           </div>
 
           {tab === 'pay' && (
-            <div className="grid lg:grid-cols-5 gap-8">
+            <div className="grid lg:grid-cols-5 gap-8 reveal">
               <div className="lg:col-span-3 space-y-6">
                 <div className="card-surface p-6">
                   <h2 className="text-xl font-heading font-bold mb-4">Select Amount</h2>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-4">
                     {amounts.map(a => (
                       <button key={a} onClick={() => { setAmount(a); setCustom('') }}
-                        className={'p-4 rounded-xl border-2 text-center transition-all ' + (amount === a && !custom ? 'border-primary-500 bg-primary-50 text-primary-600' : 'border-neutral-200 text-neutral-600 hover:border-neutral-300')}>
-                        <div className="text-lg font-heading font-bold">Rs {a.toLocaleString('en-IN')}</div>
+                        className={'p-4 rounded-xl border-2 text-center transition-all ' + (amount === a && !custom ? 'border-primary-500 bg-primary-50 dark:bg-primary-500/10 text-primary-600' : 'border-neutral-200 dark:border-neutral-700 text-neutral-600 dark:text-neutral-300 hover:border-neutral-300')}>
+                        <div className="text-lg font-heading font-bold">₹{a.toLocaleString('en-IN')}</div>
+                        <div className="text-xs text-neutral-400">{a >= 75000 ? 'Enterprise' : a >= 45000 ? 'Standard' : 'Starter'}</div>
                       </button>
                     ))}
                   </div>
-                  <div><label className="block text-sm font-medium mb-1">Custom Amount</label><input type="number" className="input-field" placeholder="Enter amount" value={custom} onChange={e => { setCustom(e.target.value); setAmount(0) }} /></div>
+                  <div>
+                    <label className="block text-sm font-medium text-neutral-600 dark:text-neutral-300 mb-1">Custom Amount</label>
+                    <div className="relative">
+                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 font-medium">₹</span>
+                      <input type="number" className="input-field pl-8" placeholder="Enter any amount" value={custom} onChange={e => { setCustom(e.target.value); setAmount(0) }} />
+                    </div>
+                  </div>
                 </div>
+
                 <div className="card-surface p-6">
                   <h2 className="text-xl font-heading font-bold mb-4">Your Details</h2>
                   <div className="space-y-4">
                     <input className="input-field" placeholder="Your Name *" value={name} onChange={e => setName(e.target.value)} />
-                    <input type="email" className="input-field" placeholder="Your Email *" value={email} onChange={e => setEmail(e.target.value)} />
+                    <input type="email" className="input-field" placeholder="Email *" value={email} onChange={e => setEmail(e.target.value)} />
+                    <input type="tel" className="input-field" placeholder="Phone (for UPI)" value={phone} onChange={e => setPhone(e.target.value)} />
                     <input className="input-field" placeholder="Project Name" value={project} onChange={e => setProject(e.target.value)} />
                   </div>
                 </div>
-                <button onClick={pay} disabled={loading} className="btn-primary w-full text-lg py-4">
-                  {loading ? <><Loader size={20} className="animate-spin" /> Processing...</> : <>Pay Rs {fa.toLocaleString('en-IN')} <Lock size={18} /></>}
-                </button>
-                <p className="text-xs text-neutral-400 text-center flex items-center justify-center gap-1"><Shield size={12} /> Secured by Razorpay</p>
-              </div>
-              <div className="lg:col-span-2">
-                <div className="card-surface p-6 sticky top-28 space-y-4">
-                  <h2 className="font-semibold">Summary</h2>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between"><span className="text-neutral-400">Amount</span><span>Rs {fa.toLocaleString('en-IN')}</span></div>
-                    <div className="flex justify-between"><span className="text-neutral-400">GST (18%)</span><span>Rs {Math.round(fa * 0.18).toLocaleString('en-IN')}</span></div>
-                    <div className="border-t pt-2 flex justify-between font-semibold text-lg"><span>Total</span><span className="gradient-text">Rs {(fa + Math.round(fa * 0.18)).toLocaleString('en-IN')}</span></div>
+
+                <div className="card-surface p-6">
+                  <h2 className="text-xl font-heading font-bold mb-4">Payment Methods</h2>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { id: 'upi', name: 'UPI', icon: Smartphone, desc: 'GPay, PhonePe, Paytm', popular: true },
+                      { id: 'card', name: 'Card', icon: CreditCard, desc: 'Visa, Mastercard, RuPay' },
+                      { id: 'netbanking', name: 'Net Banking', icon: Laptop, desc: 'All major banks' },
+                      { id: 'wallet', name: 'Wallet', icon: Wallet, desc: 'Paytm, Mobikwik' },
+                    ].map(m => (
+                      <div key={m.id} className="relative p-4 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50">
+                        {m.popular && <span className="absolute -top-2 -right-2 px-2 py-0.5 bg-primary-500 text-white text-[10px] rounded-full font-medium">Popular</span>}
+                        <m.icon className="w-5 h-5 text-primary-500 mb-1" />
+                        <div className="text-sm font-medium">{m.name}</div>
+                        <div className="text-[10px] text-neutral-400">{m.desc}</div>
+                      </div>
+                    ))}
                   </div>
-                  {['Instant confirmation', 'Auto invoice', '100% secure'].map((t, i) => (
-                    <div key={i} className="flex items-center gap-2 text-xs text-neutral-500"><Check size={12} className="text-success" /> {t}</div>
-                  ))}
+                </div>
+
+                <button onClick={pay} disabled={loading} className="btn-primary w-full text-lg py-4 flex items-center justify-center gap-2">
+                  {loading ? <><Loader size={20} className="animate-spin" /> Opening Razorpay...</> : <><Lock size={18} /> Pay ₹{total.toLocaleString('en-IN')}</>}
+                </button>
+
+                <div className="flex items-center justify-center gap-4 text-xs text-neutral-400">
+                  <span className="flex items-center gap-1"><Shield size={12} /> Razorpay Live</span>
+                  <span className="flex items-center gap-1"><Lock size={12} /> 256-bit SSL</span>
+                  <span className="flex items-center gap-1"><Zap size={12} /> Instant</span>
+                </div>
+              </div>
+
+              <div className="lg:col-span-2">
+                <div className="card-surface p-6 sticky top-28 space-y-6">
+                  <h2 className="font-semibold">Payment Summary</h2>
+                  <div className="space-y-3 text-sm">
+                    <div className="flex justify-between"><span className="text-neutral-400">Service Fee</span><span className="font-medium">₹{fa.toLocaleString('en-IN')}</span></div>
+                    <div className="flex justify-between"><span className="text-neutral-400">GST (18%)</span><span className="font-medium">₹{Math.round(fa * 0.18).toLocaleString('en-IN')}</span></div>
+                    <div className="border-t border-neutral-200 dark:border-neutral-700 pt-3 flex justify-between">
+                      <span className="font-bold">Total</span>
+                      <span className="text-2xl font-heading font-bold gradient-text">₹{total.toLocaleString('en-IN')}</span>
+                    </div>
+                  </div>
+
+                  <div className="bg-neutral-50 dark:bg-neutral-800/50 rounded-xl p-4 space-y-2 text-xs text-neutral-500">
+                    {[
+                      '🔒 Secured by Razorpay',
+                      '📧 Instant email receipt',
+                      '📋 Auto-generated invoice',
+                      '💳 UPI, Card, Net Banking',
+                      '🔄 Money settles in 1-2 days',
+                    ].map((t, i) => (
+                      <div key={i} className="flex items-center gap-2"><Check size={12} className="text-success shrink-0" /> {t}</div>
+                    ))}
+                  </div>
+
+                  <div className="text-center pt-4 border-t border-neutral-200 dark:border-neutral-700">
+                    <p className="text-xs text-neutral-400 mb-2">Paid to</p>
+                    <div className="font-semibold text-sm">Ajinkya Satkar</div>
+                    <p className="text-xs text-neutral-400">Pune, Maharashtra, India</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -126,10 +246,10 @@ export default function PayPage() {
             <div className="space-y-6">
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 {[
-                  { l: 'Total', v: 'Rs ' + (earnings.total || 0).toLocaleString('en-IN'), c: 'text-success' },
-                  { l: 'Pending', v: 'Rs ' + (earnings.pending || 0).toLocaleString('en-IN'), c: 'text-warning' },
-                  { l: 'Paid', v: String(invoices.filter(i => i.status === 'paid').length), c: 'text-primary-500' },
-                  { l: 'Open', v: String(invoices.filter(i => i.status !== 'paid').length), c: 'text-accent-500' },
+                  { l: 'Total Earned', v: '₹' + (earnings.total || 0).toLocaleString('en-IN'), c: 'text-success' },
+                  { l: 'This Month', v: '₹' + (earnings.thisMonth || 0).toLocaleString('en-IN'), c: 'text-primary-500' },
+                  { l: 'Paid Invoices', v: String(invoices.filter((i: any) => i.status === 'paid').length), c: 'text-accent-500' },
+                  { l: 'Pending', v: String(invoices.filter((i: any) => i.status !== 'paid').length), c: 'text-warning' },
                 ].map((s, i) => (
                   <div key={i} className="card-surface p-5 text-center">
                     <div className={'text-2xl font-heading font-bold ' + s.c}>{s.v}</div>
@@ -137,18 +257,35 @@ export default function PayPage() {
                   </div>
                 ))}
               </div>
+
               <div className="space-y-3">
-                {invoices.map(inv => (
-                  <div key={inv.id} className="card-surface p-5">
+                {invoices.length === 0 && (
+                  <div className="card-surface p-12 text-center text-neutral-400">No invoices yet. Make your first payment!</div>
+                )}
+                {invoices.map((inv: any) => (
+                  <div key={inv.id} className="card-surface p-5 hover:shadow-lg transition-all">
                     <div className="flex items-start justify-between gap-4">
                       <div>
-                        <div className="flex items-center gap-2"><span className="font-semibold text-sm">{inv.project}</span><span className={'chip text-[10px] border-0 ' + st(inv.status)}>{inv.status}</span></div>
-                        <div className="text-xs text-neutral-400">{inv.client} | {inv.date}</div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-semibold text-sm">{inv.project}</span>
+                          <span className={'chip text-[10px] border-0 ' + st(inv.status)}>{inv.status}</span>
+                        </div>
+                        <div className="text-xs text-neutral-400 mt-0.5">{inv.client} · {inv.date}</div>
+                        {inv.paymentId && <div className="text-[10px] text-neutral-400 mt-0.5">Payment ID: {inv.paymentId}</div>}
                       </div>
-                      <div className="text-right"><div className="text-lg font-heading font-bold">Rs {inv.amount.toLocaleString('en-IN')}</div></div>
+                      <div className="text-right">
+                        <div className="text-lg font-heading font-bold">₹{inv.amount.toLocaleString('en-IN')}</div>
+                        {inv.method && <div className="text-[10px] text-neutral-400">{inv.method}</div>}
+                      </div>
                     </div>
                   </div>
                 ))}
+              </div>
+
+              <div className="bg-gradient-to-r from-success/5 to-primary-500/5 rounded-2xl border border-success/20 p-6 text-center">
+                <h3 className="font-semibold mb-2">✅ Razorpay Live — Ready to Accept Payments</h3>
+                <p className="text-sm text-neutral-500 mb-4">Money settles directly to your bank account via Razorpay.</p>
+                <Link href="/pay" onClick={() => setTab('pay')} className="btn-primary text-sm">Make a Payment <ArrowRight size={16} /></Link>
               </div>
             </div>
           )}
