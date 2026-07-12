@@ -53,7 +53,7 @@ function getAgentResponse(input: string): string {
 export function AIAgentWidget() {
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState<{ role: string; text: string }[]>([
-    { role: 'ai', text: "👋 Hi! I'm Nexa, your AI assistant. Ask me about services, pricing, projects, or anything about Nexify!" }
+    { role: 'ai', text: "👋 Hi! I'm Nexify AI, your assistant. Ask me about services, pricing, projects, or anything about Nexify!" }
   ])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
@@ -79,7 +79,7 @@ export function AIAgentWidget() {
         <div className="absolute bottom-16 right-0 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-neutral-200 overflow-hidden mb-2 animate-slide-up">
           <div className="bg-gradient-to-r from-primary-500 to-accent-500 p-4 flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center"><Bot className="w-4 h-4 text-white" /></div>
-            <div><h3 className="text-white font-semibold text-sm">Nexa AI</h3><p className="text-white/70 text-xs">Online · Instant replies</p></div>
+            <div><h3 className="text-white font-semibold text-sm">Nexify AI</h3><p className="text-white/70 text-xs">Online · Instant replies</p></div>
             <button onClick={() => setOpen(false)} className="ml-auto text-white/70 hover:text-white"><X size={18} /></button>
           </div>
           <div className="h-80 overflow-y-auto p-4 space-y-3 bg-neutral-50">
