@@ -42,11 +42,7 @@
   }
 
   .gradient-text {
-    @apply font-bold;
-    color: #2563EB;
-  }
-  .dark .gradient-text {
-    color: #60A5FA;
+    @apply font-bold text-primary-600 dark:text-primary-400;
   }
 
   /* === 3D BACKGROUND === */
