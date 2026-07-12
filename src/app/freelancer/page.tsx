@@ -18,7 +18,7 @@ const DB = {
   set(key: string, v: any) { if (typeof window === 'undefined') return; localStorage.setItem(`nexify_freelancer_${key}`, JSON.stringify(v)) },
   init() {
     if (this.get('init')) return
-    this.set('profile', { name: 'Your Name', title: 'Full-Stack Developer | AI-Powered Freelancer', email: 'you@email.com', phone: '+91 XXXXX XXXXX', skills: ['Next.js', 'React', 'TypeScript', 'Node.js', 'Python', 'Tailwind CSS', 'PostgreSQL', 'AI/ML'], rate: '₹30,000', bio: 'I build modern web applications using AI-powered development. 10x faster delivery, enterprise quality, freelance prices.' })
+    this.set('profile', { name: 'Ajinkya Satkar', title: 'Full-Stack Developer | AI-Powered Freelancer', email: 'ajinkyasatkar5@gmail.com', phone: '+91 9373955349', location: 'Pune, Maharashtra, India', skills: ['Next.js', 'React', 'TypeScript', 'Node.js', 'Python', 'Tailwind CSS', 'PostgreSQL', 'AI/ML'], rate: '₹30,000', bio: 'I build modern web applications using AI-powered development. 10x faster delivery, enterprise quality, freelance prices.' })
     this.set('leads', [
       { id: 'LD-001', from: 'LinkedIn', name: 'Rahul Sharma', company: 'TechStart', need: 'E-commerce website', budget: '₹50K-80K', status: 'new', date: '2026-07-12', email: 'rahul@techstart.com', aiScore: 85 },
       { id: 'LD-002', from: 'Upwork', name: 'Priya Patel', company: 'HealthApp', need: 'Patient dashboard UI', budget: '₹40K-60K', status: 'proposal', date: '2026-07-11', email: 'priya@healthapp.com', aiScore: 72 },
