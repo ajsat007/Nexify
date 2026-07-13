@@ -84,7 +84,7 @@ export default function Header() {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`lg:hidden transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'}`}>
+      <div className={`lg:hidden transition-all duration-500 overflow-y-auto max-h-[80vh] ${isOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0'}`}>
         <div className="section-container pb-6">
           <nav className="flex flex-col gap-1 bg-neutral-800/50 rounded-2xl p-4 backdrop-blur-xl">
             {navigation.map((item) =>

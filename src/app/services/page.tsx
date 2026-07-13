@@ -1,14 +1,114 @@
 'use client'
 
-import { useEffect } from 'react'
 import Link from 'next/link'
-import { ArrowRight, Check, Clock, DollarSign, Users, Code2, Globe, Smartphone, Brain, BarChart3, Palette, Cloud, MessageCircle, Zap, Shield, Cpu, TrendingUp } from 'lucide-react'
+import { ArrowRight, Check, Code2, Globe, Smartphone, Brain, BarChart3, Palette, Cloud, MessageCircle, Zap, Clock, DollarSign } from 'lucide-react'
 import { services } from '@/lib/data'
+import { PageLayout, PageHeader, PageSection } from '@/components/PageLayout'
+import { AnimatedSection, StaggerGroup } from '@/components/ScrollAnimations'
 
 const iconMap: Record<string, any> = {
-  Code2, Globe, Smartphone, Brain, BarChart3, Palette, Cloud, MessageCircle
+  Code2, Globe, Smartphone, Brain, BarChart3, Palette, Cloud, MessageCircle,
 }
 
+export default function ServicesPage() {
+  return (
+    <PageLayout>
+      <PageHeader
+        badge="Our Services"
+        title="AI-Powered Software Development"
+        subtitle="20+ services delivered by specialized AI agents — from strategy to deployment, we handle it all at 10x the speed and half the cost."
+      />
+
+      {/* Service Cards */}
+      <PageSection>
+        <div className="space-y-24">
+          {services.map((service, i) => {
+            const Icon = iconMap[service.icon] || Zap
+            const details = serviceDetails.find(d => d.id === service.id)
+            return (
+              <AnimatedSection key={service.id} animation="fade-up">
+                <div id={service.id} className="grid lg:grid-cols-5 gap-8 lg:gap-16 scroll-mt-32">
+                  {/* Left: Overview */}
+                  <div className="lg:col-span-2">
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-500/10 to-accent-500/10 flex items-center justify-center mb-4">
+                      <Icon className="w-7 h-7 text-primary-500" />
+                    </div>
+                    <h2 className="text-2xl sm:text-3xl font-heading font-bold mb-3 dark:text-white">{service.title}</h2>
+                    <p className="text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed">{details?.description || service.description}</p>
+                    <div className="flex items-center gap-4 text-sm text-neutral-500 dark:text-neutral-400 mb-6">
+                      <span className="flex items-center gap-1"><Clock size={14} /> {service.timeline}</span>
+                      <span className="flex items-center gap-1"><DollarSign size={14} /> {service.price}</span>
+                    </div>
+                    <Link href="/contact" className="btn-primary text-sm">
+                      Get Started <ArrowRight size={16} />
+                    </Link>
+                  </div>
+
+                  {/* Right: Details */}
+                  <div className="lg:col-span-3">
+                    {/* Packages */}
+                    <div className="grid sm:grid-cols-3 gap-4 mb-8">
+                      {details?.packages.map((pkg, i) => (
+                        <div key={i} className={`rounded-2xl p-6 border ${i === 1 ? 'bg-primary-50 dark:bg-primary-900/20 border-primary-200 dark:border-primary-800' : 'bg-white dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700'}`}>
+                          <div className="text-xs font-semibold text-primary-500 uppercase tracking-wider mb-1">{pkg.name}</div>
+                          <div className="text-lg font-heading font-bold mb-2 dark:text-white">{pkg.price}</div>
+                          <div className="text-xs text-neutral-500 mb-4">{pkg.timeline}</div>
+                          <ul className="space-y-2">
+                            {pkg.features.map((f, j) => (
+                              <li key={j} className="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-300">
+                                <Check size={14} className="text-success mt-0.5 shrink-0" />
+                                {f}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Technologies */}
+                    {details?.technologies && (
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        {details.technologies.map((tech) => (
+                          <span key={tech} className="chip bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300">{tech}</span>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Deliverables */}
+                    {details?.deliverables && (
+                      <div className="bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-neutral-200 dark:border-neutral-700">
+                        <h3 className="font-semibold mb-3 dark:text-white">What You Get</h3>
+                        <div className="grid sm:grid-cols-2 gap-2">
+                          {details.deliverables.map((d, j) => (
+                            <div key={j} className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-300">
+                              <Check size={14} className="text-primary-500 shrink-0" />
+                              {d}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </AnimatedSection>
+            )
+          })}
+        </div>
+      </PageSection>
+
+      {/* CTA */}
+      <section className="py-20 gradient-bg">
+        <div className="section-container text-center">
+          <h2 className="text-3xl font-heading font-bold text-white mb-4">Ready to Start Your Project?</h2>
+          <p className="text-primary-200 text-lg mb-8">Get a proposal within 24 hours — built by AI, reviewed by senior architects.</p>
+          <Link href="/contact" className="btn-white text-lg px-8 py-4">Start Your Project <ArrowRight size={20} /></Link>
+        </div>
+      </section>
+    </PageLayout>
+  )
+}
+
+// ---- Inline Data ----
 const serviceDetails = [
   {
     id: 'custom-software',
@@ -27,7 +127,7 @@ const serviceDetails = [
     id: 'web-development',
     icon: 'Globe',
     title: 'Web Development',
-    description: 'High-performance websites and web applications — from landing pages to complex enterprise portals. Fully responsive, SEO-optimized, and built for conversion by AI design and development agents.',
+    description: 'High-performance websites and web applications — from landing pages to complex enterprise portals. Fully responsive, SEO-optimized, and built for conversion.',
     deliverables: ['Responsive Design (Mobile + Tablet + Desktop)', 'SEO Meta Tags & Structured Data', 'Google PageSpeed Score ≥ 90', 'SSL Certificate', '1 Month Free Maintenance'],
     technologies: ['Next.js', 'Tailwind CSS', 'TypeScript', 'MongoDB/PostgreSQL', 'Vercel/AWS'],
     packages: [
@@ -40,213 +140,78 @@ const serviceDetails = [
     id: 'mobile-apps',
     icon: 'Smartphone',
     title: 'Mobile App Development',
-    description: 'Cross-platform and native mobile applications with pixel-perfect UI, offline capability, and seamless backend integration. Built simultaneously for iOS and Android by specialized mobile agents.',
-    deliverables: ['App Store + Play Store Submission', 'APK/IPA Files', 'Crash Reporting (Sentry)', 'Analytics Integration', '1 Month Post-Launch Support'],
-    technologies: ['React Native / Flutter', 'Firebase/Supabase', 'Node.js', 'Stripe/Razorpay'],
+    description: 'Cross-platform and native mobile applications with pixel-perfect UI, offline capability, and seamless backend integration.',
+    deliverables: ['iOS & Android Apps', 'Push Notifications', 'Offline Capability', 'Payment Integration', 'App Store Submission', '3 Months Support'],
+    technologies: ['React Native/Flutter', 'Node.js', 'Firebase', 'Stripe/Razorpay', 'App Store Connect'],
     packages: [
-      { name: 'MVP', price: '₹2,50,000 - ₹5,00,000', timeline: '6-8 wks', features: ['Single platform', '5-8 screens', 'Basic auth', 'REST API'] },
-      { name: 'Standard', price: '₹5,00,000 - ₹12,00,000', timeline: '10-14 wks', features: ['Both platforms', '10-20 screens', 'Push notifications', 'Payments'] },
-      { name: 'Premium', price: '₹12,00,000 - ₹30,00,000+', timeline: '14-20 wks', features: ['Full-featured app', 'AR/VR', 'Real-time sync', 'Admin panel'] },
+      { name: 'MVP', price: '₹2,50,000 - ₹5,00,000', timeline: '6-10 wks', features: ['Single platform', '5-8 screens', 'Basic auth', 'REST API'] },
+      { name: 'Standard', price: '₹5,00,000 - ₹10,00,000', timeline: '10-14 wks', features: ['Both platforms', '10-20 screens', 'Push notifications', 'Offline mode'] },
+      { name: 'Premium', price: '₹10,00,000+', timeline: '14-18 wks', features: ['Full-featured app', 'Real-time sync', 'Admin dashboard', 'Advanced analytics'] },
     ],
   },
   {
     id: 'ai-solutions',
     icon: 'Brain',
     title: 'AI Solutions',
-    description: 'Custom AI solutions including predictive models, recommendation engines, NLP systems, and computer vision pipelines. Our AI agents build AI — meta, but effective.',
-    deliverables: ['Trained Model + Weights', 'Model Card Documentation', 'Inference API', 'Performance Report', 'Monitoring Dashboard'],
-    technologies: ['Python', 'TensorFlow/PyTorch', 'LangChain', 'Hugging Face', 'AWS SageMaker', 'MLflow'],
+    description: 'Custom AI/ML solutions — predictive models, NLP systems, computer vision, and decision intelligence platforms.',
+    deliverables: ['Trained Model', 'Inference API', 'MLOps Pipeline', 'Model Monitoring Dashboard', 'Documentation'],
+    technologies: ['TensorFlow/PyTorch', 'LangChain', 'PostgreSQL/Pinecone', 'Docker/Kubernetes', 'AWS SageMaker'],
     packages: [
       { name: 'AI Audit', price: '₹1,00,000 - ₹2,00,000', timeline: '2-3 wks', features: ['Feasibility report', 'Data assessment', 'PoC roadmap', 'ROI analysis'] },
-      { name: 'AI MVP', price: '₹4,00,000 - ₹10,00,000', timeline: '6-10 wks', features: ['Working prototype', 'Trained model', 'API endpoint', 'Basic monitoring'] },
-      { name: 'Enterprise AI', price: '₹10,00,000 - ₹40,00,000+', timeline: '12-20 wks', features: ['Production system', 'MLOps pipeline', 'Model monitoring', 'Retraining'] },
+      { name: 'AI MVP', price: '₹4,00,000 - ₹8,00,000', timeline: '6-10 wks', features: ['Working prototype', 'Trained model', 'API endpoint', 'Basic monitoring'] },
+      { name: 'Enterprise', price: '₹10,00,000+', timeline: '10-20 wks', features: ['Production system', 'MLOps pipeline', 'Model monitoring', 'Auto-retraining'] },
     ],
   },
   {
     id: 'data-analytics',
     icon: 'BarChart3',
     title: 'Data Analytics',
-    description: 'Transform raw data into actionable insights with custom dashboards, automated reports, data warehouses, and BI solutions. Your data, our AI, infinite insights.',
-    deliverables: ['Data Pipeline', 'Dashboard Builder', 'Automated Reports', 'Anomaly Detection', 'Predictive Analytics'],
-    technologies: ['BigQuery/Snowflake', 'dbt', 'Metabase/Tableau', 'Apache Airflow', 'Python'],
+    description: 'Transform raw data into actionable insights. Custom dashboards, automated reports, and BI solutions that drive decisions.',
+    deliverables: ['Data Pipeline', 'Interactive Dashboard', 'Automated Reports', 'Anomaly Detection Setup', 'Documentation'],
+    technologies: ['Python', 'Apache Spark', 'PostgreSQL', 'Metabase/Tableau', 'AWS QuickSight'],
     packages: [
-      { name: 'Data Audit', price: '₹50,000 - ₹1,00,000', timeline: '1-2 wks', features: ['Data quality report', 'Schema mapping', 'Recommendations'] },
-      { name: 'Analytics Setup', price: '₹1,50,000 - ₹4,00,000', timeline: '3-6 wks', features: ['Data pipeline', 'Warehouse setup', '3-5 dashboards', 'Auto reports'] },
-      { name: 'Enterprise BI', price: '₹4,00,000 - ₹12,00,000', timeline: '6-10 wks', features: ['Full DWH', '10+ dashboards', 'Anomaly alerts', 'Predictive analytics'] },
+      { name: 'Basic', price: '₹1,50,000 - ₹3,00,000', timeline: '3-5 wks', features: ['Data pipeline setup', 'Basic dashboard', '3 reports', 'Email integration'] },
+      { name: 'Advanced', price: '₹3,00,000 - ₹6,00,000', timeline: '5-8 wks', features: ['Multiple sources', 'Advanced dashboards', 'Anomaly detection', 'Scheduled reports'] },
+      { name: 'Enterprise', price: '₹6,00,000+', timeline: '8-10 wks', features: ['Real-time pipeline', 'AI-powered insights', 'Custom alerts', 'Full integration'] },
     ],
   },
   {
     id: 'ui-ux',
     icon: 'Palette',
     title: 'UI/UX Design',
-    description: 'Data-driven, user-centric design from research to prototype to developer handoff. Every pixel intentional, every interaction delightful — crafted by AI design agents.',
-    deliverables: ['Figma File (Editable)', 'Interactive Prototype', 'Design Token Documentation', 'Component Library', 'Developer Handoff Guide', 'User Flow Diagrams'],
-    technologies: ['Figma', 'Framer', 'React', 'Tailwind CSS', 'Design Tokens'],
+    description: 'Data-driven, user-centric design from research to prototype to developer handoff. Every pixel intentional.',
+    deliverables: ['User Research Report', 'Wireframes', 'High-Fidelity Design', 'Interactive Prototype', 'Design System', 'Developer Handoff'],
+    technologies: ['Figma', 'Tailwind CSS', 'shadcn/ui', 'Framer Motion', 'Storybook'],
     packages: [
-      { name: 'UX Audit', price: '₹30,000 - ₹60,000', timeline: '1 wk', features: ['Heuristic evaluation', 'Usability report', 'Quick fixes', 'Priority list'] },
-      { name: 'Full Design', price: '₹60,000 - ₹2,00,000', timeline: '2-4 wks', features: ['10-20 screens', 'Wireframes', 'High-fidelity prototype', 'Design system'] },
-      { name: 'Design System', price: '₹2,00,000 - ₹5,00,000', timeline: '4-6 wks', features: ['Complete system', 'React components', 'Dark/light mode', 'Accessibility audit'] },
+      { name: 'UX Audit', price: '₹30,000 - ₹60,000', timeline: '1-2 wks', features: ['Heuristic evaluation', 'Usability report', 'Recommendations', 'Priority matrix'] },
+      { name: 'Full Design', price: '₹60,000 - ₹1,50,000', timeline: '2-4 wks', features: ['10-20 screens', 'Wireframes + hi-fi', 'Interactive prototype', 'Developer handoff'] },
+      { name: 'Design System', price: '₹2,00,000+', timeline: '4-6 wks', features: ['Complete design system', 'Component library', 'Dark/light mode', 'Accessibility audit'] },
     ],
   },
   {
     id: 'cloud-devops',
     icon: 'Cloud',
     title: 'Cloud & DevOps',
-    description: 'Cloud architecture, CI/CD pipelines, containerization, and infrastructure automation. Zero-downtime deployments, auto-scaling, and 24/7 monitoring by DevOps AI agents.',
-    deliverables: ['Infrastructure as Code', 'CI/CD Pipeline', 'Monitoring Stack', 'Disaster Recovery Plan', 'Security Setup'],
-    technologies: ['AWS/Azure/GCP', 'Terraform', 'Docker', 'Kubernetes', 'GitHub Actions', 'Datadog'],
+    description: 'Cloud architecture, CI/CD pipelines, containerization, and infrastructure automation. Zero-downtime deployments.',
+    deliverables: ['Infrastructure as Code', 'CI/CD Pipeline', 'Monitoring Dashboard', 'Disaster Recovery Plan', 'Security Audit'],
+    technologies: ['AWS/Azure/GCP', 'Terraform', 'Docker/K8s', 'GitHub Actions', 'Datadog/New Relic'],
     packages: [
-      { name: 'Audit & Optimize', price: '₹80,000 - ₹1,50,000', timeline: '1-2 wks', features: ['Infra audit', 'Cost analysis', 'Migration roadmap', 'Savings report'] },
-      { name: 'Setup & Migrate', price: '₹1,50,000 - ₹4,00,000', timeline: '3-5 wks', features: ['Infrastructure as Code', 'CI/CD pipeline', 'Monitoring', 'Security setup'] },
-      { name: 'Managed Cloud', price: '₹50,000 - ₹2,00,000/mo', timeline: 'Ongoing', features: ['24/7 monitoring', 'Auto-scaling', 'Backup & DR', 'Security patches'] },
+      { name: 'Setup', price: '₹80,000 - ₹2,00,000', timeline: '2-3 wks', features: ['Cloud setup', 'CI/CD pipeline', 'Docker setup', 'Monitoring'] },
+      { name: 'Migration', price: '₹2,00,000 - ₹5,00,000', timeline: '4-6 wks', features: ['Full migration', 'IaC setup', 'Zero-downtime', 'Security audit'] },
+      { name: 'Enterprise', price: '₹5,00,000+', timeline: '6-8 wks', features: ['Multi-cloud', 'Kubernetes', 'Auto-scaling', 'Disaster recovery'] },
     ],
   },
   {
     id: 'chatbots',
     icon: 'MessageCircle',
     title: 'AI Chatbots',
-    description: 'Intelligent conversational AI — customer support bots, sales assistants, and internal knowledge bots. Multi-channel, multi-language, and powered by the latest LLMs.',
-    deliverables: ['Multi-channel Bot', 'Custom Knowledge Base', 'Human Handoff System', 'Analytics Dashboard', 'Multi-language Support'],
-    technologies: ['LangChain', 'OpenAI/Claude', 'Next.js', 'WhatsApp API', 'Twilio', 'Pinecone/Weaviate'],
+    description: 'Intelligent conversational AI — customer support bots, sales assistants, and knowledge bots powered by LLMs.',
+    deliverables: ['Working Chatbot', 'Knowledge Base', 'Analytics Dashboard', 'Multi-channel Setup', 'Documentation'],
+    technologies: ['LangChain', 'OpenAI/Anthropic', 'WhatsApp API', 'Slack API', 'Twilio'],
     packages: [
-      { name: 'FAQ Bot', price: '₹1,00,000 - ₹2,00,000', timeline: '3-4 wks', features: ['Rule-based + AI hybrid', 'WhatsApp/website', '50-100 FAQ training'] },
-      { name: 'AI Assistant', price: '₹2,00,000 - ₹5,00,000', timeline: '4-6 wks', features: ['LLM-powered', 'Custom KB', 'Multi-channel', 'Analytics'] },
-      { name: 'Enterprise Copilot', price: '₹5,00,000 - ₹15,00,000+', timeline: '6-8 wks', features: ['Multi-agent system', 'Tool integrations', 'Human handoff', 'SLA'] },
+      { name: 'Basic', price: '₹1,00,000 - ₹2,00,000', timeline: '2-3 wks', features: ['Single channel', 'FAQ bot', 'Basic knowledge base', 'Analytics'] },
+      { name: 'Business', price: '₹2,00,000 - ₹5,00,000', timeline: '4-6 wks', features: ['Multi-channel', 'Custom knowledge base', 'Human handoff', 'Dashboard'] },
+      { name: 'Enterprise', price: '₹5,00,000+', timeline: '6-8 wks', features: ['Advanced AI', 'Multi-language', 'CRM integration', 'Full analytics'] },
     ],
   },
 ]
-
-export default function ServicesPage() {
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }) },
-      { threshold: 0.1 }
-    )
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
-
-  return (
-    <>
-      {/* Hero */}
-      <section className="relative pt-32 pb-20 gradient-bg overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,...')] opacity-30" />
-        <div className="section-container relative">
-          <div className="max-w-3xl reveal">
-            <div className="chip bg-white/10 text-white border border-white/20 mb-4">Our Services</div>
-            <h1 className="text-4xl sm:text-5xl font-heading font-bold text-white mb-6">
-              AI-Powered Services for{' '}
-              <span className="text-primary-300">Every Need</span>
-            </h1>
-            <p className="text-xl text-neutral-300 max-w-2xl">
-              20+ services delivered by 50+ specialized AI agents. From strategy to deployment, we build software that scales — at half the cost and twice the speed.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="section-padding bg-white">
-        <div className="section-container">
-          <div className="grid md:grid-cols-4 gap-8 mb-16 reveal">
-            {[
-              { icon: Cpu, label: 'AI Agents', value: '50+' },
-              { icon: Zap, label: 'Faster Delivery', value: '10x' },
-              { icon: Shield, label: 'Code Coverage', value: '90%+' },
-              { icon: TrendingUp, label: 'Cost Savings', value: '60%' },
-            ].map((stat, i) => {
-              const Icon = stat.icon
-              return (
-                <div key={i} className="text-center p-6 bg-neutral-50 rounded-2xl border border-neutral-100">
-                  <Icon className="w-8 h-8 text-primary-500 mx-auto mb-3" />
-                  <div className="text-2xl font-heading font-bold text-neutral-900">{stat.value}</div>
-                  <div className="text-sm text-neutral-800">{stat.label}</div>
-                </div>
-              )
-            })}
-          </div>
-
-          <div className="text-center max-w-3xl mx-auto mb-16 reveal">
-            <h2 className="text-3xl font-heading font-bold mb-4">All <span className="gradient-text">Services</span></h2>
-            <p className="text-neutral-800">Every service delivered by specialized AI agents with human-level oversight.</p>
-          </div>
-
-          {/* Service Details */}
-          <div className="space-y-24">
-            {serviceDetails.map((service, idx) => {
-              const Icon = iconMap[service.icon] || Code2
-              return (
-                <div key={service.id} id={service.id} className="reveal scroll-mt-24">
-                  <div className={`grid lg:grid-cols-2 gap-12 ${idx % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
-                    <div>
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-500/10 to-accent-500/10 flex items-center justify-center mb-6">
-                        <Icon className="w-8 h-8 text-primary-500" />
-                      </div>
-                      <h2 className="text-2xl sm:text-3xl font-heading font-bold mb-4">{service.title}</h2>
-                      <p className="text-neutral-800 mb-6 leading-relaxed">{service.description}</p>
-
-                      <h4 className="font-semibold mb-3 text-sm uppercase tracking-wider text-neutral-800">Deliverables</h4>
-                      <ul className="space-y-2 mb-6">
-                        {service.deliverables.map((d, i) => (
-                          <li key={i} className="flex items-start gap-2 text-sm text-neutral-800">
-                            <Check size={16} className="text-success mt-0.5 shrink-0" />
-                            {d}
-                          </li>
-                        ))}
-                      </ul>
-
-                      <h4 className="font-semibold mb-3 text-sm uppercase tracking-wider text-neutral-800">Technologies</h4>
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {service.technologies.map((t, i) => (
-                          <span key={i} className="chip bg-neutral-100 text-neutral-800 text-xs">{t}</span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div>
-                      <h3 className="text-lg font-semibold mb-4">Packages</h3>
-                      <div className="space-y-4">
-                        {service.packages.map((pkg, i) => (
-                          <div key={i} className="bg-neutral-50 rounded-xl p-6 border border-neutral-200 hover:border-primary-500/30 transition-all duration-300">
-                            <div className="flex items-center justify-between mb-2">
-                              <h4 className="font-semibold text-neutral-900">{pkg.name}</h4>
-                              <div className="flex items-center gap-2 text-sm text-neutral-800">
-                                <Clock size={14} />
-                                {pkg.timeline}
-                              </div>
-                            </div>
-                            <div className="text-xl font-heading font-bold gradient-text mb-3">{pkg.price}</div>
-                            <ul className="space-y-1.5">
-                              {pkg.features.map((f, j) => (
-                                <li key={j} className="flex items-center gap-2 text-sm text-neutral-800">
-                                  <Check size={14} className="text-success shrink-0" />
-                                  {f}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-20 gradient-bg">
-        <div className="section-container text-center">
-          <h2 className="text-3xl font-heading font-bold text-white mb-4">Not Sure Which Service You Need?</h2>
-          <p className="text-primary-200 mb-8 max-w-xl mx-auto">Tell us about your project. Our AI consultants will recommend the best approach — free of charge.</p>
-          <Link href="/contact" className="btn-white text-lg px-8 py-4">
-            Get Free Consultation
-            <ArrowRight size={20} />
-          </Link>
-        </div>
-      </section>
-    </>
-  )
-}
