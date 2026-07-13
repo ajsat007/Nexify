@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { AuthSchema, validate } from '@/lib/validation'
 
 const USERS = [
   { id: 'usr-001', name: 'Nexify Founder', email: 'founder@nexify.tech', role: 'founder' },
@@ -8,9 +9,10 @@ const USERS = [
 
 export async function POST(request: Request) {
   try {
-    const { email } = await request.json()
-    if (!email) return NextResponse.json({ error: 'Email required' }, { status: 400 })
-    const user = USERS.find(u => u.email === email)
+    const body = await request.json()
+    const { error, data } = validate(AuthSchema, body)
+    if (error) return NextResponse.json({ error }, { status: 400 })
+    const user = USERS.find(u => u.email === data!.email)
     if (!user) return NextResponse.json({ error: 'User not found' }, { status: 401 })
     return NextResponse.json({ user, token: 'nexify-' + user.id + '-' + Date.now() })
   } catch { return NextResponse.json({ error: 'Invalid request' }, { status: 400 }) }

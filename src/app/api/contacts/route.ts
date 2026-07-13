@@ -1,12 +1,11 @@
 import { NextResponse } from 'next/server'
+import { ContactSchema, validate } from '@/lib/validation'
 
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { name, email, message } = body
-    if (!name || !email || !message) {
-      return NextResponse.json({ error: 'Name, email, and message required' }, { status: 400 })
-    }
+    const { error } = validate(ContactSchema, body)
+    if (error) return NextResponse.json({ error }, { status: 400 })
     return NextResponse.json({
       success: true,
       message: 'Message received. AI agents will respond within 24 hours.',
