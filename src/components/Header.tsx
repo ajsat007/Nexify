@@ -2,49 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Menu, X, ChevronDown, Moon, Sun } from 'lucide-react'
+import { Menu, X, ChevronDown, Sun, Moon } from 'lucide-react'
 import SiteSearch from '@/components/SiteSearch'
+import { navigation } from '@/constants'
 import { useTheme } from '@/components/ThemeProvider'
-
-const navigation = [
-  { name: 'Home', href: '/' },
-  { name: 'Services', href: '/services' },
-  { name: 'Products', href: '/products' },
-  { name: 'Portfolio', href: '/portfolio' },
-  { name: 'Pricing', href: '/pricing' },
-  { name: 'About', href: '/about' },
-  {
-    name: 'Resources', href: '#', hasDropdown: true,
-    children: [
-      { name: 'Blog', href: '/blog' },
-      { name: 'Case Studies', href: '/case-studies' },
-      { name: 'Documentation', href: '/docs' },
-      { name: 'FAQ', href: '/faq' },
-      { name: 'Careers', href: '/careers' },
-      { name: 'Industries', href: '/industries' },
-      { name: 'Testimonials', href: '/testimonials' },
-    ]
-  },
-  {
-    name: 'More', href: '#', hasDropdown: true,
-    children: [
-      { name: 'Marketing', href: '/marketing' },
-      { name: 'Finance', href: '/finance' },
-      { name: 'HR', href: '/hr' },
-      { name: 'Tech Stack', href: '/techstack' },
-      { name: 'AI Automation', href: '/ai-automation' },
-      { name: 'Business Automation', href: '/business-automation' },
-      { name: 'Dashboards', href: '/dashboards' },
-      { name: 'SOPs', href: '/sops' },
-      { name: 'Branding', href: '/branding' },
-      { name: 'Growth Roadmap', href: '/growth' },
-      { name: 'Admin Panel', href: '/admin' },
-      { name: 'Client Portal', href: '/portal' },
-      { name: 'Sales System', href: '/sales' },
-    ]
-  },
-  { name: 'Contact', href: '/contact' },
-]
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -57,7 +18,7 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
