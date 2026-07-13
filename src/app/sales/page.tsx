@@ -1,5 +1,6 @@
 'use client'
 
+import { Sidebar, type SidebarItem } from '@/components/Sidebar'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import {
@@ -842,7 +843,7 @@ function SalesDashboard() {
 export default function SalesPage() {
   const [authenticated, setAuthenticated] = useState(false)
   const [activeTab, setActiveTab] = useState('dashboard')
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false) // kept for mobile trigger
 
   useEffect(() => {
     DB.init()
@@ -863,39 +864,22 @@ export default function SalesPage() {
     { id: 'leadcapture', label: 'Lead Capture', icon: UserPlus },
   ]
 
+  const sidebarItems: SidebarItem[] = tabs.map(t => ({
+    label: t.label, icon: t.icon,
+    onClick: () => { setActiveTab(t.id) },
+    active: activeTab === t.id,
+  }))
+
   return (
     <div className="min-h-screen bg-neutral-50 flex">
-      <aside className={`fixed lg:sticky top-0 left-0 h-full w-64 bg-white border-r border-neutral-200 z-40 transform transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
-        <div className="p-6 border-b border-neutral-100">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center"><Target className="w-5 h-5 text-white" /></div>
-            <div><h2 className="text-neutral-900 font-heading font-bold text-sm">Nexify Sales</h2><p className="text-neutral-800 text-xs">AI Sales System</p></div>
-          </div>
-        </div>
-        <nav className="p-4 space-y-1">
-          {tabs.map(tab => (
-            <button key={tab.id} onClick={() => { setActiveTab(tab.id); setSidebarOpen(false) }}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${activeTab === tab.id ? 'bg-primary-50 text-primary-600 border border-primary-200' : 'text-neutral-800 hover:bg-neutral-50 hover:text-neutral-700'}`}>
-              <tab.icon size={18} /><span>{tab.label}</span>
-            </button>
-          ))}
-        </nav>
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-neutral-100">
-          <div className="flex items-center gap-3 px-4 py-3">
-            <div className="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center text-white text-xs font-bold">SM</div>
-            <div className="flex-1 min-w-0"><div className="text-sm font-medium text-neutral-900 truncate">SalesAgent-Mu</div><div className="text-xs text-neutral-800">Active</div></div>
-            <Link href="/" className="text-neutral-800 hover:text-primary-500"><Home size={16} /></Link>
-          </div>
-        </div>
-      </aside>
-      {sidebarOpen && <div className="fixed inset-0 bg-black/30 z-30 lg:hidden" onClick={() => setSidebarOpen(false)} />}
-      <main className="flex-1 min-w-0">
+      <Sidebar items={sidebarItems} title="Nexify Sales" subtitle="AI Sales System" logo="SM" onLogout={() => setAuthenticated(false)} />
+      <main className="flex-1 min-w-0 lg:ml-64 pt-16 lg:pt-0">
         <div className="sticky top-0 bg-white/80 backdrop-blur-xl border-b border-neutral-200 z-20">
           <div className="flex items-center justify-between px-4 sm:px-6 py-4">
-            <button className="lg:hidden text-neutral-800" onClick={() => setSidebarOpen(true)}><Menu size={20} /></button>
+            <div />
             <div className="flex items-center gap-3 ml-auto">
-              <Link href="/admin" className="text-xs text-neutral-800 hover:text-primary-500">Admin</Link>
-              <Link href="/portal" className="text-xs text-neutral-800 hover:text-primary-500">Portal</Link>
+              <Link href="/admin" className="text-xs text-neutral-500 hover:text-primary-500">Admin</Link>
+              <Link href="/portal" className="text-xs text-neutral-500 hover:text-primary-500">Portal</Link>
             </div>
           </div>
         </div>
