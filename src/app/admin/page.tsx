@@ -205,7 +205,7 @@ function AdminLogin({ onLogin }: { onLogin: () => void }) {
             <Shield className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-heading font-bold text-white">Nexify Admin</h1>
-          <p className="text-neutral-800 mt-2">AI Company Management Console</p>
+          <p className="text-neutral-400 mt-2">AI Company Management Console</p>
         </div>
         <div className="bg-neutral-800 rounded-2xl p-8 border border-neutral-700">
           <h2 className="text-xl font-semibold text-white mb-6">System Access</h2>

@@ -30,7 +30,7 @@ export default function Header() {
             <img src="/icon.svg" alt="Nexify" className="w-9 h-9" />
             <div className="hidden sm:block">
               <h1 className="text-white font-heading font-bold text-xl leading-none">Nexify</h1>
-              <p className="text-neutral-800 text-xs font-medium tracking-wider uppercase">Technologies</p>
+              <p className="text-neutral-400 text-xs font-medium tracking-wider uppercase">Technologies</p>
             </div>
           </Link>
 
@@ -92,7 +92,7 @@ export default function Header() {
                 <div key={item.name}>
                   <div className="text-neutral-300 px-4 py-2 text-sm font-semibold uppercase tracking-wider">{item.name}</div>
                   {item.children?.map((child) => (
-                    <Link key={child.name} href={child.href} className="text-neutral-800 hover:text-white px-4 py-2 rounded-lg hover:bg-neutral-700/50 transition-all text-sm block" onClick={() => setIsOpen(false)}>
+                    <Link key={child.name} href={child.href} className="text-neutral-400 hover:text-white px-4 py-2 rounded-lg hover:bg-neutral-700/50 transition-all text-sm block" onClick={() => setIsOpen(false)}>
                       {child.name}
                     </Link>
                   ))}
