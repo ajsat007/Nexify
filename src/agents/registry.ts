@@ -54,6 +54,12 @@ export const agentRegistry: AgentDefinition[] = [
 
   // ── Security ──
   { id: 'agent-security', name: 'Security-Iota', role: 'Security Engineer', department: 'security', description: 'Vulnerability scanning, compliance, threat detection, and audits.', model: 'Claude Haiku 4.5', skills: ['Pentesting', 'Compliance', 'Audit', 'Threat detection'], status: 'active', emoji: '🛡️', color: 'from-slate-500 to-gray-500', tasksCompleted: 167, efficiency: 97 },
+
+  // ── Legal ──
+  { id: 'agent-legal', name: 'Legal-Lambda', role: 'Legal Counsel', department: 'legal', description: 'Contract review, compliance, privacy policies, and risk assessment.', model: 'Claude Opus 4.8', skills: ['Contracts', 'Compliance', 'Privacy', 'Risk'], status: 'active', emoji: '⚖️', color: 'from-stone-500 to-neutral-500', tasksCompleted: 89, efficiency: 99 },
+
+  // ── Operations ──
+  { id: 'agent-ops', name: 'Ops-Omega', role: 'Operations Manager', department: 'operations', description: 'Project management, workflow automation, task coordination, and reporting.', model: 'Claude Sonnet 5', skills: ['Project mgmt', 'Workflows', 'Coordination', 'Reporting'], status: 'active', emoji: '📋', color: 'from-sky-500 to-blue-500', tasksCompleted: 234, efficiency: 96 },
 ]
 
 export function getAgentById(id: string) {
