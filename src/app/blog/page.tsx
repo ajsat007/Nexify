@@ -1,8 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, Calendar, Clock, ArrowUpRight, Wand2, Loader, Sparkles, Copy, Check, Zap, FileText, Cpu } from 'lucide-react'
+import { PageLayout, PageHeader, PageSection } from '@/components/PageLayout'
+import { AnimatedSection, StaggerGroup } from '@/components/ScrollAnimations'
 
 const posts = [
   { title: 'How AI Agents Are Revolutionizing Software Development', excerpt: 'The traditional agency model is broken. Here\'s how AI-native development is changing everything — from speed to quality to cost.', category: 'AI', date: '2026-06-28', readTime: '5 min' },
@@ -41,12 +43,6 @@ export default function BlogPage() {
   const [generatedPost, setGeneratedPost] = useState<{ title: string; content: string } | null>(null)
   const [copied, setCopied] = useState(false)
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }) }, { threshold: 0.1 })
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
-
   const generatePost = () => {
     setGenerating(true)
     setGeneratedPost(null)
@@ -68,47 +64,36 @@ export default function BlogPage() {
   const filtered = activeCategory === 'All' ? posts : posts.filter(p => p.category === activeCategory)
 
   return (
-    <>
-      <section className="relative pt-32 pb-20 gradient-bg overflow-hidden">
-        <div className="section-container relative">
-          <div className="max-w-3xl reveal">
-            <div className="chip bg-white/10 text-white border border-white/20 mb-4">Blog</div>
-            <h1 className="text-4xl sm:text-5xl font-heading font-bold text-white mb-6">
-              Insights from{' '}
-              <span className="text-primary-300">the AI Frontier</span>
-            </h1>
-            <p className="text-xl text-neutral-300">Thought leadership on AI-native development, SaaS, and the future of software.</p>
-          </div>
-        </div>
-      </section>
+    <PageLayout>
+      <PageHeader badge="Blog" title="Insights from the AI Frontier" subtitle="Thought leadership on AI-native development, SaaS, and the future of software." />
 
-      <section className="section-padding bg-white">
+      <PageSection>
         <div className="section-container">
           {/* AI Generator Toggle */}
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-8 reveal">
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
             <div className="flex flex-wrap gap-2">
               {categories.map(cat => (
                 <button key={cat} onClick={() => setActiveCategory(cat)}
-                  className={`chip transition-all ${activeCategory === cat ? 'bg-primary-500 text-white' : 'bg-neutral-100 text-neutral-800 hover:bg-neutral-200'}`}>{cat}</button>
+                  className={`chip transition-all ${activeCategory === cat ? 'bg-primary-500 text-white' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'}`}>{cat}</button>
               ))}
             </div>
             <button onClick={() => setShowGenerator(!showGenerator)}
-              className={`chip transition-all ${showGenerator ? 'bg-accent-500 text-white' : 'bg-neutral-100 text-neutral-800 hover:bg-neutral-200'}`}>
+              className={`chip transition-all ${showGenerator ? 'bg-accent-500 text-white' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'}`}>
               <Wand2 size={14} /> {showGenerator ? 'Close Generator' : 'AI Blog Generator'}
             </button>
           </div>
 
           {/* AI Generator Panel */}
           {showGenerator && (
-            <div className="mb-12 bg-gradient-to-r from-accent-500/5 to-primary-500/5 rounded-2xl border border-accent-500/20 p-6 reveal">
+            <div className="mb-12 bg-gradient-to-r from-accent-500/5 to-primary-500/5 rounded-2xl border border-accent-500/20 p-6">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center"><Sparkles className="w-5 h-5 text-white" /></div>
-                <div><h2 className="font-semibold">AI Blog Post Generator</h2><p className="text-xs text-neutral-800">Powered by Nexify AI agents — generates in seconds</p></div>
+                <div><h2 className="font-semibold">AI Blog Post Generator</h2><p className="text-xs text-neutral-600 dark:text-neutral-300">Powered by Nexify AI agents — generates in seconds</p></div>
               </div>
               <div className="flex flex-wrap gap-3 mb-4">
                 {Object.keys(blogTemplates).map(topic => (
                   <button key={topic} onClick={() => setSelectedTopic(topic)}
-                    className={`chip transition-all ${selectedTopic === topic ? 'bg-primary-500 text-white' : 'bg-neutral-100 text-neutral-800 hover:bg-neutral-200'}`}>{topic}</button>
+                    className={`chip transition-all ${selectedTopic === topic ? 'bg-primary-500 text-white' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'}`}>{topic}</button>
                 ))}
               </div>
               <button onClick={generatePost} disabled={generating} className="btn-primary text-sm">
@@ -119,13 +104,13 @@ export default function BlogPage() {
                 <div className="mt-6 bg-white rounded-xl border border-neutral-200 p-6 animate-slide-up">
                   <div className="flex items-start justify-between mb-4">
                     <h3 className="text-lg font-heading font-bold flex-1 pr-4">{generatedPost.title}</h3>
-                    <button onClick={copyPost} className="shrink-0 px-3 py-1.5 rounded-lg bg-neutral-100 text-neutral-800 hover:bg-neutral-200 transition-all text-xs flex items-center gap-1">
+                    <button onClick={copyPost} className="shrink-0 px-3 py-1.5 rounded-lg bg-neutral-100 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 transition-all text-xs flex items-center gap-1">
                       {copied ? <><Check size={12} /> Copied</> : <><Copy size={12} /> Copy</>}</button>
                   </div>
-                  <div className="prose prose-sm max-w-none text-neutral-800 whitespace-pre-line text-sm leading-relaxed">
+                  <div className="prose prose-sm max-w-none text-neutral-600 dark:text-neutral-300 whitespace-pre-line text-sm leading-relaxed">
                     {generatedPost.content}
                   </div>
-                  <div className="flex items-center gap-2 mt-4 pt-4 border-t border-neutral-100 text-xs text-neutral-800">
+                  <div className="flex items-center gap-2 mt-4 pt-4 border-t border-neutral-100 text-xs text-neutral-600 dark:text-neutral-300">
                     <Cpu size={12} className="text-primary-500" /> Generated by Nexify AI Agent · {new Date().toLocaleDateString()}
                   </div>
                 </div>
@@ -134,37 +119,37 @@ export default function BlogPage() {
           )}
 
           {/* Blog Posts */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 reveal">
+          <StaggerGroup className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filtered.map((post, i) => (
-              <article key={i} className="bg-white rounded-2xl border border-neutral-200 overflow-hidden hover:shadow-xl hover:border-primary-500/20 transition-all duration-300 group">
+              <article key={i} className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 overflow-hidden hover:shadow-xl hover:border-primary-500/20 transition-all duration-300 group">
                 <div className="p-6">
                   <div className="flex items-center gap-3 mb-3">
-                    <span className="chip bg-primary-50 text-primary-600 text-xs">{post.category}</span>
-                    <span className="text-xs text-neutral-800 flex items-center gap-1"><Calendar size={12} />{post.date}</span>
+                    <span className="chip bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-xs">{post.category}</span>
+                    <span className="text-xs text-neutral-600 dark:text-neutral-400 flex items-center gap-1"><Calendar size={12} />{post.date}</span>
                   </div>
-                  <h3 className="text-lg font-heading font-bold mb-2 group-hover:text-primary-600 transition-colors">{post.title}</h3>
-                  <p className="text-sm text-neutral-800 mb-4 line-clamp-2">{post.excerpt}</p>
-                  <div className="flex items-center justify-between text-xs text-neutral-800 pt-4 border-t border-neutral-100">
+                  <h3 className="text-lg font-heading font-bold mb-2 dark:text-white group-hover:text-primary-600 transition-colors">{post.title}</h3>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4 line-clamp-2">{post.excerpt}</p>
+                  <div className="flex items-center justify-between text-xs text-neutral-500 dark:text-neutral-400 pt-4 border-t border-neutral-100 dark:border-neutral-700">
                     <span className="flex items-center gap-1"><ArrowUpRight size={12} /> By Nexify AI</span>
                     <span className="flex items-center gap-1"><Clock size={12} />{post.readTime}</span>
                   </div>
                 </div>
               </article>
             ))}
-          </div>
+          </StaggerGroup>
         </div>
-      </section>
+      </PageSection>
 
       <section className="py-20 gradient-bg">
         <div className="section-container text-center">
           <h2 className="text-3xl font-heading font-bold text-white mb-4">Stay Ahead of the Curve</h2>
           <p className="text-primary-200 mb-8 max-w-xl mx-auto">Subscribe to our newsletter. AI-written insights delivered to your inbox.</p>
           <form className="max-w-md mx-auto flex gap-2" onSubmit={e => { e.preventDefault(); alert('Subscribed! (Demo)') }}>
-            <input type="email" placeholder="your@email.com" className="input-field flex-1 bg-white/10 border-white/20 text-white placeholder-primary-300" />
+            <input type="email" placeholder="your@email.com" className="flex-1 px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-primary-300 focus:outline-none focus:ring-2 focus:ring-white/30" />
             <button className="btn-white shrink-0">Subscribe</button>
           </form>
         </div>
       </section>
-    </>
+    </PageLayout>
   )
 }
