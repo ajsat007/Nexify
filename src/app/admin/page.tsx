@@ -454,18 +454,16 @@ function AdminProjectsPage() {
       </div>
 
       <div className="bg-white rounded-xl border border-neutral-200 overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
+        <div className="table-responsive">
+          <table className="w-full table-card">
             <thead>
               <tr className="border-b border-neutral-100 bg-neutral-50">
-                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Project</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Client</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Value</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Progress</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Agents</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Deadline</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Status</th>
-                <th className="text-right p-4 text-xs font-semibold text-neutral-800 uppercase">Action</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-500 uppercase">Project</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-500 uppercase">Client</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-500 uppercase">Value</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-500 uppercase">Progress</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-500 uppercase">Deadline</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-500 uppercase">Status</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-neutral-100">
@@ -473,28 +471,17 @@ function AdminProjectsPage() {
                 const assigned = agents.filter(a => p.agents.includes(a.id))
                 return (
                   <tr key={p.id} className="hover:bg-neutral-50 transition-all">
-                    <td className="p-4 text-sm font-medium text-neutral-900">{p.name}</td>
-                    <td className="p-4 text-sm text-neutral-800">{p.client}</td>
-                    <td className="p-4 text-sm font-semibold">{p.value}</td>
-                    <td className="p-4">
+                    <td data-label="Project" className="p-4 text-sm font-medium text-neutral-900">{p.name}</td>
+                    <td data-label="Client" className="p-4 text-sm text-neutral-500">{p.client}</td>
+                    <td data-label="Value" className="p-4 text-sm font-semibold">{p.value}</td>
+                    <td data-label="Progress" className="p-4">
                       <div className="flex items-center gap-2">
                         <div className="w-20"><ProgressBar value={p.progress} size="sm" /></div>
-                        <span className="text-xs text-neutral-800">{p.progress}%</span>
+                        <span className="text-xs text-neutral-500">{p.progress}%</span>
                       </div>
                     </td>
-                    <td className="p-4">
-                      <div className="flex -space-x-2">
-                        {assigned.slice(0, 3).map(a => (
-                          <div key={a.id} className="w-7 h-7 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 border-2 border-white flex items-center justify-center text-[8px] text-white font-bold">{a.name.split('-')[1]?.slice(0, 2)}</div>
-                        ))}
-                        {assigned.length > 3 && <div className="w-7 h-7 rounded-full bg-neutral-100 border-2 border-white flex items-center justify-center text-[8px] text-neutral-800 font-bold">+{assigned.length - 3}</div>}
-                      </div>
-                    </td>
-                    <td className="p-4 text-sm text-neutral-800">{p.deadline}</td>
-                    <td className="p-4"><Badge status={p.status} /></td>
-                    <td className="p-4 text-right">
-                      <button className="text-primary-500 hover:text-primary-600 text-sm">Manage</button>
-                    </td>
+                    <td data-label="Deadline" className="p-4 text-sm text-neutral-500">{p.deadline}</td>
+                    <td data-label="Status" className="p-4"><Badge status={p.status} /></td>
                   </tr>
                 )
               })}
@@ -617,27 +604,25 @@ function FinancePage() {
 
       <div className="bg-white rounded-xl border border-neutral-200 overflow-hidden">
         <h2 className="font-semibold p-5 pb-0">Recent Transactions</h2>
-        <div className="overflow-x-auto mt-2">
-          <table className="w-full">
+        <div className="table-responsive mt-2">
+          <table className="w-full table-card">
             <thead>
               <tr className="border-b border-neutral-100 bg-neutral-50">
-                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Description</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Category</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Amount</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Date</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Type</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase">Status</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-500 uppercase">Description</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-500 uppercase">Category</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-500 uppercase">Amount</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-500 uppercase">Date</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-500 uppercase">Status</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-neutral-100">
               {transactions.map(t => (
                 <tr key={t.id} className="hover:bg-neutral-50 transition-all">
-                  <td className="p-4 text-sm text-neutral-900">{t.description}</td>
-                  <td className="p-4 text-sm text-neutral-800">{t.category}</td>
-                  <td className={`p-4 text-sm font-semibold ${t.type === 'income' ? 'text-success' : 'text-error'}`}>{t.type === 'income' ? '+' : '-'}₹{t.amount.toLocaleString('en-IN')}</td>
-                  <td className="p-4 text-sm text-neutral-800">{t.date}</td>
-                  <td className="p-4"><Badge status={t.type} /></td>
-                  <td className="p-4"><Badge status={t.status} /></td>
+                  <td data-label="Description" className="p-4 text-sm text-neutral-900">{t.description}</td>
+                  <td data-label="Category" className="p-4 text-sm text-neutral-500">{t.category}</td>
+                  <td data-label="Amount" className={`p-4 text-sm font-semibold ${t.type === 'income' ? 'text-success' : 'text-error'}`}>{t.type === 'income' ? '+' : '-'}₹{t.amount.toLocaleString('en-IN')}</td>
+                  <td data-label="Date" className="p-4 text-sm text-neutral-500">{t.date}</td>
+                  <td data-label="Status" className="p-4"><Badge status={t.status} /></td>
                 </tr>
               ))}
             </tbody>
