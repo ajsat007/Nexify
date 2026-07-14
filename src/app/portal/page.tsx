@@ -359,29 +359,27 @@ function InvoicesPage() {
       </div>
 
       <div className="bg-white rounded-xl border border-neutral-200 overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
+        <div className="table-responsive">
+          <table className="w-full table-card">
             <thead>
               <tr className="border-b border-neutral-100 bg-neutral-50">
-                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase tracking-wider">Invoice</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase tracking-wider">Project</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase tracking-wider">Amount</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase tracking-wider">Date</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase tracking-wider">Due</th>
-                <th className="text-left p-4 text-xs font-semibold text-neutral-800 uppercase tracking-wider">Status</th>
-                <th className="text-right p-4 text-xs font-semibold text-neutral-800 uppercase tracking-wider">Action</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-500 uppercase">Invoice</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-500 uppercase">Project</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-500 uppercase">Amount</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-500 uppercase">Date</th>
+                <th className="text-left p-4 text-xs font-semibold text-neutral-500 uppercase">Status</th>
+                <th className="text-right p-4 text-xs font-semibold text-neutral-500 uppercase">Action</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-neutral-100">
               {invoices.map(inv => (
                 <tr key={inv.id} className="hover:bg-neutral-50 transition-all">
-                  <td className="p-4 text-sm font-medium text-neutral-900">{inv.id}</td>
-                  <td className="p-4 text-sm text-neutral-800">{inv.project}</td>
-                  <td className="p-4 text-sm font-semibold text-neutral-900">₹{inv.amount.toLocaleString('en-IN')}</td>
-                  <td className="p-4 text-sm text-neutral-800">{inv.date}</td>
-                  <td className="p-4 text-sm text-neutral-800">{inv.dueDate}</td>
-                  <td className="p-4"><StatusBadge status={inv.status} /></td>
-                  <td className="p-4 text-right">
+                  <td data-label="Invoice" className="p-4 text-sm font-medium text-neutral-900">{inv.id}</td>
+                  <td data-label="Project" className="p-4 text-sm text-neutral-500">{inv.project}</td>
+                  <td data-label="Amount" className="p-4 text-sm font-semibold text-neutral-900">₹{inv.amount.toLocaleString('en-IN')}</td>
+                  <td data-label="Date" className="p-4 text-sm text-neutral-500">{inv.date}</td>
+                  <td data-label="Status" className="p-4"><StatusBadge status={inv.status} /></td>
+                  <td data-label="" className="p-4 text-right">
                     <button className="text-primary-500 hover:text-primary-600 text-sm flex items-center gap-1 ml-auto"><Download size={14} /> PDF</button>
                   </td>
                 </tr>
