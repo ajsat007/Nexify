@@ -27,7 +27,7 @@ export interface AICompletionResponse {
 
 // ── Provider Interface ──
 
-interface AIProviderAdapter {
+export interface AIProviderAdapter {
   name: AIProviderType
   complete(req: AICompletionRequest): Promise<AICompletionResponse>
   streamComplete(req: AICompletionRequest, onToken: (token: string) => void): Promise<AICompletionResponse>
