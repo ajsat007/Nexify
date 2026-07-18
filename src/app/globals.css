@@ -47,11 +47,7 @@
     @apply py-10 sm:py-16 lg:py-24;
   }
 
-  /* Breakpoint xs (320px+) utilities */
-  @media (min-width: 420px) {
-    .xs\:flex-row { flex-direction: row; }
-    .xs\:hidden { display: none; }
-  }
+  /* Breakpoint xs (320px+) utilities — now handled by Tailwind config */
 
   /* Responsive grid helpers */
   .grid-responsive {

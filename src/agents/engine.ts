@@ -5,6 +5,7 @@
 
 import { complete, type AIMessage } from '@/lib/ai/providers/client'
 import { agentRegistry, type AgentDefinition } from '@/agents/registry'
+import { getAllTools, getToolSchemas, executeTool } from '@/tools/registry'
 
 export interface AgentTask {
   id: string
@@ -83,9 +84,11 @@ export async function executeTask(taskId: string): Promise<AgentTask> {
 
   task.status = 'in_progress'
   const agent = agentRegistry.find(a => a.id === task.assignedTo)
+  const availableTools = getToolSchemas()
+  const toolNames = availableTools.map(t => t.name).join(', ')
   const agentContext = agent
-    ? `You are ${agent.name}, the ${agent.role} at Nexify. Your skills: ${agent.skills.join(', ')}.`
-    : 'You are a Nexify AI agent.'
+    ? `You are ${agent.name}, the ${agent.role} at Nexify. Your skills: ${agent.skills.join(', ')}.\n\nYou have access to these tools: ${toolNames}\nWhen you need to do something (read/write files, run commands, use git, send emails), call the appropriate tool instead of describing what you'd do.`
+    : `You are a Nexify AI agent.\n\nYou have access to these tools: ${toolNames}\nUse them to get work done.`
 
   try {
     const response = await complete({
@@ -94,10 +97,34 @@ export async function executeTask(taskId: string): Promise<AgentTask> {
         { role: 'user', content: task.input || task.description },
       ],
       temperature: 0.7,
-      maxTokens: 2048,
+      maxTokens: 4096,
+      tools: availableTools.length > 0 ? availableTools : undefined,
     })
 
-    task.output = response.content
+    // Handle tool calls from the model
+    if (response.toolCalls && response.toolCalls.length > 0) {
+      const toolResults = []
+      for (const call of response.toolCalls) {
+        const result = await executeTool(call.name, call.args)
+        toolResults.push(`Tool "${call.name}" result: ${result.success ? JSON.stringify(result.data) : `Error: ${result.error}`}`)
+      }
+
+      // Send tool results back to the model for final response
+      const finalResponse = await complete({
+        messages: [
+          { role: 'system', content: agentContext },
+          { role: 'user', content: task.input || task.description },
+          { role: 'assistant', content: response.content },
+          { role: 'user', content: `Tool results:\n${toolResults.join('\n')}\n\nSummarize what was done.` },
+        ],
+        temperature: 0.5,
+        maxTokens: 2048,
+      })
+      task.output = finalResponse.content
+    } else {
+      task.output = response.content
+    }
+
     task.status = 'completed'
     task.completedAt = Date.now()
 

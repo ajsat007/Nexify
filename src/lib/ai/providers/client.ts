@@ -14,18 +14,31 @@ export interface AIMessage {
   content: string
 }
 
+export interface ToolSchema {
+  name: string
+  description: string
+  parameters: Record<string, any>
+}
+
+export interface ToolCall {
+  name: string
+  args: Record<string, any>
+}
+
 export interface AICompletionRequest {
   messages: AIMessage[]
   model?: string
   temperature?: number
   maxTokens?: number
   stream?: boolean
+  tools?: ToolSchema[]
 }
 
 export interface AICompletionResponse {
   content: string
   model: string
   provider: AIProviderType
+  toolCalls?: ToolCall[]
   usage?: { promptTokens: number; completionTokens: number; totalTokens: number }
 }
 
@@ -59,31 +72,55 @@ function extractIdentity(systemPrompt: string): { name: string; role: string; sk
   }
 }
 
-function generateMockResponse(messages: AIMessage[]): string {
+function generateMockResponse(messages: AIMessage[], tools?: ToolSchema[]): { content: string; toolCalls?: ToolCall[] } {
   const system = messages.find(m => m.role === 'system')?.content || ''
   const userMsg = messages.filter(m => m.role === 'user').pop()?.content || ''
   const identity = extractIdentity(system)
   const userLower = userMsg.toLowerCase()
 
+  // If tools are provided and the user asks for an action, simulate a tool call
+  if (tools && tools.length > 0) {
+    if (userLower.includes('write') || userLower.includes('create') || userLower.includes('make')) {
+      const writeTool = tools.find(t => t.name === 'write_file')
+      if (writeTool) return { content: '', toolCalls: [{ name: 'write_file', args: { path: 'demo.txt', content: userMsg } }] }
+    }
+    if (userLower.includes('read') || userLower.includes('show')) {
+      const readTool = tools.find(t => t.name === 'read_file')
+      if (readTool) return { content: '', toolCalls: [{ name: 'read_file', args: { path: '.' } }] }
+    }
+    if (userLower.includes('commit') || userLower.includes('save')) {
+      const commitTool = tools.find(t => t.name === 'git_commit')
+      if (commitTool) return { content: '', toolCalls: [{ name: 'git_commit', args: { message: userMsg } }] }
+    }
+    if (userLower.includes('list') || userLower.includes('dir')) {
+      const listTool = tools.find(t => t.name === 'list_directory')
+      if (listTool) return { content: '', toolCalls: [{ name: 'list_directory', args: {} }] }
+    }
+    if (userLower.includes('email') || userLower.includes('mail')) {
+      const emailTool = tools.find(t => t.name === 'send_email')
+      if (emailTool) return { content: '', toolCalls: [{ name: 'send_email', args: { to: 'client@example.com', subject: 'RE: ' + userMsg.slice(0, 40), content: userMsg } }] }
+    }
+  }
+
   if (userLower.includes('hello') || userLower.includes('hi ') || userLower === 'hi') {
-    return `Hello! I'm ${identity.name}, the ${identity.role} at Nexify Technologies. How can I help you today? My expertise includes ${identity.skills}.`
+    return { content: `Hello! I'm ${identity.name}, the ${identity.role} at Nexify Technologies. How can I help you today? My expertise includes ${identity.skills}.` }
   }
   if (userLower.includes('who are you') || userLower.includes('what can you do')) {
-    return `I'm ${identity.name}, serving as ${identity.role} at Nexify. I specialize in ${identity.skills}. How can I put my expertise to work for you?`
+    return { content: `I'm ${identity.name}, serving as ${identity.role} at Nexify. I specialize in ${identity.skills}. How can I put my expertise to work for you?` }
   }
   if (userLower.includes('pricing') || userLower.includes('cost') || userLower.includes('price')) {
-    return `Nexify offers fixed-price projects from 60,000 (UI/UX) up to 15,00,000+ (enterprise). SaaS products start at 499/user/month. As ${identity.name} (${identity.role}), I'd recommend a free consultation to discuss your needs.`
+    return { content: `Nexify offers fixed-price projects from 60,000 (UI/UX) up to 15,00,000+ (enterprise). SaaS products start at 499/user/month. As ${identity.name} (${identity.role}), I'd recommend a free consultation to discuss your needs.` }
   }
   if (userLower.includes('service') || userLower.includes('build') || userLower.includes('develop')) {
-    return `As ${identity.name} (${identity.role}), I can help! Nexify offers 20+ AI-powered services — custom software, web, mobile, AI/ML, cloud, and more. My expertise covers ${identity.skills}. Would you like me to walk you through our process?`
+    return { content: `As ${identity.name} (${identity.role}), I can help! Nexify offers 20+ AI-powered services — custom software, web, mobile, AI/ML, cloud, and more. My expertise covers ${identity.skills}. Would you like me to walk you through our process?` }
   }
   if (userLower.includes('agent') || userLower.includes('workforce') || userLower.includes('team')) {
-    return `Nexify operates 16 specialized AI agents across 12 departments — executive (CEO-Omega, CTO-Nova), engineering (Dev-Alpha, QA-Delta), design (Design-Gamma), and more. As ${identity.role}, I collaborate with all of them. We've completed 11,000+ tasks collectively.`
+    return { content: `Nexify operates 16 specialized AI agents across 12 departments — executive (CEO-Omega, CTO-Nova), engineering (Dev-Alpha, QA-Delta), design (Design-Gamma), and more. As ${identity.role}, I collaborate with all of them. We've completed 11,000+ tasks collectively.` }
   }
   if (userLower.includes('portfolio') || userLower.includes('project') || userLower.includes('work')) {
-    return `We've delivered 200+ projects across fintech, healthcare, e-commerce, edtech, and more. Recent examples: a FinTech trading dashboard (6,00,000), a telemedicine platform (10,00,000), and an AI recommendation engine (5,00,000). 94% client retention rate!`
+    return { content: `We've delivered 200+ projects across fintech, healthcare, e-commerce, edtech, and more. Recent examples: a FinTech trading dashboard (6,00,000), a telemedicine platform (10,00,000), and an AI recommendation engine (5,00,000). 94% client retention rate!` }
   }
-  return `I'm ${identity.name}, ${identity.role} at Nexify. Based on my expertise in ${identity.skills}, I'd be happy to help with your question about "${userMsg.slice(0, 80)}". For more details, visit /services or /contact to get a custom proposal.`
+  return { content: `I'm ${identity.name}, ${identity.role} at Nexify. Based on my expertise in ${identity.skills}, I'd be happy to help with your question about "${userMsg.slice(0, 80)}". For more details, visit /services or /contact to get a custom proposal.` }
 }
 
 function createMockProvider(): AIProviderAdapter {
@@ -91,15 +128,28 @@ function createMockProvider(): AIProviderAdapter {
     name: 'openai' as AIProviderType,
     async complete(req) {
       await new Promise(r => setTimeout(r, 500 + Math.random() * 500))
-      return { content: generateMockResponse(req.messages), model: 'llama3.2', provider: 'ollama', usage: { promptTokens: 0, completionTokens: 0, totalTokens: 0 } }
+      const result = generateMockResponse(req.messages, req.tools)
+      return {
+        content: result.content,
+        model: 'llama3.2',
+        provider: 'ollama',
+        toolCalls: result.toolCalls,
+        usage: { promptTokens: 0, completionTokens: 0, totalTokens: 0 },
+      }
     },
     async streamComplete(req, onToken) {
-      const text = generateMockResponse(req.messages)
+      const result = generateMockResponse(req.messages, req.tools)
+      const text = result.content
       for (const word of text.split(' ')) {
         await new Promise(r => setTimeout(r, 30))
         onToken(word + ' ')
       }
-      return { content: text, model: 'llama3.2', provider: 'ollama' }
+      return {
+        content: text,
+        model: 'llama3.2',
+        provider: 'ollama',
+        toolCalls: result.toolCalls,
+      }
     },
     availableModels() { return ['llama3.2', 'mixtral-8x7b'] },
   }
