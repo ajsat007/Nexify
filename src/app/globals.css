@@ -6,19 +6,23 @@
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
   }
 
   body {
     @apply font-body text-neutral-800 bg-neutral-50 antialiased dark:text-neutral-200 dark:bg-neutral-950 transition-colors duration-200 leading-relaxed;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    width: 100%;
   }
 
   /* Fluid typography — scales smoothly between 320px and 1440px */
-  h1 { @apply font-heading text-neutral-900 font-bold dark:text-white tracking-tight; font-size: clamp(1.75rem, 4vw, 3.5rem); }
-  h2 { @apply font-heading text-neutral-900 font-bold dark:text-white tracking-tight; font-size: clamp(1.5rem, 3vw, 2.5rem); }
-  h3 { font-size: clamp(1.125rem, 2vw, 1.5rem); }
-  h4 { font-size: clamp(1rem, 1.5vw, 1.25rem); }
-  body, p { font-size: clamp(0.9375rem, 1vw, 1rem); }
+  h1 { @apply font-heading text-neutral-900 font-bold dark:text-white tracking-tight; font-size: clamp(1.5rem, 4vw, 3.5rem); line-height: 1.15; }
+  h2 { @apply font-heading text-neutral-900 font-bold dark:text-white tracking-tight; font-size: clamp(1.35rem, 3vw, 2.5rem); line-height: 1.2; }
+  h3 { font-size: clamp(1.05rem, 2vw, 1.5rem); line-height: 1.3; }
+  h4 { font-size: clamp(0.95rem, 1.5vw, 1.25rem); line-height: 1.35; }
+  body, p { font-size: clamp(0.875rem, 1vw, 1rem); line-height: 1.6; }
 
   ::selection { @apply bg-primary-500/20 text-primary-900 dark:bg-primary-500/30; }
 
@@ -27,6 +31,9 @@
     outline-offset: 2px;
     border-radius: 4px;
   }
+
+  img, video, svg { max-width: 100%; height: auto; }
+  table { width: 100%; }
 }
 
 @layer components {
@@ -37,36 +44,42 @@
   }
 
   .section-padding {
-    @apply py-12 sm:py-16 lg:py-24;
+    @apply py-10 sm:py-16 lg:py-24;
+  }
+
+  /* Breakpoint xs (320px+) utilities */
+  @media (min-width: 420px) {
+    .xs\:flex-row { flex-direction: row; }
+    .xs\:hidden { display: none; }
   }
 
   /* Responsive grid helpers */
   .grid-responsive {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-    gap: 1.5rem;
+    gap: 1rem;
   }
 
   .grid-responsive-2 {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 1rem;
   }
 
   .grid-responsive-sm {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    gap: 0.75rem;
   }
 
   /* ── Cards ── */
   .card-responsive {
     @apply bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-2xl;
-    padding: clamp(1rem, 2.5vw, 1.5rem);
+    padding: clamp(0.875rem, 2.5vw, 1.5rem);
   }
 
   .card-stack {
-    @apply flex flex-col gap-4;
+    @apply flex flex-col gap-3;
   }
 
   /* ── Text ── */
@@ -78,10 +91,10 @@
     background: linear-gradient(135deg, #0F172A 0%, #1E40AF 50%, #7C3AED 100%);
   }
 
-  .text-fluid-sm { font-size: clamp(0.75rem, 1.5vw, 0.875rem); }
-  .text-fluid-base { font-size: clamp(0.875rem, 2vw, 1rem); }
-  .text-fluid-lg { font-size: clamp(1rem, 2.5vw, 1.25rem); }
-  .text-fluid-xl { font-size: clamp(1.25rem, 3vw, 1.5rem); }
+  .text-fluid-sm { font-size: clamp(0.7rem, 1.5vw, 0.875rem); }
+  .text-fluid-base { font-size: clamp(0.8rem, 2vw, 1rem); }
+  .text-fluid-lg { font-size: clamp(0.9rem, 2.5vw, 1.25rem); }
+  .text-fluid-xl { font-size: clamp(1.1rem, 3vw, 1.5rem); }
 
   /* ── Buttons (touch-friendly: min 44px) ── */
   .btn-primary {
@@ -184,43 +197,41 @@
     @apply bg-white border border-neutral-200 rounded-2xl dark:bg-neutral-800/50 dark:border-neutral-700;
   }
 
-  /* ── Responsive tables ── */
-  .table-responsive {
-    @apply w-full;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .table-responsive table {
-    @apply w-full;
-    min-width: max(100%, 600px);
-  }
-
-  /* Card layout for tables on very small screens */
+  /* ── Responsive tables: card layout on mobile ── */
   @media (max-width: 640px) {
-    .table-card tbody tr {
+    table.responsive-card thead { display: none; }
+    table.responsive-card tbody tr {
       display: flex;
       flex-direction: column;
-      padding: 1rem;
-      margin-bottom: 0.75rem;
+      padding: 0.875rem;
+      margin-bottom: 0.625rem;
       @apply bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700;
     }
-    .table-card thead { display: none; }
-    .table-card tbody td {
+    table.responsive-card tbody td {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0.375rem 0;
       border-bottom: 1px solid;
-      @apply border-neutral-100 dark:border-neutral-700;
+      border-color: rgba(0,0,0,0.05);
+      gap: 0.5rem;
     }
-    .table-card tbody td:last-child { border-bottom: none; }
-    .table-card tbody td::before {
+    table.responsive-card tbody td:last-child { border-bottom: none; }
+    table.responsive-card tbody td::before {
       content: attr(data-label);
       @apply text-xs font-semibold text-neutral-500 uppercase tracking-wider;
-      margin-right: 0.5rem;
+      flex-shrink: 0;
     }
   }
+
+  /* Horizontal scroll containers for mobile */
+  .scrollable-x {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollable-x::-webkit-scrollbar { display: none; }
 
   /* ── Animations ── */
   @keyframes blob {
@@ -265,43 +276,23 @@
     scroll-behavior: auto !important;
   }
 
-  /* Disable infinite background animations */
-  .animate-blob,
-  .animate-float,
-  .animate-pulse,
-  .animate-bounce,
-  .animate-spin {
+  .animate-blob, .animate-float, .animate-pulse, .animate-bounce, .animate-spin {
     animation: none !important;
     opacity: 1 !important;
   }
 }
 
-/* ── Mobile: disable performance-heavy backdrop filters and animations ── */
+/* ── Mobile: disable performance-heavy effects ── */
 @media (hover: none) and (pointer: coarse) {
-  /* Disable infinite animations on touch to prevent battery/GPU drain */
-  .animate-blob,
-  .animate-float {
-    animation: none !important;
-  }
+  .animate-blob, .animate-float { animation: none !important; }
 
-  /* Remove heavy backdrop filters on mobile */
-  .backdrop-blur-xl,
-  .backdrop-blur-lg,
-  .backdrop-blur-md,
-  .backdrop-blur-sm {
+  .backdrop-blur-xl, .backdrop-blur-lg, .backdrop-blur-md, .backdrop-blur-sm {
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
   }
 
-  /* Reduce blur-3d elements on mobile — they cause jank */
-  [class*="blur-3xl"],
-  [class*="blur-2xl"],
-  [class*="blur-xl"] {
-    opacity: 0.4;
-  }
+  [class*="blur-3xl"], [class*="blur-2xl"], [class*="blur-xl"] { opacity: 0.3; }
 
-  /* ── Force scroll-reveal elements always visible on touch ── */
-  /* Prevents blank-content flicker from JS-based reveal on mobile */
   [data-reveal="true"] {
     opacity: 1 !important;
     transform: none !important;
@@ -311,6 +302,11 @@
 }
 
 /* ── Scrollbar ── */
-::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { @apply bg-neutral-100; }
 ::-webkit-scrollbar-thumb { @apply bg-neutral-300 rounded-full hover:bg-neutral-400; }
+
+/* ── Prevent horizontal overflow on all screen sizes ── */
+* { box-sizing: border-box; }
+*, *::before, *::after { max-width: 100%; }
+pre, code { max-width: 100%; overflow-x: auto; }

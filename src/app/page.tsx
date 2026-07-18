@@ -127,17 +127,17 @@ export default function HomePage() {
       <ScrollToTop />
 
       {/* ===== HERO ===== */}
-      <section className="relative min-h-[90dvh] flex items-center overflow-hidden bg-neutral-900">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-72 sm:w-96 h-72 sm:h-96 bg-primary-500/20 rounded-full blur-3xl animate-blob" />
-          <div className="absolute top-1/3 right-1/4 w-72 sm:w-96 h-72 sm:h-96 bg-accent-500/20 rounded-full blur-3xl animate-blob animation-delay-2000" />
-          <div className="absolute bottom-1/4 left-1/3 w-72 sm:w-96 h-72 sm:h-96 bg-primary-400/10 rounded-full blur-3xl animate-blob animation-delay-4000" />
+      <section className="relative min-h-[80vh] sm:min-h-[90dvh] flex items-center overflow-hidden bg-neutral-900">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-48 sm:w-72 md:w-96 h-48 sm:h-72 md:h-96 bg-primary-500/20 rounded-full blur-3xl animate-blob" />
+          <div className="absolute top-1/3 right-1/4 w-48 sm:w-72 md:w-96 h-48 sm:h-72 md:h-96 bg-accent-500/20 rounded-full blur-3xl animate-blob animation-delay-2000" />
+          <div className="absolute bottom-1/4 left-1/3 w-48 sm:w-72 md:w-96 h-48 sm:h-72 md:h-96 bg-primary-400/10 rounded-full blur-3xl animate-blob animation-delay-4000" />
         </div>
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMCAwaDQwdjQwSDB6IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiIHN0cm9rZS13aWR0aD0iMSIvPjwvc3ZnPg==')] opacity-50" />
 
-        <div className="section-container relative z-10 pt-28 sm:pt-32 pb-16 sm:pb-20">
+        <div className="section-container relative z-10 pt-24 sm:pt-32 pb-12 sm:pb-20">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <div className="space-y-6 sm:space-y-8">
+            <div className="space-y-5 sm:space-y-8">
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-300 text-xs sm:text-sm font-medium">
                 <Cpu size={14} className="text-primary-400 shrink-0" />
@@ -145,22 +145,22 @@ export default function HomePage() {
                 <span className="xs:hidden">AI Software Company</span>
               </div>
 
-              <h1 className="text-[clamp(1.75rem,7vw,3.5rem)] sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-white leading-[1.1] sm:leading-tight">
+              <h1 className="text-[clamp(1.5rem,6vw,3rem)] sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-white leading-[1.1] sm:leading-tight">
                 Software Built by{' '}
                 <span className="text-primary-400">Intelligent AI</span>{' '}
                 Agents. Delivered in Days.
               </h1>
 
-              <p className="text-base sm:text-lg lg:text-xl text-neutral-300 leading-relaxed max-w-xl">
+              <p className="text-sm sm:text-lg lg:text-xl text-neutral-300 leading-relaxed max-w-xl">
                 Nexify is an AI-native software company. Our workforce of 50+ AI agents builds custom software, mobile apps, AI solutions, and SaaS products — 10x faster, at half the cost of traditional agencies.
               </p>
 
               {/* CTAs */}
               <div className="flex flex-col xs:flex-row gap-3 sm:gap-4">
-                <Link href="/contact" className="btn-primary text-base sm:text-lg px-6 sm:px-8 py-3.5 sm:py-4 text-center">
-                  Start Your Project <ArrowRight size={18} />
+                <Link href="/contact" className="btn-primary text-sm sm:text-lg px-5 sm:px-8 py-3 sm:py-4 text-center w-full xs:w-auto">
+                  Start Your Project <ArrowRight size={16} />
                 </Link>
-                <Link href="/portfolio" className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-medium border border-neutral-600 text-neutral-300 hover:bg-white hover:text-neutral-900 transition-all text-base sm:text-lg text-center">
+                <Link href="/portfolio" className="inline-flex items-center justify-center gap-2 px-5 sm:px-8 py-3 sm:py-4 rounded-xl font-medium border border-neutral-600 text-neutral-300 hover:bg-white hover:text-neutral-900 transition-all text-sm sm:text-lg text-center w-full xs:w-auto">
                   View Our Work
                 </Link>
               </div>

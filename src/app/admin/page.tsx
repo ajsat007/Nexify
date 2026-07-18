@@ -337,7 +337,7 @@ export default function AdminPage() {
                     </button>
                   </div>
                   <div className="overflow-x-auto">
-                    <table className="w-full text-sm">
+                    <table className="w-full text-sm responsive-card">
                       <thead>
                         <tr className="border-b border-neutral-100 dark:border-neutral-700 text-left text-xs text-neutral-500 uppercase tracking-wider">
                           <th className="py-3 px-3 font-medium">Contact</th>
