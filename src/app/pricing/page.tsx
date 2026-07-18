@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { ArrowRight, Check, Zap, Calculator } from 'lucide-react'
+import { ArrowRight, Check, Calculator } from 'lucide-react'
 import PricingCalculator from '@/components/PricingCalculator'
-import { PageLayout, PageHeader, PageSection } from '@/components/PageLayout'
-import { AnimatedSection, StaggerGroup } from '@/components/ScrollAnimations'
+import { PageLayout, PageHeader } from '@/components/PageLayout'
+import { AnimatedSection } from '@/components/ScrollAnimations'
 
 const servicePricing = [
   {
@@ -42,19 +42,10 @@ const servicePricing = [
   },
 ]
 
-const productPricing = [
-  {
-    name: 'FlowSprint',
-    tiers: [
-      { name: 'Free', price: '₹0', popular: false, features: ['Up to 5 users', '2 projects', '100 MB storage', 'Basic tasks', 'Board view', 'Community support'] },
-      { name: 'Starter', price: '₹499/user/mo', popular: true, features: ['Unlimited projects', '5 GB storage', 'All views', 'Time tracking', 'Integrations', 'Email support'] },
-      { name: 'Business', price: '₹999/user/mo', popular: false, features: ['Unlimited users', '25 GB storage', 'AI features', 'Advanced reporting', 'Priority support', 'Custom fields'] },
-    ],
-  },
-]
-
 export default function PricingPage() {
   const [service, setService] = useState(servicePricing[0]?.name || '')
+
+  const currentService = servicePricing.find((s) => s.name === service)
 
   return (
     <PageLayout>
@@ -65,87 +56,91 @@ export default function PricingPage() {
       />
 
       {/* Service Pricing */}
-      <PageSection dark>
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-3xl font-heading font-bold mb-4 dark:text-white">Service <span className="text-primary-600 dark:text-primary-400">Packages</span></h2>
-          <p className="text-neutral-600 dark:text-neutral-400">Choose the package that fits your needs. All include AI-powered delivery.</p>
-        </div>
+      <section className="section-padding bg-neutral-50 dark:bg-neutral-900">
+        <div className="section-container">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-heading font-bold mb-3 sm:mb-4 dark:text-white">Service <span className="text-primary-600 dark:text-primary-400">Packages</span></h2>
+            <p className="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">Choose the package that fits your needs. All include AI-powered delivery.</p>
+          </div>
 
-        {/* Category tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {servicePricing.map((s) => (
-            <button
-              key={s.name}
-              onClick={() => setService(s.name)}
-              className={`px-5 py-2 rounded-xl text-sm font-medium transition-all ${
-                service === s.name
-                  ? 'bg-primary-500 text-white'
-                  : 'bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700'
-              }`}
-            >
-              {s.name}
-            </button>
-          ))}
-        </div>
-
-        {/* Tier cards */}
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {servicePricing
-            .find((s) => s.name === service)
-            ?.tiers.map((tier, i) => (
-              <AnimatedSection key={tier.name} animation="fade-up" delay={i * 100}>
-                <div className={`rounded-2xl p-8 border-2 transition-all duration-300 ${
-                  tier.popular
-                    ? 'bg-primary-50 dark:bg-primary-900/20 border-primary-500 dark:border-primary-400 shadow-lg shadow-primary-500/10 relative'
-                    : 'bg-white dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700'
-                }`}>
-                  {tier.popular && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-primary-500 text-white text-xs font-semibold">
-                      Most Popular
-                    </div>
-                  )}
-                  <div className="text-lg font-heading font-bold mb-1 dark:text-white">{tier.name}</div>
-                  <div className="text-3xl font-heading font-bold mb-6 dark:text-white">{tier.price}</div>
-                  <ul className="space-y-3 mb-8">
-                    {tier.features.map((f, j) => (
-                      <li key={j} className="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-300">
-                        <Check size={16} className="text-success mt-0.5 shrink-0" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                  <Link href="/contact" className={`w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl font-medium text-sm transition-all ${
-                    tier.popular
-                      ? 'bg-primary-500 text-white hover:bg-primary-600'
-                      : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-white hover:bg-neutral-200 dark:hover:bg-neutral-600'
-                  }`}>
-                    Get Started <ArrowRight size={16} />
-                  </Link>
-                </div>
-              </AnimatedSection>
+          {/* Category tabs — scrollable row on mobile */}
+          <div className="flex overflow-x-auto gap-2 pb-2 mb-8 sm:mb-12 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap sm:justify-center sm:overflow-visible scrollbar-none">
+            {servicePricing.map((s) => (
+              <button
+                key={s.name}
+                onClick={() => setService(s.name)}
+                className={`px-4 sm:px-5 py-2 rounded-xl text-sm font-medium transition-all whitespace-nowrap shrink-0 ${
+                  service === s.name
+                    ? 'bg-primary-500 text-white shadow-md'
+                    : 'bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700'
+                }`}
+              >
+                {s.name}
+              </button>
             ))}
+          </div>
+
+          {/* Tier cards */}
+          {currentService && (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
+              {currentService.tiers.map((tier, i) => (
+                <AnimatedSection key={tier.name} animation="fade-up" delay={i * 100}>
+                  <div className={`rounded-2xl p-5 sm:p-8 border-2 transition-all duration-300 flex flex-col h-full ${
+                    tier.popular
+                      ? 'bg-primary-50 dark:bg-primary-900/20 border-primary-500 dark:border-primary-400 shadow-lg shadow-primary-500/10 relative'
+                      : 'bg-white dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700'
+                  }`}>
+                    {tier.popular && (
+                      <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-4 py-0.5 rounded-full bg-primary-500 text-white text-[11px] font-semibold whitespace-nowrap">
+                        Most Popular
+                      </div>
+                    )}
+                    <div className="text-base sm:text-lg font-heading font-bold mb-1 dark:text-white">{tier.name}</div>
+                    <div className="text-2xl sm:text-3xl font-heading font-bold mb-5 sm:mb-6 dark:text-white">{tier.price}</div>
+                    <ul className="space-y-2.5 sm:space-y-3 mb-6 sm:mb-8 flex-1">
+                      {tier.features.map((f, j) => (
+                        <li key={j} className="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-300">
+                          <Check size={15} className="text-success mt-0.5 shrink-0" />
+                          <span className="leading-snug">{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <Link href="/contact" className={`w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl font-medium text-sm transition-all text-center ${
+                      tier.popular
+                        ? 'bg-primary-500 text-white hover:bg-primary-600 shadow-md'
+                        : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-white hover:bg-neutral-200 dark:hover:bg-neutral-600 border border-neutral-200 dark:border-neutral-600'
+                    }`}>
+                      Get Started <ArrowRight size={16} />
+                    </Link>
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
+          )}
         </div>
-      </PageSection>
+      </section>
 
       {/* Calculator */}
-      <PageSection>
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-8">
-            <div className="chip bg-accent-50 dark:bg-accent-900/30 text-accent-600 dark:text-accent-400 border border-accent-200 dark:border-accent-800 mb-4">
-              <Calculator size={14} /> Cost Calculator
+      <section className="section-padding bg-white dark:bg-neutral-950">
+        <div className="section-container">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-6 sm:mb-8">
+              <div className="chip bg-accent-50 dark:bg-accent-900/30 text-accent-600 dark:text-accent-400 border border-accent-200 dark:border-accent-800 mb-3 sm:mb-4">
+                <Calculator size={14} /> Cost Calculator
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-heading font-bold mb-2 dark:text-white">Estimate Your <span className="text-primary-600 dark:text-primary-400">Project Cost</span></h2>
             </div>
-            <h2 className="text-3xl font-heading font-bold mb-2 dark:text-white">Estimate Your <span className="text-primary-600 dark:text-primary-400">Project Cost</span></h2>
+            <PricingCalculator />
           </div>
-          <PricingCalculator />
         </div>
-      </PageSection>
+      </section>
 
       {/* CTA */}
-      <section className="py-20 gradient-bg">
+      <section className="py-16 sm:py-20 gradient-bg">
         <div className="section-container text-center">
-          <h2 className="text-3xl font-heading font-bold text-white mb-4">Need a Custom Quote?</h2>
-          <p className="text-primary-200 text-lg mb-8">Tell us about your project and we&apos;ll provide a detailed estimate within 24 hours.</p>
-          <Link href="/contact" className="btn-white text-lg px-8 py-4">Get a Quote <ArrowRight size={20} /></Link>
+          <h2 className="text-2xl sm:text-3xl font-heading font-bold text-white mb-3 sm:mb-4">Need a Custom Quote?</h2>
+          <p className="text-primary-200 text-base sm:text-lg mb-6 sm:mb-8">Tell us about your project and we&apos;ll provide a detailed estimate within 24 hours.</p>
+          <Link href="/contact" className="btn-white text-base sm:text-lg px-6 sm:px-8 py-3.5 sm:py-4">Get a Quote <ArrowRight size={18} /></Link>
         </div>
       </section>
     </PageLayout>

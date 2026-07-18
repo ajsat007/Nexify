@@ -3,8 +3,8 @@
 import Link from 'next/link'
 import { ArrowRight, Check, Code2, Globe, Smartphone, Brain, BarChart3, Palette, Cloud, MessageCircle, Zap, Clock, DollarSign } from 'lucide-react'
 import { services } from '@/lib/data'
-import { PageLayout, PageHeader, PageSection } from '@/components/PageLayout'
-import { AnimatedSection, StaggerGroup } from '@/components/ScrollAnimations'
+import { PageLayout, PageHeader } from '@/components/PageLayout'
+import { AnimatedSection } from '@/components/ScrollAnimations'
 
 const iconMap: Record<string, any> = {
   Code2, Globe, Smartphone, Brain, BarChart3, Palette, Cloud, MessageCircle,
@@ -20,88 +20,105 @@ export default function ServicesPage() {
       />
 
       {/* Service Cards */}
-      <PageSection>
-        <div className="space-y-24">
-          {services.map((service, i) => {
-            const Icon = iconMap[service.icon] || Zap
-            const details = serviceDetails.find(d => d.id === service.id)
-            return (
-              <AnimatedSection key={service.id} animation="fade-up">
-                <div id={service.id} className="grid lg:grid-cols-5 gap-8 lg:gap-16 scroll-mt-32">
-                  {/* Left: Overview */}
-                  <div className="lg:col-span-2">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-500/10 to-accent-500/10 flex items-center justify-center mb-4">
-                      <Icon className="w-7 h-7 text-primary-500" />
-                    </div>
-                    <h2 className="text-2xl sm:text-3xl font-heading font-bold mb-3 dark:text-white">{service.title}</h2>
-                    <p className="text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed">{details?.description || service.description}</p>
-                    <div className="flex items-center gap-4 text-sm text-neutral-500 dark:text-neutral-400 mb-6">
-                      <span className="flex items-center gap-1"><Clock size={14} /> {service.timeline}</span>
-                      <span className="flex items-center gap-1"><DollarSign size={14} /> {service.price}</span>
-                    </div>
-                    <Link href="/contact" className="btn-primary text-sm">
-                      Get Started <ArrowRight size={16} />
-                    </Link>
-                  </div>
-
-                  {/* Right: Details */}
-                  <div className="lg:col-span-3">
-                    {/* Packages */}
-                    <div className="grid sm:grid-cols-3 gap-4 mb-8">
-                      {details?.packages.map((pkg, i) => (
-                        <div key={i} className={`rounded-2xl p-6 border ${i === 1 ? 'bg-primary-50 dark:bg-primary-900/20 border-primary-200 dark:border-primary-800' : 'bg-white dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700'}`}>
-                          <div className="text-xs font-semibold text-primary-500 uppercase tracking-wider mb-1">{pkg.name}</div>
-                          <div className="text-lg font-heading font-bold mb-2 dark:text-white">{pkg.price}</div>
-                          <div className="text-xs text-neutral-500 mb-4">{pkg.timeline}</div>
-                          <ul className="space-y-2">
-                            {pkg.features.map((f, j) => (
-                              <li key={j} className="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-300">
-                                <Check size={14} className="text-success mt-0.5 shrink-0" />
-                                {f}
-                              </li>
-                            ))}
-                          </ul>
+      <section className="section-padding bg-white dark:bg-neutral-950">
+        <div className="section-container">
+          <div className="space-y-16 sm:space-y-24">
+            {services.map((service, i) => {
+              const Icon = iconMap[service.icon] || Zap
+              const details = serviceDetails.find(d => d.id === service.id)
+              return (
+                <AnimatedSection key={service.id} animation="fade-up">
+                  <div id={service.id} className="grid lg:grid-cols-5 gap-6 lg:gap-16 scroll-mt-32">
+                    {/* Left: Overview */}
+                    <div className="lg:col-span-2">
+                      <div className="flex items-center gap-4 mb-4">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary-500/10 to-accent-500/10 flex items-center justify-center shrink-0">
+                          <Icon className="w-6 h-6 text-primary-500" />
                         </div>
-                      ))}
+                        <h2 className="text-xl sm:text-2xl lg:text-3xl font-heading font-bold dark:text-white">{service.title}</h2>
+                      </div>
+                      <p className="text-neutral-600 dark:text-neutral-400 mb-5 leading-relaxed text-sm sm:text-base">{details?.description || service.description}</p>
+                      <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-500 dark:text-neutral-400 mb-6">
+                        <span className="flex items-center gap-1.5"><Clock size={15} /> {service.timeline}</span>
+                        <span className="flex items-center gap-1.5"><DollarSign size={15} /> {service.price}</span>
+                      </div>
+                      <Link href="/contact" className="btn-primary text-sm w-full sm:w-auto text-center">
+                        Get Started <ArrowRight size={16} />
+                      </Link>
                     </div>
 
-                    {/* Technologies */}
-                    {details?.technologies && (
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {details.technologies.map((tech) => (
-                          <span key={tech} className="chip bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300">{tech}</span>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Deliverables */}
-                    {details?.deliverables && (
-                      <div className="bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-neutral-200 dark:border-neutral-700">
-                        <h3 className="font-semibold mb-3 dark:text-white">What You Get</h3>
-                        <div className="grid sm:grid-cols-2 gap-2">
-                          {details.deliverables.map((d, j) => (
-                            <div key={j} className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-300">
-                              <Check size={14} className="text-primary-500 shrink-0" />
-                              {d}
+                    {/* Right: Details */}
+                    <div className="lg:col-span-3">
+                      {details?.packages && (
+                        <div className="grid sm:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
+                          {details.packages.map((pkg, j) => (
+                            <div key={j} className={`rounded-2xl p-5 sm:p-6 border ${
+                              j === 1
+                                ? 'bg-primary-50 dark:bg-primary-900/20 border-primary-200 dark:border-primary-800 relative'
+                                : 'bg-white dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700'
+                            }`}>
+                              {j === 1 && (
+                                <div className="absolute -top-2.5 left-4 px-3 py-0.5 rounded-full bg-primary-500 text-white text-[10px] font-semibold">
+                                  Most Popular
+                                </div>
+                              )}
+                              <div className="text-xs font-semibold text-primary-500 uppercase tracking-wider mb-1">{pkg.name}</div>
+                              <div className="text-lg sm:text-xl font-heading font-bold mb-1 dark:text-white">{pkg.price}</div>
+                              <div className="text-xs text-neutral-500 mb-4">{pkg.timeline}</div>
+                              <ul className="space-y-2">
+                                {pkg.features.map((f, k) => (
+                                  <li key={k} className="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-300">
+                                    <Check size={14} className="text-success mt-0.5 shrink-0" />
+                                    <span>{f}</span>
+                                  </li>
+                                ))}
+                              </ul>
                             </div>
                           ))}
                         </div>
+                      )}
+
+                      {/* Technologies + Deliverables row */}
+                      <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+                        {details?.technologies && (
+                          <div className="bg-white dark:bg-neutral-800 rounded-2xl p-5 sm:p-6 border border-neutral-200 dark:border-neutral-700">
+                            <h3 className="font-semibold text-sm mb-3 dark:text-white">Technologies</h3>
+                            <div className="flex flex-wrap gap-2">
+                              {details.technologies.map((tech) => (
+                                <span key={tech} className="chip bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 text-xs">{tech}</span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                        {details?.deliverables && (
+                          <div className="bg-white dark:bg-neutral-800 rounded-2xl p-5 sm:p-6 border border-neutral-200 dark:border-neutral-700">
+                            <h3 className="font-semibold text-sm mb-3 dark:text-white">What You Get</h3>
+                            <div className="grid xs:grid-cols-2 gap-2">
+                              {details.deliverables.map((d, k) => (
+                                <div key={k} className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-300">
+                                  <Check size={13} className="text-primary-500 shrink-0" />
+                                  <span className="leading-snug">{d}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
-                    )}
+                    </div>
                   </div>
-                </div>
-              </AnimatedSection>
-            )
-          })}
+                </AnimatedSection>
+              )
+            })}
+          </div>
         </div>
-      </PageSection>
+      </section>
 
       {/* CTA */}
-      <section className="py-20 gradient-bg">
+      <section className="py-16 sm:py-20 gradient-bg">
         <div className="section-container text-center">
-          <h2 className="text-3xl font-heading font-bold text-white mb-4">Ready to Start Your Project?</h2>
-          <p className="text-primary-200 text-lg mb-8">Get a proposal within 24 hours — built by AI, reviewed by senior architects.</p>
-          <Link href="/contact" className="btn-white text-lg px-8 py-4">Start Your Project <ArrowRight size={20} /></Link>
+          <h2 className="text-2xl sm:text-3xl font-heading font-bold text-white mb-3 sm:mb-4">Ready to Start Your Project?</h2>
+          <p className="text-primary-200 text-base sm:text-lg mb-6 sm:mb-8">Get a proposal within 24 hours — built by AI, reviewed by senior architects.</p>
+          <Link href="/contact" className="btn-white text-base sm:text-lg px-6 sm:px-8 py-3.5 sm:py-4">Start Your Project <ArrowRight size={18} /></Link>
         </div>
       </section>
     </PageLayout>

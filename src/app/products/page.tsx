@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { ArrowRight, Check, KanbanSquare, Activity, Headphones, FileSignature, Bot, Zap } from 'lucide-react'
 import { products } from '@/lib/data'
-import { PageLayout, PageHeader, PageSection } from '@/components/PageLayout'
+import { PageLayout, PageHeader } from '@/components/PageLayout'
 import { AnimatedSection } from '@/components/ScrollAnimations'
 
 const iconMap: Record<string, any> = { KanbanSquare, Activity, Headphones, FileSignature, Bot }
@@ -21,98 +21,100 @@ export default function ProductsPage() {
     <PageLayout>
       <PageHeader badge="SaaS Products" title="Products We Build, Use & Ship" subtitle="Every product on this page we built for ourselves first. They power our AI agents daily. Now they're available for you." />
 
-      <PageSection>
-        {/* Quick comparison */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-16">
-          {products.map((p) => {
-            const Icon = iconMap[p.icon] || Zap
-            return (
-              <Link key={p.id} href={`#${p.id}`} className="bg-neutral-50 dark:bg-neutral-800 rounded-xl p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-500/30 hover:bg-white dark:hover:bg-neutral-700 transition-all text-center group">
-                <Icon className="w-6 h-6 text-primary-500 mx-auto mb-2" />
-                <div className="font-semibold text-sm text-neutral-900 dark:text-white group-hover:text-primary-600 transition-colors">{p.name}</div>
-                <div className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">{p.price}</div>
-              </Link>
-            )
-          })}
-        </div>
+      <section className="section-padding bg-white dark:bg-neutral-950">
+        <div className="section-container">
+          {/* Quick nav — scrollable row on mobile, grid on desktop */}
+          <div className="flex overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0 gap-3 sm:gap-4 pb-2 mb-10 sm:mb-16 sm:grid sm:grid-cols-5 scrollbar-none snap-x">
+            {products.map((p) => {
+              const Icon = iconMap[p.icon] || Zap
+              return (
+                <Link key={p.id} href={`#${p.id}`} className="snap-start shrink-0 sm:shrink bg-neutral-50 dark:bg-neutral-800 rounded-xl p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-500/30 hover:bg-white dark:hover:bg-neutral-700 transition-all text-center group min-w-[120px] sm:min-w-0">
+                  <Icon className="w-5 h-5 text-primary-500 mx-auto mb-1.5 group-hover:scale-105 transition-transform" />
+                  <div className="font-semibold text-xs sm:text-sm text-neutral-900 dark:text-white group-hover:text-primary-600 transition-colors leading-tight">{p.name}</div>
+                  <div className="text-[10px] sm:text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">{p.price}</div>
+                </Link>
+              )
+            })}
+          </div>
 
-        {/* Product details */}
-        <div className="space-y-32">
-          {productDetails.map((product) => {
-            const Icon = iconMap[product.icon] || Zap
-            return (
-              <AnimatedSection key={product.id} animation="fade-up">
-                <div id={product.id} className="grid lg:grid-cols-5 gap-12 scroll-mt-24">
-                  <div className="lg:col-span-3">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
-                        <Icon className="w-8 h-8 text-white" />
-                      </div>
-                      <div>
-                        <h2 className="text-3xl font-heading font-bold dark:text-white">{product.name}</h2>
-                        <p className="text-neutral-600 dark:text-neutral-400 italic">{product.tagline}</p>
-                      </div>
-                    </div>
-                    <p className="text-neutral-600 dark:text-neutral-400 mb-8 leading-relaxed text-lg">{product.description}</p>
-
-                    <h3 className="font-semibold mb-4 dark:text-white">Key Features</h3>
-                    <ul className="grid sm:grid-cols-2 gap-3 mb-8">
-                      {product.features.map((f, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-300">
-                          <Check size={16} className="text-success mt-0.5 shrink-0" />
-                          {f}
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div className="flex flex-wrap gap-6">
-                      <div>
-                        <h4 className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 font-semibold mb-2">Tech Stack</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {product.tech.map((t) => (
-                            <span key={t} className="chip bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 text-xs">{t}</span>
-                          ))}
+          {/* Product details */}
+          <div className="space-y-24 sm:space-y-32">
+            {productDetails.map((product) => {
+              const Icon = iconMap[product.icon] || Zap
+              return (
+                <AnimatedSection key={product.id} animation="fade-up">
+                  <div id={product.id} className="grid lg:grid-cols-5 gap-8 lg:gap-12 scroll-mt-24">
+                    <div className="lg:col-span-3">
+                      <div className="flex items-center gap-4 mb-5">
+                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center shrink-0">
+                          <Icon className="w-7 h-7 text-white" />
+                        </div>
+                        <div className="min-w-0">
+                          <h2 className="text-2xl sm:text-3xl font-heading font-bold dark:text-white">{product.name}</h2>
+                          <p className="text-neutral-500 dark:text-neutral-400 italic text-sm truncate">{product.tagline}</p>
                         </div>
                       </div>
-                      <div>
-                        <h4 className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 font-semibold mb-2">User Roles</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {product.roles.map((r) => (
-                            <span key={r} className="chip bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-xs">{r}</span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                      <p className="text-neutral-600 dark:text-neutral-400 mb-6 sm:mb-8 leading-relaxed text-base sm:text-lg">{product.description}</p>
 
-                  <div className="lg:col-span-2">
-                    <div className="bg-neutral-50 dark:bg-neutral-800 rounded-2xl p-6 border border-neutral-200 dark:border-neutral-700 sticky top-28">
-                      <div className="text-sm text-neutral-600 dark:text-neutral-400 mb-1">Starting from</div>
-                      <div className="text-3xl font-heading font-bold text-primary-600 dark:text-primary-400 mb-6">{product.price}</div>
-                      <Link href="/contact" className="btn-primary w-full mb-4">Start Free Trial <ArrowRight size={18} /></Link>
-                      <h4 className="font-semibold text-sm mb-3 dark:text-white">App Screens</h4>
-                      <ul className="space-y-2">
-                        {product.screens.map((s, i) => (
-                          <li key={i} className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-300">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary-500 shrink-0" />
-                            {s}
+                      <h3 className="font-semibold mb-3 sm:mb-4 dark:text-white text-sm">Key Features</h3>
+                      <ul className="grid sm:grid-cols-2 gap-2 sm:gap-3 mb-6 sm:mb-8">
+                        {product.features.map((f, i) => (
+                          <li key={i} className="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-300">
+                            <Check size={15} className="text-success mt-0.5 shrink-0" />
+                            <span className="leading-snug">{f}</span>
                           </li>
                         ))}
                       </ul>
+
+                      <div className="flex flex-col sm:flex-row gap-6">
+                        <div className="min-w-0">
+                          <h4 className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 font-semibold mb-2">Tech Stack</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {product.tech.map((t) => (
+                              <span key={t} className="chip bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 text-xs">{t}</span>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="min-w-0">
+                          <h4 className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 font-semibold mb-2">User Roles</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {product.roles.map((r) => (
+                              <span key={r} className="chip bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-xs">{r}</span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="lg:col-span-2">
+                      <div className="bg-neutral-50 dark:bg-neutral-800 rounded-2xl p-6 border border-neutral-200 dark:border-neutral-700 lg:sticky lg:top-28">
+                        <div className="text-sm text-neutral-600 dark:text-neutral-400 mb-1">Starting from</div>
+                        <div className="text-2xl sm:text-3xl font-heading font-bold text-primary-600 dark:text-primary-400 mb-6">{product.price}</div>
+                        <Link href="/contact" className="btn-primary w-full text-center mb-6">Start Free Trial <ArrowRight size={18} /></Link>
+                        <h4 className="font-semibold text-sm mb-3 dark:text-white">App Screens</h4>
+                        <ul className="space-y-2">
+                          {product.screens.map((s, i) => (
+                            <li key={i} className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-300">
+                              <div className="w-1.5 h-1.5 rounded-full bg-primary-500 shrink-0" />
+                              <span className="leading-snug">{s}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </AnimatedSection>
-            )
-          })}
+                </AnimatedSection>
+              )
+            })}
+          </div>
         </div>
-      </PageSection>
+      </section>
 
-      <section className="py-20 gradient-bg">
+      <section className="py-16 sm:py-20 gradient-bg">
         <div className="section-container text-center">
-          <h2 className="text-3xl font-heading font-bold text-white mb-4">Try Any Product Free for 14 Days</h2>
-          <p className="text-primary-200 mb-8 max-w-xl mx-auto">No credit card required. AI-powered software that works.</p>
-          <Link href="/contact" className="btn-white text-lg px-8 py-4">Start Free Trial <ArrowRight size={20} /></Link>
+          <h2 className="text-2xl sm:text-3xl font-heading font-bold text-white mb-3 sm:mb-4">Try Any Product Free for 14 Days</h2>
+          <p className="text-primary-200 text-base sm:text-lg mb-6 sm:mb-8 max-w-xl mx-auto">No credit card required. AI-powered software that works.</p>
+          <Link href="/contact" className="btn-white text-base sm:text-lg px-6 sm:px-8 py-3.5 sm:py-4">Start Free Trial <ArrowRight size={18} /></Link>
         </div>
       </section>
     </PageLayout>

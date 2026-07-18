@@ -1,9 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { TrendingUp, Clock, DollarSign } from 'lucide-react'
-import { PageLayout, PageHeader, PageSection } from '@/components/PageLayout'
-import { AnimatedSection, StaggerGroup } from '@/components/ScrollAnimations'
+import Link from 'next/link'
+import { ArrowRight, TrendingUp, Clock, DollarSign } from 'lucide-react'
+import { PageLayout, PageHeader } from '@/components/PageLayout'
+import { AnimatedSection } from '@/components/ScrollAnimations'
 
 const projects = [
   { title: 'FinTech Trading Dashboard', industry: 'Fintech', problem: 'Manual trading processes with 15-minute data latency', solution: 'Real-time AI-powered trading dashboard with sub-second data refresh and predictive analytics', tech: ['React', 'Node.js', 'WebSockets', 'Python ML'], timeline: '6 weeks', budget: '₹6,00,000', result: '40% faster trades, ₹2Cr+ monthly volume' },
@@ -22,6 +23,13 @@ const projects = [
 
 const industries = ['All', 'Fintech', 'Healthcare', 'E-commerce', 'Edtech', 'Logistics', 'Manufacturing', 'Enterprise', 'Security', 'Insurance', 'Education']
 
+const stats = [
+  { label: 'Projects Delivered', value: '200+' },
+  { label: 'Industries Served', value: '20' },
+  { label: 'Avg Delivery Time', value: '9 weeks' },
+  { label: 'Client Retention', value: '94%' },
+]
+
 export default function PortfolioPage() {
   const [filter, setFilter] = useState('All')
   const filtered = filter === 'All' ? projects : projects.filter(p => p.industry === filter)
@@ -30,57 +38,68 @@ export default function PortfolioPage() {
     <PageLayout>
       <PageHeader badge="Portfolio" title="200+ Projects. 20 Industries. Zero Humans." subtitle="Every project delivered by AI agents. Every client a success story." />
 
-      <PageSection>
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-          {[{ label: 'Projects', value: '200+' }, { label: 'Industries', value: '20' }, { label: 'Avg Delivery', value: '9 weeks' }, { label: 'Client Retention', value: '94%' }].map((s) => (
-            <div key={s.label} className="text-center">
-              <div className="text-3xl font-heading font-bold text-primary-600 dark:text-primary-400">{s.value}</div>
-              <div className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">{s.label}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* Filters */}
-        <div className="flex flex-wrap gap-2 mb-12">
-          {industries.map((f) => (
-            <button key={f} onClick={() => setFilter(f)}
-              className={`chip transition-all ${filter === f ? 'bg-primary-500 text-white' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'}`}>
-              {f}
-            </button>
-          ))}
-        </div>
-
-        {/* Grid */}
-        <StaggerGroup className="grid md:grid-cols-2 gap-8">
-          {filtered.map((project, i) => (
-            <AnimatedSection key={i} animation="fade-up" delay={i * 50}>
-              <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 hover:shadow-xl hover:border-primary-500/20 transition-all duration-300 group">
-                <div className="flex items-start justify-between mb-4">
-                  <span className="chip bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-xs">{project.industry}</span>
-                </div>
-                <h3 className="text-xl font-heading font-bold mb-3 dark:text-white group-hover:text-primary-600 transition-colors">{project.title}</h3>
-                <div className="space-y-2 mb-4">
-                  <p className="text-sm text-neutral-500 font-medium uppercase tracking-wider">Problem</p>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400">{project.problem}</p>
-                  <p className="text-sm text-neutral-500 font-medium uppercase tracking-wider mt-3">Solution</p>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400">{project.solution}</p>
-                </div>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.map((t) => (
-                    <span key={t} className="chip bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 text-xs">{t}</span>
-                  ))}
-                </div>
-                <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400 border-t border-neutral-100 dark:border-neutral-700 pt-4">
-                  <span className="flex items-center gap-1"><Clock size={14} /> {project.timeline}</span>
-                  <span className="flex items-center gap-1"><DollarSign size={14} /> {project.budget}</span>
-                  <span className="flex items-center gap-1 text-success"><TrendingUp size={14} /> {project.result}</span>
-                </div>
+      <section className="section-padding bg-white dark:bg-neutral-950">
+        <div className="section-container">
+          {/* Stats */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-8 mb-10 sm:mb-16">
+            {stats.map((s) => (
+              <div key={s.label} className="text-center bg-neutral-50 dark:bg-neutral-900 rounded-2xl p-4 sm:p-6 border border-neutral-100 dark:border-neutral-800">
+                <div className="text-2xl sm:text-3xl font-heading font-bold text-primary-600 dark:text-primary-400">{s.value}</div>
+                <div className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mt-1">{s.label}</div>
               </div>
-            </AnimatedSection>
-          ))}
-        </StaggerGroup>
-      </PageSection>
+            ))}
+          </div>
+
+          {/* Filters — scrollable on mobile */}
+          <div className="flex overflow-x-auto gap-2 pb-2 mb-8 sm:mb-12 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap sm:overflow-visible scrollbar-none">
+            {industries.map((f) => (
+              <button key={f} onClick={() => setFilter(f)}
+                className={`chip whitespace-nowrap transition-all shrink-0 ${filter === f ? 'bg-primary-500 text-white' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'}`}>
+                {f}
+              </button>
+            ))}
+          </div>
+
+          {/* Results count */}
+          <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-6">{filtered.length} project{filtered.length !== 1 ? 's' : ''}</p>
+
+          {/* Grid */}
+          <div className="grid sm:grid-cols-2 gap-4 sm:gap-8">
+            {filtered.map((project, i) => (
+              <AnimatedSection key={i} animation="fade-up" delay={i * 50}>
+                <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-5 sm:p-6 hover:shadow-xl hover:border-primary-500/20 transition-all duration-300 group flex flex-col h-full">
+                  <div className="flex items-start justify-between mb-3">
+                    <span className="chip bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-xs">{project.industry}</span>
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-heading font-bold mb-3 dark:text-white group-hover:text-primary-600 transition-colors leading-snug">{project.title}</h3>
+                  <div className="space-y-1.5 mb-4 flex-1">
+                    <p className="text-[11px] text-neutral-500 font-semibold uppercase tracking-wider">Problem</p>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">{project.problem}</p>
+                    <p className="text-[11px] text-neutral-500 font-semibold uppercase tracking-wider mt-3">Solution</p>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">{project.solution}</p>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {project.tech.map((t) => (
+                      <span key={t} className="chip bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 text-[11px]">{t}</span>
+                    ))}
+                  </div>
+                  <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 border-t border-neutral-100 dark:border-neutral-700 pt-4">
+                    <span className="flex items-center gap-1"><Clock size={13} /> {project.timeline}</span>
+                    <span className="flex items-center gap-1"><DollarSign size={13} /> {project.budget}</span>
+                    <span className="flex items-center gap-1 text-success font-medium"><TrendingUp size={13} /> {project.result}</span>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          {filtered.length === 0 && (
+            <div className="text-center py-12 text-neutral-500">
+              No projects found for this filter.
+            </div>
+          )}
+        </div>
+      </section>
     </PageLayout>
   )
 }

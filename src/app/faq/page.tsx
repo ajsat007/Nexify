@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { ArrowRight, ChevronRight, Search } from 'lucide-react'
-import { PageLayout, PageHeader, PageSection } from '@/components/PageLayout'
+import { ArrowRight, ChevronRight, Search, HelpCircle } from 'lucide-react'
+import { PageLayout, PageHeader } from '@/components/PageLayout'
 
 const categories = ['All', 'General', 'Services', 'Pricing', 'Process', 'Technology', 'Security']
 
@@ -35,50 +35,72 @@ export default function FAQPage() {
     <PageLayout>
       <PageHeader badge="FAQ" title="Questions? We Have Answers." subtitle="Everything you need to know about working with an AI-powered software company." />
 
-      <PageSection>
-        <div className="max-w-3xl mx-auto">
-          <div className="relative mb-8">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
-            <input type="text" placeholder="Search questions..." className="input-field pl-12 py-4" value={search} onChange={e => setSearch(e.target.value)} />
-          </div>
+      <section className="section-padding bg-white dark:bg-neutral-950">
+        <div className="section-container">
+          <div className="max-w-3xl mx-auto">
+            {/* Search */}
+            <div className="relative mb-6 sm:mb-8">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-neutral-400" />
+              <input
+                type="text"
+                placeholder="Search questions..."
+                className="w-full pl-10 sm:pl-12 pr-4 py-3 sm:py-4 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-500/30 transition-all text-sm sm:text-base"
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+              />
+            </div>
 
-          <div className="flex flex-wrap gap-2 mb-8">
-            {categories.map(cat => (
-              <button key={cat} onClick={() => setActiveCategory(cat)}
-                className={`chip transition-all ${activeCategory === cat ? 'bg-primary-500 text-white' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'}`}>
-                {cat}
-              </button>
-            ))}
-          </div>
+            {/* Category filters — scrollable on mobile */}
+            <div className="flex overflow-x-auto gap-2 pb-2 mb-6 sm:mb-8 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap sm:overflow-visible scrollbar-none">
+              {categories.map(cat => (
+                <button key={cat} onClick={() => setActiveCategory(cat)}
+                  className={`chip whitespace-nowrap shrink-0 transition-all ${activeCategory === cat ? 'bg-primary-500 text-white' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'}`}>
+                  {cat}
+                </button>
+              ))}
+            </div>
 
-          <div className="space-y-3">
-            {filtered.length === 0 ? (
-              <div className="text-center py-12 text-neutral-500">No questions found for &ldquo;{search}&rdquo;</div>
-            ) : (
-              filtered.map((faq, i) => (
-                <div key={i} className="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden transition-all">
-                  <button onClick={() => setActiveFaq(activeFaq === i ? null : i)} className="w-full flex items-center justify-between p-5 text-left">
-                    <div className="flex items-center gap-3">
-                      <span className="chip bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-xs hidden sm:inline-flex">{faq.category}</span>
-                      <span className="font-medium text-neutral-900 dark:text-white">{faq.q}</span>
-                    </div>
-                    <ChevronRight size={20} className={`text-neutral-500 shrink-0 transition-transform duration-300 ${activeFaq === i ? 'rotate-90' : ''}`} />
-                  </button>
-                  <div className={`transition-all duration-300 overflow-hidden ${activeFaq === i ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-                    <p className="px-5 pb-5 text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">{faq.a}</p>
-                  </div>
+            {/* Results count */}
+            <p className="text-xs sm:text-sm text-neutral-500 mb-4">{filtered.length} question{filtered.length !== 1 ? 's' : ''}</p>
+
+            {/* FAQ list */}
+            <div className="space-y-2 sm:space-y-3">
+              {filtered.length === 0 ? (
+                <div className="text-center py-16 text-neutral-500">
+                  <HelpCircle className="w-10 h-10 mx-auto mb-3 text-neutral-300 dark:text-neutral-600" />
+                  <p>No questions found for &ldquo;{search}&rdquo;</p>
+                  <button onClick={() => setSearch('')} className="text-primary-500 text-sm mt-2 hover:underline">Clear search</button>
                 </div>
-              ))
-            )}
+              ) : (
+                filtered.map((faq, i) => (
+                  <div key={i} className="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden transition-all">
+                    <button
+                      onClick={() => setActiveFaq(activeFaq === i ? null : i)}
+                      className="w-full flex items-center justify-between p-4 sm:p-5 text-left gap-3 min-h-[52px]"
+                      aria-expanded={activeFaq === i}
+                    >
+                      <div className="flex items-start sm:items-center gap-2 sm:gap-3 min-w-0">
+                        <span className="chip bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-[11px] shrink-0 mt-0.5 sm:mt-0 hidden sm:inline-flex">{faq.category}</span>
+                        <span className="font-medium text-sm sm:text-base text-neutral-900 dark:text-white leading-snug">{faq.q}</span>
+                      </div>
+                      <ChevronRight size={18} className={`text-neutral-500 shrink-0 transition-transform duration-300 ${activeFaq === i ? 'rotate-90' : ''}`} />
+                    </button>
+                    <div className={`transition-all duration-300 overflow-hidden ${activeFaq === i ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                      <p className="px-4 sm:px-5 pb-4 sm:pb-5 text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">{faq.a}</p>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
           </div>
         </div>
-      </PageSection>
+      </section>
 
-      <section className="py-20 gradient-bg">
+      <section className="py-16 sm:py-20 gradient-bg">
         <div className="section-container text-center">
-          <h2 className="text-3xl font-heading font-bold text-white mb-4">Still Have Questions?</h2>
-          <p className="text-primary-200 mb-8">Our AI support agent is available 24/7.</p>
-          <Link href="/contact" className="btn-white text-lg px-8 py-4">Ask Our AI <ArrowRight size={20} /></Link>
+          <h2 className="text-2xl sm:text-3xl font-heading font-bold text-white mb-3 sm:mb-4">Still Have Questions?</h2>
+          <p className="text-primary-200 text-base sm:text-lg mb-6 sm:mb-8">Our AI support agent is available 24/7.</p>
+          <Link href="/contact" className="btn-white text-base sm:text-lg px-6 sm:px-8 py-3.5 sm:py-4">Ask Our AI <ArrowRight size={18} /></Link>
         </div>
       </section>
     </PageLayout>

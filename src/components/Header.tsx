@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X, ChevronDown, Sun, Moon, Home } from 'lucide-react'
@@ -24,6 +24,19 @@ export default function Header() {
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Close dropdown when clicking outside
+  const handleClickOutside = useCallback((e: MouseEvent) => {
+    const target = e.target as HTMLElement
+    if (!target.closest('[data-dropdown]')) {
+      setActiveDropdown(null)
+    }
+  }, [])
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside)
+    return () => document.removeEventListener('click', handleClickOutside)
+  }, [handleClickOutside])
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || !isHome ? 'bg-neutral-900/95 backdrop-blur-xl shadow-lg shadow-black/10' : 'bg-transparent'}`}>
@@ -50,22 +63,33 @@ export default function Header() {
                 <div
                   key={item.name}
                   className="relative"
+                  data-dropdown
                   onMouseEnter={() => setActiveDropdown(item.name)}
                 >
-                  <button className="nav-link text-sm font-medium py-2 flex items-center gap-1">
+                  <button
+                    className="nav-link text-sm font-medium py-2 flex items-center gap-1"
+                    onClick={() => setActiveDropdown(activeDropdown === item.name ? null : item.name)}
+                    aria-expanded={activeDropdown === item.name}
+                  >
                     {item.name} <ChevronDown size={14} className={`transition-transform ${activeDropdown === item.name ? 'rotate-180' : ''}`} />
                   </button>
                   {activeDropdown === item.name && (
-                    <div className="absolute top-full left-0 mt-2 w-56 bg-neutral-800/95 backdrop-blur-xl rounded-2xl border border-neutral-700 shadow-2xl py-2 animate-slide-down">
-                      {item.children?.map((child) => (
-                        <Link
-                          key={child.name}
-                          href={child.href}
-                          className="block px-5 py-2.5 text-sm text-neutral-300 hover:text-white hover:bg-neutral-700/50 transition-all"
-                        >
-                          {child.name}
-                        </Link>
-                      ))}
+                    <div
+                      className="absolute top-full left-0 w-56"
+                      style={{ paddingTop: '12px' }}
+                    >
+                      <div className="bg-neutral-800/95 backdrop-blur-xl rounded-2xl border border-neutral-700 shadow-2xl py-2 animate-slide-down">
+                        {item.children?.map((child) => (
+                          <Link
+                            key={child.name}
+                            href={child.href}
+                            className="block px-5 py-2.5 text-sm text-neutral-300 hover:text-white hover:bg-neutral-700/50 transition-all"
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            {child.name}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>
