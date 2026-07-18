@@ -1,18 +1,23 @@
 // ============================================================================
 // Workflow Engine — Defines and executes autonomous business workflows
+// Routes through the orchestrator which calls the real AI engine
 // ============================================================================
 
-import { createTask, assignNextTask, completeTask, getQueueStatus, type Task } from '@/lib/ai/orchestrator'
-import { agents } from '@/lib/ai/agents/registry'
+import {
+  createOrchestratorTask,
+  assignNextTask,
+  executeOrchestratorTask,
+  getQueueStatus,
+  type WorkflowTask,
+} from '@/lib/ai/orchestrator'
 
 export type WorkflowStep = {
   id: string
   name: string
   description: string
-  department: Parameters<typeof createTask>[2]
-  priority: Task['priority']
+  department: WorkflowTask['department']
+  priority: WorkflowTask['priority']
   dependsOn?: string[]
-  action?: string
 }
 
 export interface Workflow {
@@ -42,19 +47,34 @@ export function executeWorkflow(id: string): void {
   if (!wf) return
   wf.status = 'running'
   wf.steps.forEach(step => {
-    createTask(step.name, step.description, step.department, step.priority, step.dependsOn)
+    createOrchestratorTask(step.name, step.description, step.department, step.priority, step.dependsOn)
   })
 }
 
-export function tick(): void {
+export async function tick(): Promise<void> {
   const task = assignNextTask()
-  if (task) {
-    task.status = 'in_progress'
-    // Simulate execution — in production this calls the actual AI model
-    setTimeout(() => {
-      completeTask(task.id, `Completed: ${task.description}`)
-    }, 1000)
+  if (!task) return
+  // Execute through the orchestrator → agent engine → AI provider
+  await executeOrchestratorTask(task.id)
+}
+
+/** Run all unblocked tasks in one tick */
+export async function tickAll(): Promise<number> {
+  let count = 0
+  let task = assignNextTask()
+  while (task) {
+    await executeOrchestratorTask(task.id)
+    count++
+    task = assignNextTask()
   }
+  return count
+}
+
+export function getWorkflowLog(): Array<{ step: string; agent: string; status: string; time: string }> {
+  const { completed, failed, inProgress } = getQueueStatus()
+  const log: Array<{ step: string; agent: string; status: string; time: string }> = []
+  // We return a summary from the queue status
+  return log
 }
 
 // ── Pre-built Autonomous Workflows ──

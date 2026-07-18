@@ -1,14 +1,16 @@
 // ============================================================================
 // AI Orchestrator — Routes tasks to the right AI agents
+// Uses the primary agent registry from @/agents/registry
 // ============================================================================
 
-import { agents, type AgentDefinition, type Department } from '@/lib/ai/agents/registry'
+import { agentRegistry, getAgentById, type AgentDepartment } from '@/agents/registry'
+import { executeTask, type AgentTask } from '@/agents/engine'
 
-export interface Task {
+export interface WorkflowTask {
   id: string
   type: string
   description: string
-  department: Department
+  department: AgentDepartment
   priority: 'low' | 'medium' | 'high' | 'critical'
   status: 'pending' | 'assigned' | 'in_progress' | 'review' | 'completed' | 'failed'
   assignedTo?: string
@@ -18,11 +20,17 @@ export interface Task {
   dependsOn?: string[]
 }
 
-const taskQueue: Task[] = []
-const completedTasks: Task[] = []
+const taskQueue: WorkflowTask[] = []
+const completedTasks: WorkflowTask[] = []
 
-export function createTask(type: string, description: string, department: Department, priority: Task['priority'] = 'medium', dependsOn?: string[]): Task {
-  const task: Task = {
+export function createOrchestratorTask(
+  type: string,
+  description: string,
+  department: AgentDepartment,
+  priority: WorkflowTask['priority'] = 'medium',
+  dependsOn?: string[]
+): WorkflowTask {
+  const task: WorkflowTask = {
     id: `task-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
     type, description, department, priority,
     status: 'pending',
@@ -33,14 +41,16 @@ export function createTask(type: string, description: string, department: Depart
   return task
 }
 
-export function findAgent(department: Department): AgentDefinition | undefined {
-  return agents.find(a => a.department === department && a.status === 'active')
+export function findAgent(department: AgentDepartment) {
+  return agentRegistry.find(a => a.department === department && a.status === 'active')
 }
 
-export function assignNextTask(): Task | undefined {
+export function assignNextTask(): WorkflowTask | undefined {
   const task = taskQueue.find(t => {
     if (t.status !== 'pending') return false
-    if (t.dependsOn) return t.dependsOn.every(id => completedTasks.find(ct => ct.id === id && ct.status === 'completed'))
+    if (t.dependsOn) return t.dependsOn.every(id =>
+      completedTasks.find(ct => ct.id === id && ct.status === 'completed')
+    )
     return true
   })
   if (!task) return
@@ -52,7 +62,38 @@ export function assignNextTask(): Task | undefined {
   return task
 }
 
-export function completeTask(id: string, result: string): void {
+export async function executeOrchestratorTask(id: string): Promise<void> {
+  const task = taskQueue.find(t => t.id === id)
+  if (!task) return
+
+  task.status = 'in_progress'
+
+  // Route to the main agent engine for real AI execution
+  try {
+    const engineTask: AgentTask = {
+      id: task.id,
+      title: task.type,
+      description: task.description,
+      assignedTo: task.assignedTo || 'unassigned',
+      priority: task.priority,
+      status: 'in_progress',
+      input: task.description,
+      dependsOn: [],
+      createdAt: task.createdAt,
+    }
+
+    const result = await executeTask(engineTask.id)
+    task.result = result.output || 'Completed'
+    task.status = 'completed'
+    task.completedAt = Date.now()
+    completedTasks.push(task)
+  } catch (err: any) {
+    task.status = 'failed'
+    task.result = err.message
+  }
+}
+
+export function completeOrchestratorTask(id: string, result: string): void {
   const task = taskQueue.find(t => t.id === id)
   if (task) {
     task.status = 'completed'
@@ -71,3 +112,5 @@ export function getQueueStatus() {
     failed: taskQueue.filter(t => t.status === 'failed').length,
   }
 }
+
+export { taskQueue, completedTasks }

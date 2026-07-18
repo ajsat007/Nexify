@@ -25,6 +25,7 @@ export const navigation: NavItem[] = [
   { name: 'Portfolio', href: '/portfolio' },
   { name: 'Pricing', href: '/pricing' },
   { name: 'About', href: '/about' },
+  { name: 'Agents', href: '/agents' },
   {
     name: 'Resources', href: '#', hasDropdown: true,
     children: [
