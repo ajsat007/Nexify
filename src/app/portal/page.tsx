@@ -17,14 +17,15 @@ export default function PortalPage() {
   const [magicSent, setMagicSent] = useState(false)
   const [paying, setPaying] = useState<string | null>(null)
 
-  // Check for existing session or magic link token
+  // Check for existing session or email param from magic link
   useEffect(() => {
     const checkSession = async () => {
       const params = new URLSearchParams(window.location.search)
       const token = params.get('token')
       const emailParam = params.get('email')
 
-      if (token && emailParam) {
+      // If email is in URL, auto-login (token optional — email is enough)
+      if (emailParam) {
         setEmail(emailParam)
         await doLogin(emailParam)
         return

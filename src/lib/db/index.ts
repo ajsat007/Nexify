@@ -1,8 +1,7 @@
 // ============================================================================
 // Nexify — SQLite Database Client
-// Persistent storage using better-sqlite3. Works locally and on Vercel
-// (writes to /tmp/ on Vercel which persists per-deployment).
-// Data directory: nexify.db in the project root (or /tmp/nexify.db on Vercel)
+// Auto-seeds on first access. On Vercel each instance gets its own /tmp/,
+// so we auto-seed every time the DB is empty.
 // ============================================================================
 
 import Database from 'better-sqlite3'
@@ -20,7 +19,6 @@ let db: Database.Database | null = null
 export function getDb(): Database.Database {
   if (db) return db
 
-  // Ensure the directory exists
   const dir = path.dirname(DB_PATH)
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true })
@@ -30,8 +28,8 @@ export function getDb(): Database.Database {
   db.pragma('journal_mode = WAL')
   db.pragma('foreign_keys = ON')
 
-  // Run migrations
   migrate(db)
+  autoSeed(db)
 
   return db
 }
@@ -107,6 +105,14 @@ function migrate(db: Database.Database): void {
       created_at TEXT DEFAULT (datetime('now'))
     );
 
+    CREATE TABLE IF NOT EXISTS sessions (
+      id TEXT PRIMARY KEY,
+      email TEXT NOT NULL,
+      role TEXT DEFAULT 'client',
+      created_at TEXT DEFAULT (datetime('now')),
+      expires_at TEXT NOT NULL
+    );
+
     CREATE TABLE IF NOT EXISTS agent_tasks (
       id TEXT PRIMARY KEY,
       agent_id TEXT NOT NULL,
@@ -119,15 +125,46 @@ function migrate(db: Database.Database): void {
       created_at TEXT DEFAULT (datetime('now')),
       completed_at TEXT
     );
-
-    CREATE TABLE IF NOT EXISTS sessions (
-      id TEXT PRIMARY KEY,
-      email TEXT NOT NULL,
-      role TEXT DEFAULT 'client',
-      created_at TEXT DEFAULT (datetime('now')),
-      expires_at TEXT NOT NULL
-    );
   `)
+}
+
+function autoSeed(db: Database.Database): void {
+  const count = (db.prepare('SELECT COUNT(*) as c FROM leads').get() as any).c
+  if (count > 0) return
+
+  console.log('[DB] Auto-seeding demo data...')
+
+  // Seed leads
+  const leads = [
+    { id: 'LD-001', company: 'TechVista Solutions', contact_name: 'Vikram Singh', email: 'vikram@techvista.com', phone: '+91 98765 43210', source: 'LinkedIn', service_interest: 'Custom Software', budget: 800000, status: 'qualified', notes: 'Interested in ERP system for manufacturing', created_at: '2026-07-10T00:00:00Z', updated_at: '2026-07-10T00:00:00Z' },
+    { id: 'LD-002', company: 'GreenEnergy Corp', contact_name: 'Neha Patel', email: 'neha@greenenergy.com', phone: '+91 87654 32109', source: 'Website', service_interest: 'AI Solutions', budget: 1200000, status: 'proposal', notes: 'AI for energy optimization', created_at: '2026-07-08T00:00:00Z', updated_at: '2026-07-10T00:00:00Z' },
+    { id: 'LD-003', company: 'MediCare Hospitals', contact_name: 'Dr. Rajesh Kumar', email: 'rajesh@medicare.com', phone: '+91 76543 21098', source: 'Referral', service_interest: 'Mobile App', budget: 500000, status: 'new', notes: 'Patient portal app', created_at: '2026-07-11T00:00:00Z', updated_at: '2026-07-11T00:00:00Z' },
+    { id: 'LD-004', company: 'EduPrime Institute', contact_name: 'Ananya Gupta', email: 'ananya@eduprime.com', phone: '+91 65432 10987', source: 'Twitter/X', service_interest: 'Web Development', budget: 250000, status: 'qualified', notes: 'LMS platform', created_at: '2026-07-07T00:00:00Z', updated_at: '2026-07-07T00:00:00Z' },
+    { id: 'LD-005', company: 'StyleHub Fashion', contact_name: 'Priya Sharma', email: 'priya@stylehub.com', phone: '+91 43210 98765', source: 'LinkedIn', service_interest: 'E-commerce', budget: 600000, status: 'new', notes: 'Multi-vendor marketplace', created_at: '2026-07-11T00:00:00Z', updated_at: '2026-07-11T00:00:00Z' },
+  ]
+  const insertLead = db.prepare(`INSERT INTO leads (id, company, contact_name, email, phone, source, service_interest, budget, status, notes, created_at, updated_at) VALUES (@id, @company, @contact_name, @email, @phone, @source, @service_interest, @budget, @status, @notes, @created_at, @updated_at)`)
+  for (const l of leads) insertLead.run(l)
+
+  // Seed projects
+  const projects = [
+    { id: 'PRJ-001', name: 'FinTech Trading Dashboard', client: 'FinTech Labs', description: 'Real-time trading dashboard', value: 600000, status: 'active', progress: 78, deadline: '2026-07-15', tech_stack: '["React","Node.js","PostgreSQL","WebSocket"]', agent_ids: '["dev-alpha","design-gamma","qa-delta"]', created_at: '2026-04-01T00:00:00Z', updated_at: '2026-07-10T00:00:00Z' },
+    { id: 'PRJ-002', name: 'Healthcare Telemedicine App', client: 'HealthFirst', description: 'Cross-platform telemedicine', value: 1000000, status: 'active', progress: 45, deadline: '2026-08-30', tech_stack: '["React Native","Python","PostgreSQL","Twilio"]', agent_ids: '["mobile-eta","dev-beta","qa-delta"]', created_at: '2026-05-15T00:00:00Z', updated_at: '2026-07-10T00:00:00Z' },
+    { id: 'PRJ-003', name: 'E-commerce Recommendation Engine', client: 'StyleCart', description: 'AI recommendation system', value: 500000, status: 'active', progress: 92, deadline: '2026-07-10', tech_stack: '["Python","TensorFlow","Redis","FastAPI"]', agent_ids: '["ai-theta","data-zeta"]', created_at: '2026-04-20T00:00:00Z', updated_at: '2026-07-09T00:00:00Z' },
+    { id: 'PRJ-004', name: 'EdTech Learning Platform', client: 'EduVista', description: 'Online learning management system', value: 800000, status: 'active', progress: 30, deadline: '2026-09-15', tech_stack: '["Next.js","Node.js","PostgreSQL","AWS"]', agent_ids: '["frontend-lambda","dev-beta","design-gamma"]', created_at: '2026-06-01T00:00:00Z', updated_at: '2026-07-10T00:00:00Z' },
+    { id: 'PRJ-005', name: 'Logistics Fleet Management', client: 'LogiMove', description: 'Fleet tracking system', value: 750000, status: 'planning', progress: 10, deadline: '2026-10-01', tech_stack: '["React","Python","PostgreSQL","IoT"]', agent_ids: '["devops-epsilon","data-zeta"]', created_at: '2026-06-20T00:00:00Z', updated_at: '2026-07-01T00:00:00Z' },
+    { id: 'PRJ-006', name: 'AI Customer Support Chatbot', client: 'SupportPro', description: 'Multi-channel support chatbot', value: 300000, status: 'active', progress: 65, deadline: '2026-08-01', tech_stack: '["Python","LangChain","OpenAI","WhatsApp API"]', agent_ids: '["bot-kappa","ai-theta"]', created_at: '2026-05-10T00:00:00Z', updated_at: '2026-07-10T00:00:00Z' },
+    { id: 'PRJ-007', name: 'Retail Analytics Dashboard', client: 'RetailMax', description: 'Retail analytics', value: 350000, status: 'completed', progress: 100, deadline: '2026-06-30', tech_stack: '["React","Python","PostgreSQL","Metabase"]', agent_ids: '["data-zeta","frontend-lambda"]', created_at: '2026-03-15T00:00:00Z', updated_at: '2026-06-30T00:00:00Z' },
+    { id: 'PRJ-008', name: 'HRMS & Payroll System', client: 'EnterpriseCorp', description: 'HR management system', value: 600000, status: 'planning', progress: 5, deadline: '2026-10-15', tech_stack: '["Next.js","Node.js","PostgreSQL","AWS"]', agent_ids: '["dev-alpha","frontend-lambda"]', created_at: '2026-07-01T00:00:00Z', updated_at: '2026-07-05T00:00:00Z' },
+  ]
+  const insertProject = db.prepare(`INSERT INTO projects (id, name, client, description, value, status, progress, deadline, tech_stack, agent_ids, created_at, updated_at) VALUES (@id, @name, @client, @description, @value, @status, @progress, @deadline, @tech_stack, @agent_ids, @created_at, @updated_at)`)
+  for (const p of projects) insertProject.run(p)
+
+  // Users
+  db.prepare("INSERT INTO users (id, name, email, role) VALUES ('usr-001', 'Nexify Founder', 'founder@nexify.tech', 'founder')").run()
+  db.prepare("INSERT INTO users (id, name, email, role) VALUES ('usr-002', 'Rajesh Mehta', 'rajesh@fintechlabs.com', 'client')").run()
+  db.prepare("INSERT INTO users (id, name, email, role) VALUES ('usr-003', 'Neha Patel', 'neha@greenenergy.com', 'client')").run()
+
+  console.log('[DB] Auto-seed complete')
 }
 
 export function closeDb(): void {
