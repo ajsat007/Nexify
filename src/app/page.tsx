@@ -24,16 +24,57 @@ function ServiceCard({ service, index }: { service: any; index: number }) {
   return (
     <Link
       href={`/services#${service.id}`}
-      className="group relative bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-neutral-200 dark:border-neutral-700 hover:border-primary-500/30 transition-all duration-500 hover:shadow-2xl hover:-translate-y-1"
+      className="group relative flex flex-col bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 hover:border-primary-400/40 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 overflow-hidden"
     >
-      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500/10 to-accent-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-        <Icon className="w-6 h-6 text-primary-500" />
-      </div>
-      <h3 className="text-lg font-semibold mb-2 group-hover:text-primary-600 transition-colors dark:text-white">{service.title}</h3>
-      <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-4 line-clamp-2">{service.description}</p>
-      <div className="flex items-center justify-between">
-        <span className="text-primary-600 font-semibold text-sm">{service.price}</span>
-        <span className="text-xs text-neutral-500">{service.timeline}</span>
+      {/* Top accent bar on hover */}
+      <div className="h-1 w-full bg-gradient-to-r from-primary-500 to-accent-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+      <div className="flex flex-col flex-1 p-5 sm:p-6">
+        {/* Icon */}
+        <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-primary-500/10 to-accent-500/10 flex items-center justify-center mb-3.5 group-hover:from-primary-500/20 group-hover:to-accent-500/20 transition-colors duration-300 shrink-0">
+          <Icon className="w-5.5 h-5.5 text-primary-500 group-hover:scale-110 transition-transform duration-300" />
+        </div>
+
+        {/* Title */}
+        <h3 className="text-base sm:text-lg font-bold mb-1.5 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors dark:text-white leading-snug">
+          {service.title}
+        </h3>
+
+        {/* Description */}
+        <p className="text-neutral-500 dark:text-neutral-400 text-sm leading-relaxed mb-3 line-clamp-2">
+          {service.description}
+        </p>
+
+        {/* Feature chips */}
+        {service.features && service.features.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {service.features.slice(0, 3).map((f: string) => (
+              <span
+                key={f}
+                className="inline-flex items-center px-2.5 py-1 rounded-md bg-neutral-100 dark:bg-neutral-700/60 text-neutral-500 dark:text-neutral-400 text-[11px] font-medium leading-tight"
+              >
+                {f}
+              </span>
+            ))}
+            {service.features.length > 3 && (
+              <span className="inline-flex items-center px-2.5 py-1 rounded-md bg-neutral-100 dark:bg-neutral-700/60 text-neutral-400 dark:text-neutral-500 text-[11px] font-medium leading-tight">
+                +{service.features.length - 3}
+              </span>
+            )}
+          </div>
+        )}
+
+        {/* Spacer to push footer down */}
+        <div className="flex-1 min-h-0" />
+
+        {/* Footer */}
+        <div className="flex items-center justify-between pt-3 border-t border-neutral-100 dark:border-neutral-700/50">
+          <span className="text-primary-600 dark:text-primary-400 font-bold text-sm tracking-tight">{service.price}</span>
+          <span className="text-xs text-neutral-400 dark:text-neutral-500 flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/70" />
+            {service.timeline}
+          </span>
+        </div>
       </div>
     </Link>
   )
