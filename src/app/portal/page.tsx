@@ -5,6 +5,158 @@ import Link from 'next/link'
 import { FileText, FolderKanban, Loader, Shield, ArrowRight, Mail, CheckCircle } from 'lucide-react'
 import { Sidebar } from '@/components/Sidebar'
 
+// ── Project Delivery Card ──
+
+function ProjectDeliveryCard({ project, email }: { project: any; email: string }) {
+  const [delivery, setDelivery] = useState<any>(null)
+  const [loadingStatus, setLoadingStatus] = useState(true)
+
+  useEffect(() => {
+    const fetchStatus = async () => {
+      try {
+        const res = await fetch(`/api/delivery/status?projectId=${project.id}`)
+        const data = await res.json()
+        setDelivery(data)
+      } catch {} finally { setLoadingStatus(false) }
+    }
+    fetchStatus()
+    // Poll every 30s
+    const interval = setInterval(fetchStatus, 30000)
+    return () => clearInterval(interval)
+  }, [project.id])
+
+  const progress = delivery?.project?.progress || project.progress || 0
+  const milestones = delivery?.milestones || []
+  const updates = delivery?.updates || []
+  const github = delivery?.githubStats
+
+  return (
+    <div className="space-y-4">
+      {/* Project Header */}
+      <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+        <div className="p-5 sm:p-6">
+          <div className="flex items-center justify-between mb-3">
+            <div>
+              <h3 className="font-semibold dark:text-white text-base">{project.name}</h3>
+              <p className="text-xs text-neutral-500">{project.client}</p>
+            </div>
+            <span className="chip text-xs bg-emerald-100 text-emerald-600">{project.status}</span>
+          </div>
+
+          {/* Overall Progress */}
+          <div className="mb-4">
+            <div className="flex justify-between text-xs text-neutral-500 mb-1.5">
+              <span>Overall Progress</span>
+              <span className="font-semibold text-primary-600">{progress}%</span>
+            </div>
+            <div className="w-full h-2.5 rounded-full bg-neutral-200 dark:bg-neutral-700">
+              <div className="h-full rounded-full bg-gradient-to-r from-primary-500 to-accent-500 transition-all duration-1000" style={{width: progress + '%'}} />
+            </div>
+          </div>
+
+          {/* GitHub Link */}
+          {project.github_url && (
+            <a href={project.github_url} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 text-xs hover:bg-neutral-200 transition-all">
+              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              View on GitHub
+            </a>
+          )}
+          {!project.github_url && (
+            <span className="text-xs text-neutral-400">GitHub repo being created...</span>
+          )}
+        </div>
+      </div>
+
+      {/* Milestones */}
+      <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+        <div className="p-5 sm:p-6">
+          <h4 className="font-semibold text-sm mb-4 dark:text-white">Project Milestones</h4>
+          {loadingStatus ? (
+            <div className="flex items-center gap-2 text-sm text-neutral-400"><Loader size={14} className="animate-spin" /> Loading milestones...</div>
+          ) : milestones.length === 0 ? (
+            <p className="text-sm text-neutral-400">AI agents are planning the milestones...</p>
+          ) : (
+            <div className="space-y-3">
+              {milestones.map((m: any, i: number) => (
+                <div key={m.id} className="flex items-start gap-3">
+                  <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold ${
+                    m.status === 'completed' ? 'bg-emerald-100 text-emerald-600' :
+                    m.status === 'in_progress' ? 'bg-amber-100 text-amber-600' :
+                    'bg-neutral-100 dark:bg-neutral-700 text-neutral-400'
+                  }`}>
+                    {m.status === 'completed' ? '✓' : i + 1}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-medium dark:text-white">{m.title}</span>
+                      <span className={`text-xs ${
+                        m.status === 'completed' ? 'text-emerald-500' :
+                        m.status === 'in_progress' ? 'text-amber-500' :
+                        'text-neutral-400'
+                      }`}>{m.status.replace('_', ' ')}</span>
+                    </div>
+                    <p className="text-xs text-neutral-500 mt-0.5">{m.description}</p>
+                    {m.due_date && <p className="text-[10px] text-neutral-400 mt-0.5">Due: {new Date(m.due_date).toLocaleDateString()}</p>}
+                    {m.progress > 0 && (
+                      <div className="w-full h-1 rounded-full bg-neutral-200 dark:bg-neutral-700 mt-1.5">
+                        <div className="h-full rounded-full bg-primary-500" style={{width: m.progress + '%'}} />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* GitHub Stats */}
+      {github && (
+        <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-5">
+          <h4 className="font-semibold text-sm mb-3 dark:text-white">Development Activity</h4>
+          <div className="grid grid-cols-3 gap-4 text-center">
+            <div>
+              <div className="text-lg font-heading font-bold text-primary-600">{github.openIssues}</div>
+              <div className="text-xs text-neutral-500">Open Issues</div>
+            </div>
+            <div>
+              <div className="text-lg font-heading font-bold text-emerald-500">{github.closedIssues}</div>
+              <div className="text-xs text-neutral-500">Completed</div>
+            </div>
+            <div>
+              <div className="text-lg font-heading font-bold text-amber-500">{github.closedIssues + github.openIssues}</div>
+              <div className="text-xs text-neutral-500">Total Tasks</div>
+            </div>
+          </div>
+          {github.lastCommit && (
+            <p className="text-xs text-neutral-400 mt-3 text-center">
+              Last commit: {new Date(github.lastCommit).toLocaleDateString()}
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* Project Updates Feed */}
+      <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-5">
+        <h4 className="font-semibold text-sm mb-3 dark:text-white">AI Agent Updates</h4>
+        {updates.length === 0 ? (
+          <p className="text-sm text-neutral-400">No updates yet.</p>
+        ) : (
+          <div className="space-y-2">
+            {updates.slice(0, 10).map((u: any) => (
+              <div key={u.id} className="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-300">
+                <div className="w-1.5 h-1.5 rounded-full bg-primary-500 mt-2 shrink-0" />
+                <span className="text-xs leading-relaxed">{u.message}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 export default function PortalPage() {
   const [email, setEmail] = useState('')
   const [loggedIn, setLoggedIn] = useState(false)
@@ -257,27 +409,11 @@ export default function PortalPage() {
                   {projects.length === 0 ? (
                     <div className="text-center py-12 bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6">
                       <FolderKanban className="w-8 h-8 text-neutral-300 mx-auto mb-3" />
-                      <p className="text-sm text-neutral-500">No projects yet.</p>
+                      <p className="text-sm text-neutral-500">No projects yet. Accept a proposal to get started.</p>
                     </div>
-                  ) : projects.map((p: any) => (
-                    <div key={p.id} className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-5">
-                      <div className="flex items-center justify-between mb-3">
-                        <h3 className="font-semibold dark:text-white">{p.name}</h3>
-                        <span className="chip text-xs bg-emerald-100 text-emerald-600">{p.status}</span>
-                      </div>
-                      <p className="text-sm text-neutral-500 mb-3">{p.description}</p>
-                      {p.progress > 0 && (
-                        <div>
-                          <div className="flex justify-between text-xs text-neutral-500 mb-1">
-                            <span>Progress</span><span>{p.progress}%</span>
-                          </div>
-                          <div className="w-full h-2 rounded-full bg-neutral-200 dark:bg-neutral-700">
-                            <div className="h-full rounded-full bg-primary-500" style={{width: p.progress + '%'}} />
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                  ) : (
+                    <ProjectDeliveryCard project={projects[0]} email={email} />
+                  )}
                 </div>
               )}
             </>

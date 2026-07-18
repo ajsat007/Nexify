@@ -68,9 +68,17 @@ export async function POST(request: Request) {
       }
     }
 
+    // Auto-trigger delivery start (AI project plan + GitHub repo)
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nexify-rouge.vercel.app'
+    fetch(`${siteUrl}/api/delivery/start`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ projectId }),
+    }).catch(e => console.error('[Delivery] Auto-start failed:', e))
+
     return NextResponse.json({
       success: true,
-      message: 'Proposal accepted! Project created.',
+      message: 'Proposal accepted! Project created. AI agents are preparing the delivery plan.',
       projectId,
       invoiceId,
       paymentLink,

@@ -74,6 +74,8 @@ function migrate(db: Database.Database): void {
       status TEXT DEFAULT 'planning' CHECK(status IN ('planning','active','completed','on_hold')),
       progress INTEGER DEFAULT 0,
       deadline TEXT,
+      github_repo TEXT DEFAULT '',
+      github_url TEXT DEFAULT '',
       tech_stack TEXT DEFAULT '[]',
       agent_ids TEXT DEFAULT '[]',
       lead_id TEXT,
@@ -113,6 +115,28 @@ function migrate(db: Database.Database): void {
       expires_at TEXT NOT NULL
     );
 
+    CREATE TABLE IF NOT EXISTS milestones (
+      id TEXT PRIMARY KEY,
+      project_id TEXT NOT NULL,
+      title TEXT NOT NULL DEFAULT '',
+      description TEXT DEFAULT '',
+      due_date TEXT,
+      status TEXT DEFAULT 'pending' CHECK(status IN ('pending','in_progress','completed')),
+      progress INTEGER DEFAULT 0,
+      order_index INTEGER DEFAULT 0,
+      created_at TEXT DEFAULT (datetime('now')),
+      FOREIGN KEY (project_id) REFERENCES projects(id)
+    );
+
+    CREATE TABLE IF NOT EXISTS project_updates (
+      id TEXT PRIMARY KEY,
+      project_id TEXT NOT NULL,
+      message TEXT NOT NULL DEFAULT '',
+      type TEXT DEFAULT 'update' CHECK(type IN ('update','milestone','deploy','issue')),
+      created_at TEXT DEFAULT (datetime('now')),
+      FOREIGN KEY (project_id) REFERENCES projects(id)
+    );
+
     CREATE TABLE IF NOT EXISTS agent_tasks (
       id TEXT PRIMARY KEY,
       agent_id TEXT NOT NULL,
@@ -147,8 +171,8 @@ function autoSeed(db: Database.Database): void {
 
   // Seed projects
   const projects = [
-    { id: 'PRJ-001', name: 'FinTech Trading Dashboard', client: 'FinTech Labs', description: 'Real-time trading dashboard', value: 600000, status: 'active', progress: 78, deadline: '2026-07-15', tech_stack: '["React","Node.js","PostgreSQL","WebSocket"]', agent_ids: '["dev-alpha","design-gamma","qa-delta"]', created_at: '2026-04-01T00:00:00Z', updated_at: '2026-07-10T00:00:00Z' },
-    { id: 'PRJ-002', name: 'Healthcare Telemedicine App', client: 'HealthFirst', description: 'Cross-platform telemedicine', value: 1000000, status: 'active', progress: 45, deadline: '2026-08-30', tech_stack: '["React Native","Python","PostgreSQL","Twilio"]', agent_ids: '["mobile-eta","dev-beta","qa-delta"]', created_at: '2026-05-15T00:00:00Z', updated_at: '2026-07-10T00:00:00Z' },
+    { id: 'PRJ-001', name: 'FinTech Trading Dashboard', client: 'FinTech Labs', description: 'Real-time trading dashboard', value: 600000, status: 'active', progress: 78, deadline: '2026-07-15', github_repo: 'fintech-trading-dashboard', github_url: 'https://github.com/ajsat007/fintech-trading-dashboard', tech_stack: '["React","Node.js","PostgreSQL","WebSocket"]', agent_ids: '["dev-alpha","design-gamma","qa-delta"]', created_at: '2026-04-01T00:00:00Z', updated_at: '2026-07-10T00:00:00Z' },
+    { id: 'PRJ-002', name: 'Healthcare Telemedicine App', client: 'HealthFirst', description: 'Cross-platform telemedicine', value: 1000000, status: 'active', progress: 45, deadline: '2026-08-30', github_repo: 'healthcare-telemedicine', github_url: 'https://github.com/ajsat007/healthcare-telemedicine', tech_stack: '["React Native","Python","PostgreSQL","Twilio"]', agent_ids: '["mobile-eta","dev-beta","qa-delta"]', created_at: '2026-05-15T00:00:00Z', updated_at: '2026-07-10T00:00:00Z' },
     { id: 'PRJ-003', name: 'E-commerce Recommendation Engine', client: 'StyleCart', description: 'AI recommendation system', value: 500000, status: 'active', progress: 92, deadline: '2026-07-10', tech_stack: '["Python","TensorFlow","Redis","FastAPI"]', agent_ids: '["ai-theta","data-zeta"]', created_at: '2026-04-20T00:00:00Z', updated_at: '2026-07-09T00:00:00Z' },
     { id: 'PRJ-004', name: 'EdTech Learning Platform', client: 'EduVista', description: 'Online learning management system', value: 800000, status: 'active', progress: 30, deadline: '2026-09-15', tech_stack: '["Next.js","Node.js","PostgreSQL","AWS"]', agent_ids: '["frontend-lambda","dev-beta","design-gamma"]', created_at: '2026-06-01T00:00:00Z', updated_at: '2026-07-10T00:00:00Z' },
     { id: 'PRJ-005', name: 'Logistics Fleet Management', client: 'LogiMove', description: 'Fleet tracking system', value: 750000, status: 'planning', progress: 10, deadline: '2026-10-01', tech_stack: '["React","Python","PostgreSQL","IoT"]', agent_ids: '["devops-epsilon","data-zeta"]', created_at: '2026-06-20T00:00:00Z', updated_at: '2026-07-01T00:00:00Z' },
@@ -156,7 +180,7 @@ function autoSeed(db: Database.Database): void {
     { id: 'PRJ-007', name: 'Retail Analytics Dashboard', client: 'RetailMax', description: 'Retail analytics', value: 350000, status: 'completed', progress: 100, deadline: '2026-06-30', tech_stack: '["React","Python","PostgreSQL","Metabase"]', agent_ids: '["data-zeta","frontend-lambda"]', created_at: '2026-03-15T00:00:00Z', updated_at: '2026-06-30T00:00:00Z' },
     { id: 'PRJ-008', name: 'HRMS & Payroll System', client: 'EnterpriseCorp', description: 'HR management system', value: 600000, status: 'planning', progress: 5, deadline: '2026-10-15', tech_stack: '["Next.js","Node.js","PostgreSQL","AWS"]', agent_ids: '["dev-alpha","frontend-lambda"]', created_at: '2026-07-01T00:00:00Z', updated_at: '2026-07-05T00:00:00Z' },
   ]
-  const insertProject = db.prepare(`INSERT INTO projects (id, name, client, description, value, status, progress, deadline, tech_stack, agent_ids, created_at, updated_at) VALUES (@id, @name, @client, @description, @value, @status, @progress, @deadline, @tech_stack, @agent_ids, @created_at, @updated_at)`)
+  const insertProject = db.prepare(`INSERT INTO projects (id, name, client, description, value, status, progress, deadline, github_repo, github_url, tech_stack, agent_ids, created_at, updated_at) VALUES (@id, @name, @client, @description, @value, @status, @progress, @deadline, @github_repo, @github_url, @tech_stack, @agent_ids, @created_at, @updated_at)`)
   for (const p of projects) insertProject.run(p)
 
   // Users
