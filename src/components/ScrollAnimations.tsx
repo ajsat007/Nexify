@@ -5,6 +5,7 @@ import { cn } from '@/utils'
 
 // ============================================================================
 // useScrollReveal — intersection observer with configurable animation
+// Touch devices: CSS handles visibility via data-reveal attribute (no flicker)
 // ============================================================================
 
 interface ScrollRevealOptions {
@@ -24,6 +25,7 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
   useEffect(() => {
     const el = ref.current
     if (!el) return
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry?.isIntersecting) {
@@ -44,6 +46,7 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
 
 // ============================================================================
 // AnimatedSection — wraps any section with scroll-reveal animation
+// Touch devices: CSS data-reveal override keeps content visible (no hidden sections)
 // ============================================================================
 
 interface AnimatedSectionProps {
@@ -78,6 +81,7 @@ export function AnimatedSection({
   return (
     <Tag
       ref={ref as any}
+      data-reveal="true"
       className={cn(
         'transition-all duration-700 ease-out',
         visible ? 'opacity-100 translate-y-0 translate-x-0 scale-100' : 'opacity-0',
@@ -160,7 +164,7 @@ export function AnimatedCounter({
   }, [visible, value, duration])
 
   return (
-    <span ref={ref as any} className={className}>
+    <span ref={ref as any} data-reveal="true" className={className}>
       {prefix}{count}{suffix}
     </span>
   )

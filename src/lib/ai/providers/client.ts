@@ -42,8 +42,7 @@ export function registerProvider(adapter: AIProviderAdapter) {
   providers.set(adapter.name, adapter)
 }
 
-// ── Mock Provider (offline/demo) ──
-
+// ── Mock Provider (offline/demo fallback) — registered as 'openai' only if no real provider set
 const mockResponses = [
   "I understand your query. Let me analyze this with my available context.",
   "Based on my analysis, I recommend exploring our custom software development services.",
@@ -54,25 +53,36 @@ const mockResponses = [
 
 function delay(ms: number) { return new Promise(r => setTimeout(r, ms)) }
 
-registerProvider({
-  name: 'openai',
-  async complete(req) {
-    await delay(500 + Math.random() * 1000)
-    return { content: mockResponses[Math.floor(Math.random() * mockResponses.length)], model: req.model || 'gpt-4o', provider: 'openai', usage: { promptTokens: 0, completionTokens: 0, totalTokens: 0 } }
-  },
-  async streamComplete(req, onToken) {
-    const text = mockResponses[Math.floor(Math.random() * mockResponses.length)]
-    for (const word of text.split(' ')) { await delay(50); onToken(word + ' ') }
-    return { content: text, model: req.model || 'gpt-4o', provider: 'openai' }
-  },
-  availableModels() { return ['gpt-4o', 'gpt-4o-mini', 'o3-mini'] },
-})
+function createMockProvider() {
+  return {
+    name: 'openai' as AIProviderType,
+    async complete(req: AICompletionRequest): Promise<AICompletionResponse> {
+      await delay(500 + Math.random() * 1000)
+      return { content: mockResponses[Math.floor(Math.random() * mockResponses.length)], model: req.model || 'gpt-4o', provider: 'openai', usage: { promptTokens: 0, completionTokens: 0, totalTokens: 0 } }
+    },
+    async streamComplete(req: AICompletionRequest, onToken: (token: string) => void): Promise<AICompletionResponse> {
+      const text = mockResponses[Math.floor(Math.random() * mockResponses.length)]
+      for (const word of text.split(' ')) { await delay(50); onToken(word + ' ') }
+      return { content: text, model: req.model || 'gpt-4o', provider: 'openai' }
+    },
+    availableModels() { return ['gpt-4o', 'gpt-4o-mini', 'o3-mini'] },
+  }
+}
 
 // ── Public API ──
 
 export function getProvider(name?: AIProviderType): AIProviderAdapter {
-  const p = name ? providers.get(name) : providers.get('openai')
-  return p || providers.get('openai')!
+  // If a specific provider was requested
+  if (name) {
+    return providers.get(name) || createMockProvider()
+  }
+  // Default to 'openai' — if a real OpenAI adapter registered, it wins
+  const existing = providers.get('openai')
+  if (existing) return existing
+  // Fall back to mock
+  const mock = createMockProvider()
+  registerProvider(mock)
+  return mock
 }
 
 export function getProviders(): AIProviderType[] {

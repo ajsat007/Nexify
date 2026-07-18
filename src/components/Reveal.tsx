@@ -44,6 +44,7 @@ export function Reveal({
   useEffect(() => {
     const el = ref.current
     if (!el) return
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry?.isIntersecting) {
@@ -62,10 +63,10 @@ export function Reveal({
   return (
     <div
       ref={ref}
+      data-reveal="true"
       className={cn(
         'transition-all ease-out',
-        getAnimationStyles(animation),
-        visible && 'translate-y-0 translate-x-0 scale-100 opacity-100',
+        visible ? 'translate-y-0 translate-x-0 scale-100 opacity-100' : getAnimationStyles(animation),
         className
       )}
       style={{

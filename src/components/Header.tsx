@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Menu, X, ChevronDown, Sun, Moon } from 'lucide-react'
+import { usePathname } from 'next/navigation'
+import { Menu, X, ChevronDown, Sun, Moon, Home } from 'lucide-react'
 import SiteSearch from '@/components/SiteSearch'
 import { navigation } from '@/constants'
 import { useTheme } from '@/components/ThemeProvider'
@@ -13,6 +14,8 @@ export default function Header() {
   const [mounted, setMounted] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const { theme, toggle } = useTheme()
+  const pathname = usePathname()
+  const isHome = pathname === '/'
 
   useEffect(() => { setMounted(true) }, [])
 
@@ -23,7 +26,7 @@ export default function Header() {
   }, [])
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-neutral-900/95 backdrop-blur-xl shadow-lg shadow-black/10' : 'bg-transparent'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || !isHome ? 'bg-neutral-900/95 backdrop-blur-xl shadow-lg shadow-black/10' : 'bg-transparent'}`}>
       <div className="section-container">
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="flex items-center gap-2 group">
@@ -36,6 +39,12 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-5" onMouseLeave={() => setActiveDropdown(null)}>
+            {!isHome && (
+              <Link href="/" className="nav-link text-sm font-medium py-2 flex items-center gap-1.5" title="Home">
+                <Home size={15} />
+                Home
+              </Link>
+            )}
             {navigation.map((item) =>
               item.hasDropdown ? (
                 <div
@@ -87,6 +96,11 @@ export default function Header() {
       <div className={`lg:hidden transition-all duration-500 overflow-y-auto max-h-[80vh] ${isOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0'}`}>
         <div className="section-container pb-6">
           <nav className="flex flex-col gap-1 bg-neutral-800/50 rounded-2xl p-4 backdrop-blur-xl">
+            {/* Home link always first in mobile menu */}
+            <Link href="/" className="text-neutral-300 hover:text-white px-4 py-2.5 rounded-lg hover:bg-neutral-700/50 transition-all text-sm font-medium flex items-center gap-2" onClick={() => setIsOpen(false)}>
+              <Home size={15} />
+              Home
+            </Link>
             {navigation.map((item) =>
               item.hasDropdown ? (
                 <div key={item.name}>

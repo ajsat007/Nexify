@@ -71,15 +71,19 @@ export function requireAuth(redirectTo = '/admin'): boolean {
   return true
 }
 
-// ── API Route Helper ──
+// ── API Route Helper (read token from env; fallback for dev) ──
+function getAdminToken(): string {
+  // In production, set NEXIFY_ADMIN_TOKEN env variable
+  return process.env.NEXIFY_ADMIN_TOKEN || 'changeme-in-production'
+}
+
 export function validateApiRequest(request: Request): { valid: boolean; role?: UserRole; error?: string } {
   const authHeader = request.headers.get('authorization')
   if (!authHeader) {
     return { valid: false, error: 'Missing authorization header' }
   }
-  // Simple bearer token check
   const token = authHeader.replace('Bearer ', '')
-  if (token !== 'nexify-admin-token') {
+  if (token !== getAdminToken()) {
     return { valid: false, error: 'Invalid token' }
   }
   return { valid: true, role: 'admin' }

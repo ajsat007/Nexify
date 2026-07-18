@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { AuthSchema, validate } from '@/lib/validation'
+import { validateApiRequest } from '@/lib/auth'
 
 const USERS = [
   { id: 'usr-001', name: 'Nexify Founder', email: 'founder@nexify.tech', role: 'founder' },
@@ -18,6 +19,13 @@ export async function POST(request: Request) {
   } catch { return NextResponse.json({ error: 'Invalid request' }, { status: 400 }) }
 }
 
-export async function GET() {
-  return NextResponse.json({ users: USERS })
+export async function GET(request: Request) {
+  // Require auth to list users — prevent public data leak
+  const auth = validateApiRequest(request)
+  if (!auth.valid) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+  // Return sanitized user list (no emails)
+  const sanitized = USERS.map(({ email: _email, ...rest }) => rest)
+  return NextResponse.json({ users: sanitized })
 }

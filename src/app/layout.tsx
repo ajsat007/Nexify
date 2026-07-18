@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, Space_Grotesk, JetBrains_Mono } from 'next/font/google'
 import { siteConfig } from '@/lib/data'
 import { SiteShell } from '@/components/SiteShell'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
 import './globals.css'
 
 const inter = Inter({
@@ -62,7 +63,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} min-h-screen flex flex-col font-sans antialiased`}>
-        <SiteShell>{children}</SiteShell>
+        <SiteShell>
+          <ErrorBoundary>{children}</ErrorBoundary>
+        </SiteShell>
       </body>
     </html>
   )

@@ -1,6 +1,16 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
+
+function isTouchDevice(): boolean {
+  if (typeof window === 'undefined') return false
+  return window.matchMedia('(hover: none) and (pointer: coarse)').matches
+}
+
+function prefersReducedMotion(): boolean {
+  if (typeof window === 'undefined') return false
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
 
 export default function Tilt3D({ children, className = '', maxTilt = 8, scale = 1.02, glare = true }: {
   children: React.ReactNode
@@ -10,10 +20,16 @@ export default function Tilt3D({ children, className = '', maxTilt = 8, scale = 
   glare?: boolean
 }) {
   const ref = useRef<HTMLDivElement>(null)
+  const [disabled, setDisabled] = useState(true)
+
+  useEffect(() => {
+    // Disable on touch devices or when user prefers reduced motion
+    setDisabled(isTouchDevice() || prefersReducedMotion())
+  }, [])
 
   useEffect(() => {
     const el = ref.current
-    if (!el) return
+    if (!el || disabled) return
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = el.getBoundingClientRect()
@@ -44,20 +60,20 @@ export default function Tilt3D({ children, className = '', maxTilt = 8, scale = 
       el.removeEventListener('mousemove', handleMouseMove)
       el.removeEventListener('mouseleave', handleMouseLeave)
     }
-  }, [maxTilt, scale, glare])
+  }, [maxTilt, scale, glare, disabled])
 
   return (
     <div
       ref={ref}
-      className={`tilt-3d-wrapper ${className}`}
+      className={className}
       style={{
-        transformStyle: 'preserve-3d',
+        transformStyle: disabled ? undefined : 'preserve-3d',
         transition: 'transform 0.1s ease-out',
-        willChange: 'transform',
+        willChange: disabled ? undefined : 'transform',
         position: 'relative',
       }}
     >
-      {glare && (
+      {glare && !disabled && (
         <div
           className="pointer-events-none absolute inset-0 rounded-2xl"
           style={{
@@ -66,7 +82,7 @@ export default function Tilt3D({ children, className = '', maxTilt = 8, scale = 
           }}
         />
       )}
-      <div style={{ transform: 'translateZ(20px)', position: 'relative', zIndex: 2 }}>
+      <div style={{ transform: disabled ? undefined : 'translateZ(20px)', position: 'relative', zIndex: 2 }}>
         {children}
       </div>
     </div>

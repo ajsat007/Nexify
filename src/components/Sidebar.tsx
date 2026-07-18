@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import {
   LayoutDashboard, Users, FolderKanban, Target, MessageSquare,
   DollarSign, Settings, LogOut, Menu, X, ChevronDown,
-  Cpu, BarChart3, Shield, CreditCard, FileText,
+  Cpu, BarChart3, Shield, CreditCard, FileText, Home,
 } from 'lucide-react'
 import { cn } from '@/utils'
 
@@ -151,15 +151,22 @@ export function Sidebar({ items, title, subtitle, logo = 'N', onLogout }: Sideba
         })}
       </nav>
 
-      {/* Logout */}
-      {onLogout && (
-        <div className="p-3 border-t border-neutral-800">
+      {/* Home link */}
+      <div className="p-3 border-t border-neutral-800 space-y-1">
+        <Link
+          href="/"
+          className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm text-neutral-400 hover:text-white hover:bg-neutral-800/50 transition-all duration-200 group"
+        >
+          <Home size={18} className="text-neutral-500 group-hover:text-neutral-300 shrink-0" />
+          <span className={cn('transition-all duration-300', collapsed ? 'hidden' : 'block')}>Back to Site</span>
+        </Link>
+        {onLogout && (
           <button onClick={onLogout} className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm text-neutral-400 hover:text-white hover:bg-neutral-800/50 transition-all duration-200 group">
             <LogOut size={18} className="text-neutral-500 group-hover:text-neutral-300 shrink-0" />
             <span className={cn('transition-all duration-300', collapsed ? 'hidden' : 'block')}>Logout</span>
           </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 

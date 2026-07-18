@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { agentRegistry, getAgentStats, getAgentsByDepartment } from '@/agents/registry'
 
 describe('agentRegistry', () => {
-  it('has 15 agents', () => {
+  it('has the correct number of agents', () => {
     expect(agentRegistry.length).toBe(16)
   })
 
