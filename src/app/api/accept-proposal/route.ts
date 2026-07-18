@@ -68,13 +68,17 @@ export async function POST(request: Request) {
       }
     }
 
-    // Auto-trigger delivery start (AI project plan + GitHub repo)
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nexify-rouge.vercel.app'
-    fetch(`${siteUrl}/api/delivery/start`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ projectId }),
-    }).catch(e => console.error('[Delivery] Auto-start failed:', e))
+    // Auto-trigger delivery start (inline — generates milestones + creates GitHub repo)
+    try {
+      // Import and call the delivery start logic directly instead of fire-and-forget fetch
+      const { startDelivery } = await import('@/lib/delivery')
+      const deliveryResult = await startDelivery(projectId)
+      if (deliveryResult.error) {
+        console.error('[Delivery] Start failed:', deliveryResult.error)
+      }
+    } catch (err) {
+      console.error('[Delivery] Error starting delivery:', err)
+    }
 
     return NextResponse.json({
       success: true,
