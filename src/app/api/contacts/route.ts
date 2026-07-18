@@ -46,7 +46,7 @@ export async function POST(request: Request) {
             - Executive Summary
             - Technical Approach
             - Project Timeline
-            - Pricing Breakdown (in INR)
+            - Pricing Breakdown
             - Deliverables
             - Next Steps
 
