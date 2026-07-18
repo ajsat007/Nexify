@@ -1,10 +1,11 @@
 // ============================================================================
 // AI Orchestrator — Routes tasks to the right AI agents
 // Uses the primary agent registry from @/agents/registry
+// Routes execution through @/agents/engine which calls the AI provider
 // ============================================================================
 
-import { agentRegistry, getAgentById, type AgentDepartment } from '@/agents/registry'
-import { executeTask, type AgentTask } from '@/agents/engine'
+import { agentRegistry, type AgentDepartment } from '@/agents/registry'
+import { createTask, executeTask, getAllTasks } from '@/agents/engine'
 
 export interface WorkflowTask {
   id: string
@@ -68,19 +69,16 @@ export async function executeOrchestratorTask(id: string): Promise<void> {
 
   task.status = 'in_progress'
 
-  // Route to the main agent engine for real AI execution
   try {
-    const engineTask: AgentTask = {
-      id: task.id,
+    // Register the task in the engine's task store FIRST
+    // so executeTask() finds it
+    const engineTask = createTask({
       title: task.type,
       description: task.description,
-      assignedTo: task.assignedTo || 'unassigned',
-      priority: task.priority,
-      status: 'in_progress',
+      assignedTo: task.assignedTo,
+      priority: task.priority as any,
       input: task.description,
-      dependsOn: [],
-      createdAt: task.createdAt,
-    }
+    })
 
     const result = await executeTask(engineTask.id)
     task.result = result.output || 'Completed'
@@ -90,26 +88,19 @@ export async function executeOrchestratorTask(id: string): Promise<void> {
   } catch (err: any) {
     task.status = 'failed'
     task.result = err.message
-  }
-}
-
-export function completeOrchestratorTask(id: string, result: string): void {
-  const task = taskQueue.find(t => t.id === id)
-  if (task) {
-    task.status = 'completed'
-    task.result = result
     task.completedAt = Date.now()
-    completedTasks.push(task)
   }
 }
 
 export function getQueueStatus() {
+  const engineTasks = getAllTasks()
   return {
     pending: taskQueue.filter(t => t.status === 'pending').length,
     assigned: taskQueue.filter(t => t.status === 'assigned').length,
     inProgress: taskQueue.filter(t => t.status === 'in_progress').length,
     completed: completedTasks.length,
     failed: taskQueue.filter(t => t.status === 'failed').length,
+    engineTasks: engineTasks.length,
   }
 }
 
