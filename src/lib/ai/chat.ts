@@ -1,8 +1,9 @@
 // ============================================================================
 // Nexify AI — Chat Engine with Context, Memory, and Agent Routing
+// Uses free providers: Ollama → Groq → Smart Mock (no paid API needed)
 // ============================================================================
 
-import { complete, type AIMessage } from '@/lib/ai/providers/client'
+import { complete, streamComplete, type AIMessage } from '@/lib/ai/providers/client'
 import { agentRegistry, getAgentStats } from '@/agents/registry'
 
 export interface ChatSession {
@@ -33,7 +34,7 @@ function buildSystemPrompt(): string {
 - Pricing: Fixed-price projects starting ₹60K, SaaS starts ₹499/mo
 - Founded in Pune, India · 200+ projects delivered · 12 countries served
 
-## AI Agent Workforce (${stats.total} Agents)
+## AI Agent Workforce
 ${deptList}
 
 ## Your Role
@@ -69,11 +70,34 @@ export async function sendMessage(sessionId: string, content: string): Promise<s
   session.updatedAt = Date.now()
 
   const response = await complete({
-    // Include ALL messages including system so the LLM has context
     messages: session.messages,
     temperature: 0.7,
     maxTokens: 1024,
   })
+
+  session.messages.push({ role: 'assistant', content: response.content })
+  return response.content
+}
+
+export async function streamMessage(
+  sessionId: string,
+  content: string,
+  onToken: (token: string) => void
+): Promise<string> {
+  let session = sessions.get(sessionId)
+  if (!session) session = createSession(sessionId)
+
+  session.messages.push({ role: 'user', content })
+  session.updatedAt = Date.now()
+
+  const response = await streamComplete(
+    {
+      messages: session.messages,
+      temperature: 0.7,
+      maxTokens: 1024,
+    },
+    onToken
+  )
 
   session.messages.push({ role: 'assistant', content: response.content })
   return response.content

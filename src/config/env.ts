@@ -1,6 +1,7 @@
 // ============================================================================
 // Nexify — Environment Configuration
-// Validates at build/start time so missing vars fail fast
+// Free-tier first: no paid API keys required.
+// Ollama (local) → Groq (free API) → Smart Mock (fallback)
 // ============================================================================
 
 function getEnv(key: string, fallback?: string): string {
@@ -16,9 +17,12 @@ export const env = {
   siteUrl: getEnv('NEXT_PUBLIC_SITE_URL', 'https://nexify.tech'),
   siteName: getEnv('NEXT_PUBLIC_SITE_NAME', 'Nexify Technologies'),
 
-  // AI
-  aiProvider: getEnv('AI_PROVIDER', 'openai') as 'openai' | 'anthropic' | 'gemini' | 'deepseek' | 'mistral' | 'ollama',
-  aiModel: getEnv('AI_MODEL', 'gpt-4o'),
+  // AI Provider (free tier auto-detected)
+  // No env vars needed — uses Ollama if running locally
+  // Optional: GROQ_API_KEY for free cloud inference (console.groq.com)
+  // Optional: OPENAI_API_KEY as paid fallback
+  groqApiKey: getEnv('GROQ_API_KEY'),
+  openaiApiKey: getEnv('OPENAI_API_KEY'),
 
   // Monitoring
   sentryDsn: getEnv('NEXT_PUBLIC_SENTRY_DSN'),

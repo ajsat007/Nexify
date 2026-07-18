@@ -1,6 +1,10 @@
 // ============================================================================
 // Nexify AI — Provider-Agnostic AI Client
-// Supports: OpenAI, Anthropic, Gemini, DeepSeek, Grok, Mistral, Ollama, OpenRouter
+// FREE-TIER FIRST priority chain:
+//   1. Ollama (self-hosted, completely free — works offline)
+//   2. Groq (free API tier, 30 req/min, no credit card)
+//   3. Smart Mock (no API needed, contextual responses)
+// Zero paid API keys required.
 // ============================================================================
 
 export type AIProviderType = 'openai' | 'anthropic' | 'gemini' | 'deepseek' | 'grok' | 'mistral' | 'ollama' | 'openrouter'
@@ -42,111 +46,191 @@ export function registerProvider(adapter: AIProviderAdapter) {
   providers.set(adapter.name, adapter)
 }
 
-// ── Smart Mock Provider (offline/demo) — responds contextually to system prompt ──
+// ── Smart Mock Provider (ultimate fallback — no API needed) ──
 
-function delay(ms: number) { return new Promise(r => setTimeout(r, ms)) }
-
-function extractIdentity(systemPrompt: string): { name: string; role: string } {
+function extractIdentity(systemPrompt: string): { name: string; role: string; skills: string } {
   const nameMatch = systemPrompt.match(/You are (\w+[-\w]*)/)
-  const roleMatch = systemPrompt.match(/the (\w[\w\s]+)/)
+  const roleMatch = systemPrompt.match(/the (\w[\w\s]+?)(?:\.|,| at| from)/)
+  const skillsMatch = systemPrompt.match(/skills[:\s]+([^.]+)/i)
   return {
     name: nameMatch?.[1] || 'Nexify AI',
     role: roleMatch?.[1]?.trim() || 'assistant',
+    skills: skillsMatch?.[1]?.trim() || 'general assistance',
   }
 }
 
-function generateResponse(messages: AIMessage[]): string {
+function generateMockResponse(messages: AIMessage[]): string {
   const system = messages.find(m => m.role === 'system')?.content || ''
   const userMsg = messages.filter(m => m.role === 'user').pop()?.content || ''
   const identity = extractIdentity(system)
-
-  // Extract skills from system prompt
-  const skillsMatch = system.match(/skills:?\s*([^.]+)/i)
-  const skills = skillsMatch?.[1]?.trim() || 'general assistance'
-
   const userLower = userMsg.toLowerCase()
 
-  // Contextual responses based on identity + query
   if (userLower.includes('hello') || userLower.includes('hi ') || userLower === 'hi') {
-    return `Hello! I'm ${identity.name}, the ${identity.role} at Nexify Technologies. How can I help you today? My skills include ${skills}.`
+    return `Hello! I'm ${identity.name}, the ${identity.role} at Nexify Technologies. How can I help you today? My expertise includes ${identity.skills}.`
   }
   if (userLower.includes('who are you') || userLower.includes('what can you do')) {
-    return `I'm ${identity.name}, serving as ${identity.role} at Nexify. I specialize in ${skills}. How can I put my expertise to work for you?`
+    return `I'm ${identity.name}, serving as ${identity.role} at Nexify. I specialize in ${identity.skills}. How can I put my expertise to work for you?`
   }
   if (userLower.includes('pricing') || userLower.includes('cost') || userLower.includes('price')) {
-    return `Great question! Nexify offers fixed-price projects starting from ₹60,000 (UI/UX design) up to ₹15,00,000+ (enterprise solutions). Our SaaS products start at ₹499/user/month. As ${identity.role}, I'd recommend scheduling a free consultation to discuss your specific needs.`
+    return `Nexify offers fixed-price projects from ₹60,000 (UI/UX) up to ₹15,00,000+ (enterprise). SaaS products start at ₹499/user/month. As ${identity.name} (${identity.role}), I'd recommend a free consultation to discuss your needs.`
   }
   if (userLower.includes('service') || userLower.includes('build') || userLower.includes('develop')) {
-    return `As ${identity.name} (${identity.role}), I can help you with that! Nexify offers 20+ AI-powered services including custom software, web development, mobile apps, AI/ML solutions, cloud & DevOps, and more. My specific expertise covers ${skills}. Would you like me to walk you through our process?`
+    return `As ${identity.name} (${identity.role}), I can help! Nexify offers 20+ AI-powered services — custom software, web, mobile, AI/ML, cloud, and more. My expertise covers ${identity.skills}. Would you like me to walk you through our process?`
   }
   if (userLower.includes('agent') || userLower.includes('workforce') || userLower.includes('team')) {
-    return `Nexify operates with 16 specialized AI agents across 12 departments — from executive strategy (CEO-Omega, CTO-Nova) to engineering (Dev-Alpha, QA-Delta) to design (Design-Gamma) and beyond. As ${identity.role}, I collaborate with these agents daily. Each agent has 90%+ efficiency and we've completed over 11,000 tasks collectively.`
+    return `Nexify operates 16 specialized AI agents across 12 departments — executive (CEO-Omega, CTO-Nova), engineering (Dev-Alpha, QA-Delta), design (Design-Gamma), and more. As ${identity.role}, I collaborate with all of them. We've completed 11,000+ tasks collectively.`
   }
   if (userLower.includes('portfolio') || userLower.includes('project') || userLower.includes('work')) {
-    return `We've delivered 200+ projects across fintech, healthcare, e-commerce, edtech, and more. Our AI agents recently built a FinTech trading dashboard (₹6,00,000), a healthcare telemedicine platform (₹10,00,000), and an AI recommendation engine (₹5,00,000). As ${identity.name}, I'm particularly proud of our 94% client retention rate!`
+    return `We've delivered 200+ projects across fintech, healthcare, e-commerce, edtech, and more. Recent examples: a FinTech trading dashboard (₹6,00,000), a telemedicine platform (₹10,00,000), and an AI recommendation engine (₹5,00,000). 94% client retention rate!`
   }
-  if (userLower.includes('timeline') || userLower.includes('how long') || userLower.includes('when')) {
-    return `Delivery timelines vary by scope — web development takes 2-10 weeks, mobile apps 6-18 weeks, and AI solutions 6-20 weeks. Our AI agents work 24/7 in parallel, so we're typically 2x faster than traditional agencies. I can provide a more accurate timeline once I understand your project requirements better.`
-  }
-
-  // Default — contextual to the agent's role
-  return `I'm ${identity.name}, ${identity.role} at Nexify. Based on my expertise in ${skills}, I'd be happy to help with your request regarding "${userMsg.slice(0, 80)}". Could you provide some more details so I can give you a more specific answer? You can also visit our services page at /services or contact us directly.`
+  return `I'm ${identity.name}, ${identity.role} at Nexify. Based on my expertise in ${identity.skills}, I'd be happy to help with your question about "${userMsg.slice(0, 80)}". For more details, visit /services or /contact to get a custom proposal.`
 }
 
-function createSmartMockProvider() {
+function createMockProvider(): AIProviderAdapter {
   return {
     name: 'openai' as AIProviderType,
-    async complete(req: AICompletionRequest): Promise<AICompletionResponse> {
-      await delay(600 + Math.random() * 900)
-      return {
-        content: generateResponse(req.messages),
-        model: req.model || 'gpt-4o',
-        provider: 'openai' as AIProviderType,
-        usage: { promptTokens: req.messages.reduce((s, m) => s + m.content.length, 0), completionTokens: 0, totalTokens: 0 },
-      }
+    async complete(req) {
+      await new Promise(r => setTimeout(r, 500 + Math.random() * 500))
+      return { content: generateMockResponse(req.messages), model: 'llama3.2', provider: 'ollama', usage: { promptTokens: 0, completionTokens: 0, totalTokens: 0 } }
     },
-    async streamComplete(req: AICompletionRequest, onToken: (token: string) => void): Promise<AICompletionResponse> {
-      const text = generateResponse(req.messages)
+    async streamComplete(req, onToken) {
+      const text = generateMockResponse(req.messages)
       for (const word of text.split(' ')) {
-        await delay(40 + Math.random() * 30)
+        await new Promise(r => setTimeout(r, 30))
         onToken(word + ' ')
       }
-      return { content: text, model: req.model || 'gpt-4o', provider: 'openai' as AIProviderType }
+      return { content: text, model: 'llama3.2', provider: 'ollama' }
     },
-    availableModels() { return ['gpt-4o', 'gpt-4o-mini', 'o3-mini'] },
+    availableModels() { return ['llama3.2', 'mixtral-8x7b'] },
   }
+}
+
+// ── Free provider detection & setup ──
+
+interface ProviderEntry {
+  name: AIProviderType
+  factory: () => AIProviderAdapter | null
+  priority: number // lower = tried first
+}
+
+function getProviderChain(): ProviderEntry[] {
+  const chain: ProviderEntry[] = []
+
+  // 1. Ollama — local, completely free
+  chain.push({
+    name: 'ollama',
+    priority: 0,
+    factory: () => {
+      // Lazy-create — we don't check availability at module load
+      // because it might not be running at import time
+      const { createOllamaProvider } = require('./ollama')
+      return createOllamaProvider()
+    },
+  })
+
+  // 2. Groq — free API tier
+  const groqKey = process.env.GROQ_API_KEY
+  if (groqKey) {
+    chain.push({
+      name: 'grok',
+      priority: 1,
+      factory: () => {
+        const { createGroqProvider } = require('./groq')
+        return createGroqProvider(groqKey)
+      },
+    })
+  }
+
+  // 3. OpenAI — only if key is set
+  const openaiKey = process.env.OPENAI_API_KEY
+  if (openaiKey) {
+    chain.push({
+      name: 'openai',
+      priority: 2,
+      factory: () => {
+        const { createOpenAIProvider } = require('./openai')
+        return createOpenAIProvider(openaiKey)
+      },
+    })
+  }
+
+  return chain.sort((a, b) => a.priority - b.priority)
+}
+
+// ── Auto-setup: try each free provider in order on first call ──
+
+let setupDone = false
+
+async function autoSetup(): Promise<boolean> {
+  if (setupDone) return true
+  setupDone = true
+
+  // Try in priority order: Ollama → Groq → Mock
+  const chain = getProviderChain()
+
+  for (const entry of chain) {
+    try {
+      if (entry.name === 'ollama') {
+        // Check if Ollama is actually running
+        const { isOllamaAvailable } = await import('./ollama')
+        const available = await isOllamaAvailable()
+        if (!available) {
+          console.log('[Nexify AI] Ollama not available, trying next provider...')
+          continue
+        }
+      }
+      const adapter = entry.factory()
+      if (adapter) {
+        registerProvider(adapter)
+        console.log(`[Nexify AI] Using ${entry.name} provider`)
+        return true
+      }
+    } catch (e) {
+      console.log(`[Nexify AI] ${entry.name} unavailable:`, (e as Error)?.message || e)
+      continue
+    }
+  }
+
+  // Ultimate fallback: smart mock
+  console.log('[Nexify AI] No free provider available, using smart mock')
+  registerProvider(createMockProvider())
+  return false
 }
 
 // ── Public API ──
 
-export function getProvider(name?: AIProviderType): AIProviderAdapter {
-  if (name) {
-    const p = providers.get(name)
-    if (p) return p
-    // Fall back to smart mock for any requested provider
-    const smart = createSmartMockProvider()
-    registerProvider(smart)
-    return smart
-  }
-  // Default 'openai' — if a real OpenAI adapter registered, it wins
-  const existing = providers.get('openai')
-  if (existing) return existing
-  // Fall back to smart mock
-  const smart = createSmartMockProvider()
-  registerProvider(smart)
-  return smart
+export async function getAvailableProviders(): Promise<AIProviderType[]> {
+  await autoSetup()
+  return Array.from(providers.keys()) as AIProviderType[]
 }
 
-export function getProviders(): AIProviderType[] {
-  return Array.from(providers.keys())
+export async function getProvider(name?: AIProviderType): Promise<AIProviderAdapter> {
+  await autoSetup()
+
+  if (name) {
+    const existing = providers.get(name)
+    if (existing) return existing
+  }
+
+  // Default — return whatever was auto-setup, or mock as last resort
+  const defaultProvider = providers.get('ollama') || providers.get('grok') || providers.get('openai')
+  if (defaultProvider) return defaultProvider
+
+  // Nothing registered — register mock and return it
+  const mock = createMockProvider()
+  registerProvider(mock)
+  return mock
 }
 
 export async function complete(req: AICompletionRequest): Promise<AICompletionResponse> {
-  const provider = getProvider()
+  const provider = await getProvider()
   return provider.complete(req)
 }
 
-export async function streamComplete(req: AICompletionRequest, onToken: (token: string) => void): Promise<AICompletionResponse> {
-  const provider = getProvider()
+export async function streamComplete(
+  req: AICompletionRequest,
+  onToken: (token: string) => void
+): Promise<AICompletionResponse> {
+  const provider = await getProvider()
   return provider.streamComplete(req, onToken)
 }

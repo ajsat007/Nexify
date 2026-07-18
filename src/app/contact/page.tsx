@@ -15,10 +15,20 @@ export default function ContactPage() {
     e.preventDefault()
     setLoading(true)
     setError('')
-    // Simulate submission
-    await new Promise(r => setTimeout(r, 1500))
-    setLoading(false)
-    setSubmitted(true)
+    try {
+      const res = await fetch('/api/contacts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formState),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Submission failed')
+      setLoading(false)
+      setSubmitted(true)
+    } catch (err: any) {
+      setError(err.message || 'Something went wrong.')
+      setLoading(false)
+    }
   }
 
   return (
