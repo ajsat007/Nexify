@@ -24,7 +24,7 @@ export async function POST(request: Request) {
 
     const proposal = proposals[0]
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nexify.tech'
-    const portalLink = `${siteUrl}/portal?email=${encodeURIComponent(lead.email)}`
+    const portalLink = `${siteUrl}/portal?email=${lead.email}`
 
     // Send the email
     const result = await sendEmail({

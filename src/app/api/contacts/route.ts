@@ -87,7 +87,7 @@ export async function POST(request: Request) {
 
       // Email the proposal
       const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nexify-rouge.vercel.app'
-      const portalLink = `${siteUrl}/portal?email=${encodeURIComponent(lead.email)}`
+      const portalLink = `${siteUrl}/portal?email=${lead.email}`
 
       const emailResult = await sendEmail({
         to: lead.email,
