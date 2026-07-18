@@ -78,12 +78,14 @@ export async function startDelivery(projectId: string): Promise<{ success: boole
     db.prepare(`UPDATE projects SET github_repo=?, github_url=?, tech_stack=?, progress=5, updated_at=datetime('now') WHERE id=?`)
       .run(repoName, repoUrl, JSON.stringify(plan.techStack), projectId)
 
-    // 4. Create milestones
+    // 4. Create milestones (cumulative dates)
     const insertMs = db.prepare(`INSERT INTO milestones (id, project_id, title, description, due_date, status, progress, order_index) VALUES (?,?,?,?,?,'pending',0,?)`)
-    const now = new Date()
+    const startDate = new Date()
+    let cumulativeWeeks = 0
     plan.milestones.forEach((m: any, i: number) => {
-      const due = new Date(now)
-      due.setDate(due.getDate() + (m.weeks || 2) * 7)
+      cumulativeWeeks += m.weeks || 2
+      const due = new Date(startDate)
+      due.setDate(due.getDate() + cumulativeWeeks * 7)
       insertMs.run(`MS-${Date.now().toString(36)}-${i}`, projectId, m.title, m.description, due.toISOString().split('T')[0], i)
     })
 
