@@ -6,7 +6,7 @@ import {
   LayoutDashboard, Users, FolderKanban, Target, DollarSign,
   BarChart3, LogOut, Home, TrendingUp, Mail, Phone, Plus,
   ChevronRight, CheckCircle2, Clock, AlertCircle, Loader,
-  Sparkles, FileText, Send, Check,
+  Sparkles, FileText, Send, Check, Shield,
 } from 'lucide-react'
 import { Sidebar, type SidebarItem } from '@/components/Sidebar'
 
@@ -127,6 +127,9 @@ export default function AdminPage() {
   const [proposals, setProposals] = useState<any[]>([])
   const [projects, setProjects] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+  const [authenticated, setAuthenticated] = useState(false)
+  const [showLogin, setShowLogin] = useState(false)
+  const [loginEmail, setLoginEmail] = useState('')
 
   const fetchData = async () => {
     setLoading(true)
@@ -145,7 +148,49 @@ export default function AdminPage() {
     setLoading(false)
   }
 
-  useEffect(() => { fetchData() }, [])
+  // Check session on mount
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const res = await fetch('/api/session')
+        const data = await res.json()
+        if (data.authenticated) {
+          setAuthenticated(true)
+          fetchData()
+        } else {
+          setShowLogin(true)
+          setLoading(false)
+        }
+      } catch {
+        setShowLogin(true)
+        setLoading(false)
+      }
+    }
+    checkSession()
+  }, [])
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault()
+    try {
+      const res = await fetch('/api/session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: loginEmail, role: 'admin' }),
+      })
+      const data = await res.json()
+      if (data.success) {
+        setShowLogin(false)
+        setAuthenticated(true)
+        fetchData()
+      }
+    } catch {}
+  }
+
+  const handleLogout = async () => {
+    await fetch('/api/session', { method: 'DELETE' })
+    setAuthenticated(false)
+    setShowLogin(true)
+  }
 
   const sidebarItems: SidebarItem[] = [
     { label: 'Dashboard', href: '#dashboard', icon: LayoutDashboard, active: activeTab === 'dashboard', onClick: () => setActiveTab('dashboard') },
@@ -154,9 +199,29 @@ export default function AdminPage() {
     { label: 'Projects', href: '#projects', icon: FolderKanban, active: activeTab === 'projects', onClick: () => setActiveTab('projects') },
   ]
 
+  if (showLogin) {
+    return (
+      <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 flex items-center justify-center p-4">
+        <div className="w-full max-w-sm">
+          <div className="text-center mb-8">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center mx-auto mb-4">
+              <Shield className="w-8 h-8 text-white" />
+            </div>
+            <h1 className="text-2xl font-heading font-bold dark:text-white">Admin Login</h1>
+            <p className="text-sm text-neutral-500 mt-2">Enter your email to access the dashboard.</p>
+          </div>
+          <form onSubmit={handleLogin} className="space-y-4">
+            <input type="email" required className="input-field" placeholder="admin@nexify.tech" value={loginEmail} onChange={e => setLoginEmail(e.target.value)} />
+            <button type="submit" className="btn-primary w-full">Access Dashboard</button>
+          </form>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
-      <Sidebar items={sidebarItems} title="Nexify Admin" subtitle="AI Operations" onLogout={() => {}} />
+      <Sidebar items={sidebarItems} title="Nexify Admin" subtitle="AI Operations" onLogout={handleLogout} />
 
       <div className="lg:pl-64">
         {/* Mobile header spacer */}

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { FileText, FolderKanban, Loader, Shield, ArrowRight, Mail, CheckCircle, CreditCard } from 'lucide-react'
+import { FileText, FolderKanban, Loader, Shield, ArrowRight, Mail, CheckCircle } from 'lucide-react'
 import { Sidebar } from '@/components/Sidebar'
 
 export default function PortalPage() {
@@ -17,15 +17,30 @@ export default function PortalPage() {
   const [magicSent, setMagicSent] = useState(false)
   const [paying, setPaying] = useState<string | null>(null)
 
-  // Check for magic link token in URL
+  // Check for existing session or magic link token
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
-    const token = params.get('token')
-    const emailParam = params.get('email')
-    if (token && emailParam) {
-      setEmail(emailParam)
-      doLogin(emailParam)
+    const checkSession = async () => {
+      const params = new URLSearchParams(window.location.search)
+      const token = params.get('token')
+      const emailParam = params.get('email')
+
+      if (token && emailParam) {
+        setEmail(emailParam)
+        await doLogin(emailParam)
+        return
+      }
+
+      // Check existing session
+      try {
+        const res = await fetch('/api/session')
+        const data = await res.json()
+        if (data.authenticated && data.email) {
+          setEmail(data.email)
+          await doLogin(data.email)
+        }
+      } catch {}
     }
+    checkSession()
   }, [])
 
   const doLogin = async (loginEmail: string) => {
@@ -49,6 +64,8 @@ export default function PortalPage() {
           matchingLeads.some((l: any) => l.id === p.lead_id) || p.client?.toLowerCase() === loginEmail.toLowerCase()
         ))
         setLoggedIn(true)
+        // Create persistent session
+        fetch('/api/session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: loginEmail, role: 'client' }) })
       } else {
         setError('No account found with this email.')
       }
@@ -87,49 +104,41 @@ export default function PortalPage() {
     setLoading(false)
   }
 
-  const handlePay = async (proposalId: string, amount: number) => {
+  const handleAccept = async (proposalId: string) => {
     setPaying(proposalId)
     try {
-      // Check if Razorpay is configured
-      const orderRes = await fetch('/api/razorpay', {
+      const res = await fetch('/api/accept-proposal', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          amount: amount || 50000, // default ₹50,000 if no amount
-          receipt: proposalId,
-          notes: { proposal_id: proposalId, client_email: email },
-        }),
+        body: JSON.stringify({ proposalId }),
       })
-      const orderData = await orderRes.json()
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error)
 
-      if (!orderRes.ok) {
-        alert('Payment not available. Razorpay needs to be configured. Contact us to proceed.')
-        return
-      }
-
-      // Load Razorpay checkout
-      const script = document.createElement('script')
-      script.src = 'https://checkout.razorpay.com/v1/checkout.js'
-      script.onload = () => {
-        const options = {
-          key: orderData.keyId,
-          amount: orderData.amount,
-          currency: orderData.currency,
-          name: 'Nexify Technologies',
-          description: 'Project Payment',
-          order_id: orderData.orderId,
-          handler: () => {
-            alert('Payment successful! Thank you.')
-            setPaying(null)
-          },
-          modal: { ondismiss: () => setPaying(null) },
+      if (data.paymentLink) {
+        const script = document.createElement('script')
+        script.src = 'https://checkout.razorpay.com/v1/checkout.js'
+        script.onload = () => {
+          const options = {
+            key: data.paymentLink.keyId,
+            amount: data.paymentLink.amount,
+            currency: 'INR',
+            name: 'Nexify Technologies',
+            description: 'Project Payment',
+            order_id: data.paymentLink.orderId,
+            handler: () => { alert('Welcome aboard! 🤝'); window.location.reload() },
+            modal: { ondismiss: () => setPaying(null) },
+          }
+          const rzp = new (window as any).Razorpay(options)
+          rzp.open()
         }
-        const rzp = new (window as any).Razorpay(options)
-        rzp.open()
+        document.body.appendChild(script)
+      } else {
+        alert('Proposal accepted! We will reach out to you shortly.')
+        window.location.reload()
       }
-      document.body.appendChild(script)
-    } catch {
-      alert('Payment service unavailable. Please contact us.')
+    } catch (err: any) {
+      alert(err.message || 'Failed to accept. Please contact us.')
       setPaying(null)
     }
   }
@@ -222,13 +231,18 @@ export default function PortalPage() {
                         <div className="flex items-center gap-3">
                           {p.status === 'sent' && (
                             <button
-                              onClick={() => handlePay(p.id, 50000)}
+                              onClick={() => handleAccept(p.id)}
                               disabled={paying === p.id}
                               className="btn-primary text-sm"
                             >
-                              {paying === p.id ? <Loader size={14} className="animate-spin" /> : <CreditCard size={14} />}
-                              Pay with Razorpay
+                              {paying === p.id ? <Loader size={14} className="animate-spin" /> : <CheckCircle size={14} />}
+                              Accept Proposal & Pay
                             </button>
+                          )}
+                          {p.status === 'accepted' && (
+                            <span className="chip bg-emerald-100 text-emerald-600 text-xs">
+                              <CheckCircle size={12} /> Accepted
+                            </span>
                           )}
                           <span className="text-sm text-neutral-500 font-medium">{p.price_range}</span>
                         </div>

@@ -119,6 +119,14 @@ function migrate(db: Database.Database): void {
       created_at TEXT DEFAULT (datetime('now')),
       completed_at TEXT
     );
+
+    CREATE TABLE IF NOT EXISTS sessions (
+      id TEXT PRIMARY KEY,
+      email TEXT NOT NULL,
+      role TEXT DEFAULT 'client',
+      created_at TEXT DEFAULT (datetime('now')),
+      expires_at TEXT NOT NULL
+    );
   `)
 }
 
