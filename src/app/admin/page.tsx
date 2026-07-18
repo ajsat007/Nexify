@@ -6,7 +6,7 @@ import {
   LayoutDashboard, Users, FolderKanban, Target, DollarSign,
   BarChart3, LogOut, Home, TrendingUp, Mail, Phone, Plus,
   ChevronRight, CheckCircle2, Clock, AlertCircle, Loader,
-  Sparkles, FileText, Send,
+  Sparkles, FileText, Send, Check,
 } from 'lucide-react'
 import { Sidebar, type SidebarItem } from '@/components/Sidebar'
 
@@ -29,8 +29,10 @@ function StatCard({ label, value, sub, icon: Icon, color }: { label: string; val
 
 // ── Lead Row ──
 
-function LeadRow({ lead, onGenerateProposal, onRefresh }: { lead: any; onGenerateProposal: (id: string) => void; onRefresh: () => void }) {
+function LeadRow({ lead, onRefresh }: { lead: any; onRefresh: () => void }) {
   const [generating, setGenerating] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [sent, setSent] = useState(false)
   const statusColors: Record<string, string> = {
     new: 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400',
     qualified: 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400',
@@ -52,6 +54,19 @@ function LeadRow({ lead, onGenerateProposal, onRefresh }: { lead: any; onGenerat
     setGenerating(false)
   }
 
+  const handleSend = async () => {
+    setSending(true)
+    try {
+      await fetch('/api/email-proposal', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ leadId: lead.id }),
+      })
+      setSent(true)
+    } catch {}
+    setSending(false)
+  }
+
   return (
     <tr className="border-b border-neutral-100 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors">
       <td className="py-3 px-3">
@@ -71,18 +86,33 @@ function LeadRow({ lead, onGenerateProposal, onRefresh }: { lead: any; onGenerat
         <div className="text-sm font-semibold dark:text-white">₹{lead.budget?.toLocaleString('en-IN') || '—'}</div>
       </td>
       <td className="py-3 px-3 text-right">
-        {lead.status === 'new' || lead.status === 'qualified' ? (
-          <button
-            onClick={handleGenerate}
-            disabled={generating}
-            className="chip bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 hover:bg-primary-100 transition-all text-xs disabled:opacity-50"
-          >
-            {generating ? <Loader size={12} className="animate-spin" /> : <Sparkles size={12} />}
-            <span className="hidden sm:inline ml-1">{generating ? 'Generating...' : 'AI Proposal'}</span>
-          </button>
-        ) : (
-          <span className="text-xs text-neutral-400">—</span>
-        )}
+        <div className="flex items-center gap-1.5 justify-end">
+          {(lead.status === 'new' || lead.status === 'qualified') && (
+            <button
+              onClick={handleGenerate}
+              disabled={generating}
+              className="chip bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 hover:bg-primary-100 transition-all text-xs disabled:opacity-50"
+            >
+              {generating ? <Loader size={12} className="animate-spin" /> : <Sparkles size={12} />}
+              <span className="hidden sm:inline ml-1">{generating ? '...' : 'Proposal'}</span>
+            </button>
+          )}
+          {lead.status === 'proposal' && !sent && (
+            <button
+              onClick={handleSend}
+              disabled={sending}
+              className="chip bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 transition-all text-xs disabled:opacity-50"
+            >
+              {sending ? <Loader size={12} className="animate-spin" /> : <Send size={12} />}
+              <span className="hidden sm:inline ml-1">{sending ? '...' : 'Email'}</span>
+            </button>
+          )}
+          {sent && <span className="chip text-xs bg-emerald-100 text-emerald-600"><Check size={11} /> Sent</span>}
+          {lead.status === 'won' && <span className="chip text-xs bg-emerald-100 text-emerald-600">Won</span>}
+          {lead.status === 'lost' && <span className="chip text-xs bg-red-100 text-red-600">Lost</span>}
+          {lead.status === 'closed' && <span className="chip text-xs bg-neutral-100 text-neutral-600">Closed</span>}
+          {lead.status === 'proposal' && !sent && <span className="text-xs text-neutral-400">—</span>}
+        </div>
       </td>
     </tr>
   )
@@ -255,7 +285,7 @@ export default function AdminPage() {
                       </thead>
                       <tbody>
                         {leads.map((lead: any) => (
-                          <LeadRow key={lead.id} lead={lead} onGenerateProposal={() => {}} onRefresh={fetchData} />
+                          <LeadRow key={lead.id} lead={lead} onRefresh={fetchData} />
                         ))}
                         {leads.length === 0 && (
                           <tr><td colSpan={6} className="py-8 text-center text-neutral-400">No leads found. Submit a contact form to create one.</td></tr>
