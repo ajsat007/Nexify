@@ -40,7 +40,7 @@ export async function POST(request: Request) {
         await sendEmail({
           to: email,
           subject: 'Payment Received — Nexify Technologies',
-          html: paymentReceiptEmail(notes.client_name || 'Client', `₹${(amount / 100).toLocaleString('en-IN')}`, invoiceId),
+          html: paymentReceiptEmail(notes.client_name || 'Client', `${(amount / 100).toLocaleString('en-IN')}`, invoiceId),
         })
       }
     }

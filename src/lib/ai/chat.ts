@@ -31,7 +31,7 @@ function buildSystemPrompt(): string {
 - ${stats.totalTasks.toLocaleString()} tasks completed across 12 departments
 - Services: Custom Software, Web Dev, Mobile Apps, AI Solutions, Data Analytics, UI/UX, Cloud/DevOps, AI Chatbots
 - Products: FlowSprint (project mgmt), PulseAI (BI), DeskFlow (support), SignFlow (e-signatures), BotForge (chatbots)
-- Pricing: Fixed-price projects starting ₹60K, SaaS starts ₹499/mo
+- Pricing: Fixed-price projects starting 60K, SaaS starts 499/mo
 - Founded in Pune, India · 200+ projects delivered · 12 countries served
 
 ## AI Agent Workforce

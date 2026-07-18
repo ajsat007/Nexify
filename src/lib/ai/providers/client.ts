@@ -72,7 +72,7 @@ function generateMockResponse(messages: AIMessage[]): string {
     return `I'm ${identity.name}, serving as ${identity.role} at Nexify. I specialize in ${identity.skills}. How can I put my expertise to work for you?`
   }
   if (userLower.includes('pricing') || userLower.includes('cost') || userLower.includes('price')) {
-    return `Nexify offers fixed-price projects from ₹60,000 (UI/UX) up to ₹15,00,000+ (enterprise). SaaS products start at ₹499/user/month. As ${identity.name} (${identity.role}), I'd recommend a free consultation to discuss your needs.`
+    return `Nexify offers fixed-price projects from 60,000 (UI/UX) up to 15,00,000+ (enterprise). SaaS products start at 499/user/month. As ${identity.name} (${identity.role}), I'd recommend a free consultation to discuss your needs.`
   }
   if (userLower.includes('service') || userLower.includes('build') || userLower.includes('develop')) {
     return `As ${identity.name} (${identity.role}), I can help! Nexify offers 20+ AI-powered services — custom software, web, mobile, AI/ML, cloud, and more. My expertise covers ${identity.skills}. Would you like me to walk you through our process?`
@@ -81,7 +81,7 @@ function generateMockResponse(messages: AIMessage[]): string {
     return `Nexify operates 16 specialized AI agents across 12 departments — executive (CEO-Omega, CTO-Nova), engineering (Dev-Alpha, QA-Delta), design (Design-Gamma), and more. As ${identity.role}, I collaborate with all of them. We've completed 11,000+ tasks collectively.`
   }
   if (userLower.includes('portfolio') || userLower.includes('project') || userLower.includes('work')) {
-    return `We've delivered 200+ projects across fintech, healthcare, e-commerce, edtech, and more. Recent examples: a FinTech trading dashboard (₹6,00,000), a telemedicine platform (₹10,00,000), and an AI recommendation engine (₹5,00,000). 94% client retention rate!`
+    return `We've delivered 200+ projects across fintech, healthcare, e-commerce, edtech, and more. Recent examples: a FinTech trading dashboard (6,00,000), a telemedicine platform (10,00,000), and an AI recommendation engine (5,00,000). 94% client retention rate!`
   }
   return `I'm ${identity.name}, ${identity.role} at Nexify. Based on my expertise in ${identity.skills}, I'd be happy to help with your question about "${userMsg.slice(0, 80)}". For more details, visit /services or /contact to get a custom proposal.`
 }

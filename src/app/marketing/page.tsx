@@ -41,9 +41,9 @@ export default function MarketingPage() {
   ]
 
   const adCampaigns = [
-    { platform: 'Google Ads', budget: '₹0 (AI-optimized)', targeting: 'CTOs, Founders, IT Heads', keywords: 'software development India, AI development company, custom software India', format: 'Search + Display' },
-    { platform: 'LinkedIn Ads', budget: '₹0 (organic first)', targeting: 'Engineering Leaders, Startup Founders', audience: 'India, USA, UAE, Singapore', format: 'Sponsored Content + InMail' },
-    { platform: 'Meta Ads', budget: '₹0 (organic)', targeting: 'Business Owners, SME Decision Makers', audience: 'India metro cities, 25-55 age', format: 'Feed + Stories + Reels' },
+    { platform: 'Google Ads', budget: '0 (AI-optimized)', targeting: 'CTOs, Founders, IT Heads', keywords: 'software development India, AI development company, custom software India', format: 'Search + Display' },
+    { platform: 'LinkedIn Ads', budget: '0 (organic first)', targeting: 'Engineering Leaders, Startup Founders', audience: 'India, USA, UAE, Singapore', format: 'Sponsored Content + InMail' },
+    { platform: 'Meta Ads', budget: '0 (organic)', targeting: 'Business Owners, SME Decision Makers', audience: 'India metro cities, 25-55 age', format: 'Feed + Stories + Reels' },
   ]
 
   return (
@@ -147,7 +147,7 @@ export default function MarketingPage() {
           <div className="grid md:grid-cols-2 gap-6">
             {[
               { subject: 'AI-powered development for [Company]', body: 'Hi [Name],\n\nWe noticed [Company] is [trigger - hiring devs/funding/launching product].\n\nAt Nexify, our AI agents build custom software at 10x speed — no human overhead, 60% lower cost.\n\nQuick case study: We built a trading dashboard for a fintech client in 6 weeks (normally 6 months).\n\nWorth a 15-min call this week?\n\nBest,\nSalesAgent-Mu\nNexify Technologies' },
-              { subject: 'Your [Company] project in half the time', body: 'Hi [Name],\n\nSaw that [Company] is working on [project reference from LinkedIn/website].\n\nTraditional agencies would quote 6 months and ₹20L.\n\nOur AI agents can deliver in 6-8 weeks at ₹6-8L. Same quality, faster turnaround.\n\nProof: 200+ projects delivered. 98% client satisfaction.\n\nWant to see a sample?\n\n— SalesAgent-Mu' },
+              { subject: 'Your [Company] project in half the time', body: 'Hi [Name],\n\nSaw that [Company] is working on [project reference from LinkedIn/website].\n\nTraditional agencies would quote 6 months and 20L.\n\nOur AI agents can deliver in 6-8 weeks at 6-8L. Same quality, faster turnaround.\n\nProof: 200+ projects delivered. 98% client satisfaction.\n\nWant to see a sample?\n\n— SalesAgent-Mu' },
             ].map((email, i) => (
               <div key={i} className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
                 <div className="flex items-center gap-2 mb-3"><Mail className="w-4 h-4 text-primary-300" /><span className="text-sm font-medium text-white">Subject: {email.subject}</span></div>

@@ -22,7 +22,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'amount and receipt are required' }, { status: 400 })
     }
 
-    // Amount should be in paise (₹1 = 100 paise)
+    // Amount should be in paise (1 = 100 paise)
     const amountInPaise = Math.round(amount * 100)
 
     const result = await createOrder({

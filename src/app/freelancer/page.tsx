@@ -18,13 +18,13 @@ const DB = {
   set(key: string, v: any) { if (typeof window === 'undefined') return; localStorage.setItem(`nexify_freelancer_${key}`, JSON.stringify(v)) },
   init() {
     if (this.get('init')) return
-    this.set('profile', { name: 'Ajinkya Satkar', title: 'Full-Stack Developer | AI-Powered Freelancer', email: 'ajinkyasatkar5@gmail.com', phone: '+91 9373955349', location: 'Pune, Maharashtra, India', skills: ['Next.js', 'React', 'TypeScript', 'Node.js', 'Python', 'Tailwind CSS', 'PostgreSQL', 'AI/ML'], rate: '₹30,000', bio: 'I build modern web applications using AI-powered development. 10x faster delivery, enterprise quality, freelance prices.' })
+    this.set('profile', { name: 'Ajinkya Satkar', title: 'Full-Stack Developer | AI-Powered Freelancer', email: 'ajinkyasatkar5@gmail.com', phone: '+91 9373955349', location: 'Pune, Maharashtra, India', skills: ['Next.js', 'React', 'TypeScript', 'Node.js', 'Python', 'Tailwind CSS', 'PostgreSQL', 'AI/ML'], rate: '30,000', bio: 'I build modern web applications using AI-powered development. 10x faster delivery, enterprise quality, freelance prices.' })
     this.set('leads', [
-      { id: 'LD-001', from: 'LinkedIn', name: 'Rahul Sharma', company: 'TechStart', need: 'E-commerce website', budget: '₹50K-80K', status: 'new', date: '2026-07-12', email: 'rahul@techstart.com', aiScore: 85 },
-      { id: 'LD-002', from: 'Upwork', name: 'Priya Patel', company: 'HealthApp', need: 'Patient dashboard UI', budget: '₹40K-60K', status: 'proposal', date: '2026-07-11', email: 'priya@healthapp.com', aiScore: 72 },
-      { id: 'LD-003', from: 'Website', name: 'Amit Kumar', company: 'EduPro', need: 'Learning management system', budget: '₹80K-1.2L', status: 'new', date: '2026-07-11', email: 'amit@edupro.com', aiScore: 91 },
-      { id: 'LD-004', from: 'Referral', name: 'Sneha Gupta', company: 'RetailX', need: 'Admin dashboard', budget: '₹25K-40K', status: 'won', date: '2026-07-10', email: 'sneha@retailx.com', aiScore: 78 },
-      { id: 'LD-005', from: 'LinkedIn', name: 'Vikram Joshi', company: 'LogiMove', need: 'Fleet tracking portal', budget: '₹60K-1L', status: 'proposal', date: '2026-07-09', email: 'vikram@logimove.com', aiScore: 88 },
+      { id: 'LD-001', from: 'LinkedIn', name: 'Rahul Sharma', company: 'TechStart', need: 'E-commerce website', budget: '50K-80K', status: 'new', date: '2026-07-12', email: 'rahul@techstart.com', aiScore: 85 },
+      { id: 'LD-002', from: 'Upwork', name: 'Priya Patel', company: 'HealthApp', need: 'Patient dashboard UI', budget: '40K-60K', status: 'proposal', date: '2026-07-11', email: 'priya@healthapp.com', aiScore: 72 },
+      { id: 'LD-003', from: 'Website', name: 'Amit Kumar', company: 'EduPro', need: 'Learning management system', budget: '80K-1.2L', status: 'new', date: '2026-07-11', email: 'amit@edupro.com', aiScore: 91 },
+      { id: 'LD-004', from: 'Referral', name: 'Sneha Gupta', company: 'RetailX', need: 'Admin dashboard', budget: '25K-40K', status: 'won', date: '2026-07-10', email: 'sneha@retailx.com', aiScore: 78 },
+      { id: 'LD-005', from: 'LinkedIn', name: 'Vikram Joshi', company: 'LogiMove', need: 'Fleet tracking portal', budget: '60K-1L', status: 'proposal', date: '2026-07-09', email: 'vikram@logimove.com', aiScore: 88 },
     ])
     this.set('proposals', [
       { id: 'PR-001', client: 'Priya Patel', company: 'HealthApp', project: 'Patient Dashboard UI', amount: 45000, status: 'sent', date: '2026-07-11', aiGenerated: true, deliveryDate: '2026-08-01' },
@@ -139,7 +139,7 @@ function AiLeadFinder() {
     const newLead = {
       id: `LD-${String(allLeads.length + 1).padStart(3, '0')}`,
       from: lead.source, name: lead.name, company: lead.company,
-      need: lead.need, budget: '₹30K-60K', status: 'new',
+      need: lead.need, budget: '30K-60K', status: 'new',
       date: new Date().toISOString().split('T')[0], email: `${lead.name.toLowerCase().replace(/\s/g, '.')}@${lead.company.toLowerCase().replace(/\s/g, '')}.com`,
       aiScore: Math.floor(Math.random() * 40) + 60,
     }
@@ -309,7 +309,7 @@ function AiProposalGenerator() {
                 <div className="flex items-center gap-2"><span className="font-semibold text-sm">{p.project}</span><Badge status={p.status} /></div>
                 <div className="text-xs text-neutral-800">{p.client} · {p.company} · {p.aiGenerated && 'AI-generated'}</div>
               </div>
-              <div className="text-right"><div className="font-heading font-bold">₹{p.amount.toLocaleString('en-IN')}</div><div className="text-xs text-neutral-800">Delivery: {p.deliveryDate}</div></div>
+              <div className="text-right"><div className="font-heading font-bold">{p.amount.toLocaleString('en-IN')}</div><div className="text-xs text-neutral-800">Delivery: {p.deliveryDate}</div></div>
             </div>
           </div>
         ))}
@@ -364,7 +364,7 @@ function AiCodingAgent() {
           <div key={p.id} className="card-surface p-5">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2"><span className="font-semibold text-sm">{p.name}</span><Badge status={p.status} /></div>
-              <span className="text-sm font-semibold">₹{p.amount.toLocaleString('en-IN')}</span>
+              <span className="text-sm font-semibold">{p.amount.toLocaleString('en-IN')}</span>
             </div>
             <ProgressBar value={p.progress} />
             <div className="flex items-center justify-between text-xs text-neutral-800 mt-2">
@@ -402,8 +402,8 @@ function FreelancerDashboard() {
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard icon={DollarSign} label="Total Earned" value={`₹${(earning.total/1000).toFixed(0)}K`} trend="+100%" variant="success" />
-        <StatCard icon={Clock} label="Pending Payments" value={`₹${(earning.pending/1000).toFixed(0)}K`} variant="warning" />
+        <StatCard icon={DollarSign} label="Total Earned" value={`${(earning.total/1000).toFixed(0)}K`} trend="+100%" variant="success" />
+        <StatCard icon={Clock} label="Pending Payments" value={`${(earning.pending/1000).toFixed(0)}K`} variant="warning" />
         <StatCard icon={Target} label="New Leads" value={String(newLeads)} variant="primary" />
         <StatCard icon={TrendingUp} label="Conversion Rate" value={`${leads.length ? Math.round(wonLeads/leads.length*100) : 0}%`} variant="accent" />
       </div>
@@ -430,7 +430,7 @@ function FreelancerDashboard() {
           <div className="space-y-3 text-sm">
             {[
               { agent: 'LeadFinder AI', action: 'Scanned LinkedIn — found 3 matching leads', time: '2m ago' },
-              { agent: 'Proposal AI', action: 'Generated proposal for Priya Patel (₹45K)', time: '15m ago' },
+              { agent: 'Proposal AI', action: 'Generated proposal for Priya Patel (45K)', time: '15m ago' },
               { agent: 'Code Agent', action: 'Dashboard project: 65% complete, 8/12 tasks done', time: '1h ago' },
               { agent: 'Email AI', action: 'Sent follow-up to Vikram Joshi', time: '2h ago' },
             ].map((a, i) => (
@@ -451,7 +451,7 @@ function FreelancerDashboard() {
             <div key={p.id}>
               <div className="flex items-center justify-between text-sm mb-1">
                 <span className="font-medium">{p.name} — {p.client}</span>
-                <span className="text-neutral-800">{p.progress}% · ₹{p.amount.toLocaleString('en-IN')}</span>
+                <span className="text-neutral-800">{p.progress}% · {p.amount.toLocaleString('en-IN')}</span>
               </div>
               <ProgressBar value={p.progress} />
             </div>
@@ -467,7 +467,7 @@ function FreelancerDashboard() {
             { label: 'Your Name', value: 'Your Name Here' },
             { label: 'Title', value: 'Full-Stack Developer | AI-Powered' },
             { label: 'Email', value: 'you@email.com' },
-            { label: 'Rate', value: '₹30,000+ / project' },
+            { label: 'Rate', value: '30,000+ / project' },
           ].map((f, i) => (
             <div key={i} className="p-3 bg-neutral-50 dark:bg-neutral-800/50 rounded-xl"><div className="text-xs text-neutral-800">{f.label}</div><div className="text-sm font-medium">{f.value}</div></div>
           ))}

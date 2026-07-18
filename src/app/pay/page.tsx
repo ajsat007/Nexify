@@ -79,7 +79,7 @@ export default function PayPage() {
   }
 
   const pay = () => {
-    if (fa < 100) { alert('Minimum amount: ₹100'); return }
+    if (fa < 100) { alert('Minimum amount: 100'); return }
     if (!name || !email) { alert('Please enter your name and email'); return }
     setLoading(true)
 
@@ -154,7 +154,7 @@ export default function PayPage() {
                     {amounts.map(a => (
                       <button key={a} onClick={() => { setAmount(a); setCustom('') }}
                         className={'p-4 rounded-xl border-2 text-center transition-all ' + (amount === a && !custom ? 'border-primary-500 bg-primary-50 dark:bg-primary-500/10 text-primary-600' : 'border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-neutral-300 hover:border-neutral-300')}>
-                        <div className="text-lg font-heading font-bold">₹{a.toLocaleString('en-IN')}</div>
+                        <div className="text-lg font-heading font-bold">{a.toLocaleString('en-IN')}</div>
                         <div className="text-xs text-neutral-800">{a >= 75000 ? 'Enterprise' : a >= 45000 ? 'Standard' : 'Starter'}</div>
                       </button>
                     ))}
@@ -162,7 +162,7 @@ export default function PayPage() {
                   <div>
                     <label className="block text-sm font-medium text-neutral-800 dark:text-neutral-300 mb-1">Custom Amount</label>
                     <div className="relative">
-                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-800 font-medium">₹</span>
+                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-800 font-medium"></span>
                       <input type="number" className="input-field pl-8" placeholder="Enter any amount" value={custom} onChange={e => { setCustom(e.target.value); setAmount(0) }} />
                     </div>
                   </div>
@@ -198,7 +198,7 @@ export default function PayPage() {
                 </div>
 
                 <button onClick={pay} disabled={loading} className="btn-primary w-full text-lg py-4 flex items-center justify-center gap-2">
-                  {loading ? <><Loader size={20} className="animate-spin" /> Opening Razorpay...</> : <><Lock size={18} /> Pay ₹{total.toLocaleString('en-IN')}</>}
+                  {loading ? <><Loader size={20} className="animate-spin" /> Opening Razorpay...</> : <><Lock size={18} /> Pay {total.toLocaleString('en-IN')}</>}
                 </button>
 
                 <div className="flex items-center justify-center gap-4 text-xs text-neutral-800">
@@ -212,11 +212,11 @@ export default function PayPage() {
                 <div className="card-surface p-6 sticky top-28 space-y-6">
                   <h2 className="font-semibold">Payment Summary</h2>
                   <div className="space-y-3 text-sm">
-                    <div className="flex justify-between"><span className="text-neutral-800">Service Fee</span><span className="font-medium">₹{fa.toLocaleString('en-IN')}</span></div>
-                    <div className="flex justify-between"><span className="text-neutral-800">GST (18%)</span><span className="font-medium">₹{Math.round(fa * 0.18).toLocaleString('en-IN')}</span></div>
+                    <div className="flex justify-between"><span className="text-neutral-800">Service Fee</span><span className="font-medium">{fa.toLocaleString('en-IN')}</span></div>
+                    <div className="flex justify-between"><span className="text-neutral-800">GST (18%)</span><span className="font-medium">{Math.round(fa * 0.18).toLocaleString('en-IN')}</span></div>
                     <div className="border-t border-neutral-200 dark:border-neutral-700 pt-3 flex justify-between">
                       <span className="font-bold">Total</span>
-                      <span className="text-2xl font-heading font-bold gradient-text">₹{total.toLocaleString('en-IN')}</span>
+                      <span className="text-2xl font-heading font-bold gradient-text">{total.toLocaleString('en-IN')}</span>
                     </div>
                   </div>
 
@@ -246,8 +246,8 @@ export default function PayPage() {
             <div className="space-y-6">
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 {[
-                  { l: 'Total Earned', v: '₹' + (earnings.total || 0).toLocaleString('en-IN'), c: 'text-success' },
-                  { l: 'This Month', v: '₹' + (earnings.thisMonth || 0).toLocaleString('en-IN'), c: 'text-primary-500' },
+                  { l: 'Total Earned', v: '' + (earnings.total || 0).toLocaleString('en-IN'), c: 'text-success' },
+                  { l: 'This Month', v: '' + (earnings.thisMonth || 0).toLocaleString('en-IN'), c: 'text-primary-500' },
                   { l: 'Paid Invoices', v: String(invoices.filter((i: any) => i.status === 'paid').length), c: 'text-accent-500' },
                   { l: 'Pending', v: String(invoices.filter((i: any) => i.status !== 'paid').length), c: 'text-warning' },
                 ].map((s, i) => (
@@ -274,7 +274,7 @@ export default function PayPage() {
                         {inv.paymentId && <div className="text-[10px] text-neutral-800 mt-0.5">Payment ID: {inv.paymentId}</div>}
                       </div>
                       <div className="text-right">
-                        <div className="text-lg font-heading font-bold">₹{inv.amount.toLocaleString('en-IN')}</div>
+                        <div className="text-lg font-heading font-bold">{inv.amount.toLocaleString('en-IN')}</div>
                         {inv.method && <div className="text-[10px] text-neutral-800">{inv.method}</div>}
                       </div>
                     </div>

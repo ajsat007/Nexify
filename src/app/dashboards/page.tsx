@@ -10,9 +10,9 @@ const dashboardDetail = [
     id: 'ceo', role: 'CEO Dashboard', icon: LayoutDashboard, color: 'from-amber-500 to-orange-600',
     summary: 'Company-wide performance. All metrics AI-generated in real-time.',
     metrics: [
-      { label: 'Revenue (YTD)', value: '₹79.8L', trend: '+28%', chartData: [120, 180, 220, 280, 340, 420, 510, 620, 720, 798] },
+      { label: 'Revenue (YTD)', value: '79.8L', trend: '+28%', chartData: [120, 180, 220, 280, 340, 420, 510, 620, 720, 798] },
       { label: 'Active Projects', value: '6', trend: '+2', chartData: [3, 3, 4, 4, 5, 5, 5, 6, 6, 6] },
-      { label: 'Pipeline Value', value: '₹63.5L', trend: '+18%', chartData: [25, 32, 38, 42, 48, 52, 55, 58, 61, 63.5] },
+      { label: 'Pipeline Value', value: '63.5L', trend: '+18%', chartData: [25, 32, 38, 42, 48, 52, 55, 58, 61, 63.5] },
       { label: 'Agent Efficiency', value: '95.2%', trend: '+3.2%', chartData: [88, 89, 91, 92, 92, 93, 94, 94, 95, 95.2] },
     ],
     barData: [{ label: 'Jan', value: 12 }, { label: 'Feb', value: 18 }, { label: 'Mar', value: 22 }, { label: 'Apr', value: 28 }, { label: 'May', value: 34 }, { label: 'Jun', value: 42 }],
@@ -22,10 +22,10 @@ const dashboardDetail = [
     id: 'finance', role: 'Finance Dashboard', icon: DollarSign, color: 'from-emerald-500 to-green-600',
     summary: 'Real-time financial health. Zero labor costs, 94%+ margins.',
     metrics: [
-      { label: 'Income (MTD)', value: '₹10.85L', trend: '+32%', chartData: [2, 3.5, 4.8, 6.2, 7.5, 8.8, 10.85] },
-      { label: 'Expenses (MTD)', value: '₹1.04L', trend: '-5%', chartData: [1.2, 1.15, 1.1, 1.08, 1.06, 1.05, 1.04] },
+      { label: 'Income (MTD)', value: '10.85L', trend: '+32%', chartData: [2, 3.5, 4.8, 6.2, 7.5, 8.8, 10.85] },
+      { label: 'Expenses (MTD)', value: '1.04L', trend: '-5%', chartData: [1.2, 1.15, 1.1, 1.08, 1.06, 1.05, 1.04] },
       { label: 'Profit Margin', value: '90.4%', trend: '+2.1%', chartData: [82, 84, 86, 87, 88, 89, 90.4] },
-      { label: 'Monthly Burn', value: '₹1.04L', trend: '₹0 labor', chartData: [0.3, 0.5, 0.7, 0.8, 0.9, 1.0, 1.04] },
+      { label: 'Monthly Burn', value: '1.04L', trend: '0 labor', chartData: [0.3, 0.5, 0.7, 0.8, 0.9, 1.0, 1.04] },
     ],
     barData: [{ label: 'Apr', value: 6.2 }, { label: 'May', value: 8.5 }, { label: 'Jun', value: 10.85 }, { label: 'Jul', value: 12 }, { label: 'Aug', value: 14 }, { label: 'Sep', value: 16.5 }],
     donutData: [{ label: 'Infra', value: 45, color: '#10B981' }, { label: 'API Cost', value: 35, color: '#F59E0B' }, { label: 'Tools', value: 15, color: '#3B82F6' }, { label: 'Other', value: 5, color: '#8B5CF6' }],
@@ -34,8 +34,8 @@ const dashboardDetail = [
     id: 'sales', role: 'Sales Dashboard', icon: Target, color: 'from-violet-500 to-purple-600',
     summary: 'AI-powered pipeline with auto-lead scoring and proposals.',
     metrics: [
-      { label: 'Pipeline Value', value: '₹63.5L', trend: '+18%', chartData: [32, 38, 42, 48, 52, 58, 63.5] },
-      { label: 'Won (Qtr)', value: '₹18.5L', trend: '+12%', chartData: [4, 6, 8.5, 11, 13.5, 16, 18.5] },
+      { label: 'Pipeline Value', value: '63.5L', trend: '+18%', chartData: [32, 38, 42, 48, 52, 58, 63.5] },
+      { label: 'Won (Qtr)', value: '18.5L', trend: '+12%', chartData: [4, 6, 8.5, 11, 13.5, 16, 18.5] },
       { label: 'Conversion', value: '34%', trend: '+8%', chartData: [22, 24, 26, 28, 30, 32, 34] },
       { label: 'Active Deals', value: '10', trend: '+3', chartData: [5, 6, 6, 7, 8, 9, 10] },
     ],
@@ -58,7 +58,7 @@ const otherDashboards = [
   { role: 'Marketing', icon: BarChart3, color: 'from-pink-500 to-rose-600', kpis: '2,450 visits/wk · 24 leads · 45% open rate' },
   { role: 'Projects', icon: Activity, color: 'from-cyan-500 to-teal-600', kpis: '6 active · 4 on track · 92% completion' },
   { role: 'Client Success', icon: Headphones, color: 'from-primary-500 to-accent-500', kpis: '8 clients · 4.9/5 CSAT · 94% retention' },
-  { role: 'Operations', icon: Settings, color: 'from-neutral-600 to-neutral-800', kpis: '99.99% uptime · 78 tasks · ₹0/task' },
+  { role: 'Operations', icon: Settings, color: 'from-neutral-600 to-neutral-800', kpis: '99.99% uptime · 78 tasks · 0/task' },
 ]
 
 const lineData = [{ label: 'W1', value: 42 }, { label: 'W2', value: 55 }, { label: 'W3', value: 48 }, { label: 'W4', value: 62 }, { label: 'W5', value: 58 }, { label: 'W6', value: 71 }, { label: 'W7', value: 65 }, { label: 'W8', value: 78 }]

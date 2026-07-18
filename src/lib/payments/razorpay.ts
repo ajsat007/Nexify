@@ -26,7 +26,7 @@ function getClient(): Razorpay | null {
 }
 
 export interface CreateOrderParams {
-  amount: number // in paise (₹1 = 100 paise)
+  amount: number // in paise (1 = 100 paise)
   currency?: string
   receipt: string
   notes?: Record<string, string>

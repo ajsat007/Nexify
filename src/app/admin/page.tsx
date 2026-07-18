@@ -83,7 +83,7 @@ function LeadRow({ lead, onRefresh }: { lead: any; onRefresh: () => void }) {
         <span className={`chip text-xs ${statusColors[lead.status] || statusColors.new}`}>{lead.status}</span>
       </td>
       <td className="py-3 px-3 text-right">
-        <div className="text-sm font-semibold dark:text-white">₹{lead.budget?.toLocaleString('en-IN') || '—'}</div>
+        <div className="text-sm font-semibold dark:text-white">{lead.budget?.toLocaleString('en-IN') || '—'}</div>
       </td>
       <td className="py-3 px-3 text-right">
         <div className="flex items-center gap-1.5 justify-end">
@@ -255,7 +255,7 @@ export default function AdminPage() {
                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                     <StatCard label="Total Leads" value={String(metrics?.sales?.leads || 0)} sub={`${metrics?.sales?.conversion || 0}% conversion`} icon={Target} color="bg-blue-500" />
                     <StatCard label="Active Projects" value={String(metrics?.projects?.active || 0)} sub={`${metrics?.projects?.planning || 0} planning`} icon={FolderKanban} color="bg-emerald-500" />
-                    <StatCard label="Revenue" value={`₹${(metrics?.finance?.income || 0).toLocaleString('en-IN')}`} sub={`${metrics?.finance?.profitMargin || 0}% margin`} icon={TrendingUp} color="bg-purple-500" />
+                    <StatCard label="Revenue" value={`${(metrics?.finance?.income || 0).toLocaleString('en-IN')}`} sub={`${metrics?.finance?.profitMargin || 0}% margin`} icon={TrendingUp} color="bg-purple-500" />
                     <StatCard label="AI Agents" value={String(metrics?.agents?.active || 0)} sub={`${metrics?.agents?.uptime || 0}% uptime`} icon={Users} color="bg-amber-500" />
                   </div>
 
@@ -408,7 +408,7 @@ export default function AdminPage() {
                             'bg-amber-100 text-amber-600'
                           }`}>{p.status}</span>
                         </div>
-                        <p className="text-xs text-neutral-500 mb-2">{p.client} · ₹{p.value?.toLocaleString('en-IN')}</p>
+                        <p className="text-xs text-neutral-500 mb-2">{p.client} · {p.value?.toLocaleString('en-IN')}</p>
                         {p.progress > 0 && (
                           <div className="w-full h-1.5 rounded-full bg-neutral-200 dark:bg-neutral-600">
                             <div className="h-full rounded-full bg-primary-500" style={{ width: `${p.progress}%` }} />

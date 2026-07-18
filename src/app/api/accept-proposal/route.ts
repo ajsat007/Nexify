@@ -28,7 +28,7 @@ export async function POST(request: Request) {
     db.prepare("UPDATE leads SET status = 'won', updated_at = datetime('now') WHERE id = ?")
       .run(proposal.lead_id)
 
-    // Parse amount from price_range (remove ₹ and commas)
+    // Parse amount from price_range (remove  and commas)
     const amount = lead.budget || 50000
     const projectName = `Project: ${lead.service_interest} — ${lead.company}`
 

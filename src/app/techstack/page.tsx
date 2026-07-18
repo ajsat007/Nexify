@@ -45,7 +45,7 @@ export default function TechStackPage() {
 
         <div className="mt-12 bg-gradient-to-r from-primary-500/5 to-accent-500/5 rounded-2xl border border-primary-500/20 p-8 text-center">
           <h2 className="text-2xl font-heading font-bold mb-2 dark:text-white">Zero Licensing Cost</h2>
-          <p className="text-neutral-600 dark:text-neutral-400 mb-4">Every technology has a generous free tier. Total monthly infra cost: <strong className="text-primary-600">~₹1,04,000</strong>.</p>
+          <p className="text-neutral-600 dark:text-neutral-400 mb-4">Every technology has a generous free tier. Total monthly infra cost: <strong className="text-primary-600">~1,04,000</strong>.</p>
         </div>
       </PageSection>
     </PageLayout>

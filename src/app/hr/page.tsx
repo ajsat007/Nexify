@@ -4,9 +4,9 @@ import { Check, ArrowRight, BookOpen, Users, Target, TrendingUp, Award, Star, Gr
 
 export default function HRPage() {
   const positions = [
-    { title: 'AI Agent Orchestrator', type: 'Full-time', salary: '₹0 (AI Role)', skills: ['Agent architecture', 'Workflow design', 'Prompt engineering', 'Multi-agent systems'] },
-    { title: 'Prompt Engineer', type: 'Full-time', salary: '₹0 (AI Role)', skills: ['LLM optimization', 'Code generation', 'Testing patterns', 'Documentation'] },
-    { title: 'AI Training Specialist', type: 'Full-time', salary: '₹0 (AI Role)', skills: ['Data curation', 'Model fine-tuning', 'Performance evaluation', 'RLHF'] },
+    { title: 'AI Agent Orchestrator', type: 'Full-time', salary: '0 (AI Role)', skills: ['Agent architecture', 'Workflow design', 'Prompt engineering', 'Multi-agent systems'] },
+    { title: 'Prompt Engineer', type: 'Full-time', salary: '0 (AI Role)', skills: ['LLM optimization', 'Code generation', 'Testing patterns', 'Documentation'] },
+    { title: 'AI Training Specialist', type: 'Full-time', salary: '0 (AI Role)', skills: ['Data curation', 'Model fine-tuning', 'Performance evaluation', 'RLHF'] },
   ]
 
   const handbook = [

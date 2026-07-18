@@ -135,9 +135,9 @@ const serviceDetails = [
     deliverables: ['Requirement Specification Document', 'Architecture Design Document', 'Source Code (GitHub/GitLab)', 'API Documentation (Swagger)', 'Admin Dashboard', 'Deployment Scripts', 'User Manual', '3 Months Support'],
     technologies: ['React/Next.js', 'Node.js/Python', 'PostgreSQL', 'Docker', 'AWS/Azure', 'Redis'],
     packages: [
-      { name: 'Starter', price: '₹3,00,000 - ₹6,00,000', timeline: '4-6 wks', features: ['1 web app (3-5 modules)', 'Basic auth', 'Responsive UI', 'Deployment'] },
-      { name: 'Growth', price: '₹6,00,000 - ₹15,00,000', timeline: '8-12 wks', features: ['Full web app (5-10 modules)', 'API integrations', 'Admin panel', 'Testing & docs'] },
-      { name: 'Enterprise', price: '₹15,00,000 - ₹50,00,000+', timeline: '12-24 wks', features: ['Multi-module system', 'Microservices', 'AI features', 'SLA & support'] },
+      { name: 'Starter', price: '3,00,000 - 6,00,000', timeline: '4-6 wks', features: ['1 web app (3-5 modules)', 'Basic auth', 'Responsive UI', 'Deployment'] },
+      { name: 'Growth', price: '6,00,000 - 15,00,000', timeline: '8-12 wks', features: ['Full web app (5-10 modules)', 'API integrations', 'Admin panel', 'Testing & docs'] },
+      { name: 'Enterprise', price: '15,00,000 - 50,00,000+', timeline: '12-24 wks', features: ['Multi-module system', 'Microservices', 'AI features', 'SLA & support'] },
     ],
   },
   {
@@ -148,9 +148,9 @@ const serviceDetails = [
     deliverables: ['Responsive Design (Mobile + Tablet + Desktop)', 'SEO Meta Tags & Structured Data', 'Google PageSpeed Score ≥ 90', 'SSL Certificate', '1 Month Free Maintenance'],
     technologies: ['Next.js', 'Tailwind CSS', 'TypeScript', 'MongoDB/PostgreSQL', 'Vercel/AWS'],
     packages: [
-      { name: 'Basic', price: '₹80,000 - ₹1,50,000', timeline: '2-3 wks', features: ['5-page static site', 'Responsive', 'SEO basics', 'Hosting setup'] },
-      { name: 'Business', price: '₹1,50,000 - ₹4,00,000', timeline: '4-6 wks', features: ['Dynamic CMS (10-20 pages)', 'Blog', 'Admin panel', 'Analytics'] },
-      { name: 'Enterprise', price: '₹4,00,000 - ₹12,00,000', timeline: '6-10 wks', features: ['Custom web app', 'Multi-role auth', 'Payment gateway', 'Dashboard'] },
+      { name: 'Basic', price: '80,000 - 1,50,000', timeline: '2-3 wks', features: ['5-page static site', 'Responsive', 'SEO basics', 'Hosting setup'] },
+      { name: 'Business', price: '1,50,000 - 4,00,000', timeline: '4-6 wks', features: ['Dynamic CMS (10-20 pages)', 'Blog', 'Admin panel', 'Analytics'] },
+      { name: 'Enterprise', price: '4,00,000 - 12,00,000', timeline: '6-10 wks', features: ['Custom web app', 'Multi-role auth', 'Payment gateway', 'Dashboard'] },
     ],
   },
   {
@@ -161,9 +161,9 @@ const serviceDetails = [
     deliverables: ['iOS & Android Apps', 'Push Notifications', 'Offline Capability', 'Payment Integration', 'App Store Submission', '3 Months Support'],
     technologies: ['React Native/Flutter', 'Node.js', 'Firebase', 'Stripe/Razorpay', 'App Store Connect'],
     packages: [
-      { name: 'MVP', price: '₹2,50,000 - ₹5,00,000', timeline: '6-10 wks', features: ['Single platform', '5-8 screens', 'Basic auth', 'REST API'] },
-      { name: 'Standard', price: '₹5,00,000 - ₹10,00,000', timeline: '10-14 wks', features: ['Both platforms', '10-20 screens', 'Push notifications', 'Offline mode'] },
-      { name: 'Premium', price: '₹10,00,000+', timeline: '14-18 wks', features: ['Full-featured app', 'Real-time sync', 'Admin dashboard', 'Advanced analytics'] },
+      { name: 'MVP', price: '2,50,000 - 5,00,000', timeline: '6-10 wks', features: ['Single platform', '5-8 screens', 'Basic auth', 'REST API'] },
+      { name: 'Standard', price: '5,00,000 - 10,00,000', timeline: '10-14 wks', features: ['Both platforms', '10-20 screens', 'Push notifications', 'Offline mode'] },
+      { name: 'Premium', price: '10,00,000+', timeline: '14-18 wks', features: ['Full-featured app', 'Real-time sync', 'Admin dashboard', 'Advanced analytics'] },
     ],
   },
   {
@@ -174,9 +174,9 @@ const serviceDetails = [
     deliverables: ['Trained Model', 'Inference API', 'MLOps Pipeline', 'Model Monitoring Dashboard', 'Documentation'],
     technologies: ['TensorFlow/PyTorch', 'LangChain', 'PostgreSQL/Pinecone', 'Docker/Kubernetes', 'AWS SageMaker'],
     packages: [
-      { name: 'AI Audit', price: '₹1,00,000 - ₹2,00,000', timeline: '2-3 wks', features: ['Feasibility report', 'Data assessment', 'PoC roadmap', 'ROI analysis'] },
-      { name: 'AI MVP', price: '₹4,00,000 - ₹8,00,000', timeline: '6-10 wks', features: ['Working prototype', 'Trained model', 'API endpoint', 'Basic monitoring'] },
-      { name: 'Enterprise', price: '₹10,00,000+', timeline: '10-20 wks', features: ['Production system', 'MLOps pipeline', 'Model monitoring', 'Auto-retraining'] },
+      { name: 'AI Audit', price: '1,00,000 - 2,00,000', timeline: '2-3 wks', features: ['Feasibility report', 'Data assessment', 'PoC roadmap', 'ROI analysis'] },
+      { name: 'AI MVP', price: '4,00,000 - 8,00,000', timeline: '6-10 wks', features: ['Working prototype', 'Trained model', 'API endpoint', 'Basic monitoring'] },
+      { name: 'Enterprise', price: '10,00,000+', timeline: '10-20 wks', features: ['Production system', 'MLOps pipeline', 'Model monitoring', 'Auto-retraining'] },
     ],
   },
   {
@@ -187,9 +187,9 @@ const serviceDetails = [
     deliverables: ['Data Pipeline', 'Interactive Dashboard', 'Automated Reports', 'Anomaly Detection Setup', 'Documentation'],
     technologies: ['Python', 'Apache Spark', 'PostgreSQL', 'Metabase/Tableau', 'AWS QuickSight'],
     packages: [
-      { name: 'Basic', price: '₹1,50,000 - ₹3,00,000', timeline: '3-5 wks', features: ['Data pipeline setup', 'Basic dashboard', '3 reports', 'Email integration'] },
-      { name: 'Advanced', price: '₹3,00,000 - ₹6,00,000', timeline: '5-8 wks', features: ['Multiple sources', 'Advanced dashboards', 'Anomaly detection', 'Scheduled reports'] },
-      { name: 'Enterprise', price: '₹6,00,000+', timeline: '8-10 wks', features: ['Real-time pipeline', 'AI-powered insights', 'Custom alerts', 'Full integration'] },
+      { name: 'Basic', price: '1,50,000 - 3,00,000', timeline: '3-5 wks', features: ['Data pipeline setup', 'Basic dashboard', '3 reports', 'Email integration'] },
+      { name: 'Advanced', price: '3,00,000 - 6,00,000', timeline: '5-8 wks', features: ['Multiple sources', 'Advanced dashboards', 'Anomaly detection', 'Scheduled reports'] },
+      { name: 'Enterprise', price: '6,00,000+', timeline: '8-10 wks', features: ['Real-time pipeline', 'AI-powered insights', 'Custom alerts', 'Full integration'] },
     ],
   },
   {
@@ -200,9 +200,9 @@ const serviceDetails = [
     deliverables: ['User Research Report', 'Wireframes', 'High-Fidelity Design', 'Interactive Prototype', 'Design System', 'Developer Handoff'],
     technologies: ['Figma', 'Tailwind CSS', 'shadcn/ui', 'Framer Motion', 'Storybook'],
     packages: [
-      { name: 'UX Audit', price: '₹30,000 - ₹60,000', timeline: '1-2 wks', features: ['Heuristic evaluation', 'Usability report', 'Recommendations', 'Priority matrix'] },
-      { name: 'Full Design', price: '₹60,000 - ₹1,50,000', timeline: '2-4 wks', features: ['10-20 screens', 'Wireframes + hi-fi', 'Interactive prototype', 'Developer handoff'] },
-      { name: 'Design System', price: '₹2,00,000+', timeline: '4-6 wks', features: ['Complete design system', 'Component library', 'Dark/light mode', 'Accessibility audit'] },
+      { name: 'UX Audit', price: '30,000 - 60,000', timeline: '1-2 wks', features: ['Heuristic evaluation', 'Usability report', 'Recommendations', 'Priority matrix'] },
+      { name: 'Full Design', price: '60,000 - 1,50,000', timeline: '2-4 wks', features: ['10-20 screens', 'Wireframes + hi-fi', 'Interactive prototype', 'Developer handoff'] },
+      { name: 'Design System', price: '2,00,000+', timeline: '4-6 wks', features: ['Complete design system', 'Component library', 'Dark/light mode', 'Accessibility audit'] },
     ],
   },
   {
@@ -213,9 +213,9 @@ const serviceDetails = [
     deliverables: ['Infrastructure as Code', 'CI/CD Pipeline', 'Monitoring Dashboard', 'Disaster Recovery Plan', 'Security Audit'],
     technologies: ['AWS/Azure/GCP', 'Terraform', 'Docker/K8s', 'GitHub Actions', 'Datadog/New Relic'],
     packages: [
-      { name: 'Setup', price: '₹80,000 - ₹2,00,000', timeline: '2-3 wks', features: ['Cloud setup', 'CI/CD pipeline', 'Docker setup', 'Monitoring'] },
-      { name: 'Migration', price: '₹2,00,000 - ₹5,00,000', timeline: '4-6 wks', features: ['Full migration', 'IaC setup', 'Zero-downtime', 'Security audit'] },
-      { name: 'Enterprise', price: '₹5,00,000+', timeline: '6-8 wks', features: ['Multi-cloud', 'Kubernetes', 'Auto-scaling', 'Disaster recovery'] },
+      { name: 'Setup', price: '80,000 - 2,00,000', timeline: '2-3 wks', features: ['Cloud setup', 'CI/CD pipeline', 'Docker setup', 'Monitoring'] },
+      { name: 'Migration', price: '2,00,000 - 5,00,000', timeline: '4-6 wks', features: ['Full migration', 'IaC setup', 'Zero-downtime', 'Security audit'] },
+      { name: 'Enterprise', price: '5,00,000+', timeline: '6-8 wks', features: ['Multi-cloud', 'Kubernetes', 'Auto-scaling', 'Disaster recovery'] },
     ],
   },
   {
@@ -226,9 +226,9 @@ const serviceDetails = [
     deliverables: ['Working Chatbot', 'Knowledge Base', 'Analytics Dashboard', 'Multi-channel Setup', 'Documentation'],
     technologies: ['LangChain', 'OpenAI/Anthropic', 'WhatsApp API', 'Slack API', 'Twilio'],
     packages: [
-      { name: 'Basic', price: '₹1,00,000 - ₹2,00,000', timeline: '2-3 wks', features: ['Single channel', 'FAQ bot', 'Basic knowledge base', 'Analytics'] },
-      { name: 'Business', price: '₹2,00,000 - ₹5,00,000', timeline: '4-6 wks', features: ['Multi-channel', 'Custom knowledge base', 'Human handoff', 'Dashboard'] },
-      { name: 'Enterprise', price: '₹5,00,000+', timeline: '6-8 wks', features: ['Advanced AI', 'Multi-language', 'CRM integration', 'Full analytics'] },
+      { name: 'Basic', price: '1,00,000 - 2,00,000', timeline: '2-3 wks', features: ['Single channel', 'FAQ bot', 'Basic knowledge base', 'Analytics'] },
+      { name: 'Business', price: '2,00,000 - 5,00,000', timeline: '4-6 wks', features: ['Multi-channel', 'Custom knowledge base', 'Human handoff', 'Dashboard'] },
+      { name: 'Enterprise', price: '5,00,000+', timeline: '6-8 wks', features: ['Advanced AI', 'Multi-language', 'CRM integration', 'Full analytics'] },
     ],
   },
 ]

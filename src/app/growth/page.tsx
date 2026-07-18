@@ -7,32 +7,32 @@ export default function GrowthPage() {
     {
       period: '30 Days', icon: Zap, color: 'from-green-500 to-emerald-600',
       goals: ['Deploy 10 AI agents across all functions', 'Launch website with all 15+ pages', 'Activate SalesAgent-Mu for lead gen', 'Publish 15+ pieces of content', 'Onboard first 3 clients'],
-      metrics: ['5 active projects', '₹12L pipeline', '50 LinkedIn followers', '3 published case studies'],
+      metrics: ['5 active projects', '12L pipeline', '50 LinkedIn followers', '3 published case studies'],
     },
     {
       period: '90 Days', icon: Target, color: 'from-blue-500 to-indigo-600',
       goals: ['Expand to 25 AI agents', 'Launch 3 SaaS products (FlowSprint, DeskFlow, SignFlow)', 'Reach 100+ LinkedIn followers', '10 published blog posts', '5 client testimonials'],
-      metrics: ['15 active projects', '₹35L revenue', '15% conversion rate', '4.8 CSAT'],
+      metrics: ['15 active projects', '35L revenue', '15% conversion rate', '4.8 CSAT'],
     },
     {
       period: '6 Months', icon: Globe, color: 'from-violet-500 to-purple-600',
       goals: ['50 AI agents deployed', '5 SaaS products live', 'Client portal and admin panel refined', '200+ LinkedIn followers', 'Partnerships with 3 agencies'],
-      metrics: ['30 active projects', '₹85L annualized revenue', '20% month-over-month growth', '50+ leads in pipeline'],
+      metrics: ['30 active projects', '85L annualized revenue', '20% month-over-month growth', '50+ leads in pipeline'],
     },
     {
       period: '1 Year', icon: Award, color: 'from-amber-500 to-orange-600',
-      goals: ['To be #1 AI-native software company in India', '100 AI agents', 'SaaS ARR of ₹25L', '500+ projects delivered', 'Global client base across 20 countries'],
-      metrics: ['₹2.1Cr revenue', '96% profit margin', '50+ enterprise clients', '4.9/5 avg rating'],
+      goals: ['To be #1 AI-native software company in India', '100 AI agents', 'SaaS ARR of 25L', '500+ projects delivered', 'Global client base across 20 countries'],
+      metrics: ['2.1Cr revenue', '96% profit margin', '50+ enterprise clients', '4.9/5 avg rating'],
     },
     {
       period: '3 Years', icon: Rocket, color: 'from-primary-500 to-accent-500',
-      goals: ['IPO-ready company', '500+ AI agents', 'SaaS ARR ₹2Cr+', 'Global offices (AI-managed)', 'Industry leader in AI-native development'],
-      metrics: ['₹12Cr+ revenue', '500+ employees (AI)', '10,000+ projects', 'Global top-10 AI services company'],
+      goals: ['IPO-ready company', '500+ AI agents', 'SaaS ARR 2Cr+', 'Global offices (AI-managed)', 'Industry leader in AI-native development'],
+      metrics: ['12Cr+ revenue', '500+ employees (AI)', '10,000+ projects', 'Global top-10 AI services company'],
     },
     {
       period: '5 Years', icon: TrendingUp, color: 'from-red-500 to-rose-600',
-      goals: ['₹50Cr+ valuation', 'Fully autonomous company', 'AI agents training other AI agents', 'Nexify AI Platform (agent marketplace)', 'Zero human employees'],
-      metrics: ['₹50Cr+ revenue', '2,000+ AI agents', '100,000+ projects', '#1 AI-native company globally'],
+      goals: ['50Cr+ valuation', 'Fully autonomous company', 'AI agents training other AI agents', 'Nexify AI Platform (agent marketplace)', 'Zero human employees'],
+      metrics: ['50Cr+ revenue', '2,000+ AI agents', '100,000+ projects', '#1 AI-native company globally'],
     },
   ]
 
@@ -104,7 +104,7 @@ export default function GrowthPage() {
           <div className="mt-12 bg-neutral-900 rounded-2xl p-8 text-center">
             <Rocket className="w-12 h-12 text-primary-400 mx-auto mb-4" />
             <h2 className="text-2xl font-heading font-bold text-white mb-2">The Destination</h2>
-            <p className="text-neutral-800 max-w-xl mx-auto">A fully autonomous AI company. Zero humans. Zero operating cost. Unlimited scale. Generating ₹50Cr+ in revenue through AI agents building software for the world.</p>
+            <p className="text-neutral-800 max-w-xl mx-auto">A fully autonomous AI company. Zero humans. Zero operating cost. Unlimited scale. Generating 50Cr+ in revenue through AI agents building software for the world.</p>
           </div>
         </div>
       </section>

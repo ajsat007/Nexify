@@ -46,7 +46,7 @@ export async function POST(request: Request) {
           Contact: ${lead.contact_name}
           Email: ${lead.email}
           Service: ${lead.service_interest}
-          Budget: ₹${lead.budget.toLocaleString('en-IN')}
+          Budget: ${lead.budget.toLocaleString('en-IN')}
           Notes: ${lead.notes}
 
           Include: executive summary, technical approach, timeline, pricing breakdown, and next steps.`,
@@ -60,7 +60,7 @@ export async function POST(request: Request) {
       lead_id: leadId,
       title: `Proposal for ${lead.company} — ${lead.service_interest}`,
       content: aiResponse.content,
-      price_range: `₹${lead.budget.toLocaleString('en-IN')}`,
+      price_range: `${lead.budget.toLocaleString('en-IN')}`,
       timeline: 'To be determined',
     })
 

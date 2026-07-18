@@ -211,10 +211,10 @@ function PipelinePage() {
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard icon={Target} label="Total Pipeline" value={`₹${(totalPipeline/100000).toFixed(1)}L`} variant="primary" />
-        <StatCard icon={TrendingUp} label="Weighted Value" value={`₹${(weightedPipeline/100000).toFixed(1)}L`} variant="success" />
+        <StatCard icon={Target} label="Total Pipeline" value={`${(totalPipeline/100000).toFixed(1)}L`} variant="primary" />
+        <StatCard icon={TrendingUp} label="Weighted Value" value={`${(weightedPipeline/100000).toFixed(1)}L`} variant="success" />
         <StatCard icon={Users} label="Active Deals" value={String(deals.length)} variant="accent" />
-        <StatCard icon={DollarSign} label="Avg Deal Size" value={`₹${Math.round(totalPipeline/deals.length/1000)}K`} variant="warning" />
+        <StatCard icon={DollarSign} label="Avg Deal Size" value={`${Math.round(totalPipeline/deals.length/1000)}K`} variant="warning" />
       </div>
 
       {showAdd && (
@@ -225,7 +225,7 @@ function PipelinePage() {
             <div><label className="block text-xs font-medium text-neutral-700 mb-1">Contact *</label><input className="input-field text-sm" placeholder="Contact name" value={newDeal.contact} onChange={e => setNewDeal(s => ({...s, contact: e.target.value}))} /></div>
             <div><label className="block text-xs font-medium text-neutral-700 mb-1">Email</label><input className="input-field text-sm" placeholder="email@company.com" value={newDeal.email} onChange={e => setNewDeal(s => ({...s, email: e.target.value}))} /></div>
             <div><label className="block text-xs font-medium text-neutral-700 mb-1">Phone</label><input className="input-field text-sm" placeholder="+91 98765 43210" value={newDeal.phone} onChange={e => setNewDeal(s => ({...s, phone: e.target.value}))} /></div>
-            <div><label className="block text-xs font-medium text-neutral-700 mb-1">Value (₹)</label><input className="input-field text-sm" placeholder="500000" value={newDeal.value} onChange={e => setNewDeal(s => ({...s, value: e.target.value}))} /></div>
+            <div><label className="block text-xs font-medium text-neutral-700 mb-1">Value ()</label><input className="input-field text-sm" placeholder="500000" value={newDeal.value} onChange={e => setNewDeal(s => ({...s, value: e.target.value}))} /></div>
             <div><label className="block text-xs font-medium text-neutral-700 mb-1">Service</label>
               <select className="input-field text-sm" value={newDeal.service} onChange={e => setNewDeal(s => ({...s, service: e.target.value}))}>
                 <option value="">Select</option><option>Custom Software</option><option>Web Development</option><option>Mobile App</option><option>AI Solutions</option><option>Data Analytics</option><option>Cloud Services</option>
@@ -247,7 +247,7 @@ function PipelinePage() {
                   <h3 className="font-semibold text-sm text-neutral-900">{stage.label}</h3>
                   <span className="text-xs text-neutral-800">{stageDeals.length} deals</span>
                 </div>
-                <div className="text-lg font-heading font-bold text-neutral-900 mt-1">₹{(stageValue/100000).toFixed(1)}L</div>
+                <div className="text-lg font-heading font-bold text-neutral-900 mt-1">{(stageValue/100000).toFixed(1)}L</div>
               </div>
               <div className="p-3 space-y-3 min-h-[200px]">
                 {stageDeals.map(d => (
@@ -261,7 +261,7 @@ function PipelinePage() {
                     </div>
                     <div className="flex items-center justify-between text-xs text-neutral-800 mb-2">
                       <span>{d.service}</span>
-                      <span className="font-semibold text-neutral-900">₹{(d.value/100000).toFixed(1)}L</span>
+                      <span className="font-semibold text-neutral-900">{(d.value/100000).toFixed(1)}L</span>
                     </div>
                     <div className="flex items-center gap-2 mb-2">
                       <ProgressBar value={d.probability} />
@@ -341,7 +341,7 @@ function ProposalsPage() {
         <StatCard icon={FileText} label="Total Proposals" value={String(proposals.length)} variant="primary" />
         <StatCard icon={Send} label="Sent" value={String(proposals.filter(p => p.status === 'sent').length)} variant="success" />
         <StatCard icon={Edit3} label="Drafts" value={String(proposals.filter(p => p.status === 'draft').length)} variant="warning" />
-        <StatCard icon={DollarSign} label="Total Value" value={`₹${(proposals.reduce((s, p) => s + p.value, 0)/100000).toFixed(1)}L`} variant="accent" />
+        <StatCard icon={DollarSign} label="Total Value" value={`${(proposals.reduce((s, p) => s + p.value, 0)/100000).toFixed(1)}L`} variant="accent" />
       </div>
 
       <div className="space-y-3">
@@ -357,7 +357,7 @@ function ProposalsPage() {
                 </div>
               </div>
               <div className="text-right shrink-0">
-                <div className="text-lg font-heading font-bold text-neutral-900">₹{(p.value/100000).toFixed(1)}L</div>
+                <div className="text-lg font-heading font-bold text-neutral-900">{(p.value/100000).toFixed(1)}L</div>
                 <div className="flex gap-2 mt-1">
                   <button className="btn-primary text-xs px-3 py-1.5">{p.status === 'draft' ? 'Edit' : 'View'}</button>
                   <button className="btn-secondary text-xs px-3 py-1.5 border-neutral-200 text-neutral-800"><Download size={14} /></button>
@@ -697,7 +697,7 @@ function LeadCapturePage() {
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full" style={{ width: `${(s.count / Math.max(...sourceData.map(x => x.count)) * 100)}%` }} />
               </div>
               <span className="text-sm font-medium text-neutral-900 w-12 text-right">{s.count}</span>
-              <span className="text-xs text-neutral-800 w-20 text-right">₹{(s.value/100000).toFixed(1)}L</span>
+              <span className="text-xs text-neutral-800 w-20 text-right">{(s.value/100000).toFixed(1)}L</span>
             </div>
           ))}
         </div>
@@ -753,9 +753,9 @@ function SalesDashboard() {
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard icon={Target} label="Pipeline Value" value={`₹${(pipelineTotal/100000).toFixed(1)}L`} trend="+18%" variant="primary" sub="10 active deals" />
-        <StatCard icon={TrendingUp} label="Weighted Pipeline" value={`₹${(weightedTotal/100000).toFixed(1)}L`} variant="success" sub="Avg probability: {Math.round(deals.reduce((s, d) => s + d.probability, 0) / deals.length)}%" />
-        <StatCard icon={DollarSign} label="Won (This Qtr)" value="₹18.5L" variant="accent" sub="3 deals closed" />
+        <StatCard icon={Target} label="Pipeline Value" value={`${(pipelineTotal/100000).toFixed(1)}L`} trend="+18%" variant="primary" sub="10 active deals" />
+        <StatCard icon={TrendingUp} label="Weighted Pipeline" value={`${(weightedTotal/100000).toFixed(1)}L`} variant="success" sub="Avg probability: {Math.round(deals.reduce((s, d) => s + d.probability, 0) / deals.length)}%" />
+        <StatCard icon={DollarSign} label="Won (This Qtr)" value="18.5L" variant="accent" sub="3 deals closed" />
         <StatCard icon={Activity} label="Conversion Rate" value="34%" trend="+8%" variant="warning" sub="Lead-to-deal" />
       </div>
 
@@ -831,7 +831,7 @@ function SalesDashboard() {
           <div className="text-xs text-neutral-800 mt-1">Active Campaigns</div>
         </div>
         <div className="bg-white rounded-xl border border-neutral-200 p-4">
-          <div className="text-2xl font-heading font-bold gradient-text">₹0</div>
+          <div className="text-2xl font-heading font-bold gradient-text">0</div>
           <div className="text-xs text-neutral-800 mt-1">Sales Team Cost</div>
         </div>
       </div>

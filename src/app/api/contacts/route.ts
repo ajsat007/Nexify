@@ -50,7 +50,7 @@ export async function POST(request: Request) {
             - Deliverables
             - Next Steps
 
-            Be specific about pricing (in ₹), timelines (in weeks), and deliverables. Keep the tone professional and confident.`,
+            Be specific about pricing (in ), timelines (in weeks), and deliverables. Keep the tone professional and confident.`,
           },
           {
             role: 'user',
@@ -59,7 +59,7 @@ export async function POST(request: Request) {
             Contact: ${lead.contact_name}
             Email: ${lead.email}
             Service: ${lead.service_interest || 'Custom Software'}
-            Budget: ₹${(lead.budget || 0).toLocaleString('en-IN')}
+            Budget: ${(lead.budget || 0).toLocaleString('en-IN')}
             Requirements: ${lead.notes || 'Custom software development project'}`,
           },
         ],
@@ -78,7 +78,7 @@ export async function POST(request: Request) {
         lead.id,
         `Proposal for ${lead.company || lead.contact_name} — ${lead.service_interest || 'Software Development'}`,
         aiResponse.content,
-        `₹${(lead.budget || 0).toLocaleString('en-IN')}`,
+        `${(lead.budget || 0).toLocaleString('en-IN')}`,
         `${Math.ceil(Math.random() * 8 + 4)} weeks`
       )
 

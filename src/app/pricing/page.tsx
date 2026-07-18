@@ -11,33 +11,33 @@ const servicePricing = [
   {
     name: 'Web Development',
     tiers: [
-      { name: 'Basic', price: '₹80,000', popular: false, features: ['5-page static site', 'Responsive design', 'SEO basics', 'Contact form', 'Hosting setup', '1 month support'] },
-      { name: 'Business', price: '₹1,50,000', popular: true, features: ['Dynamic CMS (20 pages)', 'Blog + admin panel', 'Analytics integration', 'Email system', 'API integrations', '3 months support'] },
-      { name: 'Enterprise', price: '₹4,00,000+', popular: false, features: ['Custom web app', 'Multi-role auth', 'Payment gateway', 'Dashboard', 'Custom integrations', '6 months support'] },
+      { name: 'Basic', price: '80,000', popular: false, features: ['5-page static site', 'Responsive design', 'SEO basics', 'Contact form', 'Hosting setup', '1 month support'] },
+      { name: 'Business', price: '1,50,000', popular: true, features: ['Dynamic CMS (20 pages)', 'Blog + admin panel', 'Analytics integration', 'Email system', 'API integrations', '3 months support'] },
+      { name: 'Enterprise', price: '4,00,000+', popular: false, features: ['Custom web app', 'Multi-role auth', 'Payment gateway', 'Dashboard', 'Custom integrations', '6 months support'] },
     ],
   },
   {
     name: 'Mobile Apps',
     tiers: [
-      { name: 'MVP', price: '₹2,50,000', popular: false, features: ['Single platform', '5-8 screens', 'Basic auth', 'REST API', 'App store submission', '1 month support'] },
-      { name: 'Standard', price: '₹5,00,000', popular: true, features: ['Both platforms', '10-20 screens', 'Push notifications', 'Payment integration', 'Offline mode', '3 months support'] },
-      { name: 'Premium', price: '₹12,00,000+', popular: false, features: ['Full-featured app', 'Real-time sync', 'Admin dashboard', 'Advanced analytics', 'AR/VR features', '6 months support'] },
+      { name: 'MVP', price: '2,50,000', popular: false, features: ['Single platform', '5-8 screens', 'Basic auth', 'REST API', 'App store submission', '1 month support'] },
+      { name: 'Standard', price: '5,00,000', popular: true, features: ['Both platforms', '10-20 screens', 'Push notifications', 'Payment integration', 'Offline mode', '3 months support'] },
+      { name: 'Premium', price: '12,00,000+', popular: false, features: ['Full-featured app', 'Real-time sync', 'Admin dashboard', 'Advanced analytics', 'AR/VR features', '6 months support'] },
     ],
   },
   {
     name: 'AI Solutions',
     tiers: [
-      { name: 'AI Audit', price: '₹1,00,000', popular: false, features: ['Feasibility report', 'Data assessment', 'PoC roadmap', 'ROI analysis', 'Technology recommendations', 'Executive summary'] },
-      { name: 'AI MVP', price: '₹4,00,000', popular: true, features: ['Working prototype', 'Trained model', 'API endpoint', 'Basic monitoring', 'Model card docs', '3 months support'] },
-      { name: 'Enterprise', price: '₹10,00,000+', popular: false, features: ['Production system', 'MLOps pipeline', 'Model monitoring', 'Auto-retraining', 'A/B testing infra', 'SLA & dedicated support'] },
+      { name: 'AI Audit', price: '1,00,000', popular: false, features: ['Feasibility report', 'Data assessment', 'PoC roadmap', 'ROI analysis', 'Technology recommendations', 'Executive summary'] },
+      { name: 'AI MVP', price: '4,00,000', popular: true, features: ['Working prototype', 'Trained model', 'API endpoint', 'Basic monitoring', 'Model card docs', '3 months support'] },
+      { name: 'Enterprise', price: '10,00,000+', popular: false, features: ['Production system', 'MLOps pipeline', 'Model monitoring', 'Auto-retraining', 'A/B testing infra', 'SLA & dedicated support'] },
     ],
   },
   {
     name: 'UI/UX Design',
     tiers: [
-      { name: 'UX Audit', price: '₹30,000', popular: false, features: ['Heuristic evaluation', 'Usability report', 'Quick fix recommendations', 'Priority matrix', 'Competitive analysis', 'Executive summary'] },
-      { name: 'Full Design', price: '₹60,000', popular: true, features: ['10-20 screens', 'Wireframes + hi-fi', 'Interactive prototype', 'Design system basics', 'Developer handoff', '2 rounds revisions'] },
-      { name: 'Design System', price: '₹2,00,000+', popular: false, features: ['Complete design system', 'React component library', 'Dark/light mode', 'Accessibility audit', 'Design tokens', 'Documentation'] },
+      { name: 'UX Audit', price: '30,000', popular: false, features: ['Heuristic evaluation', 'Usability report', 'Quick fix recommendations', 'Priority matrix', 'Competitive analysis', 'Executive summary'] },
+      { name: 'Full Design', price: '60,000', popular: true, features: ['10-20 screens', 'Wireframes + hi-fi', 'Interactive prototype', 'Design system basics', 'Developer handoff', '2 rounds revisions'] },
+      { name: 'Design System', price: '2,00,000+', popular: false, features: ['Complete design system', 'React component library', 'Dark/light mode', 'Accessibility audit', 'Design tokens', 'Documentation'] },
     ],
   },
 ]

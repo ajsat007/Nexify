@@ -50,7 +50,7 @@ export default function AIAutomationPage() {
               { label: 'Avg Response', value: '< 30s', c: 'from-emerald-500 to-teal-500' },
               { label: 'Tasks/Day', value: '2,456', c: 'from-violet-500 to-purple-500' },
               { label: 'Uptime', value: '99.99%', c: 'from-cyan-500 to-blue-500' },
-              { label: 'Labor Cost', value: '₹0', c: 'from-rose-500 to-pink-500' },
+              { label: 'Labor Cost', value: '0', c: 'from-rose-500 to-pink-500' },
             ].map((s, i) => (
               <div key={i} className="text-center p-6 bg-neutral-50 rounded-2xl border border-neutral-100 hover:shadow-lg transition-all">
                 <div className={`text-3xl font-heading font-bold bg-gradient-to-r ${s.c} bg-clip-text text-transparent`}>{s.value}</div>

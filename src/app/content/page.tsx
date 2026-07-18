@@ -19,7 +19,7 @@ const DB = {
       { id: 'PST-001', platform: 'LinkedIn', content: 'Built a complete fintech dashboard in 6 days using AI agents. My clients get 10x faster delivery at half the cost. Here is how I do it 👇', type: 'case-study', date: '2026-07-12', time: '8:00 AM', engagement: { likes: 45, comments: 8, shares: 12 }, autoPosted: true },
       { id: 'PST-002', platform: 'Twitter', content: 'The future of freelancing: AI does the coding, you do the client management. I shipped 3 projects this month without writing a single line manually. 🤖💻', type: 'insight', date: '2026-07-11', time: '10:30 AM', engagement: { likes: 32, comments: 5, shares: 8 }, autoPosted: true },
       { id: 'PST-003', platform: 'LinkedIn', content: 'Just delivered a telemedicine app in 2 weeks. Key lessons: 1) AI agents handle 80% of boilerplate 2) Focus on architecture and UX 3) Test early, test often. Client very happy! 🚀', type: 'update', date: '2026-07-10', time: '9:15 AM', engagement: { likes: 67, comments: 12, shares: 9 }, autoPosted: true },
-      { id: 'PST-004', platform: 'Twitter', content: 'Hot take: Most agencies charge ₹5L+ for what I do with AI in 3 days. The gap between AI-assisted freelancers and traditional agencies is growing every week.', type: 'hot-take', date: '2026-07-09', time: '2:00 PM', engagement: { likes: 89, comments: 15, shares: 22 }, autoPosted: true },
+      { id: 'PST-004', platform: 'Twitter', content: 'Hot take: Most agencies charge 5L+ for what I do with AI in 3 days. The gap between AI-assisted freelancers and traditional agencies is growing every week.', type: 'hot-take', date: '2026-07-09', time: '2:00 PM', engagement: { likes: 89, comments: 15, shares: 22 }, autoPosted: true },
       { id: 'PST-005', platform: 'LinkedIn', content: 'My AI-powered workflow: 1) Client shares requirements 2) AI analyzes and scopes 3) AI agents build in parallel 4) I review and polish 5) Deploy. Result: 2-week projects, zero burnout.', type: 'process', date: '2026-07-08', time: '11:00 AM', engagement: { likes: 78, comments: 14, shares: 18 }, autoPosted: true },
     ])
     this.set('analytics', { totalPosts: 32, totalEngagement: 1482, followers: { linkedin: 450, twitter: 320 }, weeklyGrowth: 12, topPost: 'Hot take about agencies (89 likes)' })
@@ -65,7 +65,7 @@ function generateContent(template: string): string {
     '{tech}': ['Next.js + Node.js + PostgreSQL + AI', 'React + Python + AWS + LangChain', 'React Native + Firebase + Stripe', 'Next.js + Prisma + Vercel + AI'][Math.floor(Math.random() * 4)],
     '{cost}': String(Math.floor(Math.random() * 40) + 40),
     '{x}': String(Math.floor(Math.random() * 5) + 3),
-    '{price}': ['₹30K', '₹45K', '₹60K', '₹80K', '₹1.2L'][Math.floor(Math.random() * 5)],
+    '{price}': ['30K', '45K', '60K', '80K', '1.2L'][Math.floor(Math.random() * 5)],
     '{client}': ['a FinTech startup', 'an e-commerce brand', 'a healthcare provider', 'a real estate firm', 'an edtech company', 'a logistics company'][Math.floor(Math.random() * 6)],
     '{score}': String(Math.floor(Math.random() * 5 + 45) / 10),
     '{quote}': ['This is the fastest I have ever seen a project delivered', 'The quality exceeded our expectations', 'I cannot believe this was built so quickly', 'We are already seeing ROI', 'Best freelancer I have ever worked with'][Math.floor(Math.random() * 5)],

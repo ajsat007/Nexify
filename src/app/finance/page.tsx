@@ -4,10 +4,10 @@ import { ArrowRight, Check, DollarSign, TrendingUp, BarChart3, PieChart, Target,
 
 export default function FinancePage() {
   const projections = [
-    { year: 'Year 1', revenue: '₹85L', expenses: '₹5.2L', profit: '₹79.8L', margin: '93.9%', clients: 25, agents: 15 },
-    { year: 'Year 2', revenue: '₹2.1Cr', expenses: '₹8.5L', profit: '₹2.01Cr', margin: '95.9%', clients: 50, agents: 25 },
-    { year: 'Year 3', revenue: '₹4.5Cr', expenses: '₹12L', profit: '₹4.38Cr', margin: '97.3%', clients: 100, agents: 50 },
-    { year: 'Year 5', revenue: '₹12Cr', expenses: '₹25L', profit: '₹11.75Cr', margin: '97.9%', clients: 250, agents: 100 },
+    { year: 'Year 1', revenue: '85L', expenses: '5.2L', profit: '79.8L', margin: '93.9%', clients: 25, agents: 15 },
+    { year: 'Year 2', revenue: '2.1Cr', expenses: '8.5L', profit: '2.01Cr', margin: '95.9%', clients: 50, agents: 25 },
+    { year: 'Year 3', revenue: '4.5Cr', expenses: '12L', profit: '4.38Cr', margin: '97.3%', clients: 100, agents: 50 },
+    { year: 'Year 5', revenue: '12Cr', expenses: '25L', profit: '11.75Cr', margin: '97.9%', clients: 250, agents: 100 },
   ]
 
   const monthlyExpenses = [
@@ -36,8 +36,8 @@ export default function FinancePage() {
         <div className="section-container">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {[
-              { icon: DollarSign, label: 'Total Startup Cost', value: '₹0', sub: 'Zero capital required' },
-              { icon: TrendingUp, label: 'Monthly Operating Cost', value: `₹${(totalMonthly/1000).toFixed(0)}K`, sub: 'All infra included' },
+              { icon: DollarSign, label: 'Total Startup Cost', value: '0', sub: 'Zero capital required' },
+              { icon: TrendingUp, label: 'Monthly Operating Cost', value: `${(totalMonthly/1000).toFixed(0)}K`, sub: 'All infra included' },
               { icon: BarChart3, label: 'Avg Project Margin', value: '96%', sub: 'vs 20% traditional agency' },
               { icon: Target, label: 'Break-even', value: 'Day 1', sub: 'No upfront investment' },
             ].map((s, i) => (
@@ -53,13 +53,13 @@ export default function FinancePage() {
           {/* Expense Breakdown */}
           <div className="grid lg:grid-cols-2 gap-8 mb-16">
             <div className="bg-neutral-50 rounded-2xl p-6 border border-neutral-200">
-              <h2 className="font-semibold text-lg mb-4">Monthly Expenses (₹{totalMonthly.toLocaleString('en-IN')}/mo)</h2>
+              <h2 className="font-semibold text-lg mb-4">Monthly Expenses ({totalMonthly.toLocaleString('en-IN')}/mo)</h2>
               <div className="space-y-4">
                 {monthlyExpenses.map((e, i) => (
                   <div key={i}>
                     <div className="flex items-center justify-between text-sm mb-1">
                       <span className="text-neutral-700">{e.category}</span>
-                      <span className="font-semibold text-neutral-900">₹{e.amount.toLocaleString('en-IN')}</span>
+                      <span className="font-semibold text-neutral-900">{e.amount.toLocaleString('en-IN')}</span>
                     </div>
                     <div className="w-full bg-white rounded-full h-2.5 border border-neutral-200">
                       <div className="h-2.5 rounded-full bg-gradient-to-r from-primary-500 to-accent-500" style={{ width: `${e.pct}%` }} />
@@ -70,7 +70,7 @@ export default function FinancePage() {
               <div className="mt-6 p-4 bg-white rounded-xl border border-neutral-200">
                 <div className="flex items-center justify-between text-sm">
                   <span className="font-semibold text-neutral-900">Total Monthly Burn</span>
-                  <span className="font-semibold text-neutral-900">₹{totalMonthly.toLocaleString('en-IN')}</span>
+                  <span className="font-semibold text-neutral-900">{totalMonthly.toLocaleString('en-IN')}</span>
                 </div>
               </div>
             </div>
@@ -102,7 +102,7 @@ export default function FinancePage() {
               <div className="bg-white/80 rounded-xl p-6 border border-neutral-200">
                 <h3 className="font-semibold text-lg text-primary-600 mb-4">Nexify (AI-Only)</h3>
                 <ul className="space-y-3">
-                  {['₹0 labor cost', '₹1.04L/mo total operating cost', '99.9% profit margin on services', 'Unlimited scalability', '24/7/365 operation', 'Zero HR overhead'].map((item, i) => (
+                  {['0 labor cost', '1.04L/mo total operating cost', '99.9% profit margin on services', 'Unlimited scalability', '24/7/365 operation', 'Zero HR overhead'].map((item, i) => (
                     <li key={i} className="flex items-center gap-2 text-sm"><Check size={16} className="text-success shrink-0" />{item}</li>
                   ))}
                 </ul>
@@ -110,7 +110,7 @@ export default function FinancePage() {
               <div className="bg-white/80 rounded-xl p-6 border border-neutral-200">
                 <h3 className="font-semibold text-lg text-neutral-800 mb-4">Traditional Agency (10 people)</h3>
                 <ul className="space-y-3">
-                  {['₹5-8L/mo salary cost', '₹50K+/mo office & overhead', '15-25% profit margin', 'Limited by team size', '8-10 hrs/day operation', 'HR, payroll, benefits admin'].map((item, i) => (
+                  {['5-8L/mo salary cost', '50K+/mo office & overhead', '15-25% profit margin', 'Limited by team size', '8-10 hrs/day operation', 'HR, payroll, benefits admin'].map((item, i) => (
                     <li key={i} className="flex items-center gap-2 text-sm"><span className="w-2 h-2 rounded-full bg-error shrink-0" />{item}</li>
                   ))}
                 </ul>

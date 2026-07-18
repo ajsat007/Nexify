@@ -134,7 +134,7 @@ export default function PricingCalculator() {
                     : 'bg-neutral-100 text-neutral-800 hover:bg-neutral-200'
                 }`}>
                 {selectedFeatures.includes(f.id) && <Check size={10} />}
-                {f.label} (+₹{(f.cost / 1000).toFixed(0)}K)
+                {f.label} (+{(f.cost / 1000).toFixed(0)}K)
               </button>
             ))}
           </div>
@@ -151,18 +151,18 @@ export default function PricingCalculator() {
           <div className="grid sm:grid-cols-3 gap-4 mb-4">
             <div className="text-center p-4 bg-white/5 rounded-xl">
               <div className="text-xs text-neutral-400 mb-1">Base Price</div>
-              <div className="text-xl font-heading font-bold">₹{(baseCost / 100000).toFixed(1)}L</div>
+              <div className="text-xl font-heading font-bold">{(baseCost / 100000).toFixed(1)}L</div>
               <div className="text-[10px] text-neutral-400">{currentService.name} · {currentComplexity.label}</div>
             </div>
             <div className="text-center p-4 bg-white/5 rounded-xl">
               <div className="text-xs text-neutral-400 mb-1">Features</div>
-              <div className="text-xl font-heading font-bold">+₹{(featuresCost / 1000).toFixed(0)}K</div>
+              <div className="text-xl font-heading font-bold">+{(featuresCost / 1000).toFixed(0)}K</div>
               <div className="text-[10px] text-neutral-400">{selectedFeatures.length} selected</div>
             </div>
             <div className="text-center p-4 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl">
               <div className="text-xs text-white/70 mb-1">Total Estimate</div>
-              <div className="text-xl font-heading font-bold">₹{(totalCost / 100000).toFixed(1)}L</div>
-              <div className="text-[10px] text-white/70">or ₹{Math.round(monthlyPayment / 1000)}K/mo</div>
+              <div className="text-xl font-heading font-bold">{(totalCost / 100000).toFixed(1)}L</div>
+              <div className="text-[10px] text-white/70">or {Math.round(monthlyPayment / 1000)}K/mo</div>
             </div>
           </div>
           <a href="/contact" className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-white text-neutral-900 font-semibold hover:bg-neutral-100 transition-all text-sm">
