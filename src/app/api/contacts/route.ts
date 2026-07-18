@@ -31,78 +31,70 @@ export async function POST(request: Request) {
       source: 'website',
     })
 
-    // 2. Background: generate proposal + email (non-blocking)
-    generateProposalForLead(lead)
-
-    return NextResponse.json({
-      success: true,
-      message: 'We received your inquiry. AI agents are preparing your proposal — check your email shortly.',
-      leadId: lead.id,
-    })
-  } catch (err: any) {
-    console.error('[Contact] Error:', err)
-    return NextResponse.json({ error: err?.message || 'Something went wrong. Please try again.' }, { status: 400 })
-  }
-}
-
-// ── Background proposal generation ──
-
-async function generateProposalForLead(lead: any) {
-  try {
-    const aiResponse = await complete({
-      messages: [
-        {
-          role: 'system',
-          content: `You are Sales-Mu, the AI proposal agent at Nexify Technologies. Generate a professional proposal.
+    // 2. Generate AI proposal (synchronous with timeout)
+    let proposalGenerated = false
+    try {
+      const db = getDb()
+      const aiPromise = complete({
+        messages: [
+          { role: 'system', content: `You are Sales-Mu, the AI proposal agent at Nexify Technologies. Generate a professional proposal.
 
           Sections: Executive Summary | Technical Approach | Project Timeline | Pricing Breakdown | Deliverables | Next Steps
 
-          Be specific about pricing, timelines (weeks), and deliverables. Professional and confident tone.`,
-        },
-        {
-          role: 'user',
-          content: `Generate proposal for:
+          Be specific about pricing, timelines (weeks), and deliverables. Professional tone.` },
+          { role: 'user', content: `Generate proposal for:
           Company: ${lead.company || lead.contact_name}
           Contact: ${lead.contact_name}
           Email: ${lead.email}
           Service: ${lead.service_interest || 'Custom Software'}
           Budget: ${(lead.budget || 0).toLocaleString('en-IN')}
-          Requirements: ${lead.notes || 'Software development project'}`,
-        },
-      ],
-      temperature: 0.7,
-      maxTokens: 2048,
-    })
+          Requirements: ${lead.notes || 'Software development project'}` },
+        ],
+        temperature: 0.7,
+        maxTokens: 2048,
+      })
 
-    const db = getDb()
-    const proposalId = `PRL-${Date.now().toString(36).toUpperCase()}`
-    db.prepare(`
-      INSERT INTO proposals (id, lead_id, title, content, price_range, timeline, status, generated_by, created_at)
-      VALUES (?, ?, ?, ?, ?, ?, 'draft', 'ai', datetime('now'))
-    `).run(
-      proposalId,
-      lead.id,
-      `Proposal for ${lead.company || lead.contact_name} — ${lead.service_interest || 'Software Development'}`,
-      aiResponse.content,
-      `${(lead.budget || 0).toLocaleString('en-IN')}`,
-      `${Math.ceil(Math.random() * 8 + 4)} weeks`
-    )
+      // Race: AI call vs timeout
+      const timeout = new Promise<never>((_, reject) => setTimeout(() => reject(new Error('AI timeout')), 20000))
+      const aiResponse = await Promise.race([aiPromise, timeout])
 
-    db.prepare("UPDATE leads SET status = 'proposal', updated_at = datetime('now') WHERE id = ?").run(lead.id)
+      const proposalId = `PRL-${Date.now().toString(36).toUpperCase()}`
+      db.prepare(`INSERT INTO proposals (id, lead_id, title, content, price_range, timeline, status, generated_by, created_at) VALUES (?,?,?,?,?,?,'draft','ai',datetime('now'))`).run(
+        proposalId, lead.id,
+        `Proposal for ${lead.company || lead.contact_name} — ${lead.service_interest || 'Software Development'}`,
+        aiResponse.content,
+        `${(lead.budget || 0).toLocaleString('en-IN')}`,
+        `${Math.ceil(Math.random() * 8 + 4)} weeks`
+      )
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nexify-rouge.vercel.app'
-    const portalLink = `${siteUrl}/portal?email=${lead.email}`
+      db.prepare("UPDATE leads SET status = 'proposal', updated_at = datetime('now') WHERE id = ?").run(lead.id)
 
-    const emailResult = await sendEmail({
-      to: lead.email,
-      subject: `Your Proposal from Nexify AI — ${lead.service_interest || 'Software'} for ${lead.company || lead.contact_name}`,
-      html: proposalReadyEmail(lead.contact_name, `${lead.service_interest || 'Software Development'} — ${lead.company || lead.contact_name}`, portalLink),
-    })
+      // Try to email (don't block response)
+      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nexify-rouge.vercel.app'
+      const portalLink = `${siteUrl}/portal?email=${lead.email}`
+      sendEmail({
+        to: lead.email,
+        subject: `Your Proposal from Nexify AI — ${lead.service_interest || 'Software'} for ${lead.company || lead.contact_name}`,
+        html: proposalReadyEmail(lead.contact_name, `${lead.service_interest || 'Software Development'} — ${lead.company || lead.contact_name}`, portalLink),
+      }).then(r => {
+        if (r.success) db.prepare("UPDATE proposals SET status='sent', sent_at=datetime('now') WHERE id=?").run(proposalId)
+      }).catch(() => {})
 
-    if (emailResult.success) {
-      db.prepare("UPDATE proposals SET status = 'sent', sent_at = datetime('now') WHERE id = ?").run(proposalId)
+      proposalGenerated = true
+    } catch (err) {
+      console.error('[Contact] Proposal generation:', err)
     }
-  } catch (err) {
-    console.error('[Background] Proposal generation failed:', err)
+
+    return NextResponse.json({
+      success: true,
+      message: proposalGenerated
+        ? 'Proposal generated and sent to your email. Check your inbox (and spam folder) for the portal link.'
+        : 'We received your inquiry. AI agents are preparing your proposal — check your email shortly.',
+      leadId: lead.id,
+      proposalGenerated,
+    })
+  } catch (err: any) {
+    console.error('[Contact] Error:', err)
+    return NextResponse.json({ error: err?.message || 'Something went wrong. Please try again.' }, { status: 400 })
   }
 }
