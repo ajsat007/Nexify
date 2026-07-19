@@ -26,6 +26,7 @@ export const LeadSchema = z.object({
 export const ChatSchema = z.object({
   message: z.string().min(1, 'Message is required').max(10000),
   sessionId: z.string().max(100).optional(),
+  stream: z.boolean().optional(),
 })
 
 export const AuthSchema = z.object({

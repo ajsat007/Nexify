@@ -15,7 +15,6 @@
     </linearGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <!-- Grid overlay -->
   <g opacity="0.04" stroke="white" stroke-width="1">
     <line x1="0" y1="0" x2="0" y2="630"/><line x1="100" y1="0" x2="100" y2="630"/>
     <line x1="200" y1="0" x2="200" y2="630"/><line x1="300" y1="0" x2="300" y2="630"/>
@@ -24,17 +23,13 @@
     <line x1="800" y1="0" x2="800" y2="630"/><line x1="900" y1="0" x2="900" y2="630"/>
     <line x1="1000" y1="0" x2="1000" y2="630"/><line x1="1100" y1="0" x2="1100" y2="630"/>
   </g>
-  <!-- Aurora blobs -->
   <ellipse cx="300" cy="315" rx="350" ry="280" fill="rgba(99,102,241,0.08)" filter="blur(80px)"/>
   <ellipse cx="900" cy="315" rx="300" ry="250" fill="rgba(6,182,212,0.06)" filter="blur(80px)"/>
-  <!-- Logo mark -->
   <rect x="80" y="215" width="100" height="100" rx="24" fill="url(#accent)"/>
   <g transform="translate(115,245)" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none">
     <path d="M8 52V8L28 28L48 8V52"/>
   </g>
-  <!-- Type -->
   <text x="210" y="278" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="42" fill="white">Nexify Technologies</text>
   <text x="210" y="318" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="rgba(255,255,255,0.5)">AI-Native Software Company</text>
-  <!-- Tagline -->
-  <text x="80" y="400" font-family="Inter, sans-serif" font-weight="300" font-size="28" fill="url(#accent2)">Engineering Tomorrow's Digital Frontiers</text>
+  <text x="80" y="400" font-family="Inter, sans-serif" font-weight="300" font-size="28" fill="url(#accent2)">Engineering Tomorrow&apos;s Digital Frontiers</text>
 </svg>

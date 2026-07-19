@@ -80,17 +80,25 @@ export default function Header() {
           <div className="flex items-center justify-between h-16 lg:h-[72px]">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 group shrink-0">
-              <div className="relative w-8 h-8 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center overflow-hidden group-hover:shadow-lg group-hover:shadow-primary-500/25 transition-all duration-300">
-                <span className="text-white font-heading font-bold text-sm relative z-10">N</span>
-                <div className="absolute inset-0 bg-gradient-to-br from-primary-400/50 to-accent-500/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="relative w-9 h-9 rounded-xl overflow-hidden group-hover:shadow-lg group-hover:shadow-primary-500/25 transition-all duration-300">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/logo-square.png"
+                  alt="Nexify"
+                  className="w-full h-full object-cover"
+                  width={36}
+                  height={36}
+                />
               </div>
               <div className="hidden sm:block">
-                <span className={`font-heading font-bold text-lg leading-none tracking-tight transition-colors duration-300 ${scrolled || !isHome ? 'text-surface-900 dark:text-white' : 'text-white'}`}>
-                  Nexify
-                </span>
-                <p className={`text-xs font-medium tracking-[0.15em] uppercase transition-colors duration-300 ${scrolled || !isHome ? 'text-surface-400 dark:text-surface-500' : 'text-white/40'}`}>
-                  Technologies
-                </p>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/logo-horizontal.png"
+                  alt="Nexify Technologies"
+                  className={`h-8 w-auto transition-opacity duration-300 ${scrolled || !isHome ? 'opacity-100' : 'opacity-90 brightness-0 invert'}`}
+                  width={160}
+                  height={32}
+                />
               </div>
             </Link>
 
@@ -262,10 +270,12 @@ export default function Header() {
         }`}>
           <div className="flex items-center justify-between p-4 border-b border-surface-200 dark:border-surface-800">
             <Link href="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
-              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
-                <span className="text-white font-heading font-bold text-xs">N</span>
+              <div className="w-8 h-8 rounded-lg overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/logo-square.png" alt="Nexify" className="w-full h-full object-cover" />
               </div>
-              <span className="font-heading font-bold text-lg dark:text-white">Nexify</span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo-horizontal.png" alt="Nexify" className="h-7 w-auto" />
             </Link>
             <button onClick={() => setIsOpen(false)} className="btn-icon">
               <X size={18} />

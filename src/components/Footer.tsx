@@ -46,8 +46,9 @@ export default function Footer() {
         <div className="rounded-2xl p-6 sm:p-8 mb-12 border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl bg-gradient-to-r from-primary-500/5 to-accent-500/5">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center shrink-0 shadow-lg shadow-primary-500/20">
-                <Bot className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 shadow-lg shadow-primary-500/20">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/logo-square.png" alt="Nexify" className="w-full h-full object-cover" />
               </div>
               <div>
                 <h3 className="text-white font-heading font-bold text-lg">AI Chatbot for Your Business</h3>
@@ -65,12 +66,13 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-4 group">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center shrink-0 group-hover:shadow-lg group-hover:shadow-primary-500/25 transition-shadow">
-                <span className="text-white font-heading font-bold text-lg">N</span>
+              <div className="w-10 h-10 rounded-xl overflow-hidden shrink-0 group-hover:shadow-lg group-hover:shadow-primary-500/25 transition-shadow">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/logo-square.png" alt="Nexify" className="w-full h-full object-cover" />
               </div>
               <div>
-                <h3 className="text-white font-heading font-bold text-lg leading-none">Nexify</h3>
-                <p className="text-white/40 text-xs font-medium tracking-wider uppercase">Technologies</p>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/logo-horizontal.png" alt="Nexify Technologies" className="h-8 w-auto brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity" />
               </div>
             </Link>
             <p className="text-white/50 text-sm leading-relaxed mb-6 max-w-xs">

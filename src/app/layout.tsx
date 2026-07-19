@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Space_Grotesk, JetBrains_Mono } from 'next/font/google'
 import { siteConfig } from '@/lib/data'
+import { ThemeProvider } from '@/components/ThemeProvider'
 import { SiteShell } from '@/components/SiteShell'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import './globals.css'
@@ -35,8 +36,8 @@ const baseUrl = siteConfig.url || 'https://nexify.tech'
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: `${siteConfig.name} — ${siteConfig.tagline}`,
-    template: `%s | Nexify Technologies`,
+    default: `Nexify — AI-Native Software Company`,
+    template: `%s • Nexify AI`,
   },
   description: siteConfig.description,
   keywords: [
@@ -52,23 +53,23 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: baseUrl,
-    siteName: siteConfig.name,
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    siteName: 'Nexify AI',
+    title: 'Nexify — AI-Native Software Company',
     description: siteConfig.description,
     images: [
       {
-        url: '/og-image.svg',
+        url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: siteConfig.name,
+        alt: 'Nexify Technologies',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    title: 'Nexify — AI-Native Software Company',
     description: siteConfig.description,
-    images: ['/og-image.svg'],
+    images: ['/og-image.png'],
     creator: '@nexifytech',
   },
   robots: {
@@ -86,9 +87,13 @@ export const metadata: Metadata = {
     icon: [
       { url: '/icon.svg', type: 'image/svg+xml' },
       { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
     ],
     apple: [
-      { url: '/apple-touch-icon.svg', sizes: '180x180', type: 'image/svg+xml' },
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    other: [
+      { rel: 'apple-touch-icon-precomposed', url: '/apple-touch-icon.png' },
     ],
   },
   manifest: '/manifest.webmanifest',
@@ -122,10 +127,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Preconnect to font providers */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* Apple touch icon fallback */}
-        <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+        {/* Apple touch icon */}
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png" />
         {/* Mask icon for Safari pinned tabs */}
         <link rel="mask-icon" href="/icon.svg" color="#6366F1" />
+        {/* Preload brand logo */}
+        <link rel="preload" href="/logo-square.png" as="image" />
+        <link rel="preload" href="/logo-horizontal.png" as="image" />
       </head>
       <body className={`
         ${inter.variable}
@@ -133,9 +142,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         ${jetbrainsMono.variable}
         min-h-screen flex flex-col font-sans
       `}>
-        <SiteShell>
-          <ErrorBoundary>{children}</ErrorBoundary>
-        </SiteShell>
+        <ThemeProvider>
+          <SiteShell>
+            <ErrorBoundary>{children}</ErrorBoundary>
+          </SiteShell>
+        </ThemeProvider>
       </body>
     </html>
   )

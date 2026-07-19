@@ -7,7 +7,27 @@
 import type { AIProviderAdapter, AICompletionRequest, AICompletionResponse } from './client'
 
 const OLLAMA_BASE = process.env.OLLAMA_BASE_URL || 'http://localhost:11434'
-const DEFAULT_MODEL = process.env.OLLAMA_MODEL || 'llama3.2'
+
+async function getAvailableModels(): Promise<string[]> {
+  try {
+    const res = await fetch(`${OLLAMA_BASE}/api/tags`, { signal: AbortSignal.timeout(2000) })
+    if (!res.ok) return []
+    const data = await res.json()
+    return (data.models || []).map((m: any) => m.name)
+  } catch {
+    return []
+  }
+}
+
+function pickBestModel(available: string[], preferred?: string): string {
+  if (preferred && available.includes(preferred)) return preferred
+  // Prefer common models in order of preference
+  const preferences = ['minimax-m3:cloud', 'llama3.2', 'llama3.1', 'llama3', 'mistral', 'qwen2.5', 'phi3', 'gemma2']
+  for (const p of preferences) {
+    if (available.includes(p)) return p
+  }
+  return available[0] || 'llama3.2' // fallback, may fail but we'll catch it
+}
 
 export function createOllamaProvider(): AIProviderAdapter {
   async function callOllama(
@@ -17,7 +37,7 @@ export function createOllamaProvider(): AIProviderAdapter {
     tools?: any[]
   ): Promise<{ content: string; toolCalls?: { name: string; args: any }[] }> {
     const body: any = {
-      model: model || DEFAULT_MODEL,
+      model: model || 'llama3.2',
       messages: messages.map(m => ({ role: m.role, content: m.content })),
       stream,
     }
@@ -31,7 +51,10 @@ export function createOllamaProvider(): AIProviderAdapter {
       signal: AbortSignal.timeout(60000),
       body: JSON.stringify(body),
     })
-    if (!res.ok) throw new Error(`Ollama error: ${res.status} ${res.statusText}`)
+    if (!res.ok) {
+      const errText = await res.text().catch(() => '')
+      throw new Error(`Ollama error: ${res.status} ${res.statusText} ${errText}`)
+    }
 
     if (stream) {
       const reader = res.body?.getReader()
@@ -72,6 +95,9 @@ export function createOllamaProvider(): AIProviderAdapter {
   return {
     name: 'ollama',
     async complete(req: AICompletionRequest): Promise<AICompletionResponse> {
+      const availableModels = await getAvailableModels()
+      const model = pickBestModel(availableModels, req.model)
+
       const tools = req.tools?.map(t => ({
         type: 'function',
         function: { name: t.name, description: t.description, parameters: t.parameters },
@@ -79,14 +105,14 @@ export function createOllamaProvider(): AIProviderAdapter {
 
       const result = await callOllama(
         req.messages.map(m => ({ role: m.role, content: m.content })),
-        req.model || DEFAULT_MODEL,
+        model,
         false,
         tools
       )
 
       return {
         content: result.content,
-        model: req.model || DEFAULT_MODEL,
+        model,
         provider: 'ollama',
         toolCalls: result.toolCalls,
         usage: { promptTokens: 0, completionTokens: 0, totalTokens: 0 },
@@ -96,9 +122,12 @@ export function createOllamaProvider(): AIProviderAdapter {
       req: AICompletionRequest,
       onToken: (token: string) => void
     ): Promise<AICompletionResponse> {
+      const availableModels = await getAvailableModels()
+      const model = pickBestModel(availableModels, req.model)
+
       const result = await callOllama(
         req.messages.map(m => ({ role: m.role, content: m.content })),
-        req.model || DEFAULT_MODEL,
+        model,
         true
       )
       const words = result.content.split(' ')
@@ -108,14 +137,14 @@ export function createOllamaProvider(): AIProviderAdapter {
       }
       return {
         content: result.content,
-        model: req.model || DEFAULT_MODEL,
+        model,
         provider: 'ollama',
         toolCalls: result.toolCalls,
         usage: { promptTokens: 0, completionTokens: 0, totalTokens: 0 },
       }
     },
     availableModels() {
-      return [DEFAULT_MODEL, 'llama3.2', 'llama3.1', 'mistral', 'qwen2.5', 'phi3', 'gemma2']
+      return ['llama3.2', 'llama3.1', 'mistral', 'qwen2.5', 'phi3', 'gemma2']
     },
   }
 }

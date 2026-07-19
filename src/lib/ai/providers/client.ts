@@ -7,7 +7,7 @@
 // Zero paid API keys required.
 // ============================================================================
 
-export type AIProviderType = 'openai' | 'anthropic' | 'gemini' | 'deepseek' | 'grok' | 'mistral' | 'ollama' | 'openrouter'
+export type AIProviderType = 'openai' | 'anthropic' | 'gemini' | 'deepseek' | 'groq' | 'mistral' | 'ollama' | 'openrouter' | 'mock'
 
 export interface AIMessage {
   role: 'user' | 'assistant' | 'system'
@@ -161,14 +161,14 @@ function generateMockResponse(messages: AIMessage[]): string {
 
 function createMockProvider(): AIProviderAdapter {
   return {
-    name: 'openai' as AIProviderType,
+    name: 'mock' as AIProviderType,
     async complete(req) {
       await new Promise(r => setTimeout(r, 300 + Math.random() * 400))
       const content = generateMockResponse(req.messages)
       return {
         content,
-        model: 'llama3.2',
-        provider: 'ollama',
+        model: 'mock-llama3.2',
+        provider: 'mock',
         usage: { promptTokens: 0, completionTokens: 0, totalTokens: 0 },
       }
     },
@@ -181,8 +181,8 @@ function createMockProvider(): AIProviderAdapter {
       }
       return {
         content,
-        model: 'llama3.2',
-        provider: 'ollama',
+        model: 'mock-llama3.2',
+        provider: 'mock',
       }
     },
     availableModels() { return ['llama3.2', 'mixtral-8x7b'] },
@@ -216,7 +216,7 @@ function getProviderChain(): ProviderEntry[] {
   const groqKey = process.env.GROQ_API_KEY
   if (groqKey) {
     chain.push({
-      name: 'grok',
+      name: 'groq',
       priority: 1,
       factory: () => {
         const { createGroqProvider } = require('./groq')
@@ -297,7 +297,7 @@ export async function getProvider(name?: AIProviderType): Promise<AIProviderAdap
   }
 
   // Default — return whatever was auto-setup, or mock as last resort
-  const defaultProvider = providers.get('ollama') || providers.get('grok') || providers.get('openai')
+  const defaultProvider = providers.get('ollama') || providers.get('groq') || providers.get('openai')
   if (defaultProvider) return defaultProvider
 
   // Nothing registered — register mock and return it

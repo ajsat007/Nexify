@@ -5,7 +5,7 @@
 // Sign up at https://console.groq.com (free, 20k tokens/day)
 // ============================================================================
 
-import type { AIProviderAdapter, AICompletionRequest, AICompletionResponse } from './client'
+import type { AIProviderAdapter, AICompletionRequest, AICompletionResponse, AIProviderType } from './client'
 
 const GROQ_BASE = 'https://api.groq.com/openai/v1'
 const GROQ_API_KEY = process.env.GROQ_API_KEY || ''
@@ -62,7 +62,7 @@ export function createGroqProvider(apiKey?: string): AIProviderAdapter {
   }
 
   return {
-    name: 'grok',
+    name: 'groq' as AIProviderType,
     async complete(req: AICompletionRequest): Promise<AICompletionResponse> {
       const content = await callGroq(
         req.messages.map(m => ({ role: m.role, content: m.content })),
@@ -71,7 +71,7 @@ export function createGroqProvider(apiKey?: string): AIProviderAdapter {
       return {
         content,
         model: req.model || DEFAULT_MODEL,
-        provider: 'grok',
+        provider: 'groq',
       }
     },
     async streamComplete(
@@ -87,7 +87,7 @@ export function createGroqProvider(apiKey?: string): AIProviderAdapter {
       return {
         content,
         model: req.model || DEFAULT_MODEL,
-        provider: 'grok',
+        provider: 'groq',
       }
     },
     availableModels() {
