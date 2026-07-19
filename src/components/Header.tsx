@@ -88,7 +88,7 @@ export default function Header() {
                 <span className={`font-heading font-bold text-lg leading-none tracking-tight transition-colors duration-300 ${scrolled || !isHome ? 'text-surface-900 dark:text-white' : 'text-white'}`}>
                   Nexify
                 </span>
-                <p className={`text-[10px] font-medium tracking-[0.15em] uppercase transition-colors duration-300 ${scrolled || !isHome ? 'text-surface-400 dark:text-surface-500' : 'text-white/40'}`}>
+                <p className={`text-xs font-medium tracking-[0.15em] uppercase transition-colors duration-300 ${scrolled || !isHome ? 'text-surface-400 dark:text-surface-500' : 'text-white/40'}`}>
                   Technologies
                 </p>
               </div>
@@ -156,7 +156,7 @@ export default function Header() {
               >
                 <Search size={14} />
                 <span className="hidden xl:inline">Search</span>
-                <kbd className={`hidden xl:inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-md text-[10px] font-medium border ${scrolled || !isHome ? 'bg-surface-100 dark:bg-surface-800 text-surface-400 border-surface-200 dark:border-surface-700' : 'bg-white/[0.08] text-white/50 border-white/[0.1]'}`}>
+                <kbd className={`hidden xl:inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded-md text-xs font-medium border ${scrolled || !isHome ? 'bg-surface-100 dark:bg-surface-800 text-surface-400 border-surface-200 dark:border-surface-700' : 'bg-white/[0.08] text-white/50 border-white/[0.1]'}`}>
                   <Command size={10} />K
                 </kbd>
               </button>
@@ -175,7 +175,7 @@ export default function Header() {
                 href="/chatbot"
                 className="hidden lg:inline-flex btn-primary text-sm"
               >
-                <Bot size={14} /> AI Chatbot <span className="text-primary-200 text-[11px]">₹15K</span>
+                <Bot size={14} /> AI Chatbot <span className="text-primary-200 text-xs">₹15K</span>
               </Link>
 
               <button
@@ -213,7 +213,7 @@ export default function Header() {
                     autoFocus
                     onKeyDown={e => { if (e.key === 'Escape') setSearchOpen(false) }}
                   />
-                  <kbd className="text-[10px] font-medium text-surface-400 bg-surface-200 dark:bg-surface-700 px-1.5 py-0.5 rounded">ESC</kbd>
+                  <kbd className="text-xs font-medium text-surface-400 bg-surface-200 dark:bg-surface-700 px-1.5 py-0.5 rounded">ESC</kbd>
                 </div>
                 <div className="mt-3 grid sm:grid-cols-2 gap-2">
                   {[

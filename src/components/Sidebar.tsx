@@ -63,7 +63,7 @@ export function Sidebar({ items, title, subtitle, logo = 'N', onLogout }: Sideba
         </div>
         <div className={cn('overflow-hidden transition-all duration-300', collapsed ? 'w-0 opacity-0' : 'w-auto opacity-100')}>
           <div className="text-white font-heading font-bold text-sm leading-tight">{title}</div>
-          {subtitle && <div className="text-neutral-500 text-[10px] font-medium uppercase tracking-wider">{subtitle}</div>}
+          {subtitle && <div className="text-neutral-500 text-xs font-medium uppercase tracking-wider">{subtitle}</div>}
         </div>
       </div>
 

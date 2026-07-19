@@ -289,7 +289,7 @@ export default function ContentPage() {
                     <p className="text-sm text-neutral-700 dark:text-neutral-200 whitespace-pre-line line-clamp-3">{post.content}</p>
                     <div className="flex flex-wrap items-center gap-3 mt-3 text-xs text-neutral-800">
                       <span>{post.date} · {post.time}</span>
-                      {post.autoPosted && <span className="chip bg-success/10 text-success text-[10px]">Auto-posted</span>}
+                      {post.autoPosted && <span className="chip bg-success/10 text-success text-xs">Auto-posted</span>}
                       <span className="flex items-center gap-1"><Heart size={12} /> {post.engagement.likes}</span>
                       <span className="flex items-center gap-1"><MessageSquare size={12} /> {post.engagement.comments}</span>
                       <span className="flex items-center gap-1"><Share2 size={12} /> {post.engagement.shares}</span>

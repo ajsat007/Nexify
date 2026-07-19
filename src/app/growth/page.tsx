@@ -86,7 +86,7 @@ export default function GrowthPage() {
                               {phase.metrics.map((m, j) => (
                                 <div key={j} className="bg-neutral-50 rounded-xl p-3 text-center">
                                   <div className="text-primary-500 font-heading font-bold text-lg">{m.split(' ')[0]}</div>
-                                  <div className="text-[10px] text-neutral-800">{m}</div>
+                                  <div className="text-xs text-neutral-800">{m}</div>
                                 </div>
                               ))}
                             </div>

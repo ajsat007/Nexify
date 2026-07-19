@@ -42,7 +42,7 @@ export default function HRPage() {
                       <span className="chip bg-success/10 text-success text-xs">{p.salary}</span>
                     </div>
                     <div className="flex flex-wrap gap-1.5 mt-2">
-                      {p.skills.map((s, j) => <span key={j} className="chip bg-primary-50 text-primary-600 text-[10px]">{s}</span>)}
+                      {p.skills.map((s, j) => <span key={j} className="chip bg-primary-50 text-primary-600 text-xs">{s}</span>)}
                     </div>
                   </div>
                 ))}

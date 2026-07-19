@@ -176,7 +176,7 @@ export default function AgentsPage() {
                         )}
                       </div>
                       <div className="text-xs sm:text-sm font-semibold text-neutral-900 dark:text-white text-center leading-tight">{phase.label}</div>
-                      <div className="hidden sm:block text-[10px] text-neutral-500 text-center leading-tight max-w-[80px]">{phase.description.slice(0, 50)}</div>
+                      <div className="hidden sm:block text-xs text-neutral-500 text-center leading-tight max-w-[80px]">{phase.description.slice(0, 50)}</div>
                     </button>
                   )
                 })}
@@ -229,7 +229,7 @@ export default function AgentsPage() {
                             <div className="min-w-0 flex-1">
                               <div className="flex items-center gap-2 flex-wrap">
                                 <span className="font-semibold text-sm dark:text-white">{agent.name}</span>
-                                <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${
+                                <span className={`text-xs px-1.5 py-0.5 rounded-full font-medium ${
                                   agent.status === 'active' ? 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400' :
                                   'bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400'
                                 }`}>{agent.status}</span>
@@ -237,13 +237,13 @@ export default function AgentsPage() {
                               <p className="text-xs text-neutral-500 truncate">{agent.role}</p>
                               <div className="flex gap-1 mt-1">
                                 {agent.skills.slice(0, 3).map(s => (
-                                  <span key={s} className="text-[10px] px-1.5 py-0.5 rounded bg-neutral-200 dark:bg-neutral-600 text-neutral-600 dark:text-neutral-300 truncate">{s}</span>
+                                  <span key={s} className="text-xs px-1.5 py-0.5 rounded bg-neutral-200 dark:bg-neutral-600 text-neutral-600 dark:text-neutral-300 truncate">{s}</span>
                                 ))}
                               </div>
                             </div>
                             <div className="text-right shrink-0">
                               <div className="text-sm font-bold text-primary-600 dark:text-primary-400">{agent.efficiency}%</div>
-                              <div className="text-[10px] text-neutral-500">{agent.tasksCompleted}k tasks</div>
+                              <div className="text-xs text-neutral-500">{agent.tasksCompleted}k tasks</div>
                             </div>
                           </div>
                         ))}
@@ -296,7 +296,7 @@ export default function AgentsPage() {
                     }`}>
                       <span className="text-lg">{phase.icon}</span>
                       <span className="flex-1 text-sm">{phase.label}</span>
-                      <span className="text-[11px]">
+                      <span className="text-xs">
                         {completedSteps.has(i) ? '✅ Done' :
                          i === runningStep ? '⏳ Running...' :
                          i < runningStep ? '✓ Complete' :
@@ -377,8 +377,8 @@ export default function AgentsPage() {
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 flex-wrap">
                               <span className="font-semibold text-sm dark:text-white">{agent.name}</span>
-                              <span className="text-[10px] text-neutral-500 bg-neutral-200 dark:bg-neutral-600 px-1.5 py-0.5 rounded">{agent.model}</span>
-                              <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${
+                              <span className="text-xs text-neutral-500 bg-neutral-200 dark:bg-neutral-600 px-1.5 py-0.5 rounded">{agent.model}</span>
+                              <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${
                                 agent.status === 'active' ? 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400' :
                                 'bg-amber-100 text-amber-600'
                               }`}>{agent.status}</span>
@@ -386,13 +386,13 @@ export default function AgentsPage() {
                             <p className="text-xs text-neutral-500 mt-0.5 leading-snug">{agent.role} · {agent.description}</p>
                             <div className="flex flex-wrap gap-1 mt-1">
                               {agent.skills.map(s => (
-                                <span key={s} className="text-[10px] px-1.5 py-0.5 rounded bg-neutral-200 dark:bg-neutral-600 text-neutral-600 dark:text-neutral-300">{s}</span>
+                                <span key={s} className="text-xs px-1.5 py-0.5 rounded bg-neutral-200 dark:bg-neutral-600 text-neutral-600 dark:text-neutral-300">{s}</span>
                               ))}
                             </div>
                           </div>
                           <div className="text-right shrink-0">
                             <div className="text-base sm:text-lg font-heading font-bold text-primary-600 dark:text-primary-400">{agent.efficiency}%</div>
-                            <div className="text-[10px] text-neutral-500">{agent.tasksCompleted.toLocaleString()} tasks</div>
+                            <div className="text-xs text-neutral-500">{agent.tasksCompleted.toLocaleString()} tasks</div>
                           </div>
                         </div>
                       ))}
@@ -439,7 +439,7 @@ export default function AgentsPage() {
                     { step: '8. Onboard Client', dept: '📋 Ops', deptRef: 'operations' },
                   ].map((s, i) => (
                     <div key={i} className="flex items-center gap-2 py-1.5">
-                      <span className="w-6 h-6 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-[10px] font-bold flex items-center justify-center shrink-0">{i + 1}</span>
+                      <span className="w-6 h-6 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-xs font-bold flex items-center justify-center shrink-0">{i + 1}</span>
                       <span className="flex-1 text-sm text-neutral-700 dark:text-neutral-300">{s.step}</span>
                       <button
                         onClick={() => {
@@ -478,7 +478,7 @@ export default function AgentsPage() {
                     { step: '10. Launch Campaign', dept: '📈 Marketing', deptRef: 'marketing' },
                   ].map((s, i) => (
                     <div key={i} className="flex items-center gap-2 py-1.5">
-                      <span className="w-6 h-6 rounded-full bg-accent-100 dark:bg-accent-900/30 text-accent-600 dark:text-accent-400 text-[10px] font-bold flex items-center justify-center shrink-0">{i + 1}</span>
+                      <span className="w-6 h-6 rounded-full bg-accent-100 dark:bg-accent-900/30 text-accent-600 dark:text-accent-400 text-xs font-bold flex items-center justify-center shrink-0">{i + 1}</span>
                       <span className="flex-1 text-sm text-neutral-700 dark:text-neutral-300">{s.step}</span>
                       <button
                         onClick={() => {

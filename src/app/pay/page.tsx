@@ -188,10 +188,10 @@ export default function PayPage() {
                       { id: 'wallet', name: 'Wallet', icon: Wallet, desc: 'Paytm, Mobikwik' },
                     ].map(m => (
                       <div key={m.id} className="relative p-4 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/50">
-                        {m.popular && <span className="absolute -top-2 -right-2 px-2 py-0.5 bg-primary-500 text-white text-[10px] rounded-full font-medium">Popular</span>}
+                        {m.popular && <span className="absolute -top-2 -right-2 px-2 py-0.5 bg-primary-500 text-white text-xs rounded-full font-medium">Popular</span>}
                         <m.icon className="w-5 h-5 text-primary-500 mb-1" />
                         <div className="text-sm font-medium">{m.name}</div>
-                        <div className="text-[10px] text-neutral-800">{m.desc}</div>
+                        <div className="text-xs text-neutral-800">{m.desc}</div>
                       </div>
                     ))}
                   </div>
@@ -268,14 +268,14 @@ export default function PayPage() {
                       <div>
                         <div className="flex items-center gap-2">
                           <span className="font-semibold text-sm">{inv.project}</span>
-                          <span className={'chip text-[10px] border-0 ' + st(inv.status)}>{inv.status}</span>
+                          <span className={'chip text-xs border-0 ' + st(inv.status)}>{inv.status}</span>
                         </div>
                         <div className="text-xs text-neutral-800 mt-0.5">{inv.client} · {inv.date}</div>
-                        {inv.paymentId && <div className="text-[10px] text-neutral-800 mt-0.5">Payment ID: {inv.paymentId}</div>}
+                        {inv.paymentId && <div className="text-xs text-neutral-800 mt-0.5">Payment ID: {inv.paymentId}</div>}
                       </div>
                       <div className="text-right">
                         <div className="text-lg font-heading font-bold">{inv.amount.toLocaleString('en-IN')}</div>
-                        {inv.method && <div className="text-[10px] text-neutral-800">{inv.method}</div>}
+                        {inv.method && <div className="text-xs text-neutral-800">{inv.method}</div>}
                       </div>
                     </div>
                   </div>

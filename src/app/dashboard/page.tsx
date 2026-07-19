@@ -58,13 +58,13 @@ export default function DashboardPage() {
                 </div>
                 <div>
                   <div className="text-sm font-semibold">{agent.name}</div>
-                  <div className="text-[10px] text-neutral-500">{agent.department} · {agent.status}</div>
+                  <div className="text-xs text-neutral-500">{agent.department} · {agent.status}</div>
                 </div>
               </div>
               <p className="text-xs text-neutral-400 mb-2 line-clamp-2">{agent.title}</p>
               <div className="flex flex-wrap gap-1">
                 {agent.capabilities.slice(0, 3).map((c: string) => (
-                  <span key={c} className="text-[10px] px-2 py-0.5 rounded-full bg-neutral-700/50 text-neutral-300">{c}</span>
+                  <span key={c} className="text-xs px-2 py-0.5 rounded-full bg-neutral-700/50 text-neutral-300">{c}</span>
                 ))}
               </div>
             </div>

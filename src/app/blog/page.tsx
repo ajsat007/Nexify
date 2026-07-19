@@ -128,7 +128,7 @@ export default function BlogPage() {
                 <article className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 overflow-hidden hover:shadow-xl hover:border-primary-500/20 transition-all duration-300 group h-full flex flex-col">
                   <div className="p-5 sm:p-6 flex flex-col flex-1">
                     <div className="flex items-center gap-3 mb-3">
-                      <span className="chip bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-[11px]">{post.category}</span>
+                      <span className="chip bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-xs">{post.category}</span>
                       <span className="text-xs text-neutral-500 flex items-center gap-1"><Calendar size={12} />{post.date}</span>
                     </div>
                     <h3 className="text-base sm:text-lg font-heading font-bold mb-2 dark:text-white group-hover:text-primary-600 transition-colors leading-snug">{post.title}</h3>

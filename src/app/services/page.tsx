@@ -58,7 +58,7 @@ export default function ServicesPage() {
                                 : 'bg-white dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700'
                             }`}>
                               {j === 1 && (
-                                <div className="absolute -top-2.5 left-4 px-3 py-0.5 rounded-full bg-primary-500 text-white text-[10px] font-semibold">
+                                <div className="absolute -top-2.5 left-4 px-3 py-0.5 rounded-full bg-primary-500 text-white text-xs font-semibold">
                                   Most Popular
                                 </div>
                               )}

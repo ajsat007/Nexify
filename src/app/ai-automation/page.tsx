@@ -71,7 +71,7 @@ export default function AIAutomationPage() {
                 <h3 className="text-lg font-heading font-bold mb-1">{agent.name}</h3>
                 <p className="text-sm text-neutral-800 mb-3 line-clamp-2">{agent.desc}</p>
                 <div className="flex flex-wrap gap-1.5">
-                  {agent.skills.map((s, i) => <span key={i} className="chip bg-neutral-100 text-neutral-800 text-[10px]">{s}</span>)}
+                  {agent.skills.map((s, i) => <span key={i} className="chip bg-neutral-100 text-neutral-800 text-xs">{s}</span>)}
                 </div>
                 <div className="mt-3 text-xs text-neutral-800">Model: {agent.model}</div>
               </button>

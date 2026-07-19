@@ -33,7 +33,7 @@ export default function TechStackPage() {
                 <div>
                   <div className="flex items-center gap-2 mb-1">
                     <span className="font-semibold text-neutral-900 dark:text-white">{t.category}</span>
-                    <span className="chip bg-accent-50 dark:bg-accent-900/30 text-accent-600 dark:text-accent-400 text-[10px]">Free Tier</span>
+                    <span className="chip bg-accent-50 dark:bg-accent-900/30 text-accent-600 dark:text-accent-400 text-xs">Free Tier</span>
                   </div>
                   <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-1">{t.tech}</p>
                   <p className="text-xs text-neutral-500 dark:text-neutral-500">{t.purpose}</p>

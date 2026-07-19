@@ -273,7 +273,7 @@ export default function AdminPage() {
                               <div className="text-sm font-medium dark:text-white truncate">{l.contact_name}</div>
                               <div className="text-xs text-neutral-500 truncate">{l.company} · {l.service_interest}</div>
                             </div>
-                            <span className={`chip text-[10px] ${
+                            <span className={`chip text-xs ${
                               l.status === 'new' ? 'bg-blue-100 text-blue-600' :
                               l.status === 'qualified' ? 'bg-purple-100 text-purple-600' :
                               l.status === 'proposal' ? 'bg-amber-100 text-amber-600' :
@@ -297,7 +297,7 @@ export default function AdminPage() {
                               <div className="text-sm font-medium dark:text-white truncate">{p.title}</div>
                               <div className="text-xs text-neutral-500">{p.price_range}</div>
                             </div>
-                            <span className={`chip text-[10px] ${
+                            <span className={`chip text-xs ${
                               p.status === 'draft' ? 'bg-neutral-100 text-neutral-600' :
                               p.status === 'sent' ? 'bg-blue-100 text-blue-600' :
                               p.status === 'accepted' ? 'bg-emerald-100 text-emerald-600' :
@@ -317,9 +317,9 @@ export default function AdminPage() {
                       {metrics?.performance?.map((p: any) => (
                         <div key={p.month} className="flex-1 flex flex-col items-center gap-1">
                           <div className="w-full bg-primary-500/20 rounded-t-md relative" style={{ height: `${(p.tasks / 3000) * 100}%` }}>
-                            <div className="absolute -top-5 left-1/2 -translate-x-1/2 text-[10px] text-neutral-500 font-medium">{p.tasks}</div>
+                            <div className="absolute -top-5 left-1/2 -translate-x-1/2 text-xs text-neutral-500 font-medium">{p.tasks}</div>
                           </div>
-                          <div className="text-[10px] text-neutral-400">{p.month}</div>
+                          <div className="text-xs text-neutral-400">{p.month}</div>
                         </div>
                       ))}
                     </div>
@@ -401,7 +401,7 @@ export default function AdminPage() {
                       <div key={p.id} className="bg-neutral-50 dark:bg-neutral-700/50 rounded-xl p-4 border border-neutral-100 dark:border-neutral-700">
                         <div className="flex items-center justify-between mb-2">
                           <h4 className="font-semibold text-sm dark:text-white">{p.name}</h4>
-                          <span className={`chip text-[10px] ${
+                          <span className={`chip text-xs ${
                             p.status === 'active' ? 'bg-emerald-100 text-emerald-600' :
                             p.status === 'planning' ? 'bg-blue-100 text-blue-600' :
                             p.status === 'completed' ? 'bg-green-100 text-green-600' :

@@ -80,7 +80,7 @@ export default function FAQPage() {
                       aria-expanded={activeFaq === i}
                     >
                       <div className="flex items-start sm:items-center gap-2 sm:gap-3 min-w-0">
-                        <span className="chip bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-[11px] shrink-0 mt-0.5 sm:mt-0 hidden sm:inline-flex">{faq.category}</span>
+                        <span className="chip bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-xs shrink-0 mt-0.5 sm:mt-0 hidden sm:inline-flex">{faq.category}</span>
                         <span className="font-medium text-sm sm:text-base text-neutral-900 dark:text-white leading-snug">{faq.q}</span>
                       </div>
                       <ChevronRight size={18} className={`text-neutral-500 shrink-0 transition-transform duration-300 ${activeFaq === i ? 'rotate-90' : ''}`} />

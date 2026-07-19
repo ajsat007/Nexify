@@ -97,7 +97,7 @@ function ProjectDeliveryCard({ project, email }: { project: any; email: string }
                       }`}>{m.status.replace('_', ' ')}</span>
                     </div>
                     <p className="text-xs text-neutral-500 mt-0.5">{m.description}</p>
-                    {m.due_date && <p className="text-[10px] text-neutral-400 mt-0.5">Due: {new Date(m.due_date).toLocaleDateString()}</p>}
+                    {m.due_date && <p className="text-xs text-neutral-400 mt-0.5">Due: {new Date(m.due_date).toLocaleDateString()}</p>}
                     {m.progress > 0 && (
                       <div className="w-full h-1 rounded-full bg-neutral-200 dark:bg-neutral-700 mt-1.5">
                         <div className="h-full rounded-full bg-primary-500" style={{width: m.progress + '%'}} />

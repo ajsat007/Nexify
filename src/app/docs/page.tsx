@@ -37,7 +37,7 @@ export default function DocsPage() {
                     <p className="text-xs text-neutral-500 mt-1">{doc.desc}</p>
                     <div className="flex items-center gap-3 mt-3 text-xs text-neutral-400">
                       <span>{doc.pages} pages</span>
-                      <span className="chip bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-[10px]">{doc.format}</span>
+                      <span className="chip bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-xs">{doc.format}</span>
                     </div>
                   </div>
                   <button className="shrink-0 w-9 h-9 rounded-lg bg-neutral-100 dark:bg-neutral-700 flex items-center justify-center text-neutral-500 hover:text-primary-500 hover:bg-primary-50 transition-all">

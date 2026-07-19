@@ -31,7 +31,7 @@ export default function ProductsPage() {
                 <Link key={p.id} href={`#${p.id}`} className="snap-start shrink-0 sm:shrink bg-neutral-50 dark:bg-neutral-800 rounded-xl p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-500/30 hover:bg-white dark:hover:bg-neutral-700 transition-all text-center group min-w-[120px] sm:min-w-0">
                   <Icon className="w-5 h-5 text-primary-500 mx-auto mb-1.5 group-hover:scale-105 transition-transform" />
                   <div className="font-semibold text-xs sm:text-sm text-neutral-900 dark:text-white group-hover:text-primary-600 transition-colors leading-tight">{p.name}</div>
-                  <div className="text-[10px] sm:text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">{p.price}</div>
+                  <div className="text-xs sm:text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">{p.price}</div>
                 </Link>
               )
             })}

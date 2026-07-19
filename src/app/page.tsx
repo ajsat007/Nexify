@@ -32,22 +32,22 @@ function ServiceCard({ service, index }: { service: any; index: number }) {
         <h3 className="text-base sm:text-[17px] font-bold mb-1.5 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors dark:text-white leading-snug">
           {service.title}
         </h3>
-        <p className="text-surface-500 dark:text-surface-400 text-sm leading-relaxed mb-3 line-clamp-2 flex-1">
+        <p className="text-surface-600 dark:text-surface-300 text-sm leading-relaxed mb-3 line-clamp-2 flex-1">
           {service.description}
         </p>
         {service.features && service.features.length > 0 && (
           <div className="flex flex-wrap gap-1.5 mb-4">
             {service.features.slice(0, 3).map((f: string) => (
-              <span key={f} className="chip-surface text-[11px]">{f}</span>
+              <span key={f} className="chip-surface text-xs">{f}</span>
             ))}
             {service.features.length > 3 && (
-              <span className="chip-surface text-[11px]">+{service.features.length - 3}</span>
+              <span className="chip-surface text-xs">+{service.features.length - 3}</span>
             )}
           </div>
         )}
         <div className="flex items-center justify-between pt-3 border-t border-surface-100 dark:border-surface-800">
           <span className="text-primary-600 dark:text-primary-400 font-bold text-sm tracking-tight">{service.price}</span>
-          <span className="text-xs text-surface-400 dark:text-surface-500 flex items-center gap-1.5">
+          <span className="text-xs text-surface-600 dark:text-surface-400 flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/70" />
             {service.timeline}
           </span>
@@ -72,18 +72,18 @@ function ProductCard({ product }: { product: any }) {
           </div>
           <div className="min-w-0">
             <h3 className="text-lg font-heading font-bold dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{product.name}</h3>
-            <p className="text-surface-500 text-xs italic mt-0.5 line-clamp-1">{product.tagline}</p>
+            <p className="text-surface-600 text-xs italic mt-0.5 line-clamp-1">{product.tagline}</p>
           </div>
         </div>
-        <p className="text-surface-600 dark:text-surface-400 text-sm leading-relaxed mb-4 line-clamp-2">{product.description}</p>
+        <p className="text-surface-600 dark:text-surface-300 text-sm leading-relaxed mb-4 line-clamp-2">{product.description}</p>
         <div className="flex flex-wrap gap-1.5 mb-auto">
           {product.features?.slice(0, 4).map((f: string) => (
-            <span key={f} className="chip-surface text-[11px]">{f.length > 25 ? f.slice(0, 24) + '…' : f}</span>
+            <span key={f} className="chip-surface text-xs">{f.length > 25 ? f.slice(0, 24) + '…' : f}</span>
           ))}
         </div>
         <div className="flex items-center justify-between mt-4 pt-3 border-t border-surface-100 dark:border-surface-800">
           <span className="text-primary-600 dark:text-primary-400 font-bold text-sm">{product.price}</span>
-          <span className="text-sm text-surface-500 group-hover:text-primary-500 transition-colors flex items-center gap-1">
+          <span className="text-sm text-surface-600 group-hover:text-primary-500 transition-colors flex items-center gap-1">
             Learn more <ArrowUpRight size={14} />
           </span>
         </div>
@@ -127,7 +127,7 @@ export default function HomePage() {
                 Agents.
               </h1>
 
-              <p className="text-base sm:text-lg lg:text-xl text-surface-400 leading-relaxed max-w-xl">
+              <p className="text-base sm:text-lg lg:text-xl text-white/70 dark:text-white/80 leading-relaxed max-w-xl">
                 Nexify is an AI-native software company. 50+ specialized AI agents build custom software, mobile apps, AI solutions, and SaaS products — 10x faster, at half the cost.
               </p>
 
@@ -155,11 +155,11 @@ export default function HomePage() {
                         {l}
                       </div>
                     ))}
-                    <div className="w-8 h-8 rounded-full bg-surface-800 border-2 border-surface-900 flex items-center justify-center text-surface-400 text-xs font-medium">+50</div>
+                    <div className="w-8 h-8 rounded-full bg-white/[0.15] border-2 border-surface-950 flex items-center justify-center text-white text-xs font-medium backdrop-blur-sm">+50</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-surface-400">
-                  <div className="flex items-center gap-0.5 text-amber-400">
+                <div className="flex items-center gap-2 text-sm text-white/90">
+                  <div className="flex items-center gap-0.5 text-amber-400/80">
                     {[1,2,3,4,5].map(i => <Star key={i} size={13} fill="currentColor" />)}
                   </div>
                   Trusted by 200+ clients
@@ -177,7 +177,7 @@ export default function HomePage() {
                       <span className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-emerald-400 border-[3px] border-surface-900" />
                     </div>
                     <h3 className="text-white text-2xl font-heading font-bold mb-1">50+ AI Agents</h3>
-                    <p className="text-surface-400 mb-6 text-sm">Working 24/7 on your projects</p>
+                    <p className="text-white/90 mb-6 text-sm">Working 24/7 on your projects</p>
                     <div className="grid grid-cols-2 gap-3 w-full">
                       {[
                         { label: 'Uptime', value: '99.9%' },
@@ -187,7 +187,7 @@ export default function HomePage() {
                       ].map(stat => (
                         <div key={stat.label} className="bg-surface-800/50 backdrop-blur-sm rounded-xl p-3 border border-surface-700/50">
                           <div className="text-white font-heading font-bold text-lg">{stat.value}</div>
-                          <div className="text-surface-500 text-xs">{stat.label}</div>
+                          <div className="text-surface-600 text-xs sm:text-sm mt-0.5">{stat.label}</div>
                         </div>
                       ))}
                     </div>
@@ -214,7 +214,7 @@ export default function HomePage() {
               {teamStats.map((stat) => (
                 <div key={stat.label} className="text-center py-1">
                   <div className="text-2xl sm:text-3xl lg:text-4xl font-heading font-bold text-surface-900 dark:text-white">{stat.value}</div>
-                  <div className="text-surface-500 text-xs sm:text-sm mt-0.5">{stat.label}</div>
+                  <div className="text-surface-600 text-xs sm:text-sm mt-0.5">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -230,7 +230,7 @@ export default function HomePage() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold mb-4 dark:text-white">
               Everything You Need to <span className="text-gradient">Build & Scale</span>
             </h2>
-            <p className="text-surface-600 dark:text-surface-400 text-base sm:text-lg">8 AI-powered services delivered by 50+ specialized agents. All at a fraction of traditional cost.</p>
+            <p className="text-surface-600 dark:text-surface-300 text-base sm:text-lg">8 AI-powered services delivered by 50+ specialized agents. All at a fraction of traditional cost.</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {services.map((service, i) => (
@@ -253,7 +253,7 @@ export default function HomePage() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold mb-4 dark:text-white">
               Purpose-Built <span className="text-gradient">SaaS Solutions</span>
             </h2>
-            <p className="text-surface-600 dark:text-surface-400 text-base sm:text-lg">Products we built, use ourselves, and now offer to the world.</p>
+            <p className="text-surface-600 dark:text-surface-300 text-base sm:text-lg">Products we built, use ourselves, and now offer to the world.</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {products.slice(0, 3).map((product, i) => (
@@ -277,7 +277,7 @@ export default function HomePage() {
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold mb-6 dark:text-white">
                 AI-Native. <span className="text-gradient">Built Different.</span>
               </h2>
-              <p className="text-surface-600 dark:text-surface-400 text-lg mb-8 leading-relaxed">
+              <p className="text-surface-600 dark:text-surface-300 text-lg mb-8 leading-relaxed">
                 We don&apos;t have a team — we have a workforce of 50+ AI agents that never sleep, never take breaks, and never compromise on quality.
               </p>
               <div className="space-y-5">
@@ -293,7 +293,7 @@ export default function HomePage() {
                     </div>
                     <div>
                       <h4 className="font-semibold text-surface-900 dark:text-white mb-1">{item.title}</h4>
-                      <p className="text-surface-600 dark:text-surface-400 text-sm">{item.desc}</p>
+                      <p className="text-surface-600 dark:text-surface-300 text-sm">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -311,7 +311,7 @@ export default function HomePage() {
                     <div key={item.label} className="card p-4">
                       <div className={`w-full h-2 rounded-full bg-gradient-to-r ${item.color} mb-3`} />
                       <div className="font-heading font-bold text-xl sm:text-2xl text-surface-900 dark:text-white">{item.pct}</div>
-                      <div className="text-surface-500 text-xs mt-0.5">{item.label} Agents</div>
+                      <div className="text-surface-600 text-xs sm:text-sm mt-0.5">{item.label} Agents</div>
                     </div>
                   ))}
                 </div>
@@ -328,9 +328,9 @@ export default function HomePage() {
           <div className="text-center max-w-3xl mx-auto">
             <div className="chip bg-white/10 text-white border border-white/20 mb-4 inline-flex">Limited Launch Offer</div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-white mb-4 sm:mb-6">
-              Ready to Build with <span className="text-primary-200">AI Agents</span>?
+              Ready to Build with <span className="text-primary-300">AI Agents</span>?
             </h2>
-            <p className="text-primary-200 text-base sm:text-lg mb-8 max-w-xl mx-auto">Tell us about your project. Get a proposal within 24 hours. First chatbot at ₹15K.</p>
+            <p className="text-primary-100 text-base sm:text-lg mb-8 max-w-xl mx-auto">Tell us about your project. Get a proposal within 24 hours. First chatbot at ₹15K.</p>
             <div className="flex flex-col xs:flex-row justify-center gap-3 sm:gap-4">
               <Link href="/chatbot" className="btn-white text-base sm:text-lg px-8 py-3.5 sm:py-4 text-center shadow-xl">
                 <Bot size={18} />
@@ -354,7 +354,7 @@ export default function HomePage() {
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold mb-4 dark:text-white">
                 Trusted by <span className="text-gradient">200+ Clients</span>
               </h2>
-              <p className="text-surface-600 dark:text-surface-400 text-base sm:text-lg mb-8">Hear from our clients about their experience working with AI agents.</p>
+              <p className="text-surface-600 dark:text-surface-300 text-base sm:text-lg mb-8">Hear from our clients about their experience working with AI agents.</p>
               <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                 {testimonials.slice(0, 4).map((t, i) => (
                   <div key={i} className="card p-5 sm:p-6 flex flex-col relative overflow-hidden group">
@@ -362,14 +362,14 @@ export default function HomePage() {
                     <div className="flex items-center gap-1 mb-3 text-amber-400 relative">
                       {Array.from({ length: t.rating }).map((_, j) => <Star key={j} size={14} fill="currentColor" />)}
                     </div>
-                    <p className="text-surface-600 dark:text-surface-400 text-sm leading-relaxed mb-4 sm:mb-6 flex-1 relative">&ldquo;{t.content}&rdquo;</p>
+                    <p className="text-surface-600 dark:text-surface-300 text-sm leading-relaxed mb-4 sm:mb-6 flex-1 relative">&ldquo;{t.content}&rdquo;</p>
                     <div className="flex items-center gap-3 relative">
                       <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white text-xs font-bold shrink-0">
                         {t.name.split(' ').map(n => n[0]).join('')}
                       </div>
                       <div className="min-w-0">
                         <div className="font-semibold text-sm text-surface-900 dark:text-white truncate">{t.name}</div>
-                        <div className="text-xs text-surface-500 truncate">{t.role}</div>
+                        <div className="text-xs text-surface-600 truncate">{t.role}</div>
                       </div>
                     </div>
                   </div>
@@ -405,7 +405,7 @@ export default function HomePage() {
                     <ChevronDown size={16} className={`text-surface-500 shrink-0 transition-transform duration-300 ${activeFaq === i ? 'rotate-180' : ''}`} />
                   </button>
                   <div className={`transition-all duration-300 overflow-hidden ${activeFaq === i ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-                    <p className="px-4 sm:px-5 pb-4 sm:pb-5 text-surface-600 dark:text-surface-400 text-sm leading-relaxed">{faq.a}</p>
+                    <p className="px-4 sm:px-5 pb-4 sm:pb-5 text-surface-600 dark:text-surface-300 text-sm leading-relaxed">{faq.a}</p>
                   </div>
                 </div>
               ))}
@@ -429,7 +429,7 @@ export default function HomePage() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold mb-4 dark:text-white">
               Let&apos;s Build Something <span className="text-gradient">Amazing</span>
             </h2>
-            <p className="text-surface-600 dark:text-surface-400 text-base sm:text-lg mb-8 max-w-lg mx-auto">Ready to experience the future of software development? Your AI workforce is waiting.</p>
+            <p className="text-surface-600 dark:text-surface-300 text-base sm:text-lg mb-8 max-w-lg mx-auto">Ready to experience the future of software development? Your AI workforce is waiting.</p>
             <div className="flex flex-col xs:flex-row justify-center gap-3">
               <Link href="/chatbot" className="btn-primary text-base sm:text-lg px-8 py-3.5">
                 <Bot size={18} />

@@ -132,7 +132,7 @@ export function AIAgentWidget() {
               </div>
               <div>
                 <h3 className="text-sm font-semibold text-surface-900 dark:text-white leading-tight">Nexify AI</h3>
-                <p className="text-[11px] text-surface-500 flex items-center gap-1">
+                <p className="text-xs text-surface-500 flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                   Online · AI-powered
                 </p>
@@ -235,7 +235,7 @@ export function AIAgentWidget() {
                     {loading ? <Loader size={13} className="animate-spin" /> : <Send size={13} />}
                   </button>
                 </div>
-                <p className="text-[10px] text-surface-400 mt-1.5 flex items-center gap-1">
+                <p className="text-xs text-surface-400 mt-1.5 flex items-center gap-1">
                   <Sparkles size={10} /> Powered by AI agents · Free to use
                 </p>
               </div>
@@ -254,7 +254,7 @@ export function AIAgentWidget() {
       >
         {open ? <X size={22} /> : <MessageCircle size={22} />}
         {!open && (
-          <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-emerald-400 text-white text-[10px] font-bold flex items-center justify-center shadow-lg animate-pulse-soft">
+          <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-emerald-400 text-white text-xs font-bold flex items-center justify-center shadow-lg animate-pulse-soft">
             1
           </span>
         )}

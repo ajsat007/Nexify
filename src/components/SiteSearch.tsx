@@ -94,7 +94,7 @@ export default function SiteSearch() {
       <button onClick={() => setOpen(true)} className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-neutral-800/50 border border-neutral-700 text-neutral-400 hover:text-white hover:border-neutral-500 transition-all text-xs" title="Search (Ctrl+K)">
         <Search size={14} />
         <span className="hidden sm:inline">Search...</span>
-        <kbd className="hidden lg:inline text-[10px] px-1.5 py-0.5 rounded bg-neutral-700 text-neutral-400">⌘K</kbd>
+        <kbd className="hidden lg:inline text-xs px-1.5 py-0.5 rounded bg-neutral-700 text-neutral-400">⌘K</kbd>
       </button>
 
       {/* Modal */}
@@ -106,7 +106,7 @@ export default function SiteSearch() {
               <Search size={18} className="text-neutral-400 shrink-0" />
               <input ref={inputRef} autoFocus className="flex-1 bg-transparent text-white placeholder-neutral-500 outline-none text-sm" placeholder="Search pages, services, products..." value={query} onChange={e => setQuery(e.target.value)} onKeyDown={handleKeyDown} />
               {query && <button onClick={() => setQuery('')} className="text-neutral-400 hover:text-white"><X size={16} /></button>}
-              <kbd className="text-[10px] px-1.5 py-0.5 rounded bg-neutral-800 text-neutral-500">ESC</kbd>
+              <kbd className="text-xs px-1.5 py-0.5 rounded bg-neutral-800 text-neutral-500">ESC</kbd>
             </div>
             <div ref={resultsRef} className="max-h-80 overflow-y-auto p-2">
               {results.length === 0 && query && (
@@ -122,7 +122,7 @@ export default function SiteSearch() {
                     className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all ${i === selectedIndex ? 'bg-primary-500/10 text-primary-300' : 'text-neutral-300 hover:bg-neutral-800'}`}>
                     <Icon size={16} className={`${i === selectedIndex ? 'text-primary-400' : 'text-neutral-500'}`} />
                     <span className="flex-1">{item.title}</span>
-                    <span className="text-[10px] text-neutral-500 px-2 py-0.5 rounded bg-neutral-800">{item.category}</span>
+                    <span className="text-xs text-neutral-500 px-2 py-0.5 rounded bg-neutral-800">{item.category}</span>
                   </Link>
                 )
               })}

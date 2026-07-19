@@ -129,7 +129,7 @@ export default function ActivityFeed({ compact = false, title = 'Agent Activity 
                   <span className="font-medium text-neutral-900 dark:text-white">{meta?.name || 'AI Agent'}</span>
                   <span className="text-neutral-500 dark:text-neutral-400"> {a.action}</span>
                 </div>
-                <span className="text-[10px] text-neutral-400">{timeAgo(a.time)}</span>
+                <span className="text-xs text-neutral-400">{timeAgo(a.time)}</span>
               </div>
             </div>
           )

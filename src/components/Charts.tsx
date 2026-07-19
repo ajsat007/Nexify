@@ -31,7 +31,7 @@ export function BarChart({ data, height = 200, color = '#3B82F6', className }: {
             <g key={i}>
               <rect x={i * 60 + 10} y={height - 20 - h} width={barW} height={h} rx="4" fill={`url(#bar-${color.replace('#', '')})`} className="transition-all duration-700 ease-out" style={{ transitionDelay: `${i * 50}ms` }} />
               <text x={i * 60 + 10 + barW / 2} y={height - 4} textAnchor="middle" className="fill-neutral-400 dark:fill-neutral-500" fontSize="10">{d.label}</text>
-              <text x={i * 60 + 10 + barW / 2} y={height - 28 - h} textAnchor="middle" className={cn('fill-neutral-600 dark:fill-neutral-300 text-[10px] font-semibold', animate ? 'opacity-100' : 'opacity-0')} style={{ transitionDelay: `${i * 50 + 300}ms` }}>{d.value}</text>
+              <text x={i * 60 + 10 + barW / 2} y={height - 28 - h} textAnchor="middle" className={cn('fill-neutral-600 dark:fill-neutral-300 text-xs font-semibold', animate ? 'opacity-100' : 'opacity-0')} style={{ transitionDelay: `${i * 50 + 300}ms` }}>{d.value}</text>
             </g>
           )
         })}

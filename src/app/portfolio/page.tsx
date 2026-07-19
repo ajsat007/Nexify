@@ -73,14 +73,14 @@ export default function PortfolioPage() {
                   </div>
                   <h3 className="text-lg sm:text-xl font-heading font-bold mb-3 dark:text-white group-hover:text-primary-600 transition-colors leading-snug">{project.title}</h3>
                   <div className="space-y-1.5 mb-4 flex-1">
-                    <p className="text-[11px] text-neutral-500 font-semibold uppercase tracking-wider">Problem</p>
+                    <p className="text-xs text-neutral-500 font-semibold uppercase tracking-wider">Problem</p>
                     <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">{project.problem}</p>
-                    <p className="text-[11px] text-neutral-500 font-semibold uppercase tracking-wider mt-3">Solution</p>
+                    <p className="text-xs text-neutral-500 font-semibold uppercase tracking-wider mt-3">Solution</p>
                     <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">{project.solution}</p>
                   </div>
                   <div className="flex flex-wrap gap-1.5 mb-4">
                     {project.tech.map((t) => (
-                      <span key={t} className="chip bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 text-[11px]">{t}</span>
+                      <span key={t} className="chip bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 text-xs">{t}</span>
                     ))}
                   </div>
                   <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 border-t border-neutral-100 dark:border-neutral-700 pt-4">

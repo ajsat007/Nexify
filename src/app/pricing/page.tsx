@@ -91,7 +91,7 @@ export default function PricingPage() {
                       : 'bg-white dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700'
                   }`}>
                     {tier.popular && (
-                      <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-4 py-0.5 rounded-full bg-primary-500 text-white text-[11px] font-semibold whitespace-nowrap">
+                      <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-4 py-0.5 rounded-full bg-primary-500 text-white text-xs font-semibold whitespace-nowrap">
                         Most Popular
                       </div>
                     )}
