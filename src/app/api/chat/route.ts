@@ -3,6 +3,7 @@ import { sendMessage, createSession, streamMessage } from '@/lib/ai/chat'
 import { ChatSchema, validate } from '@/lib/validation'
 
 export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
 
 export async function POST(request: Request) {
   try {

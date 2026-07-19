@@ -439,6 +439,12 @@
   .status-dot-offline { @apply bg-surface-400; }
 
   /* ── Gradient backgrounds ── */
+  .gradient-bg {
+    background: linear-gradient(135deg, #0F172A 0%, #1E40AF 40%, #6366F1 65%, #7C3AED 100%);
+    background-size: 300% 300%;
+    animation: gradientX 8s ease infinite;
+  }
+
   .gradient-bg-primary {
     background: linear-gradient(135deg, #0F172A 0%, #1E40AF 40%, #6366F1 65%, #7C3AED 100%);
     background-size: 300% 300%;
