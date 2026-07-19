@@ -128,7 +128,7 @@ export default function HomePage() {
               </h1>
 
               <p className="text-base sm:text-lg lg:text-xl text-surface-400 leading-relaxed max-w-xl">
-                Nexify is an AI-native software company. 28 specialized AI agents build custom software, mobile apps, AI solutions, and SaaS products — 10x faster, at half the cost.
+                Nexify is an AI-native software company. 50+ specialized AI agents build custom software, mobile apps, AI solutions, and SaaS products — 10x faster, at half the cost.
               </p>
 
               {/* CTAs */}
@@ -176,7 +176,7 @@ export default function HomePage() {
                       <Bot size={40} className="text-white" />
                       <span className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-emerald-400 border-[3px] border-surface-900" />
                     </div>
-                    <h3 className="text-white text-2xl font-heading font-bold mb-1">28 AI Agents</h3>
+                    <h3 className="text-white text-2xl font-heading font-bold mb-1">50+ AI Agents</h3>
                     <p className="text-surface-400 mb-6 text-sm">Working 24/7 on your projects</p>
                     <div className="grid grid-cols-2 gap-3 w-full">
                       {[
@@ -230,7 +230,7 @@ export default function HomePage() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold mb-4 dark:text-white">
               Everything You Need to <span className="text-gradient">Build & Scale</span>
             </h2>
-            <p className="text-surface-600 dark:text-surface-400 text-base sm:text-lg">8 AI-powered services delivered by 28 specialized agents. All at a fraction of traditional cost.</p>
+            <p className="text-surface-600 dark:text-surface-400 text-base sm:text-lg">8 AI-powered services delivered by 50+ specialized agents. All at a fraction of traditional cost.</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {services.map((service, i) => (
@@ -278,7 +278,7 @@ export default function HomePage() {
                 AI-Native. <span className="text-gradient">Built Different.</span>
               </h2>
               <p className="text-surface-600 dark:text-surface-400 text-lg mb-8 leading-relaxed">
-                We don&apos;t have a team — we have a workforce of 28 AI agents that never sleep, never take breaks, and never compromise on quality.
+                We don&apos;t have a team — we have a workforce of 50+ AI agents that never sleep, never take breaks, and never compromise on quality.
               </p>
               <div className="space-y-5">
                 {[

@@ -26,43 +26,109 @@ const jetbrainsMono = JetBrains_Mono({
   preload: false,
 })
 
+const baseUrl = siteConfig.url || 'https://nexify.tech'
+
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url || 'https://nexify.tech'),
+  metadataBase: new URL(baseUrl),
   title: {
     default: `${siteConfig.name} — ${siteConfig.tagline}`,
-    template: `%s | ${siteConfig.name}`,
+    template: `%s | Nexify Technologies`,
   },
   description: siteConfig.description,
-  keywords: ['software development', 'AI development', 'web development', 'mobile apps', 'AI agents', 'SaaS', 'India software company', 'Nexify'],
+  keywords: [
+    'AI software development', 'AI agents', 'custom software', 'AI chatbot',
+    'AI-native company', 'software development India', 'AI automation',
+    'AI workforce', 'SaaS development', 'AI consulting', 'Nexify',
+    'AI-powered development', 'intelligent AI agents', 'automated software delivery',
+  ],
+  authors: [{ name: 'Nexify Technologies' }],
+  creator: 'Nexify Technologies',
+  publisher: 'Nexify Technologies',
   openGraph: {
-    title: siteConfig.name,
-    description: siteConfig.description,
-    url: siteConfig.url,
-    siteName: siteConfig.name,
-    locale: 'en_US',
     type: 'website',
+    locale: 'en_US',
+    url: baseUrl,
+    siteName: siteConfig.name,
+    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    description: siteConfig.description,
+    images: [
+      {
+        url: '/og-image.svg',
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: siteConfig.name,
+    title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
+    images: ['/og-image.svg'],
+    creator: '@nexifytech',
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.svg', sizes: '180x180', type: 'image/svg+xml' },
+    ],
+  },
+  manifest: '/manifest.webmanifest',
+  appleWebApp: {
+    capable: true,
+    title: 'Nexify',
+    statusBarStyle: 'black-translucent',
+  },
+  formatDetection: {
+    telephone: true,
+    email: true,
+    address: true,
+  },
 }
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  maximumScale: 5,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#0f172a' },
+    { media: '(prefers-color-scheme: light)', color: '#FAFAFA' },
+    { media: '(prefers-color-scheme: dark)', color: '#09090B' },
   ],
+  colorScheme: 'dark light',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <body className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} min-h-screen flex flex-col font-sans antialiased`}>
+      <head>
+        {/* Preconnect to font providers */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Apple touch icon fallback */}
+        <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+        {/* Mask icon for Safari pinned tabs */}
+        <link rel="mask-icon" href="/icon.svg" color="#6366F1" />
+      </head>
+      <body className={`
+        ${inter.variable}
+        ${spaceGrotesk.variable}
+        ${jetbrainsMono.variable}
+        min-h-screen flex flex-col font-sans antialiased
+      `}>
         <SiteShell>
           <ErrorBoundary>{children}</ErrorBoundary>
         </SiteShell>

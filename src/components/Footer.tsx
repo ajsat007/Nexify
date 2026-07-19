@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Mail, Phone, MapPin, Linkedin, Twitter, Github, ArrowUpRight, Bot, Sparkles } from 'lucide-react'
+import { Mail, Phone, MapPin, Linkedin, Twitter, Github, ArrowUpRight, Bot } from 'lucide-react'
 
 const footerLinks = {
   services: [
@@ -23,11 +23,10 @@ const footerLinks = {
     { name: 'Pricing', href: '/pricing' },
     { name: 'Agents', href: '/agents' },
     { name: 'Blog', href: '/blog' },
-    { name: 'Careers', href: '/careers' },
     { name: 'FAQ', href: '/faq' },
+    { name: 'Contact', href: '/contact' },
   ],
   resources: [
-    { name: 'Contact', href: '/contact' },
     { name: 'Documentation', href: '/docs' },
     { name: 'Tech Stack', href: '/techstack' },
     { name: 'AI Automation', href: '/ai-automation' },
@@ -39,13 +38,12 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="relative bg-surface-900 dark:bg-surface-975 border-t border-surface-800/50 overflow-hidden">
-      {/* Subtle gradient */}
+    <footer className="relative bg-surface-950 border-t border-surface-800/50 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-primary-500/[0.02] to-transparent pointer-events-none" />
 
-      <div className="section-container section-padding relative">
+      <div className="section-container py-16 lg:py-20 relative">
         {/* CTA mini-banner */}
-        <div className="glass rounded-2xl p-6 sm:p-8 mb-12 border border-white/10 bg-gradient-to-r from-primary-500/5 to-accent-500/5">
+        <div className="rounded-2xl p-6 sm:p-8 mb-12 border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl bg-gradient-to-r from-primary-500/5 to-accent-500/5">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center shrink-0 shadow-lg shadow-primary-500/20">
@@ -53,7 +51,7 @@ export default function Footer() {
               </div>
               <div>
                 <h3 className="text-white font-heading font-bold text-lg">AI Chatbot for Your Business</h3>
-                <p className="text-surface-400 text-sm">₹15,000 · Built in 48 hours · WhatsApp + Website</p>
+                <p className="text-white/50 text-sm">₹15,000 · Built in 48 hours · WhatsApp + Website</p>
               </div>
             </div>
             <Link href="/chatbot" className="btn-white text-sm shrink-0">
@@ -72,10 +70,10 @@ export default function Footer() {
               </div>
               <div>
                 <h3 className="text-white font-heading font-bold text-lg leading-none">Nexify</h3>
-                <p className="text-surface-500 text-xs font-medium tracking-wider uppercase">Technologies</p>
+                <p className="text-white/40 text-xs font-medium tracking-wider uppercase">Technologies</p>
               </div>
             </Link>
-            <p className="text-surface-400 text-sm leading-relaxed mb-6 max-w-xs">
+            <p className="text-white/50 text-sm leading-relaxed mb-6 max-w-xs">
               AI-native software company. 28 specialized AI agents building next-gen digital products — faster, better, and at half the cost.
             </p>
             <div className="flex gap-2">
@@ -84,7 +82,7 @@ export default function Footer() {
                 { icon: Twitter, href: '#' },
                 { icon: Github, href: '#' },
               ].map(({ icon: Icon, href }) => (
-                <a key={href} href={href} className="w-9 h-9 rounded-lg bg-surface-800 flex items-center justify-center text-surface-400 hover:bg-primary-500 hover:text-white transition-all" aria-label="Social link">
+                <a key={href} href={href} className="w-9 h-9 rounded-lg bg-white/[0.06] flex items-center justify-center text-white/40 hover:bg-primary-500 hover:text-white transition-all" aria-label="Social link">
                   <Icon size={15} />
                 </a>
               ))}
@@ -103,7 +101,7 @@ export default function Footer() {
               <ul className="space-y-2.5">
                 {links.map((link) => (
                   <li key={link.name}>
-                    <Link href={link.href} className="text-surface-400 hover:text-primary-400 text-sm transition-colors">
+                    <Link href={link.href} className="text-white/50 hover:text-primary-400 text-sm transition-colors">
                       {link.name}
                     </Link>
                   </li>
@@ -114,12 +112,12 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-surface-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-12 pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
-            <p className="text-surface-500 text-xs">
+            <p className="text-white/40 text-xs">
               © {new Date().getFullYear()} Nexify Technologies. All rights reserved.
             </p>
-            <p className="text-surface-600 text-xs flex flex-wrap items-center justify-center gap-2">
+            <p className="text-white/40 text-xs flex flex-wrap items-center justify-center gap-2">
               <a href="mailto:ajinkyasatkar5@gmail.com" className="hover:text-primary-400 transition-colors flex items-center gap-1">
                 <Mail size={10} /> ajinkyasatkar5@gmail.com
               </a>
@@ -132,9 +130,9 @@ export default function Footer() {
             </p>
           </div>
           <div className="flex items-center gap-4">
-            <Link href="#" className="text-surface-500 hover:text-white text-xs transition-colors">Privacy</Link>
-            <Link href="#" className="text-surface-500 hover:text-white text-xs transition-colors">Terms</Link>
-            <Link href="#" className="text-surface-500 hover:text-white text-xs transition-colors">Cookies</Link>
+            <Link href="#" className="text-white/40 hover:text-white text-xs transition-colors">Privacy</Link>
+            <Link href="#" className="text-white/40 hover:text-white text-xs transition-colors">Terms</Link>
+            <Link href="#" className="text-white/40 hover:text-white text-xs transition-colors">Cookies</Link>
           </div>
         </div>
       </div>

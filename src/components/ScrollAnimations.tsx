@@ -1,30 +1,29 @@
 'use client'
 
-import { useEffect, useRef, useState, ReactNode } from 'react'
+import { useEffect, useRef, ReactNode, useState, useCallback } from 'react'
 import { cn } from '@/utils'
 
 // ============================================================================
-// useScrollReveal — intersection observer with configurable animation
-// Touch devices: CSS handles visibility via data-reveal attribute (no flicker)
+// useIntersectionObserver — core scroll reveal hook
 // ============================================================================
 
 interface ScrollRevealOptions {
   threshold?: number
   rootMargin?: string
   triggerOnce?: boolean
-  animation?: 'fade-up' | 'fade-down' | 'fade-left' | 'fade-right' | 'scale' | 'zoom' | 'none'
 }
 
-export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
+export function useIntersectionObserver<T extends HTMLElement = HTMLDivElement>(
   options: ScrollRevealOptions = {}
 ): [React.RefObject<T | null>, boolean] {
-  const { threshold = 0.1, rootMargin = '0px', triggerOnce = true } = options
+  const { threshold = 0.08, rootMargin = '0px 0px -40px 0px', triggerOnce = true } = options
   const ref = useRef<T | null>(null)
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     const el = ref.current
     if (!el) return
+    if (visible && triggerOnce) return
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -39,23 +38,23 @@ export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
     )
     observer.observe(el)
     return () => observer.disconnect()
-  }, [threshold, rootMargin, triggerOnce])
+  }, [threshold, rootMargin, triggerOnce, visible])
 
   return [ref, visible]
 }
 
 // ============================================================================
-// AnimatedSection — wraps any section with scroll-reveal animation
-// Touch devices: CSS data-reveal override keeps content visible (no hidden sections)
+// AnimatedSection — wraps content with scroll-triggered entrance animation
 // ============================================================================
 
 interface AnimatedSectionProps {
   children: ReactNode
   className?: string
-  animation?: ScrollRevealOptions['animation']
+  animation?: 'fade-up' | 'fade-down' | 'fade-left' | 'fade-right' | 'scale' | 'zoom' | 'none'
   delay?: number
+  duration?: number
   threshold?: number
-  as?: 'div' | 'section' | 'article'
+  as?: 'div' | 'section' | 'article' | 'span'
 }
 
 export function AnimatedSection({
@@ -63,32 +62,32 @@ export function AnimatedSection({
   className,
   animation = 'fade-up',
   delay = 0,
-  threshold = 0.1,
+  duration = 700,
+  threshold = 0.08,
   as: Tag = 'div',
 }: AnimatedSectionProps) {
-  const [ref, visible] = useScrollReveal<HTMLDivElement>({ threshold })
+  const [ref, visible] = useIntersectionObserver<HTMLDivElement>({ threshold })
 
-  const animations: Record<string, string> = {
-    'fade-up': 'translate-y-8',
-    'fade-down': '-translate-y-8',
-    'fade-left': 'translate-x-8',
-    'fade-right': '-translate-x-8',
-    scale: 'scale-95',
-    zoom: 'scale-110',
-    none: '',
+  const transforms: Record<string, string> = {
+    'fade-up': 'translateY(30px)',
+    'fade-down': 'translateY(-30px)',
+    'fade-left': 'translateX(30px)',
+    'fade-right': 'translateX(-30px)',
+    scale: 'scale(0.95)',
+    zoom: 'scale(1.1)',
+    none: 'none',
   }
 
   return (
     <Tag
       ref={ref as any}
-      data-reveal="true"
-      className={cn(
-        'transition-all duration-700 ease-out',
-        visible ? 'opacity-100 translate-y-0 translate-x-0 scale-100' : 'opacity-0',
-        !visible && animations[animation],
-        className
-      )}
-      style={{ transitionDelay: `${delay}ms` }}
+      className={cn(className)}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateX(0) translateY(0) scale(1)' : transforms[animation],
+        transition: `opacity ${duration}ms cubic-bezier(0.16, 1, 0.3, 1), transform ${duration}ms cubic-bezier(0.16, 1, 0.3, 1)`,
+        transitionDelay: `${delay}ms`,
+      }}
     >
       {children}
     </Tag>
@@ -96,37 +95,7 @@ export function AnimatedSection({
 }
 
 // ============================================================================
-// StaggerGroup — staggers children with incremental delays
-// ============================================================================
-
-interface StaggerGroupProps {
-  children: ReactNode[]
-  className?: string
-  staggerDelay?: number
-  baseDelay?: number
-  animation?: ScrollRevealOptions['animation']
-}
-
-export function StaggerGroup({
-  children,
-  className,
-  staggerDelay = 100,
-  baseDelay = 0,
-  animation = 'fade-up',
-}: StaggerGroupProps) {
-  return (
-    <div className={className}>
-      {children.map((child, i) => (
-        <AnimatedSection key={i} animation={animation} delay={baseDelay + i * staggerDelay}>
-          {child}
-        </AnimatedSection>
-      ))}
-    </div>
-  )
-}
-
-// ============================================================================
-// AnimatedCounter — counts from 0 to target when visible
+// AnimatedCounter — counts from 0 to target when scrolled into view
 // ============================================================================
 
 interface AnimatedCounterProps {
@@ -145,12 +114,12 @@ export function AnimatedCounter({
   className,
 }: AnimatedCounterProps) {
   const [count, setCount] = useState(0)
-  const [ref, visible] = useScrollReveal<HTMLSpanElement>({ threshold: 0.5 })
+  const [ref, visible] = useIntersectionObserver<HTMLSpanElement>({ threshold: 0.3 })
 
   useEffect(() => {
     if (!visible) return
     let v = 0
-    const step = Math.ceil(value / (duration / 16))
+    const step = Math.max(1, Math.ceil(value / (duration / 16)))
     const timer = setInterval(() => {
       v += step
       if (v >= value) {
@@ -164,36 +133,152 @@ export function AnimatedCounter({
   }, [visible, value, duration])
 
   return (
-    <span ref={ref as any} data-reveal="true" className={className}>
+    <span ref={ref as any} className={className}>
       {prefix}{count}{suffix}
     </span>
   )
 }
 
 // ============================================================================
-// ScrollToTop — smooth scroll-to-top button that appears on scroll
+// ScrollToTop — floating button that appears after scrolling down
 // ============================================================================
 
 export function ScrollToTop() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 500)
+    const onScroll = () => setVisible(window.scrollY > 600)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  if (!visible) return null
-
   return (
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      className="fixed bottom-24 right-6 z-50 w-10 h-10 rounded-xl bg-primary-500 text-white shadow-lg hover:bg-primary-600 transition-all flex items-center justify-center animate-fade-in"
+      className={cn(
+        'fixed bottom-6 left-6 z-50 w-10 h-10 rounded-xl bg-white/80 dark:bg-surface-800/80 backdrop-blur-xl shadow-elevated border border-surface-200/50 dark:border-surface-700/50 flex items-center justify-center transition-all duration-300 hover:bg-white dark:hover:bg-surface-700 hover:shadow-lg hover:-translate-y-0.5',
+        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+      )}
       aria-label="Scroll to top"
     >
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-surface-600 dark:text-surface-300">
         <path d="m18 15-6-6-6 6" />
       </svg>
     </button>
+  )
+}
+
+// ============================================================================
+// PremiumAnimatedGradient — animated mesh background for hero sections
+// ============================================================================
+
+export function PremiumAnimatedGradient() {
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+      {/* Deep gradient base */}
+      <div className="absolute inset-0 bg-gradient-to-br from-surface-950 via-primary-950/40 to-surface-950" />
+      {/* Animated orbs */}
+      <div
+        className="absolute w-[800px] h-[800px] rounded-full opacity-20 animate-blob"
+        style={{
+          background: 'radial-gradient(circle, rgba(99,102,241,0.25) 0%, transparent 70%)',
+          top: '-20%',
+          left: '-10%',
+        }}
+      />
+      <div
+        className="absolute w-[600px] h-[600px] rounded-full opacity-15 animate-blob"
+        style={{
+          background: 'radial-gradient(circle, rgba(6,182,212,0.2) 0%, transparent 70%)',
+          top: '10%',
+          right: '-5%',
+          animationDelay: '-3s',
+        }}
+      />
+      <div
+        className="absolute w-[500px] h-[500px] rounded-full opacity-10 animate-blob"
+        style={{
+          background: 'radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 70%)',
+          bottom: '-15%',
+          left: '20%',
+          animationDelay: '-6s',
+        }}
+      />
+      {/* Grid overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0z' fill='none' stroke='white' stroke-width='0.5'/%3E%3C/svg%3E")`,
+        }}
+      />
+    </div>
+  )
+}
+
+// ============================================================================
+// AuroraBackground — lighter animated background for content sections
+// ============================================================================
+
+export function AuroraBackground() {
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+      <div
+        className="absolute w-[700px] h-[700px] rounded-full opacity-[0.08] animate-blob"
+        style={{
+          background: 'radial-gradient(circle, rgba(99,102,241,0.3) 0%, transparent 60%)',
+          top: '-10%',
+          right: '-10%',
+        }}
+      />
+      <div
+        className="absolute w-[500px] h-[500px] rounded-full opacity-[0.06] animate-blob"
+        style={{
+          background: 'radial-gradient(circle, rgba(6,182,212,0.2) 0%, transparent 60%)',
+          bottom: '-5%',
+          left: '-5%',
+          animationDelay: '-4s',
+        }}
+      />
+    </div>
+  )
+}
+
+// ============================================================================
+// useScrollReveal — alias for backward compatibility (used by Charts.tsx)
+// ============================================================================
+
+export function useScrollReveal<T extends HTMLElement = HTMLDivElement>(
+  options: ScrollRevealOptions = {}
+): [React.RefObject<T | null>, boolean] {
+  return useIntersectionObserver<T>(options)
+}
+
+// ============================================================================
+// StaggerGroup — animates children in sequence with incremental delays
+// ============================================================================
+
+interface StaggerGroupProps {
+  children: ReactNode[]
+  className?: string
+  staggerDelay?: number
+  baseDelay?: number
+  animation?: 'fade-up' | 'fade-down' | 'fade-left' | 'fade-right' | 'scale' | 'zoom'
+}
+
+export function StaggerGroup({
+  children,
+  className,
+  staggerDelay = 80,
+  baseDelay = 0,
+  animation = 'fade-up',
+}: StaggerGroupProps) {
+  return (
+    <div className={className}>
+      {children.map((child, i) => (
+        <AnimatedSection key={i} animation={animation} delay={baseDelay + i * staggerDelay}>
+          {child}
+        </AnimatedSection>
+      ))}
+    </div>
   )
 }

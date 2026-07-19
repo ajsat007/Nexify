@@ -1,16 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
   <defs>
     <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#3B82F6"/>
-      <stop offset="50%" stop-color="#2563EB"/>
-      <stop offset="100%" stop-color="#7C3AED"/>
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="gHover" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#818CF8"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
     </linearGradient>
   </defs>
-  <rect width="200" height="200" rx="40" fill="url(#g)"/>
-  <g transform="translate(40, 40)" stroke="white" stroke-width="6" stroke-linejoin="round" fill="none">
-    <polygon points="0,60 30,30 60,60 30,90" opacity="0.5"/>
-    <polygon points="22,60 52,30 82,60 52,90" opacity="0.75"/>
-    <polygon points="44,60 74,30 104,60 74,90" opacity="0.9"/>
-    <polygon points="66,60 96,30 126,60 96,90"/>
+  <!-- Base shape -->
+  <rect x="10" y="10" width="180" height="180" rx="44" fill="url(#g)"/>
+  <!-- Neural N mark -->
+  <g transform="translate(55, 55)" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M15 75V15L45 45L75 15V75"/>
   </g>
+  <!-- Neural nodes -->
+  <circle cx="70" cy="70" r="4" fill="white" opacity="0.5"/>
+  <circle cx="100" cy="70" r="4" fill="white" opacity="0.5"/>
+  <circle cx="130" cy="70" r="4" fill="white" opacity="0.5"/>
+  <!-- Connection dots -->
+  <circle cx="70" cy="70" r="2" fill="white" opacity="0.8"/>
+  <circle cx="100" cy="70" r="2" fill="white" opacity="0.8"/>
+  <circle cx="130" cy="70" r="2" fill="white" opacity="0.8"/>
 </svg>
