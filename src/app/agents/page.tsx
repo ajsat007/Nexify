@@ -120,7 +120,7 @@ export default function AgentsPage() {
       </PageHeader>
 
       {/* ── Stats Overview ── */}
-      <section className="section-padding bg-neutral-50 dark:bg-neutral-900">
+      <section className="section-padding bg-surface-50 dark:bg-surface-900">
         <div className="section-container">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mb-10 sm:mb-12">
             {[
@@ -129,9 +129,9 @@ export default function AgentsPage() {
               { label: 'Tasks Completed', value: stats.totalTasks.toLocaleString(), color: 'text-primary-600' },
               { label: 'Departments', value: '12', color: 'text-accent-500' },
             ].map(s => (
-              <div key={s.label} className="bg-white dark:bg-neutral-800 rounded-2xl p-5 sm:p-6 text-center border border-neutral-200 dark:border-neutral-700">
+              <div key={s.label} className="bg-white dark:bg-surface-800 rounded-2xl p-5 sm:p-6 text-center border border-surface-200 dark:border-surface-700">
                 <div className={`text-3xl sm:text-4xl font-heading font-bold ${s.color}`}>{s.value}</div>
-                <div className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mt-1">{s.label}</div>
+                <div className="text-xs sm:text-sm text-surface-700 dark:text-surface-400 mt-1">{s.label}</div>
               </div>
             ))}
           </div>
@@ -159,7 +159,7 @@ export default function AgentsPage() {
                         isRunning ? 'border-cyan-500 bg-cyan-50 dark:bg-cyan-900/20 animate-pulse shadow-lg shadow-cyan-500/20 scale-105' :
                         isCompleted ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 shadow-md' :
                         isActive ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20 shadow-lg shadow-primary-500/10' :
-                        'border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 hover:border-neutral-300'
+                        'border-surface-200 dark:border-surface-700 bg-white dark:bg-surface-800 hover:border-surface-300'
                       }`}
                       style={{ position: 'relative', zIndex: 1 }}
                     >
@@ -175,8 +175,8 @@ export default function AgentsPage() {
                           <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-cyan-500 animate-ping" />
                         )}
                       </div>
-                      <div className="text-xs sm:text-sm font-semibold text-neutral-900 dark:text-white text-center leading-tight">{phase.label}</div>
-                      <div className="hidden sm:block text-xs text-neutral-500 text-center leading-tight max-w-[80px]">{phase.description.slice(0, 50)}</div>
+                      <div className="text-xs sm:text-sm font-semibold text-surface-900 dark:text-white text-center leading-tight">{phase.label}</div>
+                      <div className="hidden sm:block text-xs text-surface-600 text-center leading-tight max-w-[80px]">{phase.description.slice(0, 50)}</div>
                     </button>
                   )
                 })}
@@ -186,7 +186,7 @@ export default function AgentsPage() {
             {/* Active phase detail panel */}
             {activePhase >= 0 && activePhase < WORKFLOW_PIPELINE.length && (
               <AnimatedSection animation="fade-up" key={activePhase}>
-                <div className="mt-6 sm:mt-8 bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-5 sm:p-8">
+                <div className="mt-6 sm:mt-8 bg-white dark:bg-surface-800 rounded-2xl border border-surface-200 dark:border-surface-700 p-5 sm:p-8">
                   <div className="flex items-start gap-4 mb-6">
                     <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${DEPT_COLORS[WORKFLOW_PIPELINE[activePhase].dept]} flex items-center justify-center text-2xl shrink-0`}>
                       {WORKFLOW_PIPELINE[activePhase].icon}
@@ -194,20 +194,20 @@ export default function AgentsPage() {
                     <div className="min-w-0">
                       <div className="flex items-center gap-2 mb-1">
                         <h3 className="font-heading font-bold text-xl dark:text-white">{WORKFLOW_PIPELINE[activePhase].label} Phase</h3>
-                        <span className="chip bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 text-xs">
+                        <span className="chip bg-surface-100 dark:bg-surface-700 text-surface-700 dark:text-surface-300 text-xs">
                           Phase {activePhase + 1} of {WORKFLOW_PIPELINE.length}
                         </span>
                       </div>
-                      <p className="text-sm text-neutral-600 dark:text-neutral-400">{WORKFLOW_PIPELINE[activePhase].description}</p>
+                      <p className="text-sm text-surface-700 dark:text-surface-400">{WORKFLOW_PIPELINE[activePhase].description}</p>
                     </div>
                   </div>
 
                   {/* Steps within this phase */}
                   <div className="mb-6">
-                    <h4 className="text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-3">Steps</h4>
+                    <h4 className="text-xs font-semibold uppercase tracking-wider text-surface-600 mb-3">Steps</h4>
                     <div className="flex flex-wrap gap-2">
                       {WORKFLOW_PIPELINE[activePhase].steps.map((step, i) => (
-                        <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-700/60 text-neutral-700 dark:text-neutral-300 text-xs font-medium">
+                        <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-100 dark:bg-surface-700/60 text-surface-700 dark:text-surface-300 text-xs font-medium">
                           <CheckCircle2 size={11} className="text-primary-500" />
                           {step}
                         </span>
@@ -217,14 +217,14 @@ export default function AgentsPage() {
 
                   {/* Agents assigned to this phase */}
                   <div>
-                    <h4 className="text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-3">
+                    <h4 className="text-xs font-semibold uppercase tracking-wider text-surface-600 mb-3">
                       AI Agents — {WORKFLOW_PIPELINE[activePhase].dept} department
                     </h4>
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                       {agentRegistry
                         .filter(a => a.department === WORKFLOW_PIPELINE[activePhase].dept)
                         .map((agent) => (
-                          <div key={agent.id} className="flex items-center gap-3 bg-neutral-50 dark:bg-neutral-700/50 rounded-xl p-3 sm:p-4 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-all">
+                          <div key={agent.id} className="flex items-center gap-3 bg-surface-50 dark:bg-surface-700/50 rounded-xl p-3 sm:p-4 hover:bg-surface-100 dark:hover:bg-surface-700 transition-all">
                             <span className="text-2xl shrink-0">{agent.emoji}</span>
                             <div className="min-w-0 flex-1">
                               <div className="flex items-center gap-2 flex-wrap">
@@ -234,16 +234,16 @@ export default function AgentsPage() {
                                   'bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400'
                                 }`}>{agent.status}</span>
                               </div>
-                              <p className="text-xs text-neutral-500 truncate">{agent.role}</p>
+                              <p className="text-xs text-surface-600 truncate">{agent.role}</p>
                               <div className="flex gap-1 mt-1">
                                 {agent.skills.slice(0, 3).map(s => (
-                                  <span key={s} className="text-xs px-1.5 py-0.5 rounded bg-neutral-200 dark:bg-neutral-600 text-neutral-600 dark:text-neutral-300 truncate">{s}</span>
+                                  <span key={s} className="text-xs px-1.5 py-0.5 rounded bg-surface-200 dark:bg-surface-600 text-surface-700 dark:text-surface-300 truncate">{s}</span>
                                 ))}
                               </div>
                             </div>
                             <div className="text-right shrink-0">
                               <div className="text-sm font-bold text-primary-600 dark:text-primary-400">{agent.efficiency}%</div>
-                              <div className="text-xs text-neutral-500">{agent.tasksCompleted}k tasks</div>
+                              <div className="text-xs text-surface-600">{agent.tasksCompleted}k tasks</div>
                             </div>
                           </div>
                         ))}
@@ -255,8 +255,8 @@ export default function AgentsPage() {
                     const nextEdges = WORKFLOW_EDGES.filter(e => e[0] === activePhase)
                     if (nextEdges.length === 0) return null
                     return (
-                      <div className="mt-6 pt-4 border-t border-neutral-100 dark:border-neutral-700">
-                        <h4 className="text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-2">Feeds into</h4>
+                      <div className="mt-6 pt-4 border-t border-surface-100 dark:border-surface-700">
+                        <h4 className="text-xs font-semibold uppercase tracking-wider text-surface-600 mb-2">Feeds into</h4>
                         <div className="flex flex-wrap gap-2">
                           {nextEdges.map(([from, to]) => (
                             <button
@@ -278,11 +278,11 @@ export default function AgentsPage() {
 
             {/* Workflow animation visualization */}
             {showFlow && runningStep !== null && (
-              <div className="mt-8 bg-neutral-900 rounded-2xl p-5 sm:p-6 border border-neutral-700">
+              <div className="mt-8 bg-surface-900 rounded-2xl p-5 sm:p-6 border border-surface-700">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   <h3 className="text-white font-semibold text-sm">Live Workflow Execution</h3>
-                  <span className="text-xs text-neutral-500 ml-auto">
+                  <span className="text-xs text-surface-600 ml-auto">
                     Step {runningStep + 1} of {WORKFLOW_PIPELINE.length}
                   </span>
                 </div>
@@ -291,8 +291,8 @@ export default function AgentsPage() {
                     <div key={i} className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-500 ${
                       completedSteps.has(i) ? 'bg-emerald-900/20 text-emerald-300' :
                       i === runningStep ? 'bg-cyan-900/20 text-cyan-300 animate-pulse' :
-                      i < runningStep ? 'bg-neutral-800 text-neutral-400' :
-                      'bg-neutral-800/50 text-neutral-600'
+                      i < runningStep ? 'bg-surface-800 text-surface-500' :
+                      'bg-surface-800/50 text-surface-700'
                     }`}>
                       <span className="text-lg">{phase.icon}</span>
                       <span className="flex-1 text-sm">{phase.label}</span>
@@ -303,7 +303,7 @@ export default function AgentsPage() {
                          '⏸️ Waiting'}
                       </span>
                       {/* Progress bar */}
-                      <div className="w-24 h-1.5 rounded-full bg-neutral-700 overflow-hidden hidden sm:block">
+                      <div className="w-24 h-1.5 rounded-full bg-surface-700 overflow-hidden hidden sm:block">
                         <div className={`h-full rounded-full transition-all duration-700 ${
                           completedSteps.has(i) ? 'w-full bg-emerald-400' :
                           i === runningStep ? 'w-1/2 bg-cyan-400' :
@@ -325,13 +325,13 @@ export default function AgentsPage() {
       </section>
 
       {/* ── All Agents by Department ── */}
-      <section className="section-padding bg-white dark:bg-neutral-950">
+      <section className="section-padding bg-white dark:bg-surface-950">
         <div className="section-container">
           <div className="text-center mb-10 sm:mb-12">
             <h2 className="text-2xl sm:text-3xl font-heading font-bold mb-3 dark:text-white">
               Complete <span className="text-primary-600 dark:text-primary-400">Agent Directory</span>
             </h2>
-            <p className="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">
+            <p className="text-surface-700 dark:text-surface-400 text-sm sm:text-base">
               Every AI employee. Click a department to expand and see details.
             </p>
           </div>
@@ -344,7 +344,7 @@ export default function AgentsPage() {
               const totalTasks = agents.reduce((s, a) => s + a.tasksCompleted, 0)
 
               return (
-                <div key={dept} className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 overflow-hidden transition-all">
+                <div key={dept} className="bg-white dark:bg-surface-800 rounded-2xl border border-surface-200 dark:border-surface-700 overflow-hidden transition-all">
                   <button
                     onClick={() => setExpandedDept(isOpen ? null : dept)}
                     className="w-full flex items-center justify-between p-4 sm:p-5 text-left gap-3 min-h-[60px]"
@@ -355,44 +355,44 @@ export default function AgentsPage() {
                       </div>
                       <div className="min-w-0">
                         <h3 className="font-semibold text-sm sm:text-base dark:text-white">{DEPT_LABELS[dept]}</h3>
-                        <p className="text-xs text-neutral-500">
+                        <p className="text-xs text-surface-600">
                           {agents.length} agent{agents.length !== 1 ? 's' : ''} · {totalTasks.toLocaleString()} tasks · {totalEff}% efficiency
                         </p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3 shrink-0">
-                      <span className="hidden sm:flex items-center gap-1 text-xs text-neutral-400">
+                      <span className="hidden sm:flex items-center gap-1 text-xs text-surface-500">
                         <CheckCircle2 size={12} className="text-emerald-400" />
                         {agents.filter(a => a.status === 'active').length} active
                       </span>
-                      {isOpen ? <ChevronUp size={18} className="text-neutral-500" /> : <ChevronDown size={18} className="text-neutral-500" />}
+                      {isOpen ? <ChevronUp size={18} className="text-surface-600" /> : <ChevronDown size={18} className="text-surface-600" />}
                     </div>
                   </button>
 
                   <div className={`transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'}`}>
                     <div className="px-4 sm:px-5 pb-4 sm:pb-5 space-y-2 sm:space-y-3">
                       {agents.map((agent) => (
-                        <div key={agent.id} className="flex items-center gap-3 sm:gap-4 bg-neutral-50 dark:bg-neutral-700/50 rounded-xl p-3 sm:p-4">
+                        <div key={agent.id} className="flex items-center gap-3 sm:gap-4 bg-surface-50 dark:bg-surface-700/50 rounded-xl p-3 sm:p-4">
                           <span className="text-2xl shrink-0">{agent.emoji}</span>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 flex-wrap">
                               <span className="font-semibold text-sm dark:text-white">{agent.name}</span>
-                              <span className="text-xs text-neutral-500 bg-neutral-200 dark:bg-neutral-600 px-1.5 py-0.5 rounded">{agent.model}</span>
+                              <span className="text-xs text-surface-600 bg-surface-200 dark:bg-surface-600 px-1.5 py-0.5 rounded">{agent.model}</span>
                               <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${
                                 agent.status === 'active' ? 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400' :
                                 'bg-amber-100 text-amber-600'
                               }`}>{agent.status}</span>
                             </div>
-                            <p className="text-xs text-neutral-500 mt-0.5 leading-snug">{agent.role} · {agent.description}</p>
+                            <p className="text-xs text-surface-600 mt-0.5 leading-snug">{agent.role} · {agent.description}</p>
                             <div className="flex flex-wrap gap-1 mt-1">
                               {agent.skills.map(s => (
-                                <span key={s} className="text-xs px-1.5 py-0.5 rounded bg-neutral-200 dark:bg-neutral-600 text-neutral-600 dark:text-neutral-300">{s}</span>
+                                <span key={s} className="text-xs px-1.5 py-0.5 rounded bg-surface-200 dark:bg-surface-600 text-surface-700 dark:text-surface-300">{s}</span>
                               ))}
                             </div>
                           </div>
                           <div className="text-right shrink-0">
                             <div className="text-base sm:text-lg font-heading font-bold text-primary-600 dark:text-primary-400">{agent.efficiency}%</div>
-                            <div className="text-xs text-neutral-500">{agent.tasksCompleted.toLocaleString()} tasks</div>
+                            <div className="text-xs text-surface-600">{agent.tasksCompleted.toLocaleString()} tasks</div>
                           </div>
                         </div>
                       ))}
@@ -406,25 +406,25 @@ export default function AgentsPage() {
       </section>
 
       {/* ── Pre-built Autonomous Workflows ── */}
-      <section className="section-padding bg-neutral-50 dark:bg-neutral-900">
+      <section className="section-padding bg-surface-50 dark:bg-surface-900">
         <div className="section-container">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-10">
               <h2 className="text-2xl sm:text-3xl font-heading font-bold mb-3 dark:text-white">
                 Autonomous <span className="text-primary-600 dark:text-primary-400">Workflows</span>
               </h2>
-              <p className="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">
+              <p className="text-surface-700 dark:text-surface-400 text-sm sm:text-base">
                 Pre-built multi-agent workflows. Click to see the execution path through all departments.
               </p>
             </div>
 
             <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
-              <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-5 sm:p-6 hover:shadow-lg transition-all">
+              <div className="bg-white dark:bg-surface-800 rounded-2xl border border-surface-200 dark:border-surface-700 p-5 sm:p-6 hover:shadow-lg transition-all">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="text-2xl">💼</span>
                   <div>
                     <h3 className="font-heading font-bold dark:text-white">Lead-to-Cash</h3>
-                    <p className="text-xs text-neutral-500">8 steps · 5 departments</p>
+                    <p className="text-xs text-surface-600">8 steps · 5 departments</p>
                   </div>
                 </div>
                 <div className="space-y-1.5">
@@ -440,14 +440,14 @@ export default function AgentsPage() {
                   ].map((s, i) => (
                     <div key={i} className="flex items-center gap-2 py-1.5">
                       <span className="w-6 h-6 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-xs font-bold flex items-center justify-center shrink-0">{i + 1}</span>
-                      <span className="flex-1 text-sm text-neutral-700 dark:text-neutral-300">{s.step}</span>
+                      <span className="flex-1 text-sm text-surface-700 dark:text-surface-300">{s.step}</span>
                       <button
                         onClick={() => {
                           const phase = WORKFLOW_PIPELINE.findIndex(p => p.dept === s.deptRef)
                           if (phase >= 0) setActivePhase(phase)
                           document.getElementById('pipeline')?.scrollIntoView({ behavior: 'smooth' })
                         }}
-                        className="text-xs text-neutral-400 hover:text-primary-500 transition-colors px-2 py-0.5 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
+                        className="text-xs text-surface-500 hover:text-primary-500 transition-colors px-2 py-0.5 rounded hover:bg-surface-100 dark:hover:bg-surface-700"
                       >
                         {s.dept}
                       </button>
@@ -456,12 +456,12 @@ export default function AgentsPage() {
                 </div>
               </div>
 
-              <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-5 sm:p-6 hover:shadow-lg transition-all">
+              <div className="bg-white dark:bg-surface-800 rounded-2xl border border-surface-200 dark:border-surface-700 p-5 sm:p-6 hover:shadow-lg transition-all">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="text-2xl">🚀</span>
                   <div>
                     <h3 className="font-heading font-bold dark:text-white">SaaS Launch</h3>
-                    <p className="text-xs text-neutral-500">10 steps · 6 departments</p>
+                    <p className="text-xs text-surface-600">10 steps · 6 departments</p>
                   </div>
                 </div>
                 <div className="space-y-1.5">
@@ -479,13 +479,13 @@ export default function AgentsPage() {
                   ].map((s, i) => (
                     <div key={i} className="flex items-center gap-2 py-1.5">
                       <span className="w-6 h-6 rounded-full bg-accent-100 dark:bg-accent-900/30 text-accent-600 dark:text-accent-400 text-xs font-bold flex items-center justify-center shrink-0">{i + 1}</span>
-                      <span className="flex-1 text-sm text-neutral-700 dark:text-neutral-300">{s.step}</span>
+                      <span className="flex-1 text-sm text-surface-700 dark:text-surface-300">{s.step}</span>
                       <button
                         onClick={() => {
                           const phase = WORKFLOW_PIPELINE.findIndex(p => p.dept === s.deptRef)
                           if (phase >= 0) setActivePhase(phase)
                         }}
-                        className="text-xs text-neutral-400 hover:text-accent-500 transition-colors px-2 py-0.5 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700"
+                        className="text-xs text-surface-500 hover:text-accent-500 transition-colors px-2 py-0.5 rounded hover:bg-surface-100 dark:hover:bg-surface-700"
                       >
                         {s.dept}
                       </button>
@@ -507,7 +507,7 @@ export default function AgentsPage() {
             <Link href="/admin" className="btn-white text-base sm:text-lg px-6 sm:px-8 py-3.5 sm:py-4">
               Open Admin Panel <ArrowRight size={18} />
             </Link>
-            <Link href="/contact" className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-medium border border-white/30 text-white hover:bg-white hover:text-neutral-900 transition-all text-sm">
+            <Link href="/contact" className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl font-medium border border-white/30 text-white hover:bg-white hover:text-surface-900 transition-all text-sm">
               Get a Proposal
             </Link>
           </div>

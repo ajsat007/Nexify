@@ -49,8 +49,8 @@ export function ThemeToggle({ className = '' }: { className?: string }) {
   const { theme, toggle, mounted } = useTheme()
   if (!mounted) return <div className={`w-9 h-9 ${className}`} />
   return (
-    <button onClick={toggle} className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all hover:bg-neutral-700/50 ${className}`} title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}>
-      {theme === 'light' ? <Moon size={16} className="text-neutral-300" /> : <Sun size={16} className="text-amber-400" />}
+    <button onClick={toggle} className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all hover:bg-surface-700/50 ${className}`} title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}>
+      {theme === 'light' ? <Moon size={16} className="text-surface-400" /> : <Sun size={16} className="text-amber-400" />}
     </button>
   )
 }

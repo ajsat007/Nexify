@@ -27,7 +27,7 @@ export default function OpsPage() {
           <div className="max-w-3xl reveal">
             <div className="chip bg-white/10 text-white border border-white/20 mb-4">Operations</div>
             <h1 className="text-4xl sm:text-5xl font-heading font-bold text-white mb-6">AI-Driven <span className="text-primary-300">Operations</span></h1>
-            <p className="text-xl text-neutral-300">Every process is automated, monitored, and optimized — 24/7, zero human intervention.</p>
+            <p className="text-xl text-surface-400">Every process is automated, monitored, and optimized — 24/7, zero human intervention.</p>
           </div>
         </div>
       </section>
@@ -36,17 +36,17 @@ export default function OpsPage() {
         <div className="section-container">
           <div className="space-y-6 reveal">
             {ops.map((o, i) => (
-              <div key={i} className="bg-white rounded-2xl border border-neutral-200 p-6 hover:shadow-lg transition-all">
+              <div key={i} className="bg-white rounded-2xl border border-surface-200 p-6 hover:shadow-lg transition-all">
                 <div className="flex items-start justify-between mb-4">
                   <h2 className="text-xl font-heading font-bold">{o.area}</h2>
                   <span className="chip bg-primary-50 text-primary-600 text-xs">{o.owner}</span>
                 </div>
-                <div className="flex flex-wrap items-center gap-2 text-sm text-neutral-800">
+                <div className="flex flex-wrap items-center gap-2 text-sm text-surface-800">
                   {o.process.split('→').map((step, j) => (
                     <span key={j} className="flex items-center gap-1">
                       <CheckCircle2 size={14} className="text-success shrink-0" />
                       <span>{step.trim()}</span>
-                      {j < o.process.split('→').length - 1 && <span className="text-neutral-300 mx-1">→</span>}
+                      {j < o.process.split('→').length - 1 && <span className="text-surface-400 mx-1">→</span>}
                     </span>
                   ))}
                 </div>

@@ -25,18 +25,18 @@ export default function TechStackPage() {
       <PageSection>
         <StaggerGroup className="grid lg:grid-cols-2 gap-4">
           {techLayers.map((t) => (
-            <div key={t.category} className="bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-neutral-200 dark:border-neutral-700 hover:shadow-lg hover:border-primary-500/20 transition-all">
+            <div key={t.category} className="bg-white dark:bg-surface-800 rounded-2xl p-6 border border-surface-200 dark:border-surface-700 hover:shadow-lg hover:border-primary-500/20 transition-all">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-xl bg-primary-50 dark:bg-primary-900/30 flex items-center justify-center shrink-0">
                   <Cpu className="w-5 h-5 text-primary-500" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="font-semibold text-neutral-900 dark:text-white">{t.category}</span>
+                    <span className="font-semibold text-surface-900 dark:text-white">{t.category}</span>
                     <span className="chip bg-accent-50 dark:bg-accent-900/30 text-accent-600 dark:text-accent-400 text-xs">Free Tier</span>
                   </div>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-1">{t.tech}</p>
-                  <p className="text-xs text-neutral-500 dark:text-neutral-500">{t.purpose}</p>
+                  <p className="text-sm text-surface-700 dark:text-surface-400 mb-1">{t.tech}</p>
+                  <p className="text-xs text-surface-600 dark:text-surface-600">{t.purpose}</p>
                 </div>
               </div>
             </div>
@@ -45,7 +45,7 @@ export default function TechStackPage() {
 
         <div className="mt-12 bg-gradient-to-r from-primary-500/5 to-accent-500/5 rounded-2xl border border-primary-500/20 p-8 text-center">
           <h2 className="text-2xl font-heading font-bold mb-2 dark:text-white">Zero Licensing Cost</h2>
-          <p className="text-neutral-600 dark:text-neutral-400 mb-4">Every technology has a generous free tier. Total monthly infra cost: <strong className="text-primary-600">~1,04,000</strong>.</p>
+          <p className="text-surface-700 dark:text-surface-400 mb-4">Every technology has a generous free tier. Total monthly infra cost: <strong className="text-primary-600">~1,04,000</strong>.</p>
         </div>
       </PageSection>
     </PageLayout>

@@ -24,11 +24,11 @@ export default function IndustriesPage() {
           {industries.map((ind) => {
             const Icon = ind.icon
             return (
-              <div key={ind.name} className="bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-neutral-200 dark:border-neutral-700 hover:shadow-lg hover:border-primary-500/20 transition-all group">
+              <div key={ind.name} className="bg-white dark:bg-surface-800 rounded-2xl p-6 border border-surface-200 dark:border-surface-700 hover:shadow-lg hover:border-primary-500/20 transition-all group">
                 <Icon className="w-8 h-8 text-primary-500 mb-3" />
                 <h3 className="text-lg font-heading font-bold mb-2 dark:text-white group-hover:text-primary-600 transition-colors">{ind.name}</h3>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">{ind.description}</p>
-                <div className="flex items-center gap-4 text-xs text-neutral-500">
+                <p className="text-sm text-surface-700 dark:text-surface-400 mb-4">{ind.description}</p>
+                <div className="flex items-center gap-4 text-xs text-surface-600">
                   <span>{ind.clients} clients</span>
                   <span>{ind.projects} projects</span>
                 </div>

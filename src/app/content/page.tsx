@@ -173,18 +173,18 @@ export default function ContentPage() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
+    <div className="min-h-screen bg-surface-50 dark:bg-surface-950">
       <section className="relative pt-32 pb-20 gradient-bg overflow-hidden">
         <div className="section-container relative">
           <div className="max-w-3xl reveal">
             <div className="chip bg-white/10 text-white border border-white/20 mb-4">Auto Content Engine</div>
             <h1 className="text-4xl sm:text-5xl font-heading font-bold text-white mb-6">AI Generates <span className="text-primary-300">Your Content</span></h1>
-            <p className="text-xl text-neutral-300 max-w-2xl">AI creates LinkedIn posts, tweets, and case studies. Auto-schedules them. Builds your audience while you sleep.</p>
+            <p className="text-xl text-surface-400 max-w-2xl">AI creates LinkedIn posts, tweets, and case studies. Auto-schedules them. Builds your audience while you sleep.</p>
           </div>
         </div>
       </section>
 
-      <section className="section-padding bg-white dark:bg-neutral-950">
+      <section className="section-padding bg-white dark:bg-surface-950">
         <div className="section-container">
           {/* Stats */}
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-12 reveal">
@@ -195,9 +195,9 @@ export default function ContentPage() {
               { icon: Users, label: 'LinkedIn Followers', value: String(analytics.followers?.linkedin || 0), c: 'from-blue-500 to-indigo-500' },
               { icon: Globe, label: 'Twitter Followers', value: String(analytics.followers?.twitter || 0), c: 'from-cyan-500 to-sky-500' },
             ].map((s, i) => (
-              <div key={i} className="text-center p-6 bg-neutral-50 dark:bg-neutral-800/50 rounded-2xl border border-neutral-200 dark:border-neutral-700">
+              <div key={i} className="text-center p-6 bg-surface-50 dark:bg-surface-800/50 rounded-2xl border border-surface-200 dark:border-surface-700">
                 <div className={`text-3xl font-heading font-bold bg-gradient-to-r ${s.c} bg-clip-text text-transparent`}>{s.value}</div>
-                <div className="text-sm text-neutral-800 mt-1">{s.label}</div>
+                <div className="text-sm text-surface-800 mt-1">{s.label}</div>
               </div>
             ))}
           </div>
@@ -206,18 +206,18 @@ export default function ContentPage() {
           <div className="card-surface p-8 mb-12 reveal">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 rounded-2xl gradient-bg flex items-center justify-center"><Sparkles className="w-6 h-6 text-white" /></div>
-              <div><h2 className="text-2xl font-heading font-bold">AI Content Generator</h2><p className="text-sm text-neutral-800">Generates LinkedIn/Twitter posts optimized for engagement</p></div>
+              <div><h2 className="text-2xl font-heading font-bold">AI Content Generator</h2><p className="text-sm text-surface-800">Generates LinkedIn/Twitter posts optimized for engagement</p></div>
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
               <div>
-                <label className="block text-xs font-medium text-neutral-700 dark:text-neutral-300 mb-1.5">Platform</label>
+                <label className="block text-xs font-medium text-surface-700 dark:text-surface-300 mb-1.5">Platform</label>
                 <select className="input-field" value={selectedPlatform} onChange={e => setSelectedPlatform(e.target.value)}>
                   <option value="LinkedIn">LinkedIn</option><option value="Twitter/X">Twitter/X</option>
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-medium text-neutral-700 dark:text-neutral-300 mb-1.5">Content Type</label>
+                <label className="block text-xs font-medium text-surface-700 dark:text-surface-300 mb-1.5">Content Type</label>
                 <select className="input-field" value={selectedType} onChange={e => setSelectedType(e.target.value)}>
                   <option value="case-study">Case Study</option><option value="insight">Industry Insight</option>
                   <option value="hot-take">Hot Take</option><option value="process">Process/Workflow</option>
@@ -225,7 +225,7 @@ export default function ContentPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-medium text-neutral-700 dark:text-neutral-300 mb-1.5">Schedule Time</label>
+                <label className="block text-xs font-medium text-surface-700 dark:text-surface-300 mb-1.5">Schedule Time</label>
                 <input type="time" className="input-field" value={scheduleTime} onChange={e => setScheduleTime(e.target.value)} />
               </div>
               <div className="flex items-end gap-2">
@@ -240,12 +240,12 @@ export default function ContentPage() {
 
             {generatedPost && (
               <div className="animate-slide-up space-y-4" ref={bottomRef as any}>
-                <div className={`p-6 rounded-xl border ${selectedPlatform === 'LinkedIn' ? 'bg-blue-50 dark:bg-blue-500/5 border-blue-200 dark:border-blue-500/20' : 'bg-neutral-50 dark:bg-neutral-800/50 border-neutral-200 dark:border-neutral-700'}`}>
+                <div className={`p-6 rounded-xl border ${selectedPlatform === 'LinkedIn' ? 'bg-blue-50 dark:bg-blue-500/5 border-blue-200 dark:border-blue-500/20' : 'bg-surface-50 dark:bg-surface-800/50 border-surface-200 dark:border-surface-700'}`}>
                   <div className="flex items-center gap-2 mb-4">
                     {selectedPlatform === 'LinkedIn' ? <Linkedin className="w-5 h-5 text-blue-600" /> : <Twitter className="w-5 h-5 text-sky-500" />}
-                    <span className="text-xs font-medium text-neutral-800 uppercase">{selectedPlatform} · {selectedType.replace('-', ' ')}</span>
+                    <span className="text-xs font-medium text-surface-800 uppercase">{selectedPlatform} · {selectedType.replace('-', ' ')}</span>
                   </div>
-                  <p className="text-neutral-700 dark:text-neutral-200 whitespace-pre-line leading-relaxed">{generatedPost}</p>
+                  <p className="text-surface-700 dark:text-surface-200 whitespace-pre-line leading-relaxed">{generatedPost}</p>
                 </div>
                 <div className="flex flex-wrap gap-3">
                   <button onClick={savePost} className="btn-primary text-sm"><Calendar size={14} /> Save</button>
@@ -253,14 +253,14 @@ export default function ContentPage() {
                     {scheduling ? <Loader size={14} className="animate-spin" /> : <Clock size={14} />}
                     Schedule for {scheduleTime}
                   </button>
-                  <button onClick={copyPost} className="px-4 py-2 rounded-xl border border-neutral-200 dark:border-neutral-700 text-sm text-neutral-800 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-all">
+                  <button onClick={copyPost} className="px-4 py-2 rounded-xl border border-surface-200 dark:border-surface-700 text-sm text-surface-800 dark:text-surface-300 hover:bg-surface-50 dark:hover:bg-surface-800 transition-all">
                     {copied ? <><Check size={14} /> Copied</> : <><Copy size={14} /> Copy</>}
                   </button>
                 </div>
               </div>
             )}
 
-            <div className="mt-4 text-xs text-neutral-800 flex items-center gap-2">
+            <div className="mt-4 text-xs text-surface-800 flex items-center gap-2">
               <Zap size={12} className="text-primary-500" /> AI generates content optimized for your niche. Customize before posting.
             </div>
           </div>
@@ -269,7 +269,7 @@ export default function ContentPage() {
           {analytics.topPost && (
             <div className="bg-gradient-to-r from-amber-500/5 to-orange-500/5 rounded-2xl border border-amber-500/20 p-6 mb-12 reveal">
               <div className="flex items-center gap-2 mb-2"><Star className="w-4 h-4 text-amber-500" fill="currentColor" /><span className="text-sm font-semibold">Top Performing Post</span></div>
-              <p className="text-sm text-neutral-800">{analytics.topPost}</p>
+              <p className="text-sm text-surface-800">{analytics.topPost}</p>
             </div>
           )}
 
@@ -277,17 +277,17 @@ export default function ContentPage() {
           <div className="space-y-4 reveal">
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-heading font-bold">Content Feed</h2>
-              <span className="text-xs text-neutral-800">{posts.length} posts generated</span>
+              <span className="text-xs text-surface-800">{posts.length} posts generated</span>
             </div>
             {posts.map((post, i) => (
               <div key={post.id} className="card-surface p-5 hover:shadow-lg transition-all">
                 <div className="flex items-start gap-4">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5 ${post.platform === 'LinkedIn' ? 'bg-blue-100 dark:bg-blue-500/10' : 'bg-neutral-100 dark:bg-neutral-700'}`}>
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5 ${post.platform === 'LinkedIn' ? 'bg-blue-100 dark:bg-blue-500/10' : 'bg-surface-100 dark:bg-surface-700'}`}>
                     {post.platform === 'LinkedIn' ? <Linkedin className="w-4 h-4 text-blue-600" /> : <Twitter className="w-4 h-4 text-sky-500" />}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm text-neutral-700 dark:text-neutral-200 whitespace-pre-line line-clamp-3">{post.content}</p>
-                    <div className="flex flex-wrap items-center gap-3 mt-3 text-xs text-neutral-800">
+                    <p className="text-sm text-surface-700 dark:text-surface-200 whitespace-pre-line line-clamp-3">{post.content}</p>
+                    <div className="flex flex-wrap items-center gap-3 mt-3 text-xs text-surface-800">
                       <span>{post.date} · {post.time}</span>
                       {post.autoPosted && <span className="chip bg-success/10 text-success text-xs">Auto-posted</span>}
                       <span className="flex items-center gap-1"><Heart size={12} /> {post.engagement.likes}</span>
@@ -303,7 +303,7 @@ export default function ContentPage() {
           {/* CTA */}
           <div className="mt-12 bg-gradient-to-r from-primary-500/5 to-accent-500/5 rounded-2xl border border-primary-500/20 p-8 text-center reveal">
             <h2 className="text-2xl font-heading font-bold mb-2">Your AI Content Calendar is Running</h2>
-            <p className="text-neutral-800 mb-6 max-w-md mx-auto">AI generates posts, schedules them, and tracks engagement. Build your audience without lifting a finger.</p>
+            <p className="text-surface-800 mb-6 max-w-md mx-auto">AI generates posts, schedules them, and tracks engagement. Build your audience without lifting a finger.</p>
             <div className="flex justify-center gap-4">
               <button onClick={autoGenerateSequence} className="btn-primary"><Zap size={16} /> Auto-Generate Week</button>
               <Link href="/freelancer" className="btn-secondary">Freelancer Hub <ArrowRight size={16} /></Link>

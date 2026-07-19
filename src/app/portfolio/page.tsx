@@ -38,14 +38,14 @@ export default function PortfolioPage() {
     <PageLayout>
       <PageHeader badge="Portfolio" title="200+ Projects. 20 Industries. Zero Humans." subtitle="Every project delivered by AI agents. Every client a success story." />
 
-      <section className="section-padding bg-white dark:bg-neutral-950">
+      <section className="section-padding bg-white dark:bg-surface-950">
         <div className="section-container">
           {/* Stats */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-8 mb-10 sm:mb-16">
             {stats.map((s) => (
-              <div key={s.label} className="text-center bg-neutral-50 dark:bg-neutral-900 rounded-2xl p-4 sm:p-6 border border-neutral-100 dark:border-neutral-800">
+              <div key={s.label} className="text-center bg-surface-50 dark:bg-surface-900 rounded-2xl p-4 sm:p-6 border border-surface-100 dark:border-surface-800">
                 <div className="text-2xl sm:text-3xl font-heading font-bold text-primary-600 dark:text-primary-400">{s.value}</div>
-                <div className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mt-1">{s.label}</div>
+                <div className="text-xs sm:text-sm text-surface-700 dark:text-surface-400 mt-1">{s.label}</div>
               </div>
             ))}
           </div>
@@ -54,36 +54,36 @@ export default function PortfolioPage() {
           <div className="flex overflow-x-auto gap-2 pb-2 mb-8 sm:mb-12 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap sm:overflow-visible scrollbar-none">
             {industries.map((f) => (
               <button key={f} onClick={() => setFilter(f)}
-                className={`chip whitespace-nowrap transition-all shrink-0 ${filter === f ? 'bg-primary-500 text-white' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'}`}>
+                className={`chip whitespace-nowrap transition-all shrink-0 ${filter === f ? 'bg-primary-500 text-white' : 'bg-surface-100 dark:bg-surface-700 text-surface-700 dark:text-surface-300 hover:bg-surface-200 dark:hover:bg-surface-600'}`}>
                 {f}
               </button>
             ))}
           </div>
 
           {/* Results count */}
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-6">{filtered.length} project{filtered.length !== 1 ? 's' : ''}</p>
+          <p className="text-sm text-surface-600 dark:text-surface-400 mb-6">{filtered.length} project{filtered.length !== 1 ? 's' : ''}</p>
 
           {/* Grid */}
           <div className="grid sm:grid-cols-2 gap-4 sm:gap-8">
             {filtered.map((project, i) => (
               <AnimatedSection key={i} animation="fade-up" delay={i * 50}>
-                <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-5 sm:p-6 hover:shadow-xl hover:border-primary-500/20 transition-all duration-300 group flex flex-col h-full">
+                <div className="bg-white dark:bg-surface-800 rounded-2xl border border-surface-200 dark:border-surface-700 p-5 sm:p-6 hover:shadow-xl hover:border-primary-500/20 transition-all duration-300 group flex flex-col h-full">
                   <div className="flex items-start justify-between mb-3">
                     <span className="chip bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-xs">{project.industry}</span>
                   </div>
                   <h3 className="text-lg sm:text-xl font-heading font-bold mb-3 dark:text-white group-hover:text-primary-600 transition-colors leading-snug">{project.title}</h3>
                   <div className="space-y-1.5 mb-4 flex-1">
-                    <p className="text-xs text-neutral-500 font-semibold uppercase tracking-wider">Problem</p>
-                    <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">{project.problem}</p>
-                    <p className="text-xs text-neutral-500 font-semibold uppercase tracking-wider mt-3">Solution</p>
-                    <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">{project.solution}</p>
+                    <p className="text-xs text-surface-600 font-semibold uppercase tracking-wider">Problem</p>
+                    <p className="text-sm text-surface-700 dark:text-surface-400 leading-relaxed">{project.problem}</p>
+                    <p className="text-xs text-surface-600 font-semibold uppercase tracking-wider mt-3">Solution</p>
+                    <p className="text-sm text-surface-700 dark:text-surface-400 leading-relaxed">{project.solution}</p>
                   </div>
                   <div className="flex flex-wrap gap-1.5 mb-4">
                     {project.tech.map((t) => (
-                      <span key={t} className="chip bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 text-xs">{t}</span>
+                      <span key={t} className="chip bg-surface-100 dark:bg-surface-700 text-surface-700 dark:text-surface-300 text-xs">{t}</span>
                     ))}
                   </div>
-                  <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 border-t border-neutral-100 dark:border-neutral-700 pt-4">
+                  <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm text-surface-700 dark:text-surface-400 border-t border-surface-100 dark:border-surface-700 pt-4">
                     <span className="flex items-center gap-1"><Clock size={13} /> {project.timeline}</span>
                     <span className="flex items-center gap-1"><DollarSign size={13} /> {project.budget}</span>
                     <span className="flex items-center gap-1 text-success font-medium"><TrendingUp size={13} /> {project.result}</span>
@@ -94,7 +94,7 @@ export default function PortfolioPage() {
           </div>
 
           {filtered.length === 0 && (
-            <div className="text-center py-12 text-neutral-500">
+            <div className="text-center py-12 text-surface-600">
               No projects found for this filter.
             </div>
           )}

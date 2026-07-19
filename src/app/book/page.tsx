@@ -64,17 +64,17 @@ export default function BookingPage() {
 
   if (booked) {
     return (
-      <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-surface-50 dark:bg-surface-950 flex items-center justify-center p-4">
         <div className="max-w-md w-full text-center">
           <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-success/20 to-success/5 flex items-center justify-center mx-auto mb-6 border border-success/20">
             <Check className="w-10 h-10 text-success" />
           </div>
           <h1 className="text-3xl font-heading font-bold mb-3">You're Booked! 🎉</h1>
-          <p className="text-neutral-800 mb-6">{bookingReplies[Math.floor(Math.random() * bookingReplies.length)]}</p>
-          <div className="bg-white dark:bg-neutral-800/50 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 mb-8 space-y-3">
-            <div className="flex items-center gap-3 text-sm"><Calendar className="w-5 h-5 text-primary-500" /><span className="text-neutral-700 dark:text-neutral-200 font-medium">{selectedDate}</span></div>
-            <div className="flex items-center gap-3 text-sm"><Clock className="w-5 h-5 text-primary-500" /><span className="text-neutral-700 dark:text-neutral-200 font-medium">{selectedTime}</span></div>
-            <div className="flex items-center gap-3 text-sm"><Zap className="w-5 h-5 text-primary-500" /><span className="text-neutral-700 dark:text-neutral-200 font-medium">{selected?.name}</span></div>
+          <p className="text-surface-800 mb-6">{bookingReplies[Math.floor(Math.random() * bookingReplies.length)]}</p>
+          <div className="bg-white dark:bg-surface-800/50 rounded-2xl border border-surface-200 dark:border-surface-700 p-6 mb-8 space-y-3">
+            <div className="flex items-center gap-3 text-sm"><Calendar className="w-5 h-5 text-primary-500" /><span className="text-surface-700 dark:text-surface-200 font-medium">{selectedDate}</span></div>
+            <div className="flex items-center gap-3 text-sm"><Clock className="w-5 h-5 text-primary-500" /><span className="text-surface-700 dark:text-surface-200 font-medium">{selectedTime}</span></div>
+            <div className="flex items-center gap-3 text-sm"><Zap className="w-5 h-5 text-primary-500" /><span className="text-surface-700 dark:text-surface-200 font-medium">{selected?.name}</span></div>
           </div>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/" className="btn-primary">Back to Home <ArrowRight size={16} /></Link>
@@ -86,27 +86,27 @@ export default function BookingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
+    <div className="min-h-screen bg-surface-50 dark:bg-surface-950">
       <section className="relative pt-32 pb-20 gradient-bg overflow-hidden">
         <div className="section-container relative">
           <div className="max-w-3xl reveal">
             <div className="chip bg-white/10 text-white border border-white/20 mb-4">Book a Call</div>
             <h1 className="text-4xl sm:text-5xl font-heading font-bold text-white mb-6">Let's Talk About <span className="text-primary-300">Your Project</span></h1>
-            <p className="text-xl text-neutral-300 max-w-2xl">Pick a time that works for you. No sales pitch — just a conversation about how I can help.</p>
+            <p className="text-xl text-surface-400 max-w-2xl">Pick a time that works for you. No sales pitch — just a conversation about how I can help.</p>
           </div>
         </div>
       </section>
 
-      <section className="py-12 bg-white dark:bg-neutral-950">
+      <section className="py-12 bg-white dark:bg-surface-950">
         <div className="section-container">
           <div className="max-w-3xl mx-auto">
             {/* Steps Progress */}
             <div className="flex items-center justify-center gap-2 mb-12">
               {[1, 2, 3].map(s => (
                 <div key={s} className="flex items-center gap-2">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${step >= s ? 'bg-primary-500 text-white' : 'bg-neutral-200 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-800'}`}>{s}</div>
-                  <span className={`text-xs hidden sm:inline ${step >= s ? 'text-primary-600 dark:text-primary-400 font-medium' : 'text-neutral-800'}`}>{s === 1 ? 'Service' : s === 2 ? 'Time' : 'Details'}</span>
-                  {s < 3 && <div className={`w-12 h-0.5 ${step > s ? 'bg-primary-500' : 'bg-neutral-200 dark:bg-neutral-700'}`} />}
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${step >= s ? 'bg-primary-500 text-white' : 'bg-surface-200 dark:bg-surface-700 text-surface-800 dark:text-surface-800'}`}>{s}</div>
+                  <span className={`text-xs hidden sm:inline ${step >= s ? 'text-primary-600 dark:text-primary-400 font-medium' : 'text-surface-800'}`}>{s === 1 ? 'Service' : s === 2 ? 'Time' : 'Details'}</span>
+                  {s < 3 && <div className={`w-12 h-0.5 ${step > s ? 'bg-primary-500' : 'bg-surface-200 dark:bg-surface-700'}`} />}
                 </div>
               ))}
             </div>
@@ -115,7 +115,7 @@ export default function BookingPage() {
             {step === 1 && (
               <div className="reveal space-y-6">
                 <h2 className="text-2xl font-heading font-bold text-center">What type of call?</h2>
-                <p className="text-neutral-800 text-center">Choose the option that best fits your needs</p>
+                <p className="text-surface-800 text-center">Choose the option that best fits your needs</p>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {services.map(s => {
                     const Icon = s.icon
@@ -124,11 +124,11 @@ export default function BookingPage() {
                         className={`text-left p-6 rounded-2xl border-2 transition-all ${
                           selectedService === s.id
                             ? 'border-primary-500 bg-primary-50 dark:bg-primary-500/10 shadow-lg'
-                            : 'border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800/50 hover:border-neutral-300'
+                            : 'border-surface-200 dark:border-surface-700 bg-white dark:bg-surface-800/50 hover:border-surface-300'
                         }`}>
                         <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${s.color} flex items-center justify-center mb-3`}><Icon className="w-6 h-6 text-white" /></div>
                         <h3 className="font-semibold mb-1">{s.name}</h3>
-                        <p className="text-sm text-neutral-800">{s.desc}</p>
+                        <p className="text-sm text-surface-800">{s.desc}</p>
                       </button>
                     )
                   })}
@@ -143,14 +143,14 @@ export default function BookingPage() {
             {step === 2 && (
               <div className="reveal space-y-6">
                 <h2 className="text-2xl font-heading font-bold text-center">Pick a Date & Time</h2>
-                <p className="text-neutral-800 text-center">{selected?.name}</p>
+                <p className="text-surface-800 text-center">{selected?.name}</p>
 
                 {/* Date Picker */}
-                <div className="bg-white dark:bg-neutral-800/50 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-4">
+                <div className="bg-white dark:bg-surface-800/50 rounded-2xl border border-surface-200 dark:border-surface-700 p-4">
                   <div className="flex items-center justify-between mb-4">
-                    <button onClick={() => setWeekOffset(Math.max(0, weekOffset - 1))} disabled={weekOffset === 0} className="p-2 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-700 disabled:opacity-30"><ChevronLeft size={18} /></button>
+                    <button onClick={() => setWeekOffset(Math.max(0, weekOffset - 1))} disabled={weekOffset === 0} className="p-2 rounded-xl hover:bg-surface-100 dark:hover:bg-surface-700 disabled:opacity-30"><ChevronLeft size={18} /></button>
                     <span className="text-sm font-medium">{displayDates[0]?.month} {displayDates[0]?.date} — {displayDates[6]?.date}</span>
-                    <button onClick={() => setWeekOffset(weekOffset + 1)} disabled={weekOffset >= 1} className="p-2 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-700 disabled:opacity-30"><ChevronRight size={18} /></button>
+                    <button onClick={() => setWeekOffset(weekOffset + 1)} disabled={weekOffset >= 1} className="p-2 rounded-xl hover:bg-surface-100 dark:hover:bg-surface-700 disabled:opacity-30"><ChevronRight size={18} /></button>
                   </div>
                   <div className="grid grid-cols-7 gap-2">
                     {displayDates.map(d => (
@@ -158,7 +158,7 @@ export default function BookingPage() {
                         className={`p-3 rounded-xl text-center transition-all ${
                           selectedDate.includes(String(d.date))
                             ? 'bg-primary-500 text-white shadow-lg'
-                            : 'hover:bg-neutral-100 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300'
+                            : 'hover:bg-surface-100 dark:hover:bg-surface-700 text-surface-700 dark:text-surface-300'
                         }`}>
                         <div className="text-xs font-medium">{d.day}</div>
                         <div className="text-lg font-heading font-bold">{d.date}</div>
@@ -176,7 +176,7 @@ export default function BookingPage() {
                         className={`p-3 rounded-xl text-sm font-medium transition-all ${
                           selectedTime === t
                             ? 'bg-primary-500 text-white shadow-md'
-                            : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'
+                            : 'bg-surface-100 dark:bg-surface-700 text-surface-800 dark:text-surface-300 hover:bg-surface-200 dark:hover:bg-surface-600'
                         }`}>
                         {t}
                       </button>
@@ -195,25 +195,25 @@ export default function BookingPage() {
             {step === 3 && (
               <div className="reveal space-y-6 max-w-lg mx-auto">
                 <h2 className="text-2xl font-heading font-bold text-center">Almost Done!</h2>
-                <p className="text-neutral-800 text-center">Share your details and I'll send the confirmation</p>
+                <p className="text-surface-800 text-center">Share your details and I'll send the confirmation</p>
 
-                <div className="bg-white dark:bg-neutral-800/50 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 space-y-4">
-                  <div className="flex items-center gap-4 p-3 bg-neutral-50 dark:bg-neutral-800 rounded-xl">
+                <div className="bg-white dark:bg-surface-800/50 rounded-2xl border border-surface-200 dark:border-surface-700 p-6 space-y-4">
+                  <div className="flex items-center gap-4 p-3 bg-surface-50 dark:bg-surface-800 rounded-xl">
                     <Calendar className="w-5 h-5 text-primary-500" />
-                    <div><div className="text-sm font-medium">{selectedDate}</div><div className="text-xs text-neutral-800">{selectedTime}</div></div>
+                    <div><div className="text-sm font-medium">{selectedDate}</div><div className="text-xs text-surface-800">{selectedTime}</div></div>
                   </div>
-                  <div className="flex items-center gap-4 p-3 bg-neutral-50 dark:bg-neutral-800 rounded-xl">
+                  <div className="flex items-center gap-4 p-3 bg-surface-50 dark:bg-surface-800 rounded-xl">
                     <Zap className="w-5 h-5 text-primary-500" />
-                    <div><div className="text-sm font-medium">{selected?.name}</div><div className="text-xs text-neutral-800">{selected?.desc}</div></div>
+                    <div><div className="text-sm font-medium">{selected?.name}</div><div className="text-xs text-surface-800">{selected?.desc}</div></div>
                   </div>
                 </div>
 
                 <div className="space-y-4">
-                  <div><label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Your Name *</label>
+                  <div><label className="block text-sm font-medium text-surface-700 dark:text-surface-300 mb-1">Your Name *</label>
                     <input className="input-field" placeholder="e.g. Rahul Sharma" value={name} onChange={e => setName(e.target.value)} /></div>
-                  <div><label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Email *</label>
+                  <div><label className="block text-sm font-medium text-surface-700 dark:text-surface-300 mb-1">Email *</label>
                     <input type="email" className="input-field" placeholder="rahul@company.com" value={email} onChange={e => setEmail(e.target.value)} /></div>
-                  <div><label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Project Details (optional)</label>
+                  <div><label className="block text-sm font-medium text-surface-700 dark:text-surface-300 mb-1">Project Details (optional)</label>
                     <textarea className="input-field" rows={3} placeholder="Briefly describe your project..." value={message} onChange={e => setMessage(e.target.value)} /></div>
                 </div>
 
@@ -224,7 +224,7 @@ export default function BookingPage() {
                   </button>
                 </div>
 
-                <p className="text-xs text-neutral-800 text-center">By booking, you agree to the terms. Your data is secure.</p>
+                <p className="text-xs text-surface-800 text-center">By booking, you agree to the terms. Your data is secure.</p>
               </div>
             )}
           </div>

@@ -91,38 +91,38 @@ export default function SiteSearch() {
   return (
     <>
       {/* Search Trigger */}
-      <button onClick={() => setOpen(true)} className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-neutral-800/50 border border-neutral-700 text-neutral-400 hover:text-white hover:border-neutral-500 transition-all text-xs" title="Search (Ctrl+K)">
+      <button onClick={() => setOpen(true)} className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-surface-800/50 border border-surface-700 text-surface-500 hover:text-white hover:border-neutral-500 transition-all text-xs" title="Search (Ctrl+K)">
         <Search size={14} />
         <span className="hidden sm:inline">Search...</span>
-        <kbd className="hidden lg:inline text-xs px-1.5 py-0.5 rounded bg-neutral-700 text-neutral-400">⌘K</kbd>
+        <kbd className="hidden lg:inline text-xs px-1.5 py-0.5 rounded bg-surface-700 text-surface-500">⌘K</kbd>
       </button>
 
       {/* Modal */}
       {open && (
         <div className="fixed inset-0 z-[100] flex items-start justify-center pt-[15vh]">
           <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setOpen(false)} />
-          <div className="relative w-full max-w-lg bg-neutral-900 rounded-2xl border border-neutral-700 shadow-2xl overflow-hidden animate-slide-down">
-            <div className="flex items-center gap-3 px-5 py-4 border-b border-neutral-800">
-              <Search size={18} className="text-neutral-400 shrink-0" />
+          <div className="relative w-full max-w-lg bg-surface-900 rounded-2xl border border-surface-700 shadow-2xl overflow-hidden animate-slide-down">
+            <div className="flex items-center gap-3 px-5 py-4 border-b border-surface-800">
+              <Search size={18} className="text-surface-500 shrink-0" />
               <input ref={inputRef} autoFocus className="flex-1 bg-transparent text-white placeholder-neutral-500 outline-none text-sm" placeholder="Search pages, services, products..." value={query} onChange={e => setQuery(e.target.value)} onKeyDown={handleKeyDown} />
-              {query && <button onClick={() => setQuery('')} className="text-neutral-400 hover:text-white"><X size={16} /></button>}
-              <kbd className="text-xs px-1.5 py-0.5 rounded bg-neutral-800 text-neutral-500">ESC</kbd>
+              {query && <button onClick={() => setQuery('')} className="text-surface-500 hover:text-white"><X size={16} /></button>}
+              <kbd className="text-xs px-1.5 py-0.5 rounded bg-surface-800 text-surface-600">ESC</kbd>
             </div>
             <div ref={resultsRef} className="max-h-80 overflow-y-auto p-2">
               {results.length === 0 && query && (
-                <div className="text-center py-8 text-neutral-500 text-sm">No results for "{query}"</div>
+                <div className="text-center py-8 text-surface-600 text-sm">No results for "{query}"</div>
               )}
               {results.length === 0 && !query && (
-                <div className="text-center py-8 text-neutral-500 text-xs">Type to search across 40+ pages and services</div>
+                <div className="text-center py-8 text-surface-600 text-xs">Type to search across 40+ pages and services</div>
               )}
               {results.map((item, i) => {
                 const Icon = item.icon || Search
                 return (
                   <Link key={item.title + item.href} href={item.href} onClick={() => setOpen(false)}
-                    className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all ${i === selectedIndex ? 'bg-primary-500/10 text-primary-300' : 'text-neutral-300 hover:bg-neutral-800'}`}>
-                    <Icon size={16} className={`${i === selectedIndex ? 'text-primary-400' : 'text-neutral-500'}`} />
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm transition-all ${i === selectedIndex ? 'bg-primary-500/10 text-primary-300' : 'text-surface-400 hover:bg-surface-800'}`}>
+                    <Icon size={16} className={`${i === selectedIndex ? 'text-primary-400' : 'text-surface-600'}`} />
                     <span className="flex-1">{item.title}</span>
-                    <span className="text-xs text-neutral-500 px-2 py-0.5 rounded bg-neutral-800">{item.category}</span>
+                    <span className="text-xs text-surface-600 px-2 py-0.5 rounded bg-surface-800">{item.category}</span>
                   </Link>
                 )
               })}

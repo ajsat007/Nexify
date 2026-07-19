@@ -57,13 +57,13 @@ export function Sidebar({ items, title, subtitle, logo = 'N', onLogout }: Sideba
   const sidebarContent = (
     <div className="flex flex-col h-full">
       {/* Logo */}
-      <div className="flex items-center gap-3 px-5 h-16 border-b border-neutral-800 shrink-0">
+      <div className="flex items-center gap-3 px-5 h-16 border-b border-surface-800 shrink-0">
         <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white font-bold text-sm shrink-0">
           {logo}
         </div>
         <div className={cn('overflow-hidden transition-all duration-300', collapsed ? 'w-0 opacity-0' : 'w-auto opacity-100')}>
           <div className="text-white font-heading font-bold text-sm leading-tight">{title}</div>
-          {subtitle && <div className="text-neutral-500 text-xs font-medium uppercase tracking-wider">{subtitle}</div>}
+          {subtitle && <div className="text-surface-600 text-xs font-medium uppercase tracking-wider">{subtitle}</div>}
         </div>
       </div>
 
@@ -84,13 +84,13 @@ export function Sidebar({ items, title, subtitle, logo = 'N', onLogout }: Sideba
                       'flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 group',
                       active
                         ? 'bg-primary-500/10 text-primary-400'
-                        : 'text-neutral-400 hover:text-white hover:bg-neutral-800/50'
+                        : 'text-surface-500 hover:text-white hover:bg-surface-800/50'
                     )}
                   >
-                    {item.icon && <item.icon size={18} className={cn('shrink-0', active ? 'text-primary-400' : 'text-neutral-500 group-hover:text-neutral-300')} />}
+                    {item.icon && <item.icon size={18} className={cn('shrink-0', active ? 'text-primary-400' : 'text-surface-600 group-hover:text-surface-400')} />}
                     <span className={cn('flex-1 text-left transition-all duration-300', collapsed ? 'hidden' : 'block')}>{item.label}</span>
                     {!collapsed && (
-                      <ChevronDown size={14} className={cn('transition-transform duration-200 text-neutral-500', isExpanded && 'rotate-180')} />
+                      <ChevronDown size={14} className={cn('transition-transform duration-200 text-surface-600', isExpanded && 'rotate-180')} />
                     )}
                   </button>
                   <div className={cn(
@@ -108,10 +108,10 @@ export function Sidebar({ items, title, subtitle, logo = 'N', onLogout }: Sideba
                               'flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-all duration-200',
                               childActive
                                 ? 'bg-primary-500/10 text-primary-400 font-medium'
-                                : 'text-neutral-400 hover:text-white hover:bg-neutral-800/50'
+                                : 'text-surface-500 hover:text-white hover:bg-surface-800/50'
                             )}
                           >
-                            <span className={cn('w-1 h-1 rounded-full shrink-0', childActive ? 'bg-primary-400' : 'bg-neutral-600')} />
+                            <span className={cn('w-1 h-1 rounded-full shrink-0', childActive ? 'bg-primary-400' : 'bg-surface-600')} />
                             <span className={cn('transition-all duration-300', collapsed ? 'hidden' : 'block')}>{child.label}</span>
                           </Link>
                         )
@@ -126,10 +126,10 @@ export function Sidebar({ items, title, subtitle, logo = 'N', onLogout }: Sideba
                     'flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 group text-left',
                     isActive(item)
                       ? 'bg-primary-500/10 text-primary-400'
-                      : 'text-neutral-400 hover:text-white hover:bg-neutral-800/50'
+                      : 'text-surface-500 hover:text-white hover:bg-surface-800/50'
                   )}
                 >
-                  {item.icon && <item.icon size={18} className={cn('shrink-0', isActive(item) ? 'text-primary-400' : 'text-neutral-500 group-hover:text-neutral-300')} />}
+                  {item.icon && <item.icon size={18} className={cn('shrink-0', isActive(item) ? 'text-primary-400' : 'text-surface-600 group-hover:text-surface-400')} />}
                   <span className={cn('transition-all duration-300', collapsed ? 'hidden' : 'block')}>{item.label}</span>
                 </button>
               ) : (
@@ -139,10 +139,10 @@ export function Sidebar({ items, title, subtitle, logo = 'N', onLogout }: Sideba
                     'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 group',
                     isActive(item)
                       ? 'bg-primary-500/10 text-primary-400'
-                      : 'text-neutral-400 hover:text-white hover:bg-neutral-800/50'
+                      : 'text-surface-500 hover:text-white hover:bg-surface-800/50'
                   )}
                 >
-                  {item.icon && <item.icon size={18} className={cn('shrink-0', isActive(item) ? 'text-primary-400' : 'text-neutral-500 group-hover:text-neutral-300')} />}
+                  {item.icon && <item.icon size={18} className={cn('shrink-0', isActive(item) ? 'text-primary-400' : 'text-surface-600 group-hover:text-surface-400')} />}
                   <span className={cn('transition-all duration-300', collapsed ? 'hidden' : 'block')}>{item.label}</span>
                 </Link>
               )}
@@ -152,17 +152,17 @@ export function Sidebar({ items, title, subtitle, logo = 'N', onLogout }: Sideba
       </nav>
 
       {/* Home link */}
-      <div className="p-3 border-t border-neutral-800 space-y-1">
+      <div className="p-3 border-t border-surface-800 space-y-1">
         <Link
           href="/"
-          className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm text-neutral-400 hover:text-white hover:bg-neutral-800/50 transition-all duration-200 group"
+          className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm text-surface-500 hover:text-white hover:bg-surface-800/50 transition-all duration-200 group"
         >
-          <Home size={18} className="text-neutral-500 group-hover:text-neutral-300 shrink-0" />
+          <Home size={18} className="text-surface-600 group-hover:text-surface-400 shrink-0" />
           <span className={cn('transition-all duration-300', collapsed ? 'hidden' : 'block')}>Back to Site</span>
         </Link>
         {onLogout && (
-          <button onClick={onLogout} className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm text-neutral-400 hover:text-white hover:bg-neutral-800/50 transition-all duration-200 group">
-            <LogOut size={18} className="text-neutral-500 group-hover:text-neutral-300 shrink-0" />
+          <button onClick={onLogout} className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm text-surface-500 hover:text-white hover:bg-surface-800/50 transition-all duration-200 group">
+            <LogOut size={18} className="text-surface-600 group-hover:text-surface-400 shrink-0" />
             <span className={cn('transition-all duration-300', collapsed ? 'hidden' : 'block')}>Logout</span>
           </button>
         )}
@@ -174,14 +174,14 @@ export function Sidebar({ items, title, subtitle, logo = 'N', onLogout }: Sideba
     <>
       {/* Desktop sidebar */}
       <aside className={cn(
-        'hidden lg:flex flex-col fixed left-0 top-0 h-screen bg-neutral-900 border-r border-neutral-800 z-40 transition-all duration-300',
+        'hidden lg:flex flex-col fixed left-0 top-0 h-screen bg-surface-900 border-r border-surface-800 z-40 transition-all duration-300',
         collapsed ? 'w-16' : 'w-64'
       )}>
         {sidebarContent}
         {/* Collapse toggle */}
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="absolute -right-3 top-20 w-6 h-6 rounded-full bg-neutral-800 border border-neutral-700 text-neutral-400 flex items-center justify-center hover:bg-neutral-700 transition-all"
+          className="absolute -right-3 top-20 w-6 h-6 rounded-full bg-surface-800 border border-surface-700 text-surface-500 flex items-center justify-center hover:bg-surface-700 transition-all"
           aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
         >
           <Menu size={12} className={cn('transition-transform', collapsed && 'rotate-180')} />
@@ -192,15 +192,15 @@ export function Sidebar({ items, title, subtitle, logo = 'N', onLogout }: Sideba
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
-          <aside className="fixed left-0 top-0 w-72 h-full bg-neutral-900 border-r border-neutral-800 z-50 animate-slide-down">
+          <aside className="fixed left-0 top-0 w-72 h-full bg-surface-900 border-r border-surface-800 z-50 animate-slide-down">
             {sidebarContent}
           </aside>
         </div>
       )}
 
       {/* Mobile header */}
-      <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-neutral-900/95 backdrop-blur-xl border-b border-neutral-800 z-30 flex items-center justify-between px-4">
-        <button onClick={() => setMobileOpen(true)} className="text-neutral-400 hover:text-white p-1" aria-label="Open menu">
+      <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-surface-900/95 backdrop-blur-xl border-b border-surface-800 z-30 flex items-center justify-between px-4">
+        <button onClick={() => setMobileOpen(true)} className="text-surface-500 hover:text-white p-1" aria-label="Open menu">
           <Menu size={22} />
         </button>
         <div className="flex items-center gap-2">

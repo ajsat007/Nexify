@@ -79,12 +79,12 @@ const statusColors: Record<string, string> = {
   closed_won: 'bg-success/10 text-success border-success/20',
   closed_lost: 'bg-error/10 text-error border-error/20',
   sent: 'bg-success/10 text-success border-success/20',
-  draft: 'bg-neutral-100 text-neutral-800 border-neutral-200',
+  draft: 'bg-surface-100 text-surface-800 border-surface-200',
   active: 'bg-success/10 text-success border-success/20',
   paused: 'bg-warning/10 text-warning border-warning/20',
   high: 'bg-error/10 text-error border-error/20',
   medium: 'bg-warning/10 text-warning border-warning/20',
-  low: 'bg-neutral-100 text-neutral-800 border-neutral-200',
+  low: 'bg-surface-100 text-surface-800 border-surface-200',
   pending: 'bg-warning/10 text-warning border-warning/20',
   done: 'bg-success/10 text-success border-success/20',
   sent_m: 'bg-primary-50 text-primary-600 border-primary-200',
@@ -95,13 +95,13 @@ const statusColors: Record<string, string> = {
 }
 
 function Badge({ status }: { status: string }) {
-  return <span className={`chip text-xs capitalize border ${statusColors[status] || 'bg-neutral-100 text-neutral-800'}`}>{status.replace('_', ' ')}</span>
+  return <span className={`chip text-xs capitalize border ${statusColors[status] || 'bg-surface-100 text-surface-800'}`}>{status.replace('_', ' ')}</span>
 }
 
 function ProgressBar({ value, className = '' }: { value: number; className?: string }) {
   const color = value >= 75 ? 'bg-success' : value >= 40 ? 'bg-primary-500' : 'bg-warning'
   return (
-    <div className={`w-full bg-neutral-100 rounded-full h-2 ${className}`}>
+    <div className={`w-full bg-surface-100 rounded-full h-2 ${className}`}>
       <div className={`h-2 rounded-full transition-all duration-500 ${color}`} style={{ width: `${value}%` }} />
     </div>
   )
@@ -109,16 +109,16 @@ function ProgressBar({ value, className = '' }: { value: number; className?: str
 
 function StatCard({ icon: Icon, label, value, trend, sub, variant = 'default' }: { icon: any; label: string; value: string; trend?: string; sub?: string; variant?: string }) {
   return (
-    <div className="bg-white rounded-xl p-5 border border-neutral-200 hover:shadow-md transition-all">
+    <div className="bg-white rounded-xl p-5 border border-surface-200 hover:shadow-md transition-all">
       <div className="flex items-center justify-between mb-3">
-        <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${variant === 'primary' ? 'bg-primary-50' : variant === 'success' ? 'bg-success/10' : variant === 'warning' ? 'bg-warning/10' : variant === 'accent' ? 'bg-accent-50' : 'bg-neutral-100'}`}>
-          <Icon className={`w-5 h-5 ${variant === 'primary' ? 'text-primary-500' : variant === 'success' ? 'text-success' : variant === 'warning' ? 'text-warning' : variant === 'accent' ? 'text-accent-500' : 'text-neutral-800'}`} />
+        <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${variant === 'primary' ? 'bg-primary-50' : variant === 'success' ? 'bg-success/10' : variant === 'warning' ? 'bg-warning/10' : variant === 'accent' ? 'bg-accent-50' : 'bg-surface-100'}`}>
+          <Icon className={`w-5 h-5 ${variant === 'primary' ? 'text-primary-500' : variant === 'success' ? 'text-success' : variant === 'warning' ? 'text-warning' : variant === 'accent' ? 'text-accent-500' : 'text-surface-800'}`} />
         </div>
         {trend && <span className={`text-xs font-medium ${trend.startsWith('+') ? 'text-success' : 'text-error'}`}>{trend}</span>}
       </div>
-      <div className="text-2xl font-heading font-bold text-neutral-900">{value}</div>
-      <div className="text-sm text-neutral-800">{label}</div>
-      {sub && <div className="text-xs text-neutral-800 mt-0.5">{sub}</div>}
+      <div className="text-2xl font-heading font-bold text-surface-900">{value}</div>
+      <div className="text-sm text-surface-800">{label}</div>
+      {sub && <div className="text-xs text-surface-800 mt-0.5">{sub}</div>}
     </div>
   )
 }
@@ -127,21 +127,21 @@ function StatCard({ icon: Icon, label, value, trend, sub, variant = 'default' }:
 function SalesLogin({ onLogin }: { onLogin: () => void }) {
   const [loading, setLoading] = useState(false)
   return (
-    <div className="min-h-screen bg-neutral-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-surface-900 flex items-center justify-center p-4">
       <div className="w-full max-w-md text-center">
         <div className="w-16 h-16 rounded-2xl bg-gradient-to-r from-primary-500 to-accent-500 flex items-center justify-center mx-auto mb-4"><Target className="w-8 h-8 text-white" /></div>
         <h1 className="text-3xl font-heading font-bold text-white">Nexify Sales</h1>
-        <p className="text-neutral-800 mt-2 mb-8">AI-Powered Sales System</p>
-        <div className="bg-neutral-800 rounded-2xl p-8 border border-neutral-700">
+        <p className="text-surface-800 mt-2 mb-8">AI-Powered Sales System</p>
+        <div className="bg-surface-800 rounded-2xl p-8 border border-surface-700">
           <h2 className="text-xl font-semibold text-white mb-6">Sales Agent Login</h2>
           <div className="space-y-4">
-            <div><label className="block text-sm font-medium text-neutral-300 mb-1.5">Agent ID</label><input defaultValue="SalesAgent-Mu" className="w-full px-4 py-3 rounded-xl bg-neutral-700 border border-neutral-600 text-white focus:outline-none focus:ring-2 focus:ring-primary-500" /></div>
-            <div><label className="block text-sm font-medium text-neutral-300 mb-1.5">Access Key</label><input type="password" defaultValue="••••••••" className="w-full px-4 py-3 rounded-xl bg-neutral-700 border border-neutral-600 text-white focus:outline-none focus:ring-2 focus:ring-primary-500" /></div>
+            <div><label className="block text-sm font-medium text-surface-400 mb-1.5">Agent ID</label><input defaultValue="SalesAgent-Mu" className="w-full px-4 py-3 rounded-xl bg-surface-700 border border-surface-600 text-white focus:outline-none focus:ring-2 focus:ring-primary-500" /></div>
+            <div><label className="block text-sm font-medium text-surface-400 mb-1.5">Access Key</label><input type="password" defaultValue="••••••••" className="w-full px-4 py-3 rounded-xl bg-surface-700 border border-surface-600 text-white focus:outline-none focus:ring-2 focus:ring-primary-500" /></div>
             <button onClick={() => { DB.init(); setLoading(true); setTimeout(() => onLogin(), 800) }} disabled={loading} className="w-full py-3 rounded-xl bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold hover:opacity-90 transition-all disabled:opacity-50">
               {loading ? 'Authenticating...' : 'Access Sales System'}
             </button>
           </div>
-          <p className="text-neutral-800 text-xs mt-4">Demo: click to enter</p>
+          <p className="text-surface-800 text-xs mt-4">Demo: click to enter</p>
         </div>
       </div>
     </div>
@@ -205,7 +205,7 @@ function PipelinePage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-heading font-bold">Sales Pipeline</h1>
-          <p className="text-neutral-800 text-sm">10 active deals · AI-powered lead scoring</p>
+          <p className="text-surface-800 text-sm">10 active deals · AI-powered lead scoring</p>
         </div>
         <button onClick={() => setShowAdd(true)} className="btn-primary text-sm"><Plus size={16} /> Add Deal</button>
       </div>
@@ -218,15 +218,15 @@ function PipelinePage() {
       </div>
 
       {showAdd && (
-        <div className="bg-white rounded-xl border border-neutral-200 p-6">
-          <div className="flex items-center justify-between mb-4"><h2 className="font-semibold">New Deal</h2><button onClick={() => setShowAdd(false)}><X size={18} className="text-neutral-800" /></button></div>
+        <div className="bg-white rounded-xl border border-surface-200 p-6">
+          <div className="flex items-center justify-between mb-4"><h2 className="font-semibold">New Deal</h2><button onClick={() => setShowAdd(false)}><X size={18} className="text-surface-800" /></button></div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div><label className="block text-xs font-medium text-neutral-700 mb-1">Company *</label><input className="input-field text-sm" placeholder="Company name" value={newDeal.company} onChange={e => setNewDeal(s => ({...s, company: e.target.value}))} /></div>
-            <div><label className="block text-xs font-medium text-neutral-700 mb-1">Contact *</label><input className="input-field text-sm" placeholder="Contact name" value={newDeal.contact} onChange={e => setNewDeal(s => ({...s, contact: e.target.value}))} /></div>
-            <div><label className="block text-xs font-medium text-neutral-700 mb-1">Email</label><input className="input-field text-sm" placeholder="email@company.com" value={newDeal.email} onChange={e => setNewDeal(s => ({...s, email: e.target.value}))} /></div>
-            <div><label className="block text-xs font-medium text-neutral-700 mb-1">Phone</label><input className="input-field text-sm" placeholder="+91 98765 43210" value={newDeal.phone} onChange={e => setNewDeal(s => ({...s, phone: e.target.value}))} /></div>
-            <div><label className="block text-xs font-medium text-neutral-700 mb-1">Value ()</label><input className="input-field text-sm" placeholder="500000" value={newDeal.value} onChange={e => setNewDeal(s => ({...s, value: e.target.value}))} /></div>
-            <div><label className="block text-xs font-medium text-neutral-700 mb-1">Service</label>
+            <div><label className="block text-xs font-medium text-surface-700 mb-1">Company *</label><input className="input-field text-sm" placeholder="Company name" value={newDeal.company} onChange={e => setNewDeal(s => ({...s, company: e.target.value}))} /></div>
+            <div><label className="block text-xs font-medium text-surface-700 mb-1">Contact *</label><input className="input-field text-sm" placeholder="Contact name" value={newDeal.contact} onChange={e => setNewDeal(s => ({...s, contact: e.target.value}))} /></div>
+            <div><label className="block text-xs font-medium text-surface-700 mb-1">Email</label><input className="input-field text-sm" placeholder="email@company.com" value={newDeal.email} onChange={e => setNewDeal(s => ({...s, email: e.target.value}))} /></div>
+            <div><label className="block text-xs font-medium text-surface-700 mb-1">Phone</label><input className="input-field text-sm" placeholder="+91 98765 43210" value={newDeal.phone} onChange={e => setNewDeal(s => ({...s, phone: e.target.value}))} /></div>
+            <div><label className="block text-xs font-medium text-surface-700 mb-1">Value ()</label><input className="input-field text-sm" placeholder="500000" value={newDeal.value} onChange={e => setNewDeal(s => ({...s, value: e.target.value}))} /></div>
+            <div><label className="block text-xs font-medium text-surface-700 mb-1">Service</label>
               <select className="input-field text-sm" value={newDeal.service} onChange={e => setNewDeal(s => ({...s, service: e.target.value}))}>
                 <option value="">Select</option><option>Custom Software</option><option>Web Development</option><option>Mobile App</option><option>AI Solutions</option><option>Data Analytics</option><option>Cloud Services</option>
               </select></div>
@@ -241,42 +241,42 @@ function PipelinePage() {
           const stageDeals = deals.filter(d => d.stage === stage.id)
           const stageValue = stageDeals.reduce((s, d) => s + d.value, 0)
           return (
-            <div key={stage.id} className="bg-neutral-50 rounded-xl border border-neutral-200 min-w-[250px]">
-              <div className="p-4 border-b border-neutral-200">
+            <div key={stage.id} className="bg-surface-50 rounded-xl border border-surface-200 min-w-[250px]">
+              <div className="p-4 border-b border-surface-200">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-semibold text-sm text-neutral-900">{stage.label}</h3>
-                  <span className="text-xs text-neutral-800">{stageDeals.length} deals</span>
+                  <h3 className="font-semibold text-sm text-surface-900">{stage.label}</h3>
+                  <span className="text-xs text-surface-800">{stageDeals.length} deals</span>
                 </div>
-                <div className="text-lg font-heading font-bold text-neutral-900 mt-1">{(stageValue/100000).toFixed(1)}L</div>
+                <div className="text-lg font-heading font-bold text-surface-900 mt-1">{(stageValue/100000).toFixed(1)}L</div>
               </div>
               <div className="p-3 space-y-3 min-h-[200px]">
                 {stageDeals.map(d => (
-                  <div key={d.id} className="bg-white rounded-xl p-4 border border-neutral-200 shadow-sm hover:shadow-md transition-all cursor-grab">
+                  <div key={d.id} className="bg-white rounded-xl p-4 border border-surface-200 shadow-sm hover:shadow-md transition-all cursor-grab">
                     <div className="flex items-start justify-between mb-2">
                       <div>
-                        <div className="font-semibold text-sm text-neutral-900">{d.company}</div>
-                        <div className="text-xs text-neutral-800">{d.contact}</div>
+                        <div className="font-semibold text-sm text-surface-900">{d.company}</div>
+                        <div className="text-xs text-surface-800">{d.contact}</div>
                       </div>
                       <Badge status={d.source} />
                     </div>
-                    <div className="flex items-center justify-between text-xs text-neutral-800 mb-2">
+                    <div className="flex items-center justify-between text-xs text-surface-800 mb-2">
                       <span>{d.service}</span>
-                      <span className="font-semibold text-neutral-900">{(d.value/100000).toFixed(1)}L</span>
+                      <span className="font-semibold text-surface-900">{(d.value/100000).toFixed(1)}L</span>
                     </div>
                     <div className="flex items-center gap-2 mb-2">
                       <ProgressBar value={d.probability} />
-                      <span className="text-xs text-neutral-800 shrink-0">{d.probability}%</span>
+                      <span className="text-xs text-surface-800 shrink-0">{d.probability}%</span>
                     </div>
-                    <div className="flex items-center justify-between text-xs text-neutral-800">
+                    <div className="flex items-center justify-between text-xs text-surface-800">
                       <span>{d.lastContact}</span>
                       <div className="flex gap-1">
-                        <button onClick={() => moveStage(d.id, 'backward')} disabled={stage.id === 'new'} className="p-1 rounded hover:bg-neutral-100 disabled:opacity-30" title="Move back"><ChevronDown size={14} /></button>
-                        <button onClick={() => moveStage(d.id, 'forward')} disabled={stage.id === 'negotiation'} className="p-1 rounded hover:bg-neutral-100 disabled:opacity-30" title="Move forward"><ChevronUp size={14} /></button>
+                        <button onClick={() => moveStage(d.id, 'backward')} disabled={stage.id === 'new'} className="p-1 rounded hover:bg-surface-100 disabled:opacity-30" title="Move back"><ChevronDown size={14} /></button>
+                        <button onClick={() => moveStage(d.id, 'forward')} disabled={stage.id === 'negotiation'} className="p-1 rounded hover:bg-surface-100 disabled:opacity-30" title="Move forward"><ChevronUp size={14} /></button>
                       </div>
                     </div>
                   </div>
                 ))}
-                {stageDeals.length === 0 && <div className="text-center py-8 text-xs text-neutral-800">No deals in this stage</div>}
+                {stageDeals.length === 0 && <div className="text-center py-8 text-xs text-surface-800">No deals in this stage</div>}
               </div>
             </div>
           )
@@ -324,7 +324,7 @@ function ProposalsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-heading font-bold">Proposals & Quotations</h1>
-          <p className="text-neutral-800 text-sm">AI-generated proposals in seconds</p>
+          <p className="text-surface-800 text-sm">AI-generated proposals in seconds</p>
         </div>
         <button onClick={generateProposal} disabled={generating} className="btn-primary text-sm">
           {generating ? <><Loader size={16} className="animate-spin" /> Generating...</> : <><Wand2 size={16} /> Generate Proposal</>}
@@ -346,21 +346,21 @@ function ProposalsPage() {
 
       <div className="space-y-3">
         {proposals.map(p => (
-          <div key={p.id} className="bg-white rounded-xl border border-neutral-200 p-5 hover:shadow-lg transition-all">
+          <div key={p.id} className="bg-white rounded-xl border border-surface-200 p-5 hover:shadow-lg transition-all">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-2xl bg-primary-50 flex items-center justify-center"><FileText className="w-6 h-6 text-primary-500" /></div>
                 <div>
-                  <div className="flex items-center gap-2"><span className="font-semibold text-neutral-900">{p.title}</span><Badge status={p.status} /></div>
-                  <div className="text-sm text-neutral-800">{p.company} · {p.type}</div>
-                  <div className="text-xs text-neutral-800">Validity: {p.validUntil} · Sent: {p.sentDate}</div>
+                  <div className="flex items-center gap-2"><span className="font-semibold text-surface-900">{p.title}</span><Badge status={p.status} /></div>
+                  <div className="text-sm text-surface-800">{p.company} · {p.type}</div>
+                  <div className="text-xs text-surface-800">Validity: {p.validUntil} · Sent: {p.sentDate}</div>
                 </div>
               </div>
               <div className="text-right shrink-0">
-                <div className="text-lg font-heading font-bold text-neutral-900">{(p.value/100000).toFixed(1)}L</div>
+                <div className="text-lg font-heading font-bold text-surface-900">{(p.value/100000).toFixed(1)}L</div>
                 <div className="flex gap-2 mt-1">
                   <button className="btn-primary text-xs px-3 py-1.5">{p.status === 'draft' ? 'Edit' : 'View'}</button>
-                  <button className="btn-secondary text-xs px-3 py-1.5 border-neutral-200 text-neutral-800"><Download size={14} /></button>
+                  <button className="btn-secondary text-xs px-3 py-1.5 border-surface-200 text-surface-800"><Download size={14} /></button>
                 </div>
               </div>
             </div>
@@ -374,8 +374,8 @@ function ProposalsPage() {
           <div className="w-12 h-12 rounded-2xl gradient-bg flex items-center justify-center shrink-0"><Wand2 className="w-6 h-6 text-white" /></div>
           <div>
             <h3 className="font-semibold text-lg mb-1">AI Proposal Generator</h3>
-            <p className="text-sm text-neutral-800 mb-4">Our AI agent analyzes the lead's requirements, company profile, and industry to generate a personalized proposal with scope, timeline, pricing, and terms.</p>
-            <div className="flex flex-wrap gap-4 text-xs text-neutral-800">
+            <p className="text-sm text-surface-800 mb-4">Our AI agent analyzes the lead's requirements, company profile, and industry to generate a personalized proposal with scope, timeline, pricing, and terms.</p>
+            <div className="flex flex-wrap gap-4 text-xs text-surface-800">
               <span className="flex items-center gap-1"><CheckCircle2 size={12} className="text-success" /> Personalized to each lead</span>
               <span className="flex items-center gap-1"><CheckCircle2 size={12} className="text-success" /> Industry-standard pricing</span>
               <span className="flex items-center gap-1"><CheckCircle2 size={12} className="text-success" /> Auto-calculates timeline</span>
@@ -415,17 +415,17 @@ function EmailsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-heading font-bold">Email Automation</h1>
-          <p className="text-neutral-800 text-sm">AI-driven email campaigns · 0 cost (self-hosted SMTP)</p>
+          <p className="text-surface-800 text-sm">AI-driven email campaigns · 0 cost (self-hosted SMTP)</p>
         </div>
         <button onClick={() => setShowNewCamp(true)} className="btn-primary text-sm"><Plus size={16} /> New Campaign</button>
       </div>
 
       {showNewCamp && (
-        <div className="bg-white rounded-xl border border-neutral-200 p-6">
+        <div className="bg-white rounded-xl border border-surface-200 p-6">
           <h2 className="font-semibold mb-4">Create Campaign</h2>
           <div className="grid sm:grid-cols-3 gap-4">
-            <div><label className="block text-xs font-medium text-neutral-700 mb-1">Campaign Name</label><input className="input-field text-sm" placeholder="Q3 Outreach" value={campForm.name} onChange={e => setCampForm(s => ({...s, name: e.target.value}))} /></div>
-            <div><label className="block text-xs font-medium text-neutral-700 mb-1">Type</label><select className="input-field text-sm" value={campForm.type} onChange={e => setCampForm(s => ({...s, type: e.target.value}))}><option value="automated">Automated</option><option value="sequence">Sequence</option><option value="manual">Manual</option></select></div>
+            <div><label className="block text-xs font-medium text-surface-700 mb-1">Campaign Name</label><input className="input-field text-sm" placeholder="Q3 Outreach" value={campForm.name} onChange={e => setCampForm(s => ({...s, name: e.target.value}))} /></div>
+            <div><label className="block text-xs font-medium text-surface-700 mb-1">Type</label><select className="input-field text-sm" value={campForm.type} onChange={e => setCampForm(s => ({...s, type: e.target.value}))}><option value="automated">Automated</option><option value="sequence">Sequence</option><option value="manual">Manual</option></select></div>
           </div>
           <button onClick={createCampaign} className="btn-primary text-sm mt-4">Create Campaign</button>
         </div>
@@ -440,15 +440,15 @@ function EmailsPage() {
 
       <div className="grid gap-4">
         {campaigns.map(c => (
-          <div key={c.id} className="bg-white rounded-xl border border-neutral-200 p-5 hover:shadow-lg transition-all">
+          <div key={c.id} className="bg-white rounded-xl border border-surface-200 p-5 hover:shadow-lg transition-all">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${c.status === 'active' ? 'bg-success/10' : 'bg-neutral-100'}`}>
-                  {c.type === 'sequence' ? <RefreshCw className={`w-5 h-5 ${c.status === 'active' ? 'text-success' : 'text-neutral-800'}`} /> : <Send className={`w-5 h-5 ${c.status === 'active' ? 'text-success' : 'text-neutral-800'}`} />}
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${c.status === 'active' ? 'bg-success/10' : 'bg-surface-100'}`}>
+                  {c.type === 'sequence' ? <RefreshCw className={`w-5 h-5 ${c.status === 'active' ? 'text-success' : 'text-surface-800'}`} /> : <Send className={`w-5 h-5 ${c.status === 'active' ? 'text-success' : 'text-surface-800'}`} />}
                 </div>
                 <div>
-                  <div className="flex items-center gap-2"><span className="font-semibold text-sm text-neutral-900">{c.name}</span><Badge status={c.status} /><span className="text-xs text-neutral-800 capitalize">{c.type}</span></div>
-                  <div className="text-xs text-neutral-800">Sent: {c.sent} · Opened: {c.opened} · Clicked: {c.clicked} · Replied: {c.replied}</div>
+                  <div className="flex items-center gap-2"><span className="font-semibold text-sm text-surface-900">{c.name}</span><Badge status={c.status} /><span className="text-xs text-surface-800 capitalize">{c.type}</span></div>
+                  <div className="text-xs text-surface-800">Sent: {c.sent} · Opened: {c.opened} · Clicked: {c.clicked} · Replied: {c.replied}</div>
                 </div>
               </div>
               <div className="flex items-center gap-2 shrink-0">
@@ -458,7 +458,7 @@ function EmailsPage() {
                 <button className="px-3 py-1.5 rounded-xl bg-primary-50 text-primary-600 text-xs font-medium hover:bg-primary-100">View</button>
               </div>
             </div>
-            <div className="mt-3 flex items-center gap-4 text-xs text-neutral-800">
+            <div className="mt-3 flex items-center gap-4 text-xs text-surface-800">
               <span className="flex items-center gap-1"><Mail size={12} /> {openRate}% open</span>
               <span className="flex items-center gap-1"><Activity size={12} /> {c.sent ? Math.round(c.clicked/c.sent*100) : 0}% click</span>
               <span className="flex items-center gap-1"><MessageSquare size={12} /> {c.sent ? Math.round(c.replied/c.sent*100) : 0}% reply</span>
@@ -502,7 +502,7 @@ function WhatsAppPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-heading font-bold">WhatsApp Automation</h1>
-          <p className="text-neutral-800 text-sm">AI-powered WhatsApp Business API · 0 cost</p>
+          <p className="text-surface-800 text-sm">AI-powered WhatsApp Business API · 0 cost</p>
         </div>
         <button onClick={() => setShowSend(true)} className="btn-primary text-sm"><MessageCircle size={16} /> Send Message</button>
       </div>
@@ -514,14 +514,14 @@ function WhatsAppPage() {
       </div>
 
       {showSend && (
-        <div className="bg-white rounded-xl border border-neutral-200 p-6">
+        <div className="bg-white rounded-xl border border-surface-200 p-6">
           <h2 className="font-semibold mb-4">Send WhatsApp Message</h2>
           <div className="grid sm:grid-cols-2 gap-4">
-            <div><label className="block text-xs font-medium text-neutral-700 mb-1">Contact Name</label><input className="input-field text-sm" value={msgForm.contact} onChange={e => setMsgForm(s => ({...s, contact: e.target.value}))} /></div>
-            <div><label className="block text-xs font-medium text-neutral-700 mb-1">Company</label><input className="input-field text-sm" value={msgForm.company} onChange={e => setMsgForm(s => ({...s, company: e.target.value}))} /></div>
+            <div><label className="block text-xs font-medium text-surface-700 mb-1">Contact Name</label><input className="input-field text-sm" value={msgForm.contact} onChange={e => setMsgForm(s => ({...s, contact: e.target.value}))} /></div>
+            <div><label className="block text-xs font-medium text-surface-700 mb-1">Company</label><input className="input-field text-sm" value={msgForm.company} onChange={e => setMsgForm(s => ({...s, company: e.target.value}))} /></div>
           </div>
           <div className="mt-4">
-            <label className="block text-xs font-medium text-neutral-700 mb-1">Message</label>
+            <label className="block text-xs font-medium text-surface-700 mb-1">Message</label>
             <textarea className="input-field text-sm resize-none" rows={3} value={msgForm.message} onChange={e => setMsgForm(s => ({...s, message: e.target.value}))} placeholder="Type your message... AI can optimize for better response rates." />
           </div>
           <button onClick={sendMessage} className="btn-primary text-sm mt-4"><MessageCircle size={16} /> Send via WhatsApp</button>
@@ -530,23 +530,23 @@ function WhatsAppPage() {
 
       <div className="space-y-3">
         {messages.map(m => (
-          <div key={m.id} className={`bg-white rounded-xl border p-4 hover:shadow-md transition-all ${m.direction === 'inbound' ? 'border-primary-200 bg-primary-50/30' : 'border-neutral-200'}`}>
+          <div key={m.id} className={`bg-white rounded-xl border p-4 hover:shadow-md transition-all ${m.direction === 'inbound' ? 'border-primary-200 bg-primary-50/30' : 'border-surface-200'}`}>
             <div className="flex items-start justify-between mb-2">
               <div className="flex items-center gap-3">
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${m.direction === 'outbound' ? 'bg-success/10' : 'bg-primary-50'}`}>
                   <MessageCircle className={`w-5 h-5 ${m.direction === 'outbound' ? 'text-success' : 'text-primary-500'}`} />
                 </div>
                 <div>
-                  <div className="flex items-center gap-2"><span className="font-semibold text-sm text-neutral-900">{m.contact}</span><span className="text-xs text-neutral-800">{m.company}</span></div>
-                  <div className="flex items-center gap-2 text-xs text-neutral-800">
+                  <div className="flex items-center gap-2"><span className="font-semibold text-sm text-surface-900">{m.contact}</span><span className="text-xs text-surface-800">{m.company}</span></div>
+                  <div className="flex items-center gap-2 text-xs text-surface-800">
                     <Badge status={m.direction} />
                     <Badge status={m.status} />
                   </div>
                 </div>
               </div>
-              <div className="text-xs text-neutral-800 text-right">{m.date} · {m.time}</div>
+              <div className="text-xs text-surface-800 text-right">{m.date} · {m.time}</div>
             </div>
-            <p className="text-sm text-neutral-800 bg-neutral-50 rounded-xl p-3">{m.message}</p>
+            <p className="text-sm text-surface-800 bg-surface-50 rounded-xl p-3">{m.message}</p>
           </div>
         ))}
       </div>
@@ -597,7 +597,7 @@ function FollowupsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-heading font-bold">Follow-up System</h1>
-          <p className="text-neutral-800 text-sm">AI agent automatically schedules and prioritizes follow-ups</p>
+          <p className="text-surface-800 text-sm">AI agent automatically schedules and prioritizes follow-ups</p>
         </div>
         <button onClick={() => setShowNew(true)} className="btn-primary text-sm"><Plus size={16} /> Add Task</button>
       </div>
@@ -610,12 +610,12 @@ function FollowupsPage() {
       </div>
 
       {showNew && (
-        <div className="bg-white rounded-xl border border-neutral-200 p-6">
+        <div className="bg-white rounded-xl border border-surface-200 p-6">
           <h2 className="font-semibold mb-4">New Follow-up Task</h2>
           <div className="grid sm:grid-cols-3 gap-4">
-            <div className="sm:col-span-2"><label className="block text-xs font-medium text-neutral-700 mb-1">Action</label><input className="input-field text-sm" value={form.action} onChange={e => setForm(s => ({...s, action: e.target.value}))} /></div>
-            <div><label className="block text-xs font-medium text-neutral-700 mb-1">Due Date</label><input type="date" className="input-field text-sm" value={form.dueDate} onChange={e => setForm(s => ({...s, dueDate: e.target.value}))} /></div>
-            <div><label className="block text-xs font-medium text-neutral-700 mb-1">Priority</label><select className="input-field text-sm" value={form.priority} onChange={e => setForm(s => ({...s, priority: e.target.value}))}><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select></div>
+            <div className="sm:col-span-2"><label className="block text-xs font-medium text-surface-700 mb-1">Action</label><input className="input-field text-sm" value={form.action} onChange={e => setForm(s => ({...s, action: e.target.value}))} /></div>
+            <div><label className="block text-xs font-medium text-surface-700 mb-1">Due Date</label><input type="date" className="input-field text-sm" value={form.dueDate} onChange={e => setForm(s => ({...s, dueDate: e.target.value}))} /></div>
+            <div><label className="block text-xs font-medium text-surface-700 mb-1">Priority</label><select className="input-field text-sm" value={form.priority} onChange={e => setForm(s => ({...s, priority: e.target.value}))}><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select></div>
           </div>
           <button onClick={createTask} className="btn-primary text-sm mt-4">Add Task</button>
         </div>
@@ -625,14 +625,14 @@ function FollowupsPage() {
         {followups.map(f => {
           const deal = deals.find(d => d.id === f.dealId)
           return (
-            <div key={f.id} className={`bg-white rounded-xl border p-4 hover:shadow-md transition-all ${f.status === 'done' ? 'border-success/20 bg-success/5' : 'border-neutral-200'}`}>
+            <div key={f.id} className={`bg-white rounded-xl border p-4 hover:shadow-md transition-all ${f.status === 'done' ? 'border-success/20 bg-success/5' : 'border-surface-200'}`}>
               <div className="flex items-center gap-4">
-                <button onClick={() => toggleDone(f.id)} className={`w-5 h-5 rounded-lg border-2 flex items-center justify-center transition-all ${f.status === 'done' ? 'bg-success border-success' : 'border-neutral-300 hover:border-primary-500'}`}>
+                <button onClick={() => toggleDone(f.id)} className={`w-5 h-5 rounded-lg border-2 flex items-center justify-center transition-all ${f.status === 'done' ? 'bg-success border-success' : 'border-surface-300 hover:border-primary-500'}`}>
                   {f.status === 'done' && <CheckCircle2 size={14} className="text-white" />}
                 </button>
                 <div className="flex-1">
-                  <div className={`text-sm font-medium ${f.status === 'done' ? 'text-neutral-800 line-through' : 'text-neutral-900'}`}>{f.action}</div>
-                  <div className="flex items-center gap-3 text-xs text-neutral-800 mt-0.5">
+                  <div className={`text-sm font-medium ${f.status === 'done' ? 'text-surface-800 line-through' : 'text-surface-900'}`}>{f.action}</div>
+                  <div className="flex items-center gap-3 text-xs text-surface-800 mt-0.5">
                     <span>Due: {f.dueDate}</span>
                     {deal && <span>· {deal.company}</span>}
                     <span>· {f.assignedTo}</span>
@@ -654,7 +654,7 @@ function FollowupsPage() {
           <div className="w-10 h-10 rounded-xl bg-accent-50 flex items-center justify-center"><Zap className="w-5 h-5 text-accent-500" /></div>
           <div>
             <h3 className="font-semibold text-sm">AI Auto-Scheduler Active</h3>
-            <p className="text-xs text-neutral-800">SalesAgent-Mu automatically schedules optimal follow-up times based on lead engagement patterns. 8 tasks auto-scheduled for today.</p>
+            <p className="text-xs text-surface-800">SalesAgent-Mu automatically schedules optimal follow-up times based on lead engagement patterns. 8 tasks auto-scheduled for today.</p>
           </div>
         </div>
       </div>
@@ -675,7 +675,7 @@ function LeadCapturePage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-heading font-bold">Lead Capture & Sources</h1>
-          <p className="text-neutral-800 text-sm">AI agents scan 7+ channels · Auto-qualify leads</p>
+          <p className="text-surface-800 text-sm">AI agents scan 7+ channels · Auto-qualify leads</p>
         </div>
       </div>
 
@@ -687,17 +687,17 @@ function LeadCapturePage() {
       </div>
 
       {/* Source breakdown */}
-      <div className="bg-white rounded-xl border border-neutral-200 p-5">
+      <div className="bg-white rounded-xl border border-surface-200 p-5">
         <h2 className="font-semibold mb-4">Lead Sources</h2>
         <div className="space-y-3">
           {sourceData.filter(s => s.count > 0).sort((a, b) => b.count - a.count).map(s => (
             <div key={s.source} className="flex items-center gap-4">
-              <span className="text-sm text-neutral-800 w-24">{s.source}</span>
-              <div className="flex-1 bg-neutral-100 rounded-full h-6 relative overflow-hidden">
+              <span className="text-sm text-surface-800 w-24">{s.source}</span>
+              <div className="flex-1 bg-surface-100 rounded-full h-6 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full" style={{ width: `${(s.count / Math.max(...sourceData.map(x => x.count)) * 100)}%` }} />
               </div>
-              <span className="text-sm font-medium text-neutral-900 w-12 text-right">{s.count}</span>
-              <span className="text-xs text-neutral-800 w-20 text-right">{(s.value/100000).toFixed(1)}L</span>
+              <span className="text-sm font-medium text-surface-900 w-12 text-right">{s.count}</span>
+              <span className="text-xs text-surface-800 w-20 text-right">{(s.value/100000).toFixed(1)}L</span>
             </div>
           ))}
         </div>
@@ -712,10 +712,10 @@ function LeadCapturePage() {
         ].map((item, i) => {
           const Icon = item.icon
           return (
-            <div key={i} className="bg-white rounded-xl border border-neutral-200 p-5 hover:shadow-lg transition-all">
+            <div key={i} className="bg-white rounded-xl border border-surface-200 p-5 hover:shadow-lg transition-all">
               <Icon className="w-8 h-8 text-primary-500 mb-3" />
               <h3 className="font-semibold text-sm mb-1">{item.title}</h3>
-              <p className="text-xs text-neutral-800">{item.desc}</p>
+              <p className="text-xs text-surface-800">{item.desc}</p>
             </div>
           )
         })}
@@ -745,9 +745,9 @@ function SalesDashboard() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-heading font-bold">Sales Dashboard</h1>
-          <p className="text-neutral-800 text-sm">AI-powered sales metrics · Real-time sync</p>
+          <p className="text-surface-800 text-sm">AI-powered sales metrics · Real-time sync</p>
         </div>
-        <div className="flex items-center gap-2 text-xs text-neutral-800 bg-neutral-100 rounded-xl px-3 py-1.5">
+        <div className="flex items-center gap-2 text-xs text-surface-800 bg-surface-100 rounded-xl px-3 py-1.5">
           <RefreshCw size={12} /> Auto-sync on
         </div>
       </div>
@@ -761,7 +761,7 @@ function SalesDashboard() {
 
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Pipeline by Stage */}
-        <div className="bg-white rounded-xl border border-neutral-200 p-5">
+        <div className="bg-white rounded-xl border border-surface-200 p-5">
           <h2 className="font-semibold mb-4">Pipeline by Stage</h2>
           <div className="space-y-3">
             {[
@@ -773,11 +773,11 @@ function SalesDashboard() {
               const max = Math.max(1, deals.length)
               return (
                 <div key={i} className="flex items-center gap-3">
-                  <span className="text-sm text-neutral-800 w-28">{s.label}</span>
-                  <div className="flex-1 bg-neutral-100 rounded-full h-5 relative overflow-hidden">
+                  <span className="text-sm text-surface-800 w-28">{s.label}</span>
+                  <div className="flex-1 bg-surface-100 rounded-full h-5 relative overflow-hidden">
                     <div className={`absolute inset-0 ${s.color} rounded-full transition-all`} style={{ width: `${(s.value / max) * 100}%` }} />
                   </div>
-                  <span className="text-sm font-semibold text-neutral-900 w-8">{s.value}</span>
+                  <span className="text-sm font-semibold text-surface-900 w-8">{s.value}</span>
                 </div>
               )
             })}
@@ -785,7 +785,7 @@ function SalesDashboard() {
         </div>
 
         {/* Recent Activity */}
-        <div className="bg-white rounded-xl border border-neutral-200 p-5">
+        <div className="bg-white rounded-xl border border-surface-200 p-5">
           <h2 className="font-semibold mb-4">Today's Sales Activity</h2>
           <div className="space-y-3">
             {[
@@ -797,7 +797,7 @@ function SalesDashboard() {
             ].map((a, i) => (
               <div key={i} className="flex items-start gap-3 text-sm">
                 <div className={`w-2 h-2 rounded-full mt-1.5 ${a.type === 'proposal' ? 'bg-warning' : a.type === 'reply' ? 'bg-success' : a.type === 'lead' ? 'bg-info' : 'bg-primary-500'}`} />
-                <div className="flex-1"><span className="text-neutral-800">{a.action}</span><div className="text-xs text-neutral-800">{a.time}</div></div>
+                <div className="flex-1"><span className="text-surface-800">{a.action}</span><div className="text-xs text-surface-800">{a.time}</div></div>
               </div>
             ))}
           </div>
@@ -812,7 +812,7 @@ function SalesDashboard() {
           </div>
           <div className="flex-1">
             <h3 className="font-semibold">SalesAgent-Mu — Active</h3>
-            <p className="text-sm text-neutral-800">AI sales agent is currently: Sending follow-up emails · Qualifying 2 new leads · Monitoring LinkedIn for signals</p>
+            <p className="text-sm text-surface-800">AI sales agent is currently: Sending follow-up emails · Qualifying 2 new leads · Monitoring LinkedIn for signals</p>
           </div>
           <div className="flex items-center gap-1 text-success text-xs font-medium bg-success/10 px-3 py-1.5 rounded-full">
             <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
@@ -822,17 +822,17 @@ function SalesDashboard() {
       </div>
 
       <div className="grid grid-cols-3 gap-4 text-center">
-        <div className="bg-white rounded-xl border border-neutral-200 p-4">
+        <div className="bg-white rounded-xl border border-surface-200 p-4">
           <div className="text-2xl font-heading font-bold gradient-text">{pendingFollowups}</div>
-          <div className="text-xs text-neutral-800 mt-1">Pending Follow-ups</div>
+          <div className="text-xs text-surface-800 mt-1">Pending Follow-ups</div>
         </div>
-        <div className="bg-white rounded-xl border border-neutral-200 p-4">
+        <div className="bg-white rounded-xl border border-surface-200 p-4">
           <div className="text-2xl font-heading font-bold gradient-text">{campaigns.filter(c => c.status === 'active').length}</div>
-          <div className="text-xs text-neutral-800 mt-1">Active Campaigns</div>
+          <div className="text-xs text-surface-800 mt-1">Active Campaigns</div>
         </div>
-        <div className="bg-white rounded-xl border border-neutral-200 p-4">
+        <div className="bg-white rounded-xl border border-surface-200 p-4">
           <div className="text-2xl font-heading font-bold gradient-text">0</div>
-          <div className="text-xs text-neutral-800 mt-1">Sales Team Cost</div>
+          <div className="text-xs text-surface-800 mt-1">Sales Team Cost</div>
         </div>
       </div>
     </div>
@@ -871,15 +871,15 @@ export default function SalesPage() {
   }))
 
   return (
-    <div className="min-h-screen bg-neutral-50 flex">
+    <div className="min-h-screen bg-surface-50 flex">
       <Sidebar items={sidebarItems} title="Nexify Sales" subtitle="AI Sales System" logo="SM" onLogout={() => setAuthenticated(false)} />
       <main className="flex-1 min-w-0 lg:ml-64 pt-16 lg:pt-0">
-        <div className="sticky top-0 bg-white/80 backdrop-blur-xl border-b border-neutral-200 z-20">
+        <div className="sticky top-0 bg-white/80 backdrop-blur-xl border-b border-surface-200 z-20">
           <div className="flex items-center justify-between px-4 sm:px-6 py-4">
             <div />
             <div className="flex items-center gap-3 ml-auto">
-              <Link href="/admin" className="text-xs text-neutral-500 hover:text-primary-500">Admin</Link>
-              <Link href="/portal" className="text-xs text-neutral-500 hover:text-primary-500">Portal</Link>
+              <Link href="/admin" className="text-xs text-surface-600 hover:text-primary-500">Admin</Link>
+              <Link href="/portal" className="text-xs text-surface-600 hover:text-primary-500">Portal</Link>
             </div>
           </div>
         </div>

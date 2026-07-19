@@ -22,11 +22,11 @@ export default function BrandingPage() {
           {assets.map((a) => {
             const Icon = a.icon
             return (
-              <div key={a.name} className="bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-neutral-200 dark:border-neutral-700 hover:shadow-lg transition-all group">
+              <div key={a.name} className="bg-white dark:bg-surface-800 rounded-2xl p-6 border border-surface-200 dark:border-surface-700 hover:shadow-lg transition-all group">
                 <Icon className="w-8 h-8 text-primary-500 mb-3" />
                 <h3 className="text-lg font-heading font-bold mb-1 dark:text-white group-hover:text-primary-600 transition-colors">{a.name}</h3>
-                <p className="text-xs text-neutral-500 mb-2">{a.formats}</p>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400">{a.desc}</p>
+                <p className="text-xs text-surface-600 mb-2">{a.formats}</p>
+                <p className="text-sm text-surface-700 dark:text-surface-400">{a.desc}</p>
               </div>
             )
           })}

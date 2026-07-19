@@ -79,7 +79,7 @@ export function DonutChart({ data, size = 160, thickness = 32, className }: { da
   return (
     <div ref={ref as any} className={cn('w-full max-w-[200px] mx-auto', className)}>
       <svg viewBox={`0 0 ${size} ${size}`}>
-        <circle cx={cx} cy={cy} r={r} fill="none" stroke="currentColor" strokeWidth={thickness} className="text-neutral-100 dark:text-neutral-700" />
+        <circle cx={cx} cy={cy} r={r} fill="none" stroke="currentColor" strokeWidth={thickness} className="text-surface-100 dark:text-surface-700" />
         {data.map((d, i) => {
           const pct = d.value / total, len = pct * circ
           const dash = animate ? len : 0
@@ -107,8 +107,8 @@ export function MetricCard({ label, value, trend, data, color = '#3B82F6' }: { l
     <div className="card-surface p-5">
       <div className="flex items-start justify-between mb-2">
         <div>
-          <div className="text-2xl font-heading font-bold text-neutral-900 dark:text-white">{value}</div>
-          <div className="text-sm text-neutral-500">{label}</div>
+          <div className="text-2xl font-heading font-bold text-surface-900 dark:text-white">{value}</div>
+          <div className="text-sm text-surface-600">{label}</div>
         </div>
         {trend && <span className={`text-xs font-medium ${trend.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>{trend}</span>}
       </div>

@@ -21,17 +21,17 @@ export default function ProductsPage() {
     <PageLayout>
       <PageHeader badge="SaaS Products" title="Products We Build, Use & Ship" subtitle="Every product on this page we built for ourselves first. They power our AI agents daily. Now they're available for you." />
 
-      <section className="section-padding bg-white dark:bg-neutral-950">
+      <section className="section-padding bg-white dark:bg-surface-950">
         <div className="section-container">
           {/* Quick nav — scrollable row on mobile, grid on desktop */}
           <div className="flex overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0 gap-3 sm:gap-4 pb-2 mb-10 sm:mb-16 sm:grid sm:grid-cols-5 scrollbar-none snap-x">
             {products.map((p) => {
               const Icon = iconMap[p.icon] || Zap
               return (
-                <Link key={p.id} href={`#${p.id}`} className="snap-start shrink-0 sm:shrink bg-neutral-50 dark:bg-neutral-800 rounded-xl p-4 border border-neutral-200 dark:border-neutral-700 hover:border-primary-500/30 hover:bg-white dark:hover:bg-neutral-700 transition-all text-center group min-w-[120px] sm:min-w-0">
+                <Link key={p.id} href={`#${p.id}`} className="snap-start shrink-0 sm:shrink bg-surface-50 dark:bg-surface-800 rounded-xl p-4 border border-surface-200 dark:border-surface-700 hover:border-primary-500/30 hover:bg-white dark:hover:bg-surface-700 transition-all text-center group min-w-[120px] sm:min-w-0">
                   <Icon className="w-5 h-5 text-primary-500 mx-auto mb-1.5 group-hover:scale-105 transition-transform" />
-                  <div className="font-semibold text-xs sm:text-sm text-neutral-900 dark:text-white group-hover:text-primary-600 transition-colors leading-tight">{p.name}</div>
-                  <div className="text-xs sm:text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">{p.price}</div>
+                  <div className="font-semibold text-xs sm:text-sm text-surface-900 dark:text-white group-hover:text-primary-600 transition-colors leading-tight">{p.name}</div>
+                  <div className="text-xs sm:text-xs text-surface-700 dark:text-surface-400 mt-0.5">{p.price}</div>
                 </Link>
               )
             })}
@@ -51,15 +51,15 @@ export default function ProductsPage() {
                         </div>
                         <div className="min-w-0">
                           <h2 className="text-2xl sm:text-3xl font-heading font-bold dark:text-white">{product.name}</h2>
-                          <p className="text-neutral-500 dark:text-neutral-400 italic text-sm truncate">{product.tagline}</p>
+                          <p className="text-surface-600 dark:text-surface-400 italic text-sm truncate">{product.tagline}</p>
                         </div>
                       </div>
-                      <p className="text-neutral-600 dark:text-neutral-400 mb-6 sm:mb-8 leading-relaxed text-base sm:text-lg">{product.description}</p>
+                      <p className="text-surface-700 dark:text-surface-400 mb-6 sm:mb-8 leading-relaxed text-base sm:text-lg">{product.description}</p>
 
                       <h3 className="font-semibold mb-3 sm:mb-4 dark:text-white text-sm">Key Features</h3>
                       <ul className="grid sm:grid-cols-2 gap-2 sm:gap-3 mb-6 sm:mb-8">
                         {product.features.map((f, i) => (
-                          <li key={i} className="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-300">
+                          <li key={i} className="flex items-start gap-2 text-sm text-surface-700 dark:text-surface-300">
                             <Check size={15} className="text-success mt-0.5 shrink-0" />
                             <span className="leading-snug">{f}</span>
                           </li>
@@ -68,15 +68,15 @@ export default function ProductsPage() {
 
                       <div className="flex flex-col sm:flex-row gap-6">
                         <div className="min-w-0">
-                          <h4 className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 font-semibold mb-2">Tech Stack</h4>
+                          <h4 className="text-xs uppercase tracking-wider text-surface-600 dark:text-surface-400 font-semibold mb-2">Tech Stack</h4>
                           <div className="flex flex-wrap gap-2">
                             {product.tech.map((t) => (
-                              <span key={t} className="chip bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 text-xs">{t}</span>
+                              <span key={t} className="chip bg-surface-100 dark:bg-surface-700 text-surface-700 dark:text-surface-300 text-xs">{t}</span>
                             ))}
                           </div>
                         </div>
                         <div className="min-w-0">
-                          <h4 className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 font-semibold mb-2">User Roles</h4>
+                          <h4 className="text-xs uppercase tracking-wider text-surface-600 dark:text-surface-400 font-semibold mb-2">User Roles</h4>
                           <div className="flex flex-wrap gap-2">
                             {product.roles.map((r) => (
                               <span key={r} className="chip bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-xs">{r}</span>
@@ -87,14 +87,14 @@ export default function ProductsPage() {
                     </div>
 
                     <div className="lg:col-span-2">
-                      <div className="bg-neutral-50 dark:bg-neutral-800 rounded-2xl p-6 border border-neutral-200 dark:border-neutral-700 lg:sticky lg:top-28">
-                        <div className="text-sm text-neutral-600 dark:text-neutral-400 mb-1">Starting from</div>
+                      <div className="bg-surface-50 dark:bg-surface-800 rounded-2xl p-6 border border-surface-200 dark:border-surface-700 lg:sticky lg:top-28">
+                        <div className="text-sm text-surface-700 dark:text-surface-400 mb-1">Starting from</div>
                         <div className="text-2xl sm:text-3xl font-heading font-bold text-primary-600 dark:text-primary-400 mb-6">{product.price}</div>
                         <Link href="/contact" className="btn-primary w-full text-center mb-6">Start Free Trial <ArrowRight size={18} /></Link>
                         <h4 className="font-semibold text-sm mb-3 dark:text-white">App Screens</h4>
                         <ul className="space-y-2">
                           {product.screens.map((s, i) => (
-                            <li key={i} className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-300">
+                            <li key={i} className="flex items-center gap-2 text-sm text-surface-700 dark:text-surface-300">
                               <div className="w-1.5 h-1.5 rounded-full bg-primary-500 shrink-0" />
                               <span className="leading-snug">{s}</span>
                             </li>

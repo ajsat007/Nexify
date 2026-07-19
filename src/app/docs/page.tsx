@@ -34,13 +34,13 @@ export default function DocsPage() {
                   <Icon className="w-8 h-8 text-primary-500 shrink-0 mt-1" />
                   <div className="flex-1 min-w-0">
                     <h3 className="font-semibold text-sm dark:text-white group-hover:text-primary-600 transition-colors">{doc.name}</h3>
-                    <p className="text-xs text-neutral-500 mt-1">{doc.desc}</p>
-                    <div className="flex items-center gap-3 mt-3 text-xs text-neutral-400">
+                    <p className="text-xs text-surface-600 mt-1">{doc.desc}</p>
+                    <div className="flex items-center gap-3 mt-3 text-xs text-surface-500">
                       <span>{doc.pages} pages</span>
                       <span className="chip bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-xs">{doc.format}</span>
                     </div>
                   </div>
-                  <button className="shrink-0 w-9 h-9 rounded-lg bg-neutral-100 dark:bg-neutral-700 flex items-center justify-center text-neutral-500 hover:text-primary-500 hover:bg-primary-50 transition-all">
+                  <button className="shrink-0 w-9 h-9 rounded-lg bg-surface-100 dark:bg-surface-700 flex items-center justify-center text-surface-600 hover:text-primary-500 hover:bg-primary-50 transition-all">
                     <Download size={16} />
                   </button>
                 </div>

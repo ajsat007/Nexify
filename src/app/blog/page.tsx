@@ -67,18 +67,18 @@ export default function BlogPage() {
     <PageLayout>
       <PageHeader badge="Blog" title="Insights from the AI Frontier" subtitle="Thought leadership on AI-native development, SaaS, and the future of software." />
 
-      <section className="section-padding bg-white dark:bg-neutral-950">
+      <section className="section-padding bg-white dark:bg-surface-950">
         <div className="section-container">
           {/* Controls row */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-6 sm:mb-8">
             <div className="flex overflow-x-auto gap-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap sm:overflow-visible scrollbar-none">
               {categories.map(cat => (
                 <button key={cat} onClick={() => setActiveCategory(cat)}
-                  className={`chip whitespace-nowrap shrink-0 transition-all ${activeCategory === cat ? 'bg-primary-500 text-white' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'}`}>{cat}</button>
+                  className={`chip whitespace-nowrap shrink-0 transition-all ${activeCategory === cat ? 'bg-primary-500 text-white' : 'bg-surface-100 dark:bg-surface-700 text-surface-700 dark:text-surface-300 hover:bg-surface-200 dark:hover:bg-surface-600'}`}>{cat}</button>
               ))}
             </div>
             <button onClick={() => setShowGenerator(!showGenerator)}
-              className={`chip transition-all shrink-0 self-start sm:self-auto ${showGenerator ? 'bg-accent-500 text-white' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'}`}>
+              className={`chip transition-all shrink-0 self-start sm:self-auto ${showGenerator ? 'bg-accent-500 text-white' : 'bg-surface-100 dark:bg-surface-700 text-surface-700 dark:text-surface-300 hover:bg-surface-200 dark:hover:bg-surface-600'}`}>
               <Wand2 size={14} /> {showGenerator ? 'Close Generator' : 'AI Blog Generator'}
             </button>
           </div>
@@ -88,12 +88,12 @@ export default function BlogPage() {
             <div className="mb-10 sm:mb-12 bg-gradient-to-r from-accent-500/5 to-primary-500/5 rounded-2xl border border-accent-500/20 p-5 sm:p-6">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center shrink-0"><Sparkles className="w-5 h-5 text-white" /></div>
-                <div className="min-w-0"><h3 className="font-semibold text-sm">AI Blog Post Generator</h3><p className="text-xs text-neutral-600 dark:text-neutral-300">Powered by Nexify AI agents — generates in seconds</p></div>
+                <div className="min-w-0"><h3 className="font-semibold text-sm">AI Blog Post Generator</h3><p className="text-xs text-surface-700 dark:text-surface-300">Powered by Nexify AI agents — generates in seconds</p></div>
               </div>
               <div className="flex flex-wrap gap-2 mb-4">
                 {Object.keys(blogTemplates).map(topic => (
                   <button key={topic} onClick={() => setSelectedTopic(topic)}
-                    className={`chip text-xs transition-all ${selectedTopic === topic ? 'bg-primary-500 text-white' : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600'}`}>{topic}</button>
+                    className={`chip text-xs transition-all ${selectedTopic === topic ? 'bg-primary-500 text-white' : 'bg-surface-100 dark:bg-surface-700 text-surface-700 dark:text-surface-300 hover:bg-surface-200 dark:hover:bg-surface-600'}`}>{topic}</button>
                 ))}
               </div>
               <button onClick={generatePost} disabled={generating} className="btn-primary text-sm">
@@ -101,16 +101,16 @@ export default function BlogPage() {
               </button>
 
               {generatedPost && (
-                <div className="mt-5 bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 p-5 animate-slide-up">
+                <div className="mt-5 bg-white dark:bg-surface-800 rounded-xl border border-surface-200 dark:border-surface-700 p-5 animate-slide-up">
                   <div className="flex items-start justify-between gap-3 mb-4">
                     <h3 className="text-base sm:text-lg font-heading font-bold flex-1 leading-snug dark:text-white">{generatedPost.title}</h3>
-                    <button onClick={copyPost} className="shrink-0 px-3 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 transition-all text-xs flex items-center gap-1">
+                    <button onClick={copyPost} className="shrink-0 px-3 py-1.5 rounded-lg bg-surface-100 dark:bg-surface-700 text-surface-700 dark:text-surface-300 hover:bg-surface-200 transition-all text-xs flex items-center gap-1">
                       {copied ? <><Check size={12} /> Copied</> : <><Copy size={12} /> Copy</>}</button>
                   </div>
-                  <div className="text-sm text-neutral-600 dark:text-neutral-300 whitespace-pre-line leading-relaxed">
+                  <div className="text-sm text-surface-700 dark:text-surface-300 whitespace-pre-line leading-relaxed">
                     {generatedPost.content}
                   </div>
-                  <div className="flex items-center gap-2 mt-4 pt-4 border-t border-neutral-100 dark:border-neutral-700 text-xs text-neutral-500">
+                  <div className="flex items-center gap-2 mt-4 pt-4 border-t border-surface-100 dark:border-surface-700 text-xs text-surface-600">
                     <Cpu size={12} className="text-primary-500" /> Generated by Nexify AI Agent · {new Date().toLocaleDateString()}
                   </div>
                 </div>
@@ -119,21 +119,21 @@ export default function BlogPage() {
           )}
 
           {/* Results count */}
-          <p className="text-xs sm:text-sm text-neutral-500 mb-4">{filtered.length} post{filtered.length !== 1 ? 's' : ''}</p>
+          <p className="text-xs sm:text-sm text-surface-600 mb-4">{filtered.length} post{filtered.length !== 1 ? 's' : ''}</p>
 
           {/* Blog Posts */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
             {filtered.map((post, i) => (
               <AnimatedSection key={i} animation="fade-up" delay={i * 50}>
-                <article className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 overflow-hidden hover:shadow-xl hover:border-primary-500/20 transition-all duration-300 group h-full flex flex-col">
+                <article className="bg-white dark:bg-surface-800 rounded-2xl border border-surface-200 dark:border-surface-700 overflow-hidden hover:shadow-xl hover:border-primary-500/20 transition-all duration-300 group h-full flex flex-col">
                   <div className="p-5 sm:p-6 flex flex-col flex-1">
                     <div className="flex items-center gap-3 mb-3">
                       <span className="chip bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-xs">{post.category}</span>
-                      <span className="text-xs text-neutral-500 flex items-center gap-1"><Calendar size={12} />{post.date}</span>
+                      <span className="text-xs text-surface-600 flex items-center gap-1"><Calendar size={12} />{post.date}</span>
                     </div>
                     <h3 className="text-base sm:text-lg font-heading font-bold mb-2 dark:text-white group-hover:text-primary-600 transition-colors leading-snug">{post.title}</h3>
-                    <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4 line-clamp-2 flex-1">{post.excerpt}</p>
-                    <div className="flex items-center justify-between text-xs text-neutral-500 pt-4 border-t border-neutral-100 dark:border-neutral-700">
+                    <p className="text-sm text-surface-700 dark:text-surface-400 mb-4 line-clamp-2 flex-1">{post.excerpt}</p>
+                    <div className="flex items-center justify-between text-xs text-surface-600 pt-4 border-t border-surface-100 dark:border-surface-700">
                       <span className="flex items-center gap-1"><ArrowUpRight size={12} /> By Nexify AI</span>
                       <span className="flex items-center gap-1"><Clock size={12} />{post.readTime}</span>
                     </div>
@@ -144,7 +144,7 @@ export default function BlogPage() {
           </div>
 
           {filtered.length === 0 && (
-            <div className="text-center py-12 text-neutral-500">No posts in this category.</div>
+            <div className="text-center py-12 text-surface-600">No posts in this category.</div>
           )}
         </div>
       </section>

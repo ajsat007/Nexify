@@ -92,9 +92,9 @@ export default function ChatbotPage() {
       </PageHeader>
 
       {/* Social proof bar */}
-      <section className="bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800">
+      <section className="bg-white dark:bg-surface-950 border-b border-surface-200 dark:border-surface-800">
         <div className="section-container py-6">
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs sm:text-sm text-neutral-500 dark:text-neutral-400">
+          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs sm:text-sm text-surface-600 dark:text-surface-400">
             <span className="flex items-center gap-1.5"><Star size={14} className="text-amber-400" fill="currentColor" /> Built by AI agents</span>
             <span className="flex items-center gap-1.5"><Check size={14} className="text-emerald-400" /> 48h delivery guarantee</span>
             <span className="flex items-center gap-1.5"><Zap size={14} className="text-primary-500" /> ₹0 operating cost for you</span>
@@ -104,23 +104,23 @@ export default function ChatbotPage() {
       </section>
 
       {/* Features */}
-      <section className="section-padding bg-white dark:bg-neutral-950">
+      <section className="section-padding bg-white dark:bg-surface-950">
         <div className="section-container">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-2xl sm:text-3xl font-heading font-bold mb-4 dark:text-white">
               Your Business Never Sleeps. <span className="text-primary-600">Why Should Your Customer Support?</span>
             </h2>
-            <p className="text-neutral-600 dark:text-neutral-400 text-base sm:text-lg">
+            <p className="text-surface-700 dark:text-surface-400 text-base sm:text-lg">
               Most businesses lose 60% of leads because nobody responds within 5 minutes. Our AI chatbot responds instantly, 24/7.
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((f, i) => (
               <AnimatedSection key={f.title} animation="fade-up" delay={i * 50}>
-                <div className="bg-neutral-50 dark:bg-neutral-800 rounded-2xl p-6 border border-neutral-200 dark:border-neutral-700 hover:border-primary-500/20 transition-all h-full">
+                <div className="bg-surface-50 dark:bg-surface-800 rounded-2xl p-6 border border-surface-200 dark:border-surface-700 hover:border-primary-500/20 transition-all h-full">
                   <f.icon className="w-8 h-8 text-primary-500 mb-4" />
                   <h3 className="font-bold text-lg mb-2 dark:text-white">{f.title}</h3>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">{f.desc}</p>
+                  <p className="text-sm text-surface-700 dark:text-surface-400 leading-relaxed">{f.desc}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -129,13 +129,13 @@ export default function ChatbotPage() {
       </section>
 
       {/* Plans */}
-      <section id="plans" className="section-padding bg-neutral-50 dark:bg-neutral-900">
+      <section id="plans" className="section-padding bg-surface-50 dark:bg-surface-900">
         <div className="section-container">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-2xl sm:text-3xl font-heading font-bold mb-4 dark:text-white">
               Simple Pricing. <span className="text-primary-600">No Hidden Fees.</span>
             </h2>
-            <p className="text-neutral-600 dark:text-neutral-400 text-base sm:text-lg">
+            <p className="text-surface-700 dark:text-surface-400 text-base sm:text-lg">
               One-time build fee + low monthly hosting. No contracts. Cancel anytime.
             </p>
           </div>
@@ -145,7 +145,7 @@ export default function ChatbotPage() {
                 <div className={`rounded-2xl p-6 sm:p-8 border-2 transition-all flex flex-col h-full ${
                   plan.popular
                     ? 'bg-primary-50 dark:bg-primary-900/20 border-primary-500 shadow-lg shadow-primary-500/10 relative'
-                    : 'bg-white dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700'
+                    : 'bg-white dark:bg-surface-800 border-surface-200 dark:border-surface-700'
                 }`}>
                   {plan.popular && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-primary-500 text-white text-xs font-semibold whitespace-nowrap">
@@ -154,10 +154,10 @@ export default function ChatbotPage() {
                   )}
                   <div className="text-sm font-semibold text-primary-600 dark:text-primary-400 uppercase tracking-wider mb-1">{plan.name}</div>
                   <div className="text-3xl font-heading font-bold mb-1 dark:text-white">{plan.price}</div>
-                  <div className="text-xs text-neutral-500 mb-6">Built in {plan.timeline} · ₹2K/mo hosting</div>
+                  <div className="text-xs text-surface-600 mb-6">Built in {plan.timeline} · ₹2K/mo hosting</div>
                   <ul className="space-y-3 mb-8 flex-1">
                     {plan.items.map((item) => (
-                      <li key={item} className="flex items-start gap-2 text-sm text-neutral-700 dark:text-neutral-300">
+                      <li key={item} className="flex items-start gap-2 text-sm text-surface-700 dark:text-surface-300">
                         <Check size={16} className="text-emerald-500 mt-0.5 shrink-0" />
                         <span>{item}</span>
                       </li>
@@ -166,7 +166,7 @@ export default function ChatbotPage() {
                   <Link href="/contact" className={`w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl font-medium text-sm transition-all text-center ${
                     plan.popular
                       ? 'bg-primary-500 text-white hover:bg-primary-600 shadow-md'
-                      : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-white hover:bg-neutral-200'
+                      : 'bg-surface-100 dark:bg-surface-700 text-surface-900 dark:text-white hover:bg-surface-200'
                   }`}>
                     Get Started <ArrowRight size={16} />
                   </Link>
@@ -174,12 +174,12 @@ export default function ChatbotPage() {
               </AnimatedSection>
             ))}
           </div>
-          <p className="text-center text-xs text-neutral-400 mt-6">All plans include free updates, uptime monitoring, and priority email support.</p>
+          <p className="text-center text-xs text-surface-500 mt-6">All plans include free updates, uptime monitoring, and priority email support.</p>
         </div>
       </section>
 
       {/* ROI Calculator */}
-      <section className="section-padding bg-white dark:bg-neutral-950">
+      <section className="section-padding bg-white dark:bg-surface-950">
         <div className="section-container">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-10">
@@ -193,14 +193,14 @@ export default function ChatbotPage() {
                 { label: 'Convert with chatbot', value: '5-10%', calc: 'Industry avg. chatbot conversion' },
                 { label: 'Monthly value', value: '₹75K-₹1.5L', calc: 'At ₹1,500 avg. customer value' },
               ].map((s) => (
-                <div key={s.label} className="bg-neutral-50 dark:bg-neutral-800 rounded-xl p-5 text-center border border-neutral-200 dark:border-neutral-700">
-                  <div className="text-xs text-neutral-500 mb-1">{s.label}</div>
+                <div key={s.label} className="bg-surface-50 dark:bg-surface-800 rounded-xl p-5 text-center border border-surface-200 dark:border-surface-700">
+                  <div className="text-xs text-surface-600 mb-1">{s.label}</div>
                   <div className="text-2xl font-heading font-bold text-primary-600 dark:text-primary-400">{s.value}</div>
-                  <div className="text-xs text-neutral-400 mt-1">{s.calc}</div>
+                  <div className="text-xs text-surface-500 mt-1">{s.calc}</div>
                 </div>
               ))}
             </div>
-            <p className="text-center text-sm text-neutral-500 mt-6">
+            <p className="text-center text-sm text-surface-600 mt-6">
               A ₹15,000 chatbot that generates ₹75K+/month in leads pays for itself in under a week.
             </p>
           </div>
@@ -208,7 +208,7 @@ export default function ChatbotPage() {
       </section>
 
       {/* How it works */}
-      <section className="section-padding bg-neutral-50 dark:bg-neutral-900">
+      <section className="section-padding bg-surface-50 dark:bg-surface-900">
         <div className="section-container">
           <div className="max-w-3xl mx-auto text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-heading font-bold mb-4 dark:text-white">
@@ -227,7 +227,7 @@ export default function ChatbotPage() {
                 <div className="w-10 h-10 rounded-xl bg-primary-500 text-white flex items-center justify-center font-bold shrink-0">{s.step}</div>
                 <div>
                   <h4 className="font-semibold dark:text-white">{s.title}</h4>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400">{s.desc}</p>
+                  <p className="text-sm text-surface-700 dark:text-surface-400">{s.desc}</p>
                 </div>
               </div>
             ))}
@@ -236,23 +236,23 @@ export default function ChatbotPage() {
       </section>
 
       {/* FAQ */}
-      <section className="section-padding bg-white dark:bg-neutral-950">
+      <section className="section-padding bg-white dark:bg-surface-950">
         <div className="section-container">
           <div className="max-w-2xl mx-auto">
             <h2 className="text-2xl font-heading font-bold text-center mb-8 dark:text-white">Common Questions</h2>
             <div className="space-y-2">
               {faqs.map((faq, i) => (
-                <div key={i} className="bg-neutral-50 dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+                <div key={i} className="bg-surface-50 dark:bg-surface-800 rounded-xl border border-surface-200 dark:border-surface-700 overflow-hidden">
                   <button
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                     className="w-full flex items-center justify-between p-4 text-left gap-3"
                   >
                     <span className="font-medium text-sm dark:text-white">{faq.q}</span>
-                    {openFaq === i ? <ChevronUp size={16} className="shrink-0 text-neutral-500" /> : <ChevronDown size={16} className="shrink-0 text-neutral-500" />}
+                    {openFaq === i ? <ChevronUp size={16} className="shrink-0 text-surface-600" /> : <ChevronDown size={16} className="shrink-0 text-surface-600" />}
                   </button>
                   {openFaq === i && (
                     <div className="px-4 pb-4">
-                      <p className="text-sm text-neutral-600 dark:text-neutral-400">{faq.a}</p>
+                      <p className="text-sm text-surface-700 dark:text-surface-400">{faq.a}</p>
                     </div>
                   )}
                 </div>

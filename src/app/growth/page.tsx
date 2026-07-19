@@ -37,13 +37,13 @@ export default function GrowthPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-surface-50">
       <section className="relative pt-32 pb-20 gradient-bg overflow-hidden">
         <div className="section-container relative">
           <div className="max-w-3xl">
             <div className="chip bg-white/10 text-white border border-white/20 mb-4">Step 19</div>
             <h1 className="text-4xl sm:text-5xl font-heading font-bold text-white mb-6">Growth <span className="text-primary-300">Roadmap</span></h1>
-            <p className="text-xl text-neutral-300 max-w-2xl">From 10 AI agents to a fully autonomous global corporation. Zero humans. Infinite scale.</p>
+            <p className="text-xl text-surface-400 max-w-2xl">From 10 AI agents to a fully autonomous global corporation. Zero humans. Infinite scale.</p>
           </div>
         </div>
       </section>
@@ -56,7 +56,7 @@ export default function GrowthPage() {
               return (
                 <div key={i} className="relative">
                   {/* Timeline connector */}
-                  {i < phases.length - 1 && <div className="absolute left-8 top-20 bottom-0 w-0.5 bg-neutral-200 hidden lg:block" />}
+                  {i < phases.length - 1 && <div className="absolute left-8 top-20 bottom-0 w-0.5 bg-surface-200 hidden lg:block" />}
                   <div className={`bg-gradient-to-r ${phase.color} rounded-2xl p-1`}>
                     <div className="bg-white rounded-xl p-6 lg:p-8">
                       <div className="flex flex-col lg:flex-row lg:items-start gap-6">
@@ -65,28 +65,28 @@ export default function GrowthPage() {
                             <Icon className="w-7 h-7 text-white" />
                           </div>
                           <div>
-                            <div className="text-2xl font-heading font-bold text-neutral-900">{phase.period}</div>
-                            <div className="text-xs text-neutral-800">Phase {i + 1}</div>
+                            <div className="text-2xl font-heading font-bold text-surface-900">{phase.period}</div>
+                            <div className="text-xs text-surface-800">Phase {i + 1}</div>
                           </div>
                         </div>
                         <div className="flex-1 grid md:grid-cols-2 gap-6">
                           <div>
-                            <h4 className="text-xs font-semibold text-neutral-800 uppercase mb-3">Goals</h4>
+                            <h4 className="text-xs font-semibold text-surface-800 uppercase mb-3">Goals</h4>
                             <ul className="space-y-2">
                               {phase.goals.map((g, j) => (
-                                <li key={j} className="flex items-start gap-2 text-sm text-neutral-800">
+                                <li key={j} className="flex items-start gap-2 text-sm text-surface-800">
                                   <Check size={16} className="text-success mt-0.5 shrink-0" />{g}
                                 </li>
                               ))}
                             </ul>
                           </div>
                           <div>
-                            <h4 className="text-xs font-semibold text-neutral-800 uppercase mb-3">Target Metrics</h4>
+                            <h4 className="text-xs font-semibold text-surface-800 uppercase mb-3">Target Metrics</h4>
                             <div className="grid grid-cols-2 gap-3">
                               {phase.metrics.map((m, j) => (
-                                <div key={j} className="bg-neutral-50 rounded-xl p-3 text-center">
+                                <div key={j} className="bg-surface-50 rounded-xl p-3 text-center">
                                   <div className="text-primary-500 font-heading font-bold text-lg">{m.split(' ')[0]}</div>
-                                  <div className="text-xs text-neutral-800">{m}</div>
+                                  <div className="text-xs text-surface-800">{m}</div>
                                 </div>
                               ))}
                             </div>
@@ -101,10 +101,10 @@ export default function GrowthPage() {
           </div>
 
           {/* Summary */}
-          <div className="mt-12 bg-neutral-900 rounded-2xl p-8 text-center">
+          <div className="mt-12 bg-surface-900 rounded-2xl p-8 text-center">
             <Rocket className="w-12 h-12 text-primary-400 mx-auto mb-4" />
             <h2 className="text-2xl font-heading font-bold text-white mb-2">The Destination</h2>
-            <p className="text-neutral-800 max-w-xl mx-auto">A fully autonomous AI company. Zero humans. Zero operating cost. Unlimited scale. Generating 50Cr+ in revenue through AI agents building software for the world.</p>
+            <p className="text-surface-800 max-w-xl mx-auto">A fully autonomous AI company. Zero humans. Zero operating cost. Unlimited scale. Generating 50Cr+ in revenue through AI agents building software for the world.</p>
           </div>
         </div>
       </section>

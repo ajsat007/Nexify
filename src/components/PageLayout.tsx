@@ -44,7 +44,7 @@ export function PageHeader({ title, subtitle, badge, badgeColor, children }: Pag
             {title}
           </h1>
           {subtitle && (
-            <p className="text-base sm:text-lg lg:text-xl text-neutral-300 leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl text-white/80 leading-relaxed">
               {subtitle}
             </p>
           )}
@@ -66,7 +66,7 @@ export function PageSection({ children, className, dark }: PageSectionProps) {
   return (
     <section className={cn(
       'section-padding',
-      dark ? 'bg-neutral-50 dark:bg-neutral-900' : 'bg-white dark:bg-neutral-950',
+      dark ? 'bg-surface-50 dark:bg-surface-900' : 'bg-white dark:bg-surface-950',
       className
     )}>
       <div className="section-container">

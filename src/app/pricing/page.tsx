@@ -56,11 +56,11 @@ export default function PricingPage() {
       />
 
       {/* Service Pricing */}
-      <section className="section-padding bg-neutral-50 dark:bg-neutral-900">
+      <section className="section-padding bg-surface-50 dark:bg-surface-900">
         <div className="section-container">
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
             <h2 className="text-2xl sm:text-3xl font-heading font-bold mb-3 sm:mb-4 dark:text-white">Service <span className="text-primary-600 dark:text-primary-400">Packages</span></h2>
-            <p className="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">Choose the package that fits your needs. All include AI-powered delivery.</p>
+            <p className="text-surface-700 dark:text-surface-400 text-sm sm:text-base">Choose the package that fits your needs. All include AI-powered delivery.</p>
           </div>
 
           {/* Category tabs — scrollable row on mobile */}
@@ -72,7 +72,7 @@ export default function PricingPage() {
                 className={`px-4 sm:px-5 py-2 rounded-xl text-sm font-medium transition-all whitespace-nowrap shrink-0 ${
                   service === s.name
                     ? 'bg-primary-500 text-white shadow-md'
-                    : 'bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 border border-neutral-200 dark:border-neutral-700'
+                    : 'bg-white dark:bg-surface-800 text-surface-700 dark:text-surface-300 hover:bg-surface-100 dark:hover:bg-surface-700 border border-surface-200 dark:border-surface-700'
                 }`}
               >
                 {s.name}
@@ -88,7 +88,7 @@ export default function PricingPage() {
                   <div className={`rounded-2xl p-5 sm:p-8 border-2 transition-all duration-300 flex flex-col h-full ${
                     tier.popular
                       ? 'bg-primary-50 dark:bg-primary-900/20 border-primary-500 dark:border-primary-400 shadow-lg shadow-primary-500/10 relative'
-                      : 'bg-white dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700'
+                      : 'bg-white dark:bg-surface-800 border-surface-200 dark:border-surface-700'
                   }`}>
                     {tier.popular && (
                       <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-4 py-0.5 rounded-full bg-primary-500 text-white text-xs font-semibold whitespace-nowrap">
@@ -99,7 +99,7 @@ export default function PricingPage() {
                     <div className="text-2xl sm:text-3xl font-heading font-bold mb-5 sm:mb-6 dark:text-white">{tier.price}</div>
                     <ul className="space-y-2.5 sm:space-y-3 mb-6 sm:mb-8 flex-1">
                       {tier.features.map((f, j) => (
-                        <li key={j} className="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-300">
+                        <li key={j} className="flex items-start gap-2 text-sm text-surface-700 dark:text-surface-300">
                           <Check size={15} className="text-success mt-0.5 shrink-0" />
                           <span className="leading-snug">{f}</span>
                         </li>
@@ -108,7 +108,7 @@ export default function PricingPage() {
                     <Link href="/contact" className={`w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl font-medium text-sm transition-all text-center ${
                       tier.popular
                         ? 'bg-primary-500 text-white hover:bg-primary-600 shadow-md'
-                        : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-white hover:bg-neutral-200 dark:hover:bg-neutral-600 border border-neutral-200 dark:border-neutral-600'
+                        : 'bg-surface-100 dark:bg-surface-700 text-surface-900 dark:text-white hover:bg-surface-200 dark:hover:bg-surface-600 border border-surface-200 dark:border-surface-600'
                     }`}>
                       Get Started <ArrowRight size={16} />
                     </Link>
@@ -121,7 +121,7 @@ export default function PricingPage() {
       </section>
 
       {/* Calculator */}
-      <section className="section-padding bg-white dark:bg-neutral-950">
+      <section className="section-padding bg-white dark:bg-surface-950">
         <div className="section-container">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-6 sm:mb-8">

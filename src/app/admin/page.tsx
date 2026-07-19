@@ -14,15 +14,15 @@ import { Sidebar, type SidebarItem } from '@/components/Sidebar'
 
 function StatCard({ label, value, sub, icon: Icon, color }: { label: string; value: string; sub?: string; icon: any; color: string }) {
   return (
-    <div className="bg-white dark:bg-neutral-800 rounded-2xl p-5 border border-neutral-200 dark:border-neutral-700 hover:shadow-md transition-all">
+    <div className="bg-white dark:bg-surface-800 rounded-2xl p-5 border border-surface-200 dark:border-surface-700 hover:shadow-md transition-all">
       <div className="flex items-start justify-between mb-3">
         <div className={`w-10 h-10 rounded-xl ${color} flex items-center justify-center`}>
           <Icon className="w-5 h-5 text-white" />
         </div>
       </div>
       <div className="text-2xl font-heading font-bold dark:text-white">{value}</div>
-      <div className="text-sm text-neutral-500 dark:text-neutral-400">{label}</div>
-      {sub && <div className="text-xs text-neutral-400 mt-1">{sub}</div>}
+      <div className="text-sm text-surface-600 dark:text-surface-400">{label}</div>
+      {sub && <div className="text-xs text-surface-500 mt-1">{sub}</div>}
     </div>
   )
 }
@@ -68,17 +68,17 @@ function LeadRow({ lead, onRefresh }: { lead: any; onRefresh: () => void }) {
   }
 
   return (
-    <tr className="border-b border-neutral-100 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors">
+    <tr className="border-b border-surface-100 dark:border-surface-700 hover:bg-surface-50 dark:hover:bg-surface-800/50 transition-colors">
       <td className="py-3 px-3">
         <div className="font-medium text-sm dark:text-white">{lead.contact_name}</div>
-        <div className="text-xs text-neutral-500">{lead.company}</div>
+        <div className="text-xs text-surface-600">{lead.company}</div>
       </td>
       <td className="py-3 px-3 hidden sm:table-cell">
-        <div className="flex items-center gap-1 text-xs text-neutral-500">
+        <div className="flex items-center gap-1 text-xs text-surface-600">
           <Mail size={11} /> {lead.email}
         </div>
       </td>
-      <td className="py-3 px-3 hidden lg:table-cell text-xs text-neutral-500">{lead.service_interest}</td>
+      <td className="py-3 px-3 hidden lg:table-cell text-xs text-surface-600">{lead.service_interest}</td>
       <td className="py-3 px-3">
         <span className={`chip text-xs ${statusColors[lead.status] || statusColors.new}`}>{lead.status}</span>
       </td>
@@ -110,8 +110,8 @@ function LeadRow({ lead, onRefresh }: { lead: any; onRefresh: () => void }) {
           {sent && <span className="chip text-xs bg-emerald-100 text-emerald-600"><Check size={11} /> Sent</span>}
           {lead.status === 'won' && <span className="chip text-xs bg-emerald-100 text-emerald-600">Won</span>}
           {lead.status === 'lost' && <span className="chip text-xs bg-red-100 text-red-600">Lost</span>}
-          {lead.status === 'closed' && <span className="chip text-xs bg-neutral-100 text-neutral-600">Closed</span>}
-          {lead.status === 'proposal' && !sent && <span className="text-xs text-neutral-400">—</span>}
+          {lead.status === 'closed' && <span className="chip text-xs bg-surface-100 text-surface-700">Closed</span>}
+          {lead.status === 'proposal' && !sent && <span className="text-xs text-surface-500">—</span>}
         </div>
       </td>
     </tr>
@@ -201,14 +201,14 @@ export default function AdminPage() {
 
   if (showLogin) {
     return (
-      <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-surface-50 dark:bg-surface-950 flex items-center justify-center p-4">
         <div className="w-full max-w-sm">
           <div className="text-center mb-8">
             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center mx-auto mb-4">
               <Shield className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-2xl font-heading font-bold dark:text-white">Admin Login</h1>
-            <p className="text-sm text-neutral-500 mt-2">Enter your email to access the dashboard.</p>
+            <p className="text-sm text-surface-600 mt-2">Enter your email to access the dashboard.</p>
           </div>
           <form onSubmit={handleLogin} className="space-y-4">
             <input type="email" required className="input-field" placeholder="admin@nexify.tech" value={loginEmail} onChange={e => setLoginEmail(e.target.value)} />
@@ -220,7 +220,7 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
+    <div className="min-h-screen bg-surface-50 dark:bg-surface-950">
       <Sidebar items={sidebarItems} title="Nexify Admin" subtitle="AI Operations" onLogout={handleLogout} />
 
       <div className="lg:pl-64">
@@ -232,7 +232,7 @@ export default function AdminPage() {
           <div className="flex items-center justify-between mb-6">
             <div>
               <h1 className="text-2xl font-heading font-bold dark:text-white">Admin Dashboard</h1>
-              <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">Real data from your database</p>
+              <p className="text-sm text-surface-600 dark:text-surface-400 mt-1">Real data from your database</p>
             </div>
             <div className="flex items-center gap-2">
               <button onClick={fetchData} className="btn-primary text-sm" disabled={loading}>
@@ -262,16 +262,16 @@ export default function AdminPage() {
                   {/* Agent activity + Recent leads */}
                   <div className="grid lg:grid-cols-2 gap-6 mb-8">
                     {/* Recent Leads */}
-                    <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-5">
+                    <div className="bg-white dark:bg-surface-800 rounded-2xl border border-surface-200 dark:border-surface-700 p-5">
                       <h3 className="font-semibold text-sm mb-4 dark:text-white flex items-center gap-2">
                         <Target size={16} className="text-primary-500" /> Recent Leads
                       </h3>
                       <div className="space-y-3">
                         {leads.slice(0, 5).map((l: any) => (
-                          <div key={l.id} className="flex items-center justify-between py-2 border-b border-neutral-100 dark:border-neutral-700 last:border-0">
+                          <div key={l.id} className="flex items-center justify-between py-2 border-b border-surface-100 dark:border-surface-700 last:border-0">
                             <div className="min-w-0">
                               <div className="text-sm font-medium dark:text-white truncate">{l.contact_name}</div>
-                              <div className="text-xs text-neutral-500 truncate">{l.company} · {l.service_interest}</div>
+                              <div className="text-xs text-surface-600 truncate">{l.company} · {l.service_interest}</div>
                             </div>
                             <span className={`chip text-xs ${
                               l.status === 'new' ? 'bg-blue-100 text-blue-600' :
@@ -281,45 +281,45 @@ export default function AdminPage() {
                             }`}>{l.status}</span>
                           </div>
                         ))}
-                        {leads.length === 0 && <p className="text-sm text-neutral-400">No leads yet. Submit a contact form!</p>}
+                        {leads.length === 0 && <p className="text-sm text-surface-500">No leads yet. Submit a contact form!</p>}
                       </div>
                     </div>
 
                     {/* Proposals Summary */}
-                    <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-5">
+                    <div className="bg-white dark:bg-surface-800 rounded-2xl border border-surface-200 dark:border-surface-700 p-5">
                       <h3 className="font-semibold text-sm mb-4 dark:text-white flex items-center gap-2">
                         <FileText size={16} className="text-primary-500" /> Proposals
                       </h3>
                       <div className="space-y-3">
                         {proposals.slice(0, 5).map((p: any) => (
-                          <div key={p.id} className="flex items-center justify-between py-2 border-b border-neutral-100 dark:border-neutral-700 last:border-0">
+                          <div key={p.id} className="flex items-center justify-between py-2 border-b border-surface-100 dark:border-surface-700 last:border-0">
                             <div className="min-w-0">
                               <div className="text-sm font-medium dark:text-white truncate">{p.title}</div>
-                              <div className="text-xs text-neutral-500">{p.price_range}</div>
+                              <div className="text-xs text-surface-600">{p.price_range}</div>
                             </div>
                             <span className={`chip text-xs ${
-                              p.status === 'draft' ? 'bg-neutral-100 text-neutral-600' :
+                              p.status === 'draft' ? 'bg-surface-100 text-surface-700' :
                               p.status === 'sent' ? 'bg-blue-100 text-blue-600' :
                               p.status === 'accepted' ? 'bg-emerald-100 text-emerald-600' :
                               'bg-red-100 text-red-600'
                             }`}>{p.status}</span>
                           </div>
                         ))}
-                        {proposals.length === 0 && <p className="text-sm text-neutral-400">No proposals yet. Generate from leads.</p>}
+                        {proposals.length === 0 && <p className="text-sm text-surface-500">No proposals yet. Generate from leads.</p>}
                       </div>
                     </div>
                   </div>
 
                   {/* Performance chart */}
-                  <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-5">
+                  <div className="bg-white dark:bg-surface-800 rounded-2xl border border-surface-200 dark:border-surface-700 p-5">
                     <h3 className="font-semibold text-sm mb-4 dark:text-white">Monthly Performance</h3>
                     <div className="flex items-end gap-2 sm:gap-4 h-32">
                       {metrics?.performance?.map((p: any) => (
                         <div key={p.month} className="flex-1 flex flex-col items-center gap-1">
                           <div className="w-full bg-primary-500/20 rounded-t-md relative" style={{ height: `${(p.tasks / 3000) * 100}%` }}>
-                            <div className="absolute -top-5 left-1/2 -translate-x-1/2 text-xs text-neutral-500 font-medium">{p.tasks}</div>
+                            <div className="absolute -top-5 left-1/2 -translate-x-1/2 text-xs text-surface-600 font-medium">{p.tasks}</div>
                           </div>
-                          <div className="text-xs text-neutral-400">{p.month}</div>
+                          <div className="text-xs text-surface-500">{p.month}</div>
                         </div>
                       ))}
                     </div>
@@ -329,8 +329,8 @@ export default function AdminPage() {
 
               {/* ── LEADS TABLE ── */}
               {activeTab === 'leads' && (
-                <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 overflow-hidden">
-                  <div className="p-4 border-b border-neutral-100 dark:border-neutral-700 flex items-center justify-between">
+                <div className="bg-white dark:bg-surface-800 rounded-2xl border border-surface-200 dark:border-surface-700 overflow-hidden">
+                  <div className="p-4 border-b border-surface-100 dark:border-surface-700 flex items-center justify-between">
                     <h3 className="font-semibold text-sm dark:text-white">All Leads ({leads.length})</h3>
                     <button onClick={() => window.location.href = '/contact'} className="btn-primary text-xs">
                       <Plus size={14} /> Add Lead
@@ -339,7 +339,7 @@ export default function AdminPage() {
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm responsive-card">
                       <thead>
-                        <tr className="border-b border-neutral-100 dark:border-neutral-700 text-left text-xs text-neutral-500 uppercase tracking-wider">
+                        <tr className="border-b border-surface-100 dark:border-surface-700 text-left text-xs text-surface-600 uppercase tracking-wider">
                           <th className="py-3 px-3 font-medium">Contact</th>
                           <th className="py-3 px-3 hidden sm:table-cell font-medium">Email</th>
                           <th className="py-3 px-3 hidden lg:table-cell font-medium">Service</th>
@@ -353,7 +353,7 @@ export default function AdminPage() {
                           <LeadRow key={lead.id} lead={lead} onRefresh={fetchData} />
                         ))}
                         {leads.length === 0 && (
-                          <tr><td colSpan={6} className="py-8 text-center text-neutral-400">No leads found. Submit a contact form to create one.</td></tr>
+                          <tr><td colSpan={6} className="py-8 text-center text-surface-500">No leads found. Submit a contact form to create one.</td></tr>
                         )}
                       </tbody>
                     </table>
@@ -363,21 +363,21 @@ export default function AdminPage() {
 
               {/* ── PROPOSALS ── */}
               {activeTab === 'proposals' && (
-                <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-5">
+                <div className="bg-white dark:bg-surface-800 rounded-2xl border border-surface-200 dark:border-surface-700 p-5">
                   <h3 className="font-semibold text-sm mb-4 dark:text-white">AI-Generated Proposals ({proposals.length})</h3>
                   <div className="space-y-3">
                     {proposals.map((p: any) => (
-                      <div key={p.id} className="bg-neutral-50 dark:bg-neutral-700/50 rounded-xl p-4">
+                      <div key={p.id} className="bg-surface-50 dark:bg-surface-700/50 rounded-xl p-4">
                         <div className="flex items-start justify-between gap-4">
                           <div className="min-w-0">
                             <h4 className="font-semibold text-sm dark:text-white">{p.title}</h4>
-                            <p className="text-xs text-neutral-500 mt-1">
+                            <p className="text-xs text-surface-600 mt-1">
                               {p.price_range} · {p.timeline} · Generated {new Date(p.created_at).toLocaleDateString()}
                             </p>
-                            <p className="text-xs text-neutral-400 mt-2 line-clamp-3">{p.content.slice(0, 300)}...</p>
+                            <p className="text-xs text-surface-500 mt-2 line-clamp-3">{p.content.slice(0, 300)}...</p>
                           </div>
                           <span className={`chip text-xs shrink-0 ${
-                            p.status === 'draft' ? 'bg-neutral-100 text-neutral-600' :
+                            p.status === 'draft' ? 'bg-surface-100 text-surface-700' :
                             p.status === 'sent' ? 'bg-blue-100 text-blue-600' :
                             p.status === 'accepted' ? 'bg-emerald-100 text-emerald-600' :
                             'bg-red-100 text-red-600'
@@ -386,7 +386,7 @@ export default function AdminPage() {
                       </div>
                     ))}
                     {proposals.length === 0 && (
-                      <p className="text-sm text-neutral-400 text-center py-8">No proposals yet. Go to Leads tab and click "AI Proposal" to generate one.</p>
+                      <p className="text-sm text-surface-500 text-center py-8">No proposals yet. Go to Leads tab and click "AI Proposal" to generate one.</p>
                     )}
                   </div>
                 </div>
@@ -394,11 +394,11 @@ export default function AdminPage() {
 
               {/* ── PROJECTS ── */}
               {activeTab === 'projects' && (
-                <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-5">
+                <div className="bg-white dark:bg-surface-800 rounded-2xl border border-surface-200 dark:border-surface-700 p-5">
                   <h3 className="font-semibold text-sm mb-4 dark:text-white">Projects ({projects.length})</h3>
                   <div className="grid sm:grid-cols-2 gap-4">
                     {projects.map((p: any) => (
-                      <div key={p.id} className="bg-neutral-50 dark:bg-neutral-700/50 rounded-xl p-4 border border-neutral-100 dark:border-neutral-700">
+                      <div key={p.id} className="bg-surface-50 dark:bg-surface-700/50 rounded-xl p-4 border border-surface-100 dark:border-surface-700">
                         <div className="flex items-center justify-between mb-2">
                           <h4 className="font-semibold text-sm dark:text-white">{p.name}</h4>
                           <span className={`chip text-xs ${
@@ -408,9 +408,9 @@ export default function AdminPage() {
                             'bg-amber-100 text-amber-600'
                           }`}>{p.status}</span>
                         </div>
-                        <p className="text-xs text-neutral-500 mb-2">{p.client} · {p.value?.toLocaleString('en-IN')}</p>
+                        <p className="text-xs text-surface-600 mb-2">{p.client} · {p.value?.toLocaleString('en-IN')}</p>
                         {p.progress > 0 && (
-                          <div className="w-full h-1.5 rounded-full bg-neutral-200 dark:bg-neutral-600">
+                          <div className="w-full h-1.5 rounded-full bg-surface-200 dark:bg-surface-600">
                             <div className="h-full rounded-full bg-primary-500" style={{ width: `${p.progress}%` }} />
                           </div>
                         )}

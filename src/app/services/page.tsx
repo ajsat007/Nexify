@@ -20,7 +20,7 @@ export default function ServicesPage() {
       />
 
       {/* Service Cards */}
-      <section className="section-padding bg-white dark:bg-neutral-950">
+      <section className="section-padding bg-white dark:bg-surface-950">
         <div className="section-container">
           <div className="space-y-16 sm:space-y-24">
             {services.map((service, i) => {
@@ -37,8 +37,8 @@ export default function ServicesPage() {
                         </div>
                         <h2 className="text-xl sm:text-2xl lg:text-3xl font-heading font-bold dark:text-white">{service.title}</h2>
                       </div>
-                      <p className="text-neutral-600 dark:text-neutral-400 mb-5 leading-relaxed text-sm sm:text-base">{details?.description || service.description}</p>
-                      <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-500 dark:text-neutral-400 mb-6">
+                      <p className="text-surface-700 dark:text-surface-400 mb-5 leading-relaxed text-sm sm:text-base">{details?.description || service.description}</p>
+                      <div className="flex flex-wrap items-center gap-4 text-sm text-surface-600 dark:text-surface-400 mb-6">
                         <span className="flex items-center gap-1.5"><Clock size={15} /> {service.timeline}</span>
                         <span className="flex items-center gap-1.5"><DollarSign size={15} /> {service.price}</span>
                       </div>
@@ -55,7 +55,7 @@ export default function ServicesPage() {
                             <div key={j} className={`rounded-2xl p-5 sm:p-6 border ${
                               j === 1
                                 ? 'bg-primary-50 dark:bg-primary-900/20 border-primary-200 dark:border-primary-800 relative'
-                                : 'bg-white dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700'
+                                : 'bg-white dark:bg-surface-800 border-surface-200 dark:border-surface-700'
                             }`}>
                               {j === 1 && (
                                 <div className="absolute -top-2.5 left-4 px-3 py-0.5 rounded-full bg-primary-500 text-white text-xs font-semibold">
@@ -64,10 +64,10 @@ export default function ServicesPage() {
                               )}
                               <div className="text-xs font-semibold text-primary-500 uppercase tracking-wider mb-1">{pkg.name}</div>
                               <div className="text-lg sm:text-xl font-heading font-bold mb-1 dark:text-white">{pkg.price}</div>
-                              <div className="text-xs text-neutral-500 mb-4">{pkg.timeline}</div>
+                              <div className="text-xs text-surface-600 mb-4">{pkg.timeline}</div>
                               <ul className="space-y-2">
                                 {pkg.features.map((f, k) => (
-                                  <li key={k} className="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-300">
+                                  <li key={k} className="flex items-start gap-2 text-sm text-surface-700 dark:text-surface-300">
                                     <Check size={14} className="text-success mt-0.5 shrink-0" />
                                     <span>{f}</span>
                                   </li>
@@ -81,21 +81,21 @@ export default function ServicesPage() {
                       {/* Technologies + Deliverables row */}
                       <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                         {details?.technologies && (
-                          <div className="bg-white dark:bg-neutral-800 rounded-2xl p-5 sm:p-6 border border-neutral-200 dark:border-neutral-700">
+                          <div className="bg-white dark:bg-surface-800 rounded-2xl p-5 sm:p-6 border border-surface-200 dark:border-surface-700">
                             <h3 className="font-semibold text-sm mb-3 dark:text-white">Technologies</h3>
                             <div className="flex flex-wrap gap-2">
                               {details.technologies.map((tech) => (
-                                <span key={tech} className="chip bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 text-xs">{tech}</span>
+                                <span key={tech} className="chip bg-surface-100 dark:bg-surface-700 text-surface-700 dark:text-surface-300 text-xs">{tech}</span>
                               ))}
                             </div>
                           </div>
                         )}
                         {details?.deliverables && (
-                          <div className="bg-white dark:bg-neutral-800 rounded-2xl p-5 sm:p-6 border border-neutral-200 dark:border-neutral-700">
+                          <div className="bg-white dark:bg-surface-800 rounded-2xl p-5 sm:p-6 border border-surface-200 dark:border-surface-700">
                             <h3 className="font-semibold text-sm mb-3 dark:text-white">What You Get</h3>
                             <div className="grid xs:grid-cols-2 gap-2">
                               {details.deliverables.map((d, k) => (
-                                <div key={k} className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-300">
+                                <div key={k} className="flex items-center gap-2 text-sm text-surface-700 dark:text-surface-300">
                                   <Check size={13} className="text-primary-500 shrink-0" />
                                   <span className="leading-snug">{d}</span>
                                 </div>

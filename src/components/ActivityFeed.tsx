@@ -99,10 +99,10 @@ export default function ActivityFeed({ compact = false, title = 'Agent Activity 
 
   return (
     <div className={cn(
-      'bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 overflow-hidden',
+      'bg-white dark:bg-surface-800 rounded-2xl border border-surface-200 dark:border-surface-700 overflow-hidden',
       !compact && 'shadow-xl'
     )}>
-      <div className="p-4 border-b border-neutral-100 dark:border-neutral-700 flex items-center justify-between">
+      <div className="p-4 border-b border-surface-100 dark:border-surface-700 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Activity className="w-4 h-4 text-primary-500" />
           <h3 className="font-semibold text-sm dark:text-white">{title}</h3>
@@ -117,19 +117,19 @@ export default function ActivityFeed({ compact = false, title = 'Agent Activity 
           const meta = agentMeta[a.agentId]
           const Icon = meta?.icon || Bot
           return (
-            <div key={a.id} className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-neutral-50 dark:hover:bg-neutral-700/50 transition-all animate-slide-down">
+            <div key={a.id} className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-surface-50 dark:hover:bg-surface-700/50 transition-all animate-slide-down">
               <div className={cn(
-                'w-8 h-8 rounded-lg bg-neutral-100 dark:bg-neutral-700 flex items-center justify-center shrink-0 text-xs',
+                'w-8 h-8 rounded-lg bg-surface-100 dark:bg-surface-700 flex items-center justify-center shrink-0 text-xs',
                 meta?.color
               )}>
                 <span>{meta?.emoji || '🤖'}</span>
               </div>
               <div className="flex-1 min-w-0">
                 <div className="text-xs">
-                  <span className="font-medium text-neutral-900 dark:text-white">{meta?.name || 'AI Agent'}</span>
-                  <span className="text-neutral-500 dark:text-neutral-400"> {a.action}</span>
+                  <span className="font-medium text-surface-900 dark:text-white">{meta?.name || 'AI Agent'}</span>
+                  <span className="text-surface-600 dark:text-surface-400"> {a.action}</span>
                 </div>
-                <span className="text-xs text-neutral-400">{timeAgo(a.time)}</span>
+                <span className="text-xs text-surface-500">{timeAgo(a.time)}</span>
               </div>
             </div>
           )

@@ -17,19 +17,19 @@ export default function TestimonialsPage() {
           {stats.map((s) => (
             <div key={s.label} className="text-center">
               <div className="text-3xl font-heading font-bold text-primary-600 dark:text-primary-400">{s.value}</div>
-              <div className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">{s.label}</div>
+              <div className="text-sm text-surface-700 dark:text-surface-400 mt-1">{s.label}</div>
             </div>
           ))}
         </div>
         <StaggerGroup className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((t, i) => (
-            <div key={i} className="bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-neutral-200 dark:border-neutral-700 hover:border-primary-500/20 transition-all">
+            <div key={i} className="bg-white dark:bg-surface-800 rounded-2xl p-6 border border-surface-200 dark:border-surface-700 hover:border-primary-500/20 transition-all">
               <Quote className="w-8 h-8 text-primary-200 dark:text-primary-800 mb-3" />
               <div className="flex items-center gap-1 mb-4 text-amber-400">{Array.from({ length: t.rating }).map((_, j) => <Star key={j} size={16} fill="currentColor" />)}</div>
-              <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed mb-6">&ldquo;{t.content}&rdquo;</p>
+              <p className="text-surface-700 dark:text-surface-400 text-sm leading-relaxed mb-6">&ldquo;{t.content}&rdquo;</p>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white text-sm font-bold">{t.name.split(' ').map(n => n[0]).join('')}</div>
-                <div><div className="font-semibold text-sm text-neutral-900 dark:text-white">{t.name}</div><div className="text-xs text-neutral-500">{t.role}</div></div>
+                <div><div className="font-semibold text-sm text-surface-900 dark:text-white">{t.name}</div><div className="text-xs text-surface-600">{t.role}</div></div>
               </div>
             </div>
           ))}

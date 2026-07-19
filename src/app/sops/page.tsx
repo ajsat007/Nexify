@@ -31,12 +31,12 @@ export default function SOPsPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold dark:text-white">{sop.dept}</h3>
-                    <span className="text-xs text-neutral-500">Owned by: {sop.owner}</span>
+                    <span className="text-xs text-surface-600">Owned by: {sop.owner}</span>
                   </div>
                 </div>
                 <ol className="space-y-2">
                   {sop.steps.map((step, j) => (
-                    <li key={j} className="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-400">
+                    <li key={j} className="flex items-start gap-2 text-sm text-surface-700 dark:text-surface-400">
                       <span className="w-5 h-5 rounded-full bg-primary-500 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">{j + 1}</span>
                       {step}
                     </li>

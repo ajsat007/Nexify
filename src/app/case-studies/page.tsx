@@ -21,22 +21,22 @@ export default function CaseStudiesPage() {
         <div className="space-y-8">
           {cases.map((c, i) => (
             <AnimatedSection key={i} animation="fade-up" delay={i * 50}>
-              <div className="bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-neutral-200 dark:border-neutral-700 hover:shadow-lg transition-all">
+              <div className="bg-white dark:bg-surface-800 rounded-2xl p-6 border border-surface-200 dark:border-surface-700 hover:shadow-lg transition-all">
                 <div className="flex flex-wrap items-start gap-4 mb-4">
                   <span className="chip bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-xs">{c.industry}</span>
                 </div>
                 <h3 className="text-xl font-heading font-bold mb-3 dark:text-white">{c.title}</h3>
                 <div className="grid sm:grid-cols-2 gap-4 mb-4">
-                  <div><p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-1">Problem</p><p className="text-sm text-neutral-600 dark:text-neutral-400">{c.problem}</p></div>
-                  <div><p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-1">Solution</p><p className="text-sm text-neutral-600 dark:text-neutral-400">{c.solution}</p></div>
+                  <div><p className="text-xs font-semibold text-surface-600 uppercase tracking-wider mb-1">Problem</p><p className="text-sm text-surface-700 dark:text-surface-400">{c.problem}</p></div>
+                  <div><p className="text-xs font-semibold text-surface-600 uppercase tracking-wider mb-1">Solution</p><p className="text-sm text-surface-700 dark:text-surface-400">{c.solution}</p></div>
                 </div>
-                <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-600 dark:text-neutral-400 border-t border-neutral-100 dark:border-neutral-700 pt-4">
+                <div className="flex flex-wrap items-center gap-4 text-sm text-surface-700 dark:text-surface-400 border-t border-surface-100 dark:border-surface-700 pt-4">
                   <span className="flex items-center gap-1"><Clock size={14} /> {c.timeline}</span>
                   <span className="flex items-center gap-1"><DollarSign size={14} /> {c.budget}</span>
                   <span className="flex items-center gap-1 text-success"><TrendingUp size={14} /> {c.result}</span>
                 </div>
                 <div className="flex flex-wrap gap-2 mt-3">
-                  {c.tech.map((t) => (<span key={t} className="chip bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 text-xs">{t}</span>))}
+                  {c.tech.map((t) => (<span key={t} className="chip bg-surface-100 dark:bg-surface-700 text-surface-700 dark:text-surface-300 text-xs">{t}</span>))}
                 </div>
               </div>
             </AnimatedSection>

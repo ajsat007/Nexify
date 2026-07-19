@@ -36,7 +36,7 @@ export default function AIAutomationPage() {
           <div className="max-w-3xl reveal">
             <div className="chip bg-white/10 text-white border border-white/20 mb-4">AI Automation</div>
             <h1 className="text-4xl sm:text-5xl font-heading font-bold text-white mb-6"><span className="text-primary-300">AI Agent</span> Workforce</h1>
-            <p className="text-xl text-neutral-300">10 specialized AI agents running 24/7 · Zero cost · Unlimited scalability.</p>
+            <p className="text-xl text-surface-400">10 specialized AI agents running 24/7 · Zero cost · Unlimited scalability.</p>
           </div>
         </div>
       </section>
@@ -52,9 +52,9 @@ export default function AIAutomationPage() {
               { label: 'Uptime', value: '99.99%', c: 'from-cyan-500 to-blue-500' },
               { label: 'Labor Cost', value: '0', c: 'from-rose-500 to-pink-500' },
             ].map((s, i) => (
-              <div key={i} className="text-center p-6 bg-neutral-50 rounded-2xl border border-neutral-100 hover:shadow-lg transition-all">
+              <div key={i} className="text-center p-6 bg-surface-50 rounded-2xl border border-surface-100 hover:shadow-lg transition-all">
                 <div className={`text-3xl font-heading font-bold bg-gradient-to-r ${s.c} bg-clip-text text-transparent`}>{s.value}</div>
-                <div className="text-sm text-neutral-800 mt-1">{s.label}</div>
+                <div className="text-sm text-surface-800 mt-1">{s.label}</div>
               </div>
             ))}
           </div>
@@ -63,17 +63,17 @@ export default function AIAutomationPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
             {display.map(agent => (
               <button key={agent.id} onClick={() => { setActiveAgent(agent); setShowAll(true) }}
-                className={`text-left bg-white rounded-2xl border-2 p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${activeAgent.id === agent.id ? 'border-primary-500 shadow-lg ring-2 ring-primary-500/20' : 'border-neutral-200'}`}>
+                className={`text-left bg-white rounded-2xl border-2 p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${activeAgent.id === agent.id ? 'border-primary-500 shadow-lg ring-2 ring-primary-500/20' : 'border-surface-200'}`}>
                 <div className="flex items-start justify-between mb-4">
                   <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${agent.color} flex items-center justify-center text-2xl`}>{agent.emoji}</div>
                   <span className="flex items-center gap-1.5 text-xs font-medium text-success"><span className="w-2 h-2 rounded-full bg-success animate-pulse" /> active</span>
                 </div>
                 <h3 className="text-lg font-heading font-bold mb-1">{agent.name}</h3>
-                <p className="text-sm text-neutral-800 mb-3 line-clamp-2">{agent.desc}</p>
+                <p className="text-sm text-surface-800 mb-3 line-clamp-2">{agent.desc}</p>
                 <div className="flex flex-wrap gap-1.5">
-                  {agent.skills.map((s, i) => <span key={i} className="chip bg-neutral-100 text-neutral-800 text-xs">{s}</span>)}
+                  {agent.skills.map((s, i) => <span key={i} className="chip bg-surface-100 text-surface-800 text-xs">{s}</span>)}
                 </div>
-                <div className="mt-3 text-xs text-neutral-800">Model: {agent.model}</div>
+                <div className="mt-3 text-xs text-surface-800">Model: {agent.model}</div>
               </button>
             ))}
           </div>
@@ -90,11 +90,11 @@ export default function AIAutomationPage() {
                     <h2 className="text-2xl font-heading font-bold">{activeAgent.name}</h2>
                     <span className="flex items-center gap-1.5 text-xs text-success bg-success/10 px-3 py-1 rounded-full"><span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />Running</span>
                   </div>
-                  <p className="text-neutral-800 mb-4">{activeAgent.desc}</p>
+                  <p className="text-surface-800 mb-4">{activeAgent.desc}</p>
                   <div className="flex flex-wrap gap-4 text-sm">
-                    <div><span className="text-neutral-800 text-xs block">Model</span><span className="font-medium">{activeAgent.model}</span></div>
-                    <div><span className="text-neutral-800 text-xs block">Response Time</span><span className="font-medium text-success">{'<'} 30s</span></div>
-                    <div><span className="text-neutral-800 text-xs block">Tasks Today</span><span className="font-medium">{Math.floor(Math.random() * 100 + 50)}</span></div>
+                    <div><span className="text-surface-800 text-xs block">Model</span><span className="font-medium">{activeAgent.model}</span></div>
+                    <div><span className="text-surface-800 text-xs block">Response Time</span><span className="font-medium text-success">{'<'} 30s</span></div>
+                    <div><span className="text-surface-800 text-xs block">Tasks Today</span><span className="font-medium">{Math.floor(Math.random() * 100 + 50)}</span></div>
                   </div>
                   <div className="flex flex-wrap gap-2 mt-4">
                     {activeAgent.skills.map((s, i) => <span key={i} className="chip bg-primary-50 text-primary-600 text-xs">{s}</span>)}
@@ -117,7 +117,7 @@ export default function AIAutomationPage() {
                 <div key={i} className="text-center">
                   <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${item.c} flex items-center justify-center mx-auto mb-4 text-white font-bold text-lg`}>{item.step}</div>
                   <h3 className="font-semibold mb-1">{item.title}</h3>
-                  <p className="text-sm text-neutral-800">{item.desc}</p>
+                  <p className="text-sm text-surface-800">{item.desc}</p>
                 </div>
               ))}
             </div>

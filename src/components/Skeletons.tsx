@@ -18,7 +18,7 @@ export function Skeleton({ className, variant = 'text', width, height, style }: 
   return (
     <div
       className={cn(
-        'animate-pulse bg-neutral-200 dark:bg-neutral-700',
+        'animate-pulse bg-surface-200 dark:bg-surface-700',
         variant === 'circular' && 'rounded-full',
         variant === 'text' && 'rounded-md h-4',
         variant === 'rectangular' && 'rounded-lg',
@@ -37,7 +37,7 @@ export function Skeleton({ className, variant = 'text', width, height, style }: 
 
 export function CardSkeleton() {
   return (
-    <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-5 space-y-3">
+    <div className="bg-white dark:bg-surface-800 rounded-2xl border border-surface-200 dark:border-surface-700 p-5 space-y-3">
       <div className="flex items-center justify-between">
         <Skeleton variant="circular" className="w-10 h-10" />
         <Skeleton className="w-12 h-4" />
@@ -54,12 +54,12 @@ export function CardSkeleton() {
 
 export function TableSkeleton({ rows = 5, columns = 5 }: { rows?: number; columns?: number }) {
   return (
-    <div className="bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden">
-      <div className="p-4 border-b border-neutral-100 dark:border-neutral-700">
+    <div className="bg-white dark:bg-surface-800 rounded-xl border border-surface-200 dark:border-surface-700 overflow-hidden">
+      <div className="p-4 border-b border-surface-100 dark:border-surface-700">
         <Skeleton className="w-48 h-6" />
       </div>
       {Array.from({ length: rows }).map((_, i) => (
-        <div key={i} className="flex items-center gap-4 p-4 border-b border-neutral-100 dark:border-neutral-700 last:border-0">
+        <div key={i} className="flex items-center gap-4 p-4 border-b border-surface-100 dark:border-surface-700 last:border-0">
           {Array.from({ length: columns }).map((_, j) => (
             <Skeleton key={j} className="flex-1 h-4" style={{ maxWidth: j === 0 ? '200px' : `${80 + Math.random() * 80}px` }} />
           ))}
@@ -75,7 +75,7 @@ export function TableSkeleton({ rows = 5, columns = 5 }: { rows?: number; column
 
 export function ChartSkeleton({ height = 200 }: { height?: number }) {
   return (
-    <div className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-5">
+    <div className="bg-white dark:bg-surface-800 rounded-2xl border border-surface-200 dark:border-surface-700 p-5">
       <div className="flex items-center justify-between mb-4">
         <Skeleton className="w-40 h-5" />
         <Skeleton className="w-16 h-4" />
