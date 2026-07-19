@@ -70,18 +70,18 @@ function timeAgo(date: Date): string {
 }
 
 export default function ActivityFeed({ compact = false, title = 'Agent Activity Feed' }: { compact?: boolean; title?: string }) {
-  const [activities, setActivities] = useState<{ id: number; agentId: string; action: string; time: Date }[]>([])
   const idRef = useRef(0)
-
-  useEffect(() => {
-    // Initial batch
-    const initial = Array.from({ length: compact ? 5 : 10 }, () => ({
+  // Pre-populate immediately — no empty state flash
+  const [activities, setActivities] = useState<{ id: number; agentId: string; action: string; time: Date }[]>(
+    () => Array.from({ length: compact ? 5 : 10 }, () => ({
       id: idRef.current++,
       agentId: randomAgentId(),
       action: randomAction(),
       time: new Date(Date.now() - Math.random() * 3600000),
     }))
-    setActivities(initial)
+  )
+
+  useEffect(() => {
 
     // New activity every 4-8 seconds (simulating agent task completion)
     const interval = setInterval(() => {
