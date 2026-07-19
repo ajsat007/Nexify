@@ -70,9 +70,9 @@ export default function Footer() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/logo-square.png" alt="Nexify" className="w-full h-full object-cover" />
               </div>
-              <div>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/logo-horizontal.png" alt="Nexify Technologies" className="h-8 w-auto brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity" />
+              <div className="leading-none">
+                <span className="text-white font-heading font-bold text-lg leading-none">Nexify</span>
+                <p className="text-white/40 text-xs font-medium tracking-wider uppercase">Technologies</p>
               </div>
             </Link>
             <p className="text-white/50 text-sm leading-relaxed mb-6 max-w-xs">

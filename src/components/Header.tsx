@@ -90,15 +90,13 @@ export default function Header() {
                   height={36}
                 />
               </div>
-              <div className="hidden sm:block">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/logo-horizontal.png"
-                  alt="Nexify Technologies"
-                  className={`h-8 w-auto transition-opacity duration-300 ${scrolled || !isHome ? 'opacity-100' : 'opacity-90 brightness-0 invert'}`}
-                  width={160}
-                  height={32}
-                />
+              <div className="leading-none">
+                <span className={`font-heading font-bold text-lg leading-none tracking-tight transition-colors duration-300 ${scrolled || !isHome ? 'text-surface-900 dark:text-white' : 'text-white'}`}>
+                  Nexify
+                </span>
+                <p className={`text-xs font-medium tracking-[0.15em] uppercase transition-colors duration-300 ${scrolled || !isHome ? 'text-surface-400 dark:text-surface-500' : 'text-white/40'}`}>
+                  Technologies
+                </p>
               </div>
             </Link>
 
@@ -274,8 +272,7 @@ export default function Header() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/logo-square.png" alt="Nexify" className="w-full h-full object-cover" />
               </div>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo-horizontal.png" alt="Nexify" className="h-7 w-auto" />
+              <span className="font-heading font-bold text-lg dark:text-white">Nexify</span>
             </Link>
             <button onClick={() => setIsOpen(false)} className="btn-icon">
               <X size={18} />
