@@ -10,6 +10,8 @@ const inter = Inter({
   variable: '--font-inter',
   display: 'swap',
   preload: true,
+  adjustFontFallback: true,
+  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
 })
 
 const spaceGrotesk = Space_Grotesk({
@@ -17,13 +19,15 @@ const spaceGrotesk = Space_Grotesk({
   variable: '--font-space-grotesk',
   display: 'swap',
   preload: true,
+  fallback: ['system-ui', 'sans-serif'],
 })
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-jetbrains-mono',
   display: 'swap',
-  preload: false,
+  preload: true,
+  fallback: ['monospace'],
 })
 
 const baseUrl = siteConfig.url || 'https://nexify.tech'
@@ -127,7 +131,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         ${inter.variable}
         ${spaceGrotesk.variable}
         ${jetbrainsMono.variable}
-        min-h-screen flex flex-col font-sans antialiased
+        min-h-screen flex flex-col font-sans
       `}>
         <SiteShell>
           <ErrorBoundary>{children}</ErrorBoundary>
