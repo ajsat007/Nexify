@@ -149,6 +149,23 @@ function migrate(db: Database.Database): void {
       created_at TEXT DEFAULT (datetime('now')),
       completed_at TEXT
     );
+
+    CREATE TABLE IF NOT EXISTS chatbot_projects (
+      id TEXT PRIMARY KEY,
+      project_id TEXT NOT NULL,
+      business_name TEXT NOT NULL DEFAULT '',
+      business_type TEXT DEFAULT '',
+      faqs TEXT DEFAULT '',
+      services TEXT DEFAULT '',
+      tone TEXT DEFAULT 'professional',
+      channels TEXT DEFAULT '["web"]',
+      knowledge_base TEXT DEFAULT '[]',
+      status TEXT DEFAULT 'pending' CHECK(status IN ('pending','training','ready','deployed','active')),
+      deployed_at TEXT,
+      created_at TEXT DEFAULT (datetime('now')),
+      updated_at TEXT DEFAULT (datetime('now')),
+      FOREIGN KEY (project_id) REFERENCES projects(id)
+    );
   `)
 }
 

@@ -56,6 +56,7 @@ export const navigation: NavItem[] = [
       { name: 'Sales System', href: '/sales' },
     ],
   },
+  { name: 'Chatbot', href: '/chatbot' },
   { name: 'Contact', href: '/contact' },
 ]
 
@@ -70,6 +71,7 @@ export const searchData: SearchResult[] = [
   { title: 'Careers', href: '/careers', category: 'Page', icon: 'Target' },
   { title: 'FAQ', href: '/faq', category: 'Page', icon: 'MessageCircle' },
   { title: 'Contact', href: '/contact', category: 'Page', icon: 'Globe' },
+  { title: 'AI Chatbot', href: '/chatbot', category: 'Service', icon: 'MessageCircle' },
   { title: 'Client Portal', href: '/portal', category: 'System', icon: 'LayoutDashboard' },
   { title: 'Admin Panel', href: '/admin', category: 'System', icon: 'Shield' },
   { title: 'Sales System', href: '/sales', category: 'System', icon: 'TrendingUp' },

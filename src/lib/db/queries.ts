@@ -261,3 +261,75 @@ export function getDashboardStats() {
     totalProposals: proposalCount,
   }
 }
+
+// ── CHATBOT PROJECTS ──
+
+export interface ChatbotProject {
+  id: string
+  project_id: string
+  business_name: string
+  business_type: string
+  faqs: string
+  services: string
+  tone: string
+  channels: string
+  knowledge_base: string
+  status: 'pending' | 'training' | 'ready' | 'deployed' | 'active'
+  deployed_at: string | null
+  created_at: string
+  updated_at: string
+}
+
+export function createChatbotProject(data: {
+  project_id: string
+  business_name: string
+  business_type?: string
+  faqs?: string
+  services?: string
+  tone?: string
+  channels?: string
+  knowledge_base?: string
+}): ChatbotProject {
+  const db = getDb()
+  const project: ChatbotProject = {
+    id: generateId('CBT'),
+    project_id: data.project_id,
+    business_name: data.business_name,
+    business_type: data.business_type || '',
+    faqs: data.faqs || '',
+    services: data.services || '',
+    tone: data.tone || 'professional',
+    channels: data.channels || '["web"]',
+    knowledge_base: data.knowledge_base || '[]',
+    status: 'pending',
+    deployed_at: null,
+    created_at: now(),
+    updated_at: now(),
+  }
+  db.prepare(`
+    INSERT INTO chatbot_projects (id, project_id, business_name, business_type, faqs, services, tone, channels, knowledge_base, status, created_at, updated_at)
+    VALUES (@id, @project_id, @business_name, @business_type, @faqs, @services, @tone, @channels, @knowledge_base, @status, @created_at, @updated_at)
+  `).run(project)
+  return project
+}
+
+export function getChatbotProject(projectId: string): ChatbotProject | undefined {
+  const db = getDb()
+  return db.prepare('SELECT * FROM chatbot_projects WHERE project_id = ?').get(projectId) as ChatbotProject | undefined
+}
+
+export function updateChatbotProject(projectId: string, updates: Partial<ChatbotProject>): ChatbotProject | null {
+  const db = getDb()
+  const existing = getChatbotProject(projectId)
+  if (!existing) return null
+
+  const updated = { ...existing, ...updates, updated_at: now() }
+  db.prepare(`
+    UPDATE chatbot_projects
+    SET business_name=@business_name, business_type=@business_type, faqs=@faqs,
+        services=@services, tone=@tone, channels=@channels, knowledge_base=@knowledge_base,
+        status=@status, deployed_at=@deployed_at, updated_at=@updated_at
+    WHERE project_id=@project_id
+  `).run({ ...updated, project_id: projectId })
+  return updated
+}
