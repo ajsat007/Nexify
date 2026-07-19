@@ -5,16 +5,28 @@
       <stop offset="50%" stop-color="#13113C"/>
       <stop offset="100%" stop-color="#09090B"/>
     </linearGradient>
-    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#6366F1"/>
-      <stop offset="100%" stop-color="#06B6D4"/>
+      <stop offset="60%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#6366F1"/>
     </linearGradient>
     <linearGradient id="accent2" x1="100%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#818CF8"/>
       <stop offset="100%" stop-color="#22D3EE"/>
     </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
   </defs>
+
   <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Subtle grid -->
   <g opacity="0.04" stroke="white" stroke-width="1">
     <line x1="0" y1="0" x2="0" y2="630"/><line x1="100" y1="0" x2="100" y2="630"/>
     <line x1="200" y1="0" x2="200" y2="630"/><line x1="300" y1="0" x2="300" y2="630"/>
@@ -23,13 +35,36 @@
     <line x1="800" y1="0" x2="800" y2="630"/><line x1="900" y1="0" x2="900" y2="630"/>
     <line x1="1000" y1="0" x2="1000" y2="630"/><line x1="1100" y1="0" x2="1100" y2="630"/>
   </g>
+
+  <!-- Aurora blobs -->
   <ellipse cx="300" cy="315" rx="350" ry="280" fill="rgba(99,102,241,0.08)" filter="blur(80px)"/>
   <ellipse cx="900" cy="315" rx="300" ry="250" fill="rgba(6,182,212,0.06)" filter="blur(80px)"/>
-  <rect x="80" y="215" width="100" height="100" rx="24" fill="url(#accent)"/>
-  <g transform="translate(115,245)" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none">
-    <path d="M8 52V8L28 28L48 8V52"/>
+
+  <!-- Brand icon (scaled up) -->
+  <g transform="translate(100, 180) scale(1.5)">
+    <!-- Icon background -->
+    <rect x="-4" y="-4" width="88" height="88" rx="24" fill="url(#brandGrad)" opacity="0.15"/>
+
+    <!-- "N" Mark -->
+    <rect x="6" y="6" width="8" height="68" rx="3" fill="url(#brandGrad)"/>
+    <rect x="62" y="6" width="8" height="68" rx="3" fill="url(#brandGrad)"/>
+    <path d="M14 10 L70 74" stroke="url(#accentGrad)" stroke-width="7" stroke-linecap="round"/>
+
+    <!-- AI accent dot -->
+    <circle cx="70" cy="10" r="6" fill="url(#accentGrad)" filter="url(#glow)"/>
+    <circle cx="70" cy="10" r="2.5" fill="white" opacity="0.8"/>
+
+    <!-- Neural dots -->
+    <circle cx="10" cy="10" r="2" fill="url(#accentGrad)" opacity="0.4"/>
+    <circle cx="10" cy="70" r="2" fill="url(#accentGrad)" opacity="0.4"/>
+    <circle cx="66" cy="70" r="2" fill="url(#accentGrad)" opacity="0.4"/>
   </g>
-  <text x="210" y="278" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="42" fill="white">Nexify Technologies</text>
-  <text x="210" y="318" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="rgba(255,255,255,0.5)">AI-Native Software Company</text>
-  <text x="80" y="400" font-family="Inter, sans-serif" font-weight="300" font-size="28" fill="url(#accent2)">Engineering Tomorrow&apos;s Digital Frontiers</text>
+
+  <!-- Wordmark -->
+  <g transform="translate(260, 250)">
+    <text x="0" y="40" font-family="'Inter','Space Grotesk','Segoe UI',sans-serif" font-size="42" font-weight="700" letter-spacing="-0.3" fill="white">Nexify</text>
+    <circle cx="175" cy="12" r="4" fill="url(#accentGrad)"/>
+    <text x="0" y="65" font-family="'Inter','Segoe UI',sans-serif" font-size="11.5" font-weight="500" letter-spacing="3.5" fill="#A1A1AA">TECHNOLOGIES</text>
+    <text x="0" y="80" font-family="'Inter','Segoe UI',sans-serif" font-size="7.5" font-weight="400" letter-spacing="1.5" fill="#52525B">ENGINEERING TOMORROW'S DIGITAL FRONTIERS</text>
+  </g>
 </svg>

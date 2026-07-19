@@ -1,31 +1,72 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" width="400" height="120">
   <defs>
-    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <!-- Primary brand gradient -->
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#6366F1"/>
-      <stop offset="50%" stop-color="#4F46E5"/>
+      <stop offset="60%" stop-color="#4F46E5"/>
       <stop offset="100%" stop-color="#7C3AED"/>
     </linearGradient>
+    <!-- Accent gradient for the diagonal -->
     <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="0%" stop-color="#06B6D4"/>
       <stop offset="100%" stop-color="#6366F1"/>
     </linearGradient>
+    <!-- Glow -->
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Dark mode: invert text colors -->
+    <style>
+      .brand-text { fill: #0F172A; }
+      .brand-sub { fill: #64748B; }
+      .brand-tagline { fill: #94A3B8; }
+      @media (prefers-color-scheme: dark) {
+        .brand-text { fill: #FFFFFF; }
+        .brand-sub { fill: #A1A1AA; }
+        .brand-tagline { fill: #52525B; }
+      }
+    </style>
   </defs>
 
-  <!-- Icon: Forward chevrons forming abstract "N" -->
-  <g transform="translate(10, 10)">
-    <polygon points="0,50 25,25 50,50 25,75" fill="none" stroke="url(#primaryGrad)" stroke-width="5" stroke-linejoin="round" opacity="0.6"/>
-    <polygon points="18,50 43,25 68,50 43,75" fill="none" stroke="url(#primaryGrad)" stroke-width="5" stroke-linejoin="round" opacity="0.8"/>
-    <polygon points="36,50 61,25 86,50 61,75" fill="none" stroke="url(#primaryGrad)" stroke-width="5" stroke-linejoin="round" opacity="0.9"/>
-    <polygon points="54,50 79,25 104,50 79,75" fill="none" stroke="url(#accentGrad)" stroke-width="5" stroke-linejoin="round"/>
-    <circle cx="79" cy="25" r="3" fill="#8B5CF6"/>
+  <!-- === Icon: Modern "N" Mark with AI accent === -->
+  <g transform="translate(14, 22)">
+    <!-- Subtle glow behind icon -->
+    <rect x="-4" y="-4" width="88" height="88" rx="24" fill="url(#brandGrad)" opacity="0.08"/>
+
+    <!-- Main "N" shape — two vertical strokes + diagonal -->
+    <!-- Left vertical -->
+    <rect x="6" y="6" width="8" height="68" rx="3" fill="url(#brandGrad)"/>
+    <!-- Right vertical -->
+    <rect x="62" y="6" width="8" height="68" rx="3" fill="url(#brandGrad)"/>
+    <!-- Diagonal bridge (left top → right bottom) -->
+    <path d="M14 10 L70 74" stroke="url(#accentGrad)" stroke-width="7" stroke-linecap="round"/>
+
+    <!-- AI accent: the i-dot / data node on top-right -->
+    <circle cx="70" cy="10" r="6" fill="url(#accentGrad)" filter="url(#glow)"/>
+    <circle cx="70" cy="10" r="2.5" fill="white" opacity="0.8"/>
+
+    <!-- Neural side-dots (AI motif) -->
+    <circle cx="10" cy="10" r="2" fill="url(#accentGrad)" opacity="0.4"/>
+    <circle cx="10" cy="70" r="2" fill="url(#accentGrad)" opacity="0.4"/>
+    <circle cx="66" cy="70" r="2" fill="url(#accentGrad)" opacity="0.4"/>
   </g>
 
-  <!-- Text -->
-  <g transform="translate(120, 35)">
-    <text x="0" y="30" font-family="'Space Grotesk', 'Inter', 'Segoe UI', sans-serif" font-size="44" font-weight="700" fill="#0F172A" letter-spacing="1">Nexify</text>
-    <text x="195" y="30" font-family="'Space Grotesk', 'Inter', 'Segoe UI', sans-serif" font-size="44" font-weight="700" fill="url(#primaryGrad)" letter-spacing="1">x</text>
-    <circle cx="230" cy="10" r="4" fill="url(#accentGrad)"/>
-    <text x="0" y="55" font-family="'Inter', 'Segoe UI', sans-serif" font-size="13" font-weight="500" fill="#64748B" letter-spacing="3.5" text-transform="uppercase">TECHNOLOGIES</text>
-    <text x="0" y="75" font-family="'Inter', 'Segoe UI', sans-serif" font-size="9.5" font-weight="400" fill="#94A3B8" letter-spacing="1.5" text-transform="uppercase">Engineering Tomorrow&apos;s Digital Frontiers</text>
+  <!-- === Wordmark === -->
+  <g transform="translate(118, 24)">
+    <!-- Nexify — bold, modern -->
+    <text x="0" y="40" font-family="'Inter','Space Grotesk','Segoe UI',sans-serif" font-size="42" font-weight="700" letter-spacing="-0.3" class="brand-text">Nexify</text>
+
+    <!-- Stylized "i" dot (matches accent) -->
+    <circle cx="175" cy="12" r="4" fill="url(#accentGrad)"/>
+
+    <!-- Technologies — uppercase, letter-spaced -->
+    <text x="0" y="65" font-family="'Inter','Segoe UI',sans-serif" font-size="11.5" font-weight="500" letter-spacing="3.5" class="brand-sub">TECHNOLOGIES</text>
+
+    <!-- Tagline -->
+    <text x="0" y="80" font-family="'Inter','Segoe UI',sans-serif" font-size="7.5" font-weight="400" letter-spacing="1.5" class="brand-tagline">ENGINEERING TOMORROW'S DIGITAL FRONTIERS</text>
   </g>
 </svg>

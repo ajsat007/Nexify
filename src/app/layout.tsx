@@ -132,9 +132,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png" />
         {/* Mask icon for Safari pinned tabs */}
         <link rel="mask-icon" href="/icon.svg" color="#6366F1" />
-        {/* Preload brand logo */}
+        {/* Preload brand logos */}
         <link rel="preload" href="/logo-square.png" as="image" />
-        <link rel="preload" href="/logo-horizontal.png" as="image" />
+        <link rel="preload" href="/logo.svg" as="image" />
       </head>
       <body className={`
         ${inter.variable}
