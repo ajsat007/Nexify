@@ -2,7 +2,7 @@
   <defs>
     <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#6366F1"/>
-      <stop offset="60%" stop-color="#4F46E5"/>
+      <stop offset="50%" stop-color="#4F46E5"/>
       <stop offset="100%" stop-color="#7C3AED"/>
     </linearGradient>
     <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -14,26 +14,15 @@
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-
-  <!-- Rounded square background -->
   <rect x="10" y="10" width="180" height="180" rx="44" fill="url(#brandGrad)"/>
-
-  <!-- "N" monogram -->
-  <g transform="translate(50, 44)">
-    <!-- Left vertical -->
-    <rect x="6" y="6" width="16" height="100" rx="6" fill="white"/>
-    <!-- Right vertical -->
-    <rect x="78" y="6" width="16" height="100" rx="6" fill="white"/>
-    <!-- Diagonal bridge -->
-    <path d="M22 10 L94 106" stroke="rgba(255,255,255,0.85)" stroke-width="14" stroke-linecap="round"/>
-
-    <!-- Accent: the "i" dot -->
-    <circle cx="94" cy="10" r="10" fill="#22D3EE" filter="url(#glow)"/>
-    <circle cx="94" cy="10" r="4" fill="white" opacity="0.9"/>
-
-    <!-- Neural dots -->
-    <circle cx="12" cy="12" r="3.5" fill="rgba(255,255,255,0.3)"/>
-    <circle cx="12" cy="100" r="3.5" fill="rgba(255,255,255,0.3)"/>
-    <circle cx="86" cy="100" r="3.5" fill="rgba(255,255,255,0.3)"/>
+  <g transform="translate(48, 38)">
+    <rect x="8" y="8" width="16" height="108" rx="7" fill="white"/>
+    <path d="M26 10 L94 114" stroke="white" stroke-width="14" stroke-linecap="round" fill="none"/>
+    <rect x="78" y="8" width="16" height="108" rx="7" fill="white"/>
+    <circle cx="94" cy="12" r="10" fill="#22D3EE" filter="url(#glow)"/>
+    <circle cx="94" cy="12" r="4" fill="white" opacity="0.9"/>
+    <circle cx="12" cy="12" r="4" fill="rgba(255,255,255,0.3)"/>
+    <circle cx="12" cy="112" r="4" fill="rgba(255,255,255,0.3)"/>
+    <circle cx="86" cy="112" r="4" fill="rgba(255,255,255,0.3)"/>
   </g>
 </svg>
