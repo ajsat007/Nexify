@@ -74,7 +74,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-white/50 text-sm leading-relaxed mb-6 max-w-xs">
-              AI-native software company. 28 specialized AI agents building next-gen digital products — faster, better, and at half the cost.
+              AI-native software company. 50+ specialized AI agents building next-gen digital products — faster, better, and at half the cost.
             </p>
             <div className="flex gap-2">
               {[
